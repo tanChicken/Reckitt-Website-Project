@@ -1,4 +1,7 @@
 # Reckitt Product Finder Starter
+
+# Print (Hello World)
+
 A clean **repository-ready starter skeleton** for a pink-themed interactive FMCG product finder website.
 
 Primary theme color: `#f20683`
@@ -111,31 +114,31 @@ reckitt-product-finder-starter/
 
 ## 4. Which file does what
 
-| File | What it does |
-|---|---|
-| `app/page.tsx` | Main homepage. It renders the product finder app. |
-| `app/layout.tsx` | Root layout and metadata for the Next.js app. |
-| `app/globals.css` | Global CSS, Tailwind setup, pink brand variables, background, and focus styles. |
-| `app/api/product-finder-events/route.ts` | Simple backend endpoint for tracking funnel events like quiz started, question completed, and recommendation viewed. |
-| `components/product-finder/ProductFinder.tsx` | Main controller component. Handles steps, user answers, navigation, and event tracking. Start coding here if you want to change the flow. |
-| `components/product-finder/ProgressHeader.tsx` | Top navigation bar and progress indicator. |
-| `components/product-finder/steps/WelcomeStep.tsx` | First screen. Hero section, CTA button, and product-category preview. |
-| `components/product-finder/steps/NeedSelectionStep.tsx` | Lets users choose their need, such as sore throat, pain, cough, hygiene, or home cleaning. |
-| `components/product-finder/steps/QuestionsStep.tsx` | Follow-up questions for audience, severity, and preferences. |
-| `components/product-finder/steps/RecommendationStep.tsx` | Shows the suggested product category and alternative categories. |
-| `components/product-finder/steps/SafetyStep.tsx` | Shows safe-use advice, label guidance, pharmacist/doctor reminder, and restart action. |
-| `components/ui/Button.tsx` | Reusable accessible button component with primary, secondary, and ghost styles. |
-| `components/ui/Card.tsx` | Reusable card component with rounded corners and soft shadows. |
-| `components/ui/Pill.tsx` | Reusable selectable option button for quiz answers. |
-| `data/productFinder.ts` | The main content/data file. Edit this to add needs, questions, preferences, products, and tags. |
-| `lib/recommendation.ts` | Recommendation logic. Edit this when you want to change how product categories are suggested. |
-| `lib/analytics.ts` | Client-side function that sends funnel events to the API route. |
-| `lib/cn.ts` | Small helper for joining CSS class names. |
-| `types/productFinder.ts` | TypeScript types for needs, answers, products, and recommendations. |
-| `tailwind.config.ts` | Tailwind design tokens, including the pink brand color `#f20683`. |
-| `.env.local.example` | Example environment variables. Copy this to `.env.local`. |
-| `public/brand-placeholder.svg` | Placeholder brand asset. Replace this with your real approved asset later. |
-| `docs/pink-desktop-flow-reference.png` | Design reference image from the pink desktop flow concept. |
+| File                                                     | What it does                                                                                                                              |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `app/page.tsx`                                           | Main homepage. It renders the product finder app.                                                                                         |
+| `app/layout.tsx`                                         | Root layout and metadata for the Next.js app.                                                                                             |
+| `app/globals.css`                                        | Global CSS, Tailwind setup, pink brand variables, background, and focus styles.                                                           |
+| `app/api/product-finder-events/route.ts`                 | Simple backend endpoint for tracking funnel events like quiz started, question completed, and recommendation viewed.                      |
+| `components/product-finder/ProductFinder.tsx`            | Main controller component. Handles steps, user answers, navigation, and event tracking. Start coding here if you want to change the flow. |
+| `components/product-finder/ProgressHeader.tsx`           | Top navigation bar and progress indicator.                                                                                                |
+| `components/product-finder/steps/WelcomeStep.tsx`        | First screen. Hero section, CTA button, and product-category preview.                                                                     |
+| `components/product-finder/steps/NeedSelectionStep.tsx`  | Lets users choose their need, such as sore throat, pain, cough, hygiene, or home cleaning.                                                |
+| `components/product-finder/steps/QuestionsStep.tsx`      | Follow-up questions for audience, severity, and preferences.                                                                              |
+| `components/product-finder/steps/RecommendationStep.tsx` | Shows the suggested product category and alternative categories.                                                                          |
+| `components/product-finder/steps/SafetyStep.tsx`         | Shows safe-use advice, label guidance, pharmacist/doctor reminder, and restart action.                                                    |
+| `components/ui/Button.tsx`                               | Reusable accessible button component with primary, secondary, and ghost styles.                                                           |
+| `components/ui/Card.tsx`                                 | Reusable card component with rounded corners and soft shadows.                                                                            |
+| `components/ui/Pill.tsx`                                 | Reusable selectable option button for quiz answers.                                                                                       |
+| `data/productFinder.ts`                                  | The main content/data file. Edit this to add needs, questions, preferences, products, and tags.                                           |
+| `lib/recommendation.ts`                                  | Recommendation logic. Edit this when you want to change how product categories are suggested.                                             |
+| `lib/analytics.ts`                                       | Client-side function that sends funnel events to the API route.                                                                           |
+| `lib/cn.ts`                                              | Small helper for joining CSS class names.                                                                                                 |
+| `types/productFinder.ts`                                 | TypeScript types for needs, answers, products, and recommendations.                                                                       |
+| `tailwind.config.ts`                                     | Tailwind design tokens, including the pink brand color `#f20683`.                                                                         |
+| `.env.local.example`                                     | Example environment variables. Copy this to `.env.local`.                                                                                 |
+| `public/brand-placeholder.svg`                           | Placeholder brand asset. Replace this with your real approved asset later.                                                                |
+| `docs/pink-desktop-flow-reference.png`                   | Design reference image from the pink desktop flow concept.                                                                                |
 
 ---
 
@@ -152,9 +155,9 @@ data/productFinder.ts
 Look for:
 
 ```ts
-needOptions
-severityOptions
-preferenceOptions
+needOptions;
+severityOptions;
+preferenceOptions;
 ```
 
 ### To change the product recommendations
