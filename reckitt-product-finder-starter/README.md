@@ -1,5 +1,4 @@
 # Reckitt Product Finder Starter
-# Hello World
 A clean **repository-ready starter skeleton** for a pink-themed interactive FMCG product finder website.
 
 Primary theme color: `#f20683`
