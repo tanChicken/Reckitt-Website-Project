@@ -1,0 +1,8 @@
+<svg width="240" height="80" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Brand placeholder</title>
+  <desc id="desc">Pink text logo placeholder for the product finder starter.</desc>
+  <rect width="240" height="80" rx="24" fill="#FFF0F8"/>
+  <circle cx="42" cy="40" r="22" fill="#F20683"/>
+  <path d="M42 26C50 26 56 32 56 40C56 48 50 54 42 54C34 54 28 48 28 40C28 32 34 26 42 26Z" fill="white" fill-opacity="0.22"/>
+  <text x="78" y="49" fill="#F20683" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800">brand</text>
+</svg>
