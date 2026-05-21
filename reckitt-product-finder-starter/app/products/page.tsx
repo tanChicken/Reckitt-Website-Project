@@ -9,13 +9,12 @@ export const metadata: Metadata = {
 };
 
 const categories = [
-  { id: "all",              label: "All Products",       count: productItems.length                                          },
-  { id: "sore-throat",      label: "Sore Throat",        count: productItems.filter((p) => p.needId === "sore-throat").length },
-  { id: "pain-fever",       label: "Pain Relief",        count: productItems.filter((p) => p.needId === "pain-fever").length  },
-  { id: "cough-mucus",      label: "Cold & Cough",       count: productItems.filter((p) => p.needId === "cough-mucus").length },
-  { id: "heartburn",        label: "Digestive Health",   count: productItems.filter((p) => p.needId === "heartburn").length   },
-  { id: "personal-hygiene", label: "Hygiene",            count: productItems.filter((p) => p.needId === "personal-hygiene").length },
-  { id: "home-cleaning",    label: "Home Care",          count: productItems.filter((p) => p.needId === "home-cleaning").length },
+  { id: "all",     label: "All Products", count: productItems.length                                     },
+  { id: "head",    label: "Head & Pain",  count: productItems.filter((p) => p.needId === "head").length  },
+  { id: "throat",  label: "Throat",       count: productItems.filter((p) => p.needId === "throat").length },
+  { id: "chest",   label: "Chest & Cough",count: productItems.filter((p) => p.needId === "chest").length },
+  { id: "heart",   label: "Heart",        count: productItems.filter((p) => p.needId === "heart").length  },
+  { id: "stomach", label: "Digestive",    count: productItems.filter((p) => p.needId === "stomach").length},
 ];
 
 const navLinks = [
@@ -88,12 +87,33 @@ export default function ProductsPage() {
             </button>
           </div>
         </nav>
+
+        {/* Mobile nav links — horizontal scrollable strip, hidden on md+ */}
+        <div className="flex gap-1 overflow-x-auto border-t border-border-subtle px-4 py-2 md:hidden">
+          {navLinks.map((link) => {
+            const active = link.href === "/products";
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={[
+                  "shrink-0 rounded-lg px-3 py-2 text-sm font-semibold whitespace-nowrap transition-all duration-200",
+                  active
+                    ? "text-reckitt-pink"
+                    : "text-secondary hover:bg-surface-container-low hover:text-deep-navy",
+                ].join(" ")}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
       </header>
 
-      <main className="mx-auto max-w-container-max px-4 py-12 sm:px-8 lg:px-16">
+      <main className="mx-auto max-w-container-max px-4 py-8 sm:px-8 sm:py-12 lg:px-16">
         {/* ── Page header ─────────────────────────────── */}
-        <section className="mb-10">
-          <h1 className="font-display text-4xl font-bold tracking-tight text-deep-navy sm:text-5xl">
+        <section className="mb-8">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-deep-navy sm:text-4xl lg:text-5xl">
             Product Library
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-7 text-secondary">
@@ -101,43 +121,75 @@ export default function ProductsPage() {
           </p>
         </section>
 
-        <div className="flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-8">
           {/* ── Sidebar filters ───────────────────────── */}
-          <aside className="w-full md:w-60 md:shrink-0">
-            <div className="sticky top-28 rounded-xl border border-border-subtle bg-white p-5">
-              <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-deep-navy">
-                Categories
-              </h3>
-              <div className="flex flex-col gap-1">
+          <aside className="w-full md:w-56 md:shrink-0">
+            {/* Mobile: compact horizontal filter bar */}
+            <div className="md:hidden">
+              <div className="flex gap-1.5 overflow-x-auto pb-1">
                 {categories.map((cat, i) => (
                   <button
                     key={cat.id}
                     className={[
-                      "flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                      "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-200",
                       i === 0
-                        ? "bg-reckitt-pink text-white"
-                        : "text-secondary hover:bg-surface-container-low hover:text-deep-navy",
+                        ? "border-reckitt-pink bg-reckitt-pink text-white"
+                        : "border-border-subtle bg-white text-secondary hover:border-reckitt-pink hover:text-reckitt-pink",
                     ].join(" ")}
                   >
                     <span>{cat.label}</span>
-                    <span className="text-xs opacity-70">{cat.count}</span>
+                    <span className="opacity-70">({cat.count})</span>
                   </button>
                 ))}
               </div>
+              <div className="mt-3 flex gap-2 flex-wrap">
+                {["Tablet", "Liquid", "Spray", "Lozenge"].map((fmt) => (
+                  <button
+                    key={fmt}
+                    className="rounded-full border border-border-subtle bg-surface-container-low px-3 py-1 text-xs font-semibold text-secondary transition-all hover:border-reckitt-pink hover:text-reckitt-pink"
+                  >
+                    {fmt}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-              <div className="mt-5 border-t border-border-subtle pt-5">
-                <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-deep-navy">
-                  Format
+            {/* Desktop: vertical sticky panel */}
+            <div className="hidden md:block md:sticky md:top-24">
+              <div className="rounded-xl border border-border-subtle bg-white p-5">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-deep-navy">
+                  Categories
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {["Tablet", "Liquid", "Spray", "Lozenge"].map((fmt) => (
+                <div className="flex flex-col gap-1">
+                  {categories.map((cat, i) => (
                     <button
-                      key={fmt}
-                      className="rounded-full border border-border-subtle bg-surface-container-low px-3 py-1 text-xs font-semibold text-secondary transition-all hover:border-reckitt-pink hover:text-reckitt-pink"
+                      key={cat.id}
+                      className={[
+                        "flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                        i === 0
+                          ? "bg-reckitt-pink text-white"
+                          : "text-secondary hover:bg-surface-container-low hover:text-deep-navy",
+                      ].join(" ")}
                     >
-                      {fmt}
+                      <span>{cat.label}</span>
+                      <span className="text-xs opacity-70">{cat.count}</span>
                     </button>
                   ))}
+                </div>
+                <div className="mt-5 border-t border-border-subtle pt-5">
+                  <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-deep-navy">
+                    Format
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {["Tablet", "Liquid", "Spray", "Lozenge"].map((fmt) => (
+                      <button
+                        key={fmt}
+                        className="rounded-full border border-border-subtle bg-surface-container-low px-3 py-1 text-xs font-semibold text-secondary transition-all hover:border-reckitt-pink hover:text-reckitt-pink"
+                      >
+                        {fmt}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

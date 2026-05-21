@@ -27,7 +27,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
       aria-labelledby="welcome-heading"
     >
       {/* ── Left: hero copy ─────────────────────────── */}
-      <div className="space-y-8">
+      <div className="space-y-6 lg:space-y-8">
         {/* Status badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-2 shadow-card">
           <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
@@ -53,13 +53,13 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-wrap gap-3">
-          <Button onClick={onStart} className="px-8 py-3 text-base">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button onClick={onStart} className="w-full justify-center px-8 py-3 text-base sm:w-auto">
             Start now →
           </Button>
           <Button
             variant="secondary"
-            className="px-6"
+            className="w-full justify-center px-6 sm:w-auto"
             onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}
           >
             Learn more

@@ -17,14 +17,14 @@ export default function RecommendationStep({
   return (
     <section aria-labelledby="recommendation-heading">
       {/* ── Page header ─────────────────────────────── */}
-      <div className="mb-8 flex items-start justify-between gap-4">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-widest text-secondary">
             Recommended Relief
           </span>
           <h1
             id="recommendation-heading"
-            className="mt-2 font-display text-3xl font-bold leading-tight text-deep-navy sm:text-4xl"
+            className="mt-2 font-display text-2xl font-bold leading-tight text-deep-navy sm:text-3xl lg:text-4xl"
           >
             {recommendation.headline}
           </h1>
@@ -33,7 +33,7 @@ export default function RecommendationStep({
             following care plan.
           </p>
         </div>
-        <Button variant="ghost" onClick={onBack} className="shrink-0 text-sm">
+        <Button variant="ghost" onClick={onBack} className="shrink-0 self-start text-sm">
           ← Back
         </Button>
       </div>

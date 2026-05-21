@@ -58,27 +58,27 @@ export default function SafetyStep({
   return (
     <section aria-labelledby="safety-heading">
       {/* ── Header — no step badge, epilogue feel ─── */}
-      <div className="mb-8 flex items-start justify-between gap-4">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-widest text-secondary">
             Safety &amp; Next Steps
           </span>
           <h1
             id="safety-heading"
-            className="mt-2 font-display text-3xl font-bold leading-tight text-deep-navy sm:text-4xl"
+            className="mt-2 font-display text-2xl font-bold leading-tight text-deep-navy sm:text-3xl lg:text-4xl"
           >
             Use safely. Feel better.
           </h1>
           <p className="mt-2 text-sm text-secondary">Your wellbeing comes first.</p>
         </div>
-        <Button variant="ghost" onClick={onBack} className="shrink-0 text-sm">
+        <Button variant="ghost" onClick={onBack} className="shrink-0 self-start text-sm">
           ← Back
         </Button>
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[1fr_1.4fr]">
         {/* ── Left: recommendation summary ─────────── */}
-        <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-white p-8 text-center">
+        <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-white p-5 text-center sm:p-8">
           <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-reckitt-pink shadow-pink">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2L3 7v7c0 6.1 4.7 11.8 11 13 6.3-1.2 11-6.9 11-13V7L14 2z" />
