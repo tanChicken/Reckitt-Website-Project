@@ -1,10 +1,9 @@
-export type NeedId =
-  | "sore-throat"
-  | "pain-fever"
-  | "cough-mucus"
-  | "heartburn"
-  | "personal-hygiene"
-  | "home-cleaning";
+export type BodyPartId =
+  | "head"
+  | "throat"
+  | "heart"
+  | "chest"
+  | "stomach";
 
 export type AudienceId = "adult" | "teen" | "child" | "someone-else";
 export type SeverityId = "mild" | "moderate" | "severe" | "not-sure";
@@ -18,10 +17,9 @@ export type PreferenceId =
 
 export type SafetyLevel = "standard" | "caution" | "professional-advice";
 
-export interface NeedOption {
-  id: NeedId;
-  label: string;
-  description: string;
+export interface SymsptomType {
+  id: BodyPartId;
+  symptom: string[];
   icon: string;
 }
 
@@ -37,13 +35,13 @@ export interface ProductItem {
   brand: string;
   category: string;
   description: string;
-  needId: NeedId;
+  needId: BodyPartId;
   imageLabel: string;
   tags: string[];
 }
 
 export interface FinderAnswers {
-  needId?: NeedId;
+  needId?: BodyPartId;
   audienceId?: AudienceId;
   severityId?: SeverityId;
   preferenceIds: PreferenceId[];

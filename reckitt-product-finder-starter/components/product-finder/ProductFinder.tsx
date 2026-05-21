@@ -13,7 +13,7 @@ import { getRecommendation } from "@/lib/recommendation";
 import type {
   AudienceId,
   FinderAnswers,
-  NeedId,
+  BodyPartId,
   PreferenceId,
   SeverityId,
 } from "@/types/productFinder";
@@ -47,8 +47,8 @@ export default function ProductFinder() {
     void trackFunnelEvent(eventName, nextStep, nextAnswers);
   }
 
-  function setNeed(needId: NeedId) {
-    const nextAnswers = { ...answers, needId };
+  function setNeed(bodyPartId: BodyPartId) {
+    const nextAnswers = { ...answers, needId: bodyPartId };
     setAnswers(nextAnswers);
     moveTo(2, "need_selected", nextAnswers);
   }
@@ -90,9 +90,10 @@ export default function ProductFinder() {
             {step === 0 && <WelcomeStep onStart={() => moveTo(1, "finder_started")} />}
             {step === 1 && (
               <NeedSelectionStep
-                selectedNeedId={answers.needId}
+                selectedBodyPart={answers.needId}
                 onSelect={setNeed}
                 onBack={() => moveTo(0, "back_to_welcome")}
+                onContinue={() => moveTo(2, "need_selected")}
               />
             )}
             {step === 2 && (

@@ -1,44 +1,57 @@
-import type { AudienceId, ChoiceOption, NeedOption, PreferenceId, ProductItem, SeverityId } from "@/types/productFinder";
+import type { AudienceId, ChoiceOption, SymsptomType, PreferenceId, ProductItem, SeverityId, BodyPartId } from "@/types/productFinder";
 
-export const needOptions: NeedOption[] = [
-  {
-    id: "sore-throat",
-    label: "Sore throat",
-    description: "Relieve throat irritation and discomfort.",
-    icon: "🗣️"
-  },
-  {
-    id: "pain-fever",
-    label: "Pain & fever",
-    description: "Support for everyday pain or fever needs.",
-    icon: "🌡️"
-  },
-  {
-    id: "cough-mucus",
-    label: "Cough & mucus",
-    description: "Help users explore cough and chest mucus care.",
-    icon: "🫁"
-  },
-  {
-    id: "heartburn",
-    label: "Heartburn & indigestion",
-    description: "Guidance for reflux, acidity, and indigestion needs.",
-    icon: "🔥"
-  },
-  {
-    id: "personal-hygiene",
-    label: "Personal hygiene",
-    description: "Everyday protection for hands and body.",
-    icon: "🛡️"
-  },
-  {
-    id: "home-cleaning",
-    label: "Home cleaning",
-    description: "Cleaning support for surfaces, dishes, and laundry.",
-    icon: "🏠"
-  }
+// export const needOptions: NeedOption[] = [
+//   {
+//     id: "sore-throat",
+//     label: "Sore throat",
+//     description: "Relieve throat irritation and discomfort.",
+//     icon: "🗣️"
+//   },
+//   {
+//     id: "pain-fever",
+//     label: "Pain & fever",
+//     description: "Support for everyday pain or fever needs.",
+//     icon: "🌡️"
+//   },
+//   {
+//     id: "cough-mucus",
+//     label: "Cough & mucus",
+//     description: "Help users explore cough and chest mucus care.",
+//     icon: "🫁"
+//   },
+//   {
+//     id: "heartburn",
+//     label: "Heartburn & indigestion",
+//     description: "Guidance for reflux, acidity, and indigestion needs.",
+//     icon: "🔥"
+//   },
+//   {
+//     id: "personal-hygiene",
+//     label: "Personal hygiene",
+//     description: "Everyday protection for hands and body.",
+//     icon: "🛡️"
+//   },
+//   {
+//     id: "home-cleaning",
+//     label: "Home cleaning",
+//     description: "Cleaning support for surfaces, dishes, and laundry.",
+//     icon: "🏠"
+//   }
+// ];
+export const bodyParts: ChoiceOption<BodyPartId>[] = [
+  { id: "head", label: "Head", description: "Head-related symptoms.", icon: "🧠" },
+  { id: "throat", label: "Throat", description: "Throat-related symptoms.", icon: "�️" },
+  { id: "heart", label: "Heart", description: "Heart-related symptoms.", icon: "❤️" },
+  { id: "chest", label: "Chest", description: "Chest-related symptoms.", icon: "🫁" },
+  { id: "stomach", label: "Stomach", description: "Stomach-related symptoms.", icon: "🔥" }
 ];
-
+export const bodySymptoms: SymsptomType[] = [
+  { id: "head", symptom: ["Headache", "Migraine", "Fever", "Dental Pain", "Menstrual Pain"], icon: "🧠" },
+  { id: "throat", symptom: ["Sore Throat", "Cough", "Hoarseness", "Throat Irritation", "Difficulty Swallowing"], icon: "️" },
+  { id: "heart", symptom: ["Heart Attack", "Chest Pain", "Shortness of Breath", "Palpitations", "Irregular Heartbeat"], icon: "❤️" },
+  { id: "chest", symptom: ["Chest Pain", "Shortness of Breath", "Cough", "Chest Congestion", "Chest Tightness"], icon: "🫁" },
+  { id: "stomach", symptom: ["Stomach Ache", "Indigestion", "Nausea", "Bloating", "Gas"], icon: "🔥" }
+];
 export const audienceOptions: ChoiceOption<AudienceId>[] = [
   { id: "adult", label: "Adult", description: "18 years old and above.", icon: "👤" },
   { id: "teen", label: "Teen", description: "13–17 years old.", icon: "🙂" },
@@ -68,53 +81,8 @@ export const productItems: ProductItem[] = [
     brand: "Strepsils",
     category: "Sore throat relief",
     description: "A throat-care category for users looking for sore throat support.",
-    needId: "sore-throat",
+    needId: "head",
     imageLabel: "ST",
     tags: ["Lozenges", "Throat care", "Popular"]
-  },
-  {
-    id: "nurofen",
-    brand: "Nurofen",
-    category: "Pain and fever relief",
-    description: "A pain and fever category for users who want everyday relief options.",
-    needId: "pain-fever",
-    imageLabel: "NF",
-    tags: ["Pain relief", "Fever", "Fast relief"]
-  },
-  {
-    id: "mucinex",
-    brand: "Mucinex",
-    category: "Cough and mucus relief",
-    description: "A cough-care category for mucus and chest congestion support.",
-    needId: "cough-mucus",
-    imageLabel: "MX",
-    tags: ["Cough", "Mucus", "Chest care"]
-  },
-  {
-    id: "gaviscon",
-    brand: "Gaviscon",
-    category: "Heartburn and indigestion relief",
-    description: "A digestive-care category for reflux, acidity, and indigestion needs.",
-    needId: "heartburn",
-    imageLabel: "GV",
-    tags: ["Heartburn", "Indigestion", "Digestive care"]
-  },
-  {
-    id: "dettol",
-    brand: "Dettol",
-    category: "Personal hygiene protection",
-    description: "A hygiene category for everyday hand and body protection.",
-    needId: "personal-hygiene",
-    imageLabel: "DT",
-    tags: ["Hygiene", "Protection", "Everyday care"]
-  },
-  {
-    id: "finish",
-    brand: "Finish / Vanish / Harpic",
-    category: "Home care and cleaning",
-    description: "A home-care category for dishes, laundry, toilet, and surface cleaning.",
-    needId: "home-cleaning",
-    imageLabel: "HC",
-    tags: ["Home care", "Cleaning", "Family home"]
   }
 ];
