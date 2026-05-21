@@ -1,104 +1,112 @@
 import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import Image from "next/image";
 
 interface WelcomeStepProps {
   onStart: () => void;
 }
 
+const quickFeatures = [
+  { iconPath: "/clock.png", title: "Quick", text: "Takes 1–2 mins" },
+  { iconPath: "/compass.png", title: "Guided", text: "Step-by-step" },
+  { iconPath: "/shield.png", title: "Safety-first", text: "Label guidance included" },
+];
+
+const showcaseProducts = [
+  { brand: "Strepsils", label: "Sore throat" },
+  { brand: "Nurofen", label: "Pain & fever" },
+  { brand: "Mucinex", label: "Cough & mucus" },
+  { brand: "Gaviscon", label: "Heartburn" },
+  { brand: "Dettol", label: "Hygiene" },
+  { brand: "Finish", label: "Home care" },
+];
+
 export default function WelcomeStep({ onStart }: WelcomeStepProps) {
   return (
     <section
-      className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center"
+      className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center"
       aria-labelledby="welcome-heading"
     >
-      {/*Changed welcome message*/}
-      <div className="space-y-7">
-        <div className="inline-flex rounded-full bg-brand-pinkSoft px-4 py-2 text-3xl font-bold text-brand-pink">
-          Welcome to reckitt
+      {/* Left: hero copy */}
+      <div className="space-y-8">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-brand-pinkSoft px-4 py-2">
+          <span className="h-2 w-2 rounded-full bg-brand-pink" aria-hidden="true" />
+          <span className="text-sm font-semibold text-brand-pink">Welcome to Reckitt</span>
         </div>
+
+        {/* Heading */}
         <div className="space-y-4">
           <h1
             id="welcome-heading"
-            className="max-w-3xl text-5xl font-black leading-tight text-brand-navy md:text-7xl"
+            className="max-w-xl text-4xl font-black leading-[1.1] tracking-tight text-brand-navy sm:text-5xl md:text-6xl"
           >
-            Find the right care in under a minute
+            Find the right care{" "}
+            <span className="text-brand-pink">in under a minute</span>
           </h1>
-          <p className="max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="max-w-lg text-base leading-7 text-slate-500 sm:text-lg">
             Answer a few simple questions and get a responsible product-category
             suggestion for health, hygiene, or home care.
           </p>
         </div>
+
+        {/* CTA buttons */}
         <div className="flex flex-wrap gap-3">
-          <Button onClick={onStart} className="px-8">
+          <Button onClick={onStart} className="px-8 py-3 text-base">
             Start now →
           </Button>
           <Button
             variant="secondary"
+            className="px-6"
             onClick={() =>
-              window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth",
-              })
+              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
             }
           >
-            View trust points
+            Learn more
           </Button>
         </div>
+
+        {/* Feature mini cards */}
         <div className="grid gap-3 sm:grid-cols-3">
-          {[
-            ["/clock.png", "Quick", "Takes 1–2 mins"],
-            ["/compass.png", "Guided", "Step-by-step"],
-            ["/shield.png", "Safety-first", "Label guidance included"],
-          ].map(([iconPath, title, text]) => (
-            <Card key={title} className="p-5">
+          {quickFeatures.map(({ iconPath, title, text }) => (
+            <div
+              key={title}
+              className="flex items-start gap-3 rounded-2xl border border-slate-100 bg-white p-4 shadow-card"
+            >
               <div
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-pinkSoft"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-pinkSoft"
                 aria-hidden="true"
               >
-                <Image
-                  src={iconPath}
-                  alt={`${title} icon`}
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
+                <Image src={iconPath} alt="" width={20} height={20} className="object-contain" />
               </div>
-              <p className="mt-3 font-black text-brand-navy">{title}</p>
-              <p className="mt-1 text-sm text-slate-500">{text}</p>
-            </Card>
+              <div>
+                <p className="text-sm font-black text-brand-navy">{title}</p>
+                <p className="text-xs text-slate-500">{text}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      <Card className="overflow-hidden p-6">
-        <div className="rounded-[2rem] bg-gradient-to-br from-brand-pinkSoft via-white to-pink-50 p-8">
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-pink">
-            Example categories
-          </p>
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            {[
-              ["Strepsils", "Sore throat"],
-              ["Nurofen", "Pain & fever"],
-              ["Mucinex", "Cough & mucus"],
-              ["Gaviscon", "Heartburn"],
-              ["Dettol", "Hygiene"],
-              ["Finish", "Home care"],
-            ].map(([brand, label]) => (
-              <div
-                key={brand}
-                className="rounded-3xl border border-pink-100 bg-white p-4 shadow-sm"
-              >
-                <div className="grid h-16 w-full place-items-center rounded-2xl bg-brand-pinkSoft text-xl font-black text-brand-pink">
-                  {brand.slice(0, 2).toUpperCase()}
-                </div>
-                <p className="mt-3 font-black text-brand-navy">{brand}</p>
-                <p className="text-sm text-slate-500">{label}</p>
+      {/* Right: product showcase card */}
+      <div className="rounded-4xl border border-pink-100 bg-gradient-to-br from-brand-pinkSoft via-white to-pink-50 p-6 shadow-soft">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-pink">
+          Example categories
+        </p>
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          {showcaseProducts.map(({ brand, label }) => (
+            <div
+              key={brand}
+              className="group rounded-2xl border border-pink-100 bg-white p-4 shadow-card transition hover:border-brand-pink hover:shadow-cardHover"
+            >
+              <div className="grid h-14 w-full place-items-center rounded-xl bg-brand-pinkSoft text-lg font-black text-brand-pink transition group-hover:bg-brand-pinkMid">
+                {brand.slice(0, 2).toUpperCase()}
               </div>
-            ))}
-          </div>
+              <p className="mt-2.5 text-sm font-black text-brand-navy">{brand}</p>
+              <p className="text-xs text-slate-500">{label}</p>
+            </div>
+          ))}
         </div>
-      </Card>
+      </div>
     </section>
   );
 }
