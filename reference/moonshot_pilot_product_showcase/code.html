@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Library | Moonshot Pilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f0f3ff",
+                    "secondary": "#475d92",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-gray": "#F8F9FB",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "outline": "#926e6f",
+                    "on-tertiary-container": "#fffcff",
+                    "surface-variant": "#dce2f3",
+                    "tertiary-fixed": "#ffdad3",
+                    "primary": "#ba0035",
+                    "primary-fixed-dim": "#ffb3b6",
+                    "background": "#f9f9ff",
+                    "primary-container": "#e80044",
+                    "on-primary-fixed": "#40000c",
+                    "border-subtle": "#E7E9EF",
+                    "secondary-fixed": "#d9e2ff",
+                    "tertiary-container": "#d63c23",
+                    "on-secondary-container": "#394f83",
+                    "primary-fixed": "#ffdada",
+                    "reckitt-pink": "#E80044",
+                    "on-surface": "#151c27",
+                    "surface-container-high": "#e2e8f8",
+                    "surface-container-highest": "#dce2f3",
+                    "on-primary-container": "#fffbff",
+                    "surface-dim": "#d3daea",
+                    "on-surface-variant": "#5d3f40",
+                    "inverse-primary": "#ffb3b6",
+                    "inverse-surface": "#2a313d",
+                    "on-tertiary-fixed-variant": "#8f1000",
+                    "tertiary-fixed-dim": "#ffb4a6",
+                    "on-background": "#151c27",
+                    "deep-navy": "#001E50",
+                    "secondary-fixed-dim": "#b0c6ff",
+                    "secondary-container": "#adc3fe",
+                    "on-primary-fixed-variant": "#920027",
+                    "surface-tint": "#be0036",
+                    "outline-variant": "#e7bcbd",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#3f0300",
+                    "energy-orange": "#FF593D",
+                    "on-secondary-fixed-variant": "#2f4578",
+                    "tertiary": "#b3220c",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#001945",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eefe",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "margin-tablet": "32px",
+                    "margin-mobile": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .product-card-hover:hover {
+            box-shadow: 0 16px 32px -12px rgba(0, 30, 80, 0.08);
+            transform: translateY(-4px);
+        }
+        .active-filter {
+            background-color: #ba0035;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-surface-gray text-on-surface font-body-md antialiased transition-colors duration-300">
+<!-- Top Navigation Bar -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-12">
+<span class="text-headline-md font-headline-md font-bold text-deep-navy dark:text-inverse-on-surface">Moonshot Pilot</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Symptom Checker</a>
+<a class="text-label-md font-label-md text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1" href="#">Products</a>
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-base">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined text-secondary">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined text-secondary">account_circle</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-12">
+<div class="flex flex-col gap-8">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<h1 class="text-display-lg font-display-lg text-deep-navy">Product Library</h1>
+<p class="text-body-lg font-body-lg text-secondary max-w-2xl">Explore our clinical-grade solutions for digestive health, pain management, and everyday wellness.</p>
+</section>
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0">
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-border-subtle flex flex-col gap-6 sticky top-28">
+<div>
+<h3 class="text-label-md font-label-md text-deep-navy mb-4">Categories</h3>
+<div class="flex flex-col gap-2">
+<button class="flex items-center justify-between px-3 py-2 rounded-lg bg-primary text-white text-body-sm font-medium transition-all">
+                                    All Products
+                                    <span class="text-[10px] opacity-80">24</span>
+</button>
+<button class="flex items-center justify-between px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low text-body-sm font-medium transition-all">
+                                    Pain Relief
+                                    <span class="text-[10px] opacity-60">8</span>
+</button>
+<button class="flex items-center justify-between px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low text-body-sm font-medium transition-all">
+                                    Digestive Health
+                                    <span class="text-[10px] opacity-60">6</span>
+</button>
+<button class="flex items-center justify-between px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low text-body-sm font-medium transition-all">
+                                    Cold &amp; Flu
+                                    <span class="text-[10px] opacity-60">12</span>
+</button>
+<button class="flex items-center justify-between px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low text-body-sm font-medium transition-all">
+                                    Wellness
+                                    <span class="text-[10px] opacity-60">4</span>
+</button>
+</div>
+</div>
+<div class="pt-4 border-t border-border-subtle">
+<h3 class="text-label-md font-label-md text-deep-navy mb-4">Format</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-low text-secondary text-label-sm rounded-full border border-border-subtle cursor-pointer hover:border-primary transition-colors">Tablet</span>
+<span class="px-3 py-1 bg-surface-container-low text-secondary text-label-sm rounded-full border border-border-subtle cursor-pointer hover:border-primary transition-colors">Liquid</span>
+<span class="px-3 py-1 bg-surface-container-low text-secondary text-label-sm rounded-full border border-border-subtle cursor-pointer hover:border-primary transition-colors">Spray</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Gaviscon Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-border-subtle overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+<div class="aspect-square bg-white p-8 relative overflow-hidden">
+<img alt="Gaviscon Advance" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A professional studio product photograph of a clinical antacid medicine bottle. The lighting is clean, bright, and sterile, evoking a pharmaceutical laboratory environment. The background is a soft, minimalist light gray. The composition is centered, highlighting the precision and trustworthiness of the healthcare product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8vyEYMrpC08bwmeATGhgF3o0j94GzWbFGvcw8-PcL2-lFfey3Rq19EHfMW26M7W2y-9HXgrgeZct9m6lD5lwAkJ6GjpsU1yckVOXF5OJlohFLwKWB2QWuBrnaVEJ_Tt9wVi3nXjINyH0rQYGtcuWif7E4i-dBL_IkfmZ90tJ16TBZ4XHIonIporl8M_fB2Scb0l7lkraFgTZZik7G3j9FuWVvpR6s4r-kTiKBjqbHkGUAoGaZQXjCRaHtO531tZvvEKshA2mhLfix"/>
+<span class="absolute top-4 left-4 px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded">DIGESTIVE</span>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<h2 class="text-headline-md font-headline-md text-deep-navy">Gaviscon Advance</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">Fast-acting, long-lasting relief from heartburn and acid indigestion. Forms a protective barrier.</p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<button class="text-reckitt-pink font-label-md flex items-center gap-1 group/btn">
+                                        View Details 
+                                        <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-reckitt-pink text-white w-10 h-10 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Mucinex Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-border-subtle overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+<div class="aspect-square bg-white p-8 relative overflow-hidden">
+<img alt="Mucinex Max Strength" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A clean, medical-grade product shot of a cold and flu medication package. The aesthetic is modern and professional, with cool blue and crisp white tones. Soft shadows create a sense of depth on a pristine white surface. High-key lighting emphasizes clarity and health safety." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2dAwLL9SZijpUONDRdLlyxuJ4YyyMmMD0S-fETM6nMvy1CpUqxDGMmrKgKOKY0Qqxsz20agFXbMGav6IVisddqCKlev9M87xHHywU_XlH6-zrpVH1M-n6h87YqHujXHNXZ_To5h8FMNmhirLgBZfckEkU2_mAJwQSl_1WpmUwcpt8C_IF7NJMLFCfmgSN2LdNIQvFI-bGCP8tUgcEXJyedIE34G6c5hNHuVUsq3g9NSEH8kWZ08jY7PIVcrNJgC6v7SxP_oCkO2hP"/>
+<span class="absolute top-4 left-4 px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded">COLD &amp; FLU</span>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<h2 class="text-headline-md font-headline-md text-deep-navy">Mucinex Max</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">12-hour chest congestion relief. Helps thin and loosen mucus for more productive coughs.</p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<button class="text-reckitt-pink font-label-md flex items-center gap-1 group/btn">
+                                        View Details 
+                                        <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-reckitt-pink text-white w-10 h-10 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Durex Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-border-subtle overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+<div class="aspect-square bg-white p-8 relative overflow-hidden">
+<img alt="Durex Invisible" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A high-end, minimalist lifestyle product image of premium personal care packaging. The lighting is cinematic yet soft, using a palette of deep navy and sophisticated silvers. The style is contemporary and elegant, conveying quality and discretion within a modern wellness context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBspxcVZXEl2zmDhyxoPBKaGEDCSWFDNbtJGIJheD-n3jQ9lOWfO4xBY59kKLslV7bO5zzJKxRGEFKbgXusOOHsUBH9jZQEzRx0eKNeA_JplbLOTu1Yfu2Z-NAOxa8F7vXKUfIZ1AmE6sd2k6OBI1NXVa_t0NyEbSBaP2Jj46WkknXZJEd-Gw58Ldod_nOW1uBU0D8sY5oM-9Koodgltbz7ulVB5eIRw9KZ2wf5Bk4dT8FJu_nn4a7tbWcyPFY_FVH8JkjGcoIXo5Lm"/>
+<span class="absolute top-4 left-4 px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded">WELLNESS</span>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<h2 class="text-headline-md font-headline-md text-deep-navy">Durex Invisible</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">Our thinnest condoms for maximum sensitivity, designed to provide high-level protection.</p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<button class="text-reckitt-pink font-label-md flex items-center gap-1 group/btn">
+                                        View Details 
+                                        <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-reckitt-pink text-white w-10 h-10 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Strepsils Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-border-subtle overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+<div class="aspect-square bg-white p-8 relative overflow-hidden">
+<img alt="Strepsils Throat Lozenges" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A macro studio photograph of medical lozenges and their packaging. The scene is bright and clinical, with vibrant accents of orange and red against a pure white background. The focus is sharp, highlighting the texture and precision of the pharmaceutical manufacturing process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrSZCUydKyQ6oSgERLH_4z1wfI7Ph8MftLucDNIxchj8jbo8lWZlpHj68Jc_bjF4TGcPhbf4jPwQyU8idJHYJaWBvZVqt8XN0teSmOtmm0z_7UqsnfQ9ubDH461wBEk3ARdR6sxR6JE6AfNALbDPXtWXiRAlQLmsbYMkAWSOxZCBU85qr5euWw6TSxSfUvX6dHB0GaXIG6ohvS3M3I2wTdZAacfk8uxMioleH71cRU72PwcurTEYxf6YIO8ozNTs41YfmYO6dHEqQ-"/>
+<span class="absolute top-4 left-4 px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded">PAIN RELIEF</span>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<h2 class="text-headline-md font-headline-md text-deep-navy">Strepsils Sore Throat</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">Double antibacterial action to provide soothing relief for sore throats and mouth infections.</p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<button class="text-reckitt-pink font-label-md flex items-center gap-1 group/btn">
+                                        View Details 
+                                        <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-reckitt-pink text-white w-10 h-10 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Nurofen Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-border-subtle overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+<div class="aspect-square bg-white p-8 relative overflow-hidden">
+<img alt="Nurofen Tablets" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Clean architectural product photography of a premium pain reliever. The lighting uses soft diffuse highlights to show the metallic foil of the blister pack. The overall mood is reliable and scientific, with a color palette of white, silver, and deep brand reds." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsPvGSp_HNUah_IhAooUVEGJr1pljqYsZCjrrSYRaKHxQ8L5SD0-rnmmO28joTbP0SZVDsSa_97jY6GlBULLFAXh1FScYSY8sMDUmuVX06IAgPW-X1kndAFYhsGUFFUhKmmbny8om8Y8aksa6bVoeJ3m1MhfseiMD6Kf8gikjMweSf7r5TnbeOBdXZ1G8jNDSB_uiQiJnUIF8-w3p4G2GYGyLjUPtbTrvuQShDe7gsUGVgZKqXThO0bcINYMuT34-2KPjd6Ks-I6EI"/>
+<span class="absolute top-4 left-4 px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded">PAIN RELIEF</span>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<h2 class="text-headline-md font-headline-md text-deep-navy">Nurofen Targeted</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">Effective relief from headache, fever, and inflammatory pain. Targeted fast release formula.</p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<button class="text-reckitt-pink font-label-md flex items-center gap-1 group/btn">
+                                        View Details 
+                                        <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-reckitt-pink text-white w-10 h-10 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Enfamil Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-border-subtle overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+<div class="aspect-square bg-white p-8 relative overflow-hidden">
+<img alt="Enfamil NeuroPro" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A soft and gentle product photograph of premium infant nutrition packaging. The lighting is warm and natural, creating a comforting and safe atmosphere. The background is a clean, neutral nursery-style setting with soft bokeh. The style emphasizes clinical excellence combined with maternal care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaGmCXbXkF0ZcFQNYDBdg0q18mbtpKXGqNSYGOwZm2FiW96o_ZAPj9bwx8_BGPhhHuaYfKEx9P5faJzo30kWX99a6P2dI3vY9RwDqvx-ZxZp8QqYI5EPAxl5TDV3bSFhvLwZP6l-VZLbWKU_K7G42iN69nxGncf6tUvCM1e64_80ZNyA0cVlz1icgzkhY71csnVlzEeQ4RKAop92BIRaKIZDTuo0OxhDDlGlLYIRhw1f8rlT8KokxF2H8iUY6QyfZsQzwiSJg6H4cX"/>
+<span class="absolute top-4 left-4 px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded">NUTRITION</span>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<h2 class="text-headline-md font-headline-md text-deep-navy">Enfamil NeuroPro</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">Scientifically formulated infant formula with brain-building MFGM and DHA nutrients.</p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<button class="text-reckitt-pink font-label-md flex items-center gap-1 group/btn">
+                                        View Details 
+                                        <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-reckitt-pink text-white w-10 h-10 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-2">
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 bg-deep-navy text-white rounded-lg text-label-md">1</button>
+<button class="w-10 h-10 text-secondary hover:bg-surface-container-low rounded-lg text-label-md transition-colors">2</button>
+<button class="w-10 h-10 text-secondary hover:bg-surface-container-low rounded-lg text-label-md transition-colors">3</button>
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-navy dark:bg-surface-on-surface mt-20">
+<div class="w-full py-12 px-margin-desktop max-w-container-max mx-auto flex flex-col gap-base">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8 border-b border-white/10 pb-8">
+<span class="text-headline-sm font-headline-sm font-bold text-reckitt-pink">Moonshot Pilot</span>
+<div class="flex flex-wrap gap-6">
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest hover:underline decoration-reckitt-pink transition-colors" href="#">Medical Disclaimer</a>
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest hover:underline decoration-reckitt-pink transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest hover:underline decoration-reckitt-pink transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest hover:underline decoration-reckitt-pink transition-colors" href="#">Contact Us</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-body-sm font-body-sm text-surface-container-lowest dark:text-surface-container-lowest opacity-70">© 2024 Reckitt. This platform is for informational purposes only and does not constitute medical advice.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-surface-container-lowest opacity-60 cursor-pointer hover:opacity-100">language</span>
+<span class="material-symbols-outlined text-surface-container-lowest opacity-60 cursor-pointer hover:opacity-100">info</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple filter interaction
+        const filterButtons = document.querySelectorAll('aside button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white');
+                    b.classList.add('text-secondary', 'hover:bg-surface-container-low');
+                });
+                btn.classList.add('bg-primary', 'text-white');
+                btn.classList.remove('text-secondary', 'hover:bg-surface-container-low');
+            });
+        });
+
+        // Add to cart micro-interaction
+        const addButtons = document.querySelectorAll('.bg-reckitt-pink.w-10');
+        addButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const icon = btn.querySelector('.material-symbols-outlined');
+                icon.textContent = 'check';
+                btn.classList.replace('bg-reckitt-pink', 'bg-green-600');
+                setTimeout(() => {
+                    icon.textContent = 'add';
+                    btn.classList.replace('bg-green-600', 'bg-reckitt-pink');
+                }, 2000);
+            });
+        });
+    </script>
+</body></html>

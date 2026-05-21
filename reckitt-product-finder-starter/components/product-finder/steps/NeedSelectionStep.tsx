@@ -14,99 +14,169 @@ export default function NeedSelectionStep({
   onSelect,
   onBack,
 }: NeedSelectionStepProps) {
+  const selected = needOptions.find((o) => o.id === selectedNeedId);
+
   return (
-    <section aria-labelledby="need-heading">
-      {/* Step header */}
-      <div className="mb-7 flex items-start justify-between gap-4">
+    <section
+      aria-labelledby="need-heading"
+      className="grid gap-6 lg:grid-cols-[1fr_1.15fr] lg:items-start"
+    >
+      {/* ── Left: illustration panel ────────────────── */}
+      <div className="flex flex-col gap-5">
+        {/* Step label + heading */}
         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-pinkSoft px-3 py-1 text-xs font-black uppercase tracking-widest text-brand-pink">
-            Step 1 of 4
+          <span className="text-xs font-bold uppercase tracking-widest text-secondary">
+            Symptom Analysis
           </span>
           <h1
             id="need-heading"
-            className="mt-3 text-3xl font-black leading-tight text-brand-navy sm:text-4xl"
+            className="mt-2 font-display text-3xl font-bold leading-tight tracking-tight text-deep-navy sm:text-4xl"
           >
-            What do you need help with today?
+            Where does it hurt?
           </h1>
-          <p className="mt-2 text-slate-500">
-            Choose the option that best describes your need.
+          <p className="mt-2 text-sm leading-6 text-secondary">
+            Select the option that best describes your symptom to get a tailored suggestion.
           </p>
         </div>
-        <Button variant="ghost" onClick={onBack} className="shrink-0 text-sm">
+
+        {/*
+         * ── MEDIA PLACEMENT ──────────────────────────────────────────
+         * Place a clinical body-diagram illustration here.
+         * Recommended format : SVG or PNG, transparent background
+         * Recommended size   : 360 × 520 px (portrait ratio)
+         * File location      : /public/body-diagram.png  (or .svg)
+         *
+         * To activate: replace the placeholder <div> below with:
+         *   <img src="/body-diagram.png" alt="Body diagram" className="h-full w-full object-contain" />
+         * ─────────────────────────────────────────────────────────────
+         */}
+        <div className="relative flex min-h-[300px] flex-1 flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-border-subtle bg-white p-8 lg:min-h-[380px]">
+          {/* Soft background tint */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-surface-container-low/40 to-transparent" />
+
+          {/* Placeholder body graphic */}
+          <div className="relative z-10 flex flex-col items-center gap-3 text-center">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-surface-container-low">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#475d92" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="20" cy="10" r="5" />
+                <path d="M12 22c0-4.4 3.6-8 8-8s8 3.6 8 8v10H12V22z" />
+                <line x1="12" y1="28" x2="8" y2="38" /><line x1="28" y1="28" x2="32" y2="38" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-deep-navy">Clinical Body Diagram</p>
+              <p className="mt-1 text-xs text-secondary">Place your illustration here</p>
+              <code className="mt-1 block text-xs text-secondary/60">📁 /public/body-diagram.png</code>
+            </div>
+          </div>
+
+          {/* Active category badge */}
+          {selected && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-deep-navy px-4 py-2 text-white shadow-soft">
+              <span className="text-lg leading-none">{selected.icon}</span>
+              <span className="text-xs font-bold uppercase tracking-wider">{selected.label}</span>
+            </div>
+          )}
+
+          {/* "Clinical Model Active" badge when nothing selected */}
+          {!selected && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-deep-navy px-4 py-2 text-white shadow-soft">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" aria-hidden="true" />
+              <span className="text-xs font-bold uppercase tracking-wider">Clinical Model Active</span>
+            </div>
+          )}
+        </div>
+
+        {/* Active category info card */}
+        {selected && (
+          <div className="animate-fade-in rounded-xl border border-l-[3px] border-border-subtle border-l-reckitt-pink bg-white p-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-secondary">Selected symptom</p>
+            <div className="mt-2 flex items-center gap-3">
+              <span className="text-2xl leading-none">{selected.icon}</span>
+              <div>
+                <p className="font-semibold text-deep-navy">{selected.label}</p>
+                <p className="text-xs text-secondary">{selected.description}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Back */}
+        <Button variant="ghost" onClick={onBack} className="self-start text-sm">
           ← Back
         </Button>
       </div>
 
-      {/* Need options grid */}
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      {/* ── Right: symptom / need option list ───────── */}
+      <div className="flex flex-col gap-3">
+        <p className="text-xs font-bold uppercase tracking-widest text-secondary/60 px-1">
+          Common Symptoms
+        </p>
         {needOptions.map((option) => {
-          const selected = option.id === selectedNeedId;
+          const isSelected = option.id === selectedNeedId;
           return (
             <button
               key={option.id}
               onClick={() => onSelect(option.id)}
               className={cn(
-                "group relative rounded-2xl border p-5 text-left transition-all duration-200 hover:-translate-y-0.5",
-                selected
-                  ? "border-brand-pink bg-brand-pinkSoft shadow-pink ring-1 ring-brand-pink"
-                  : "border-slate-200 bg-white shadow-card hover:border-pink-300 hover:shadow-cardHover"
+                "group flex w-full items-center justify-between rounded-xl border p-4 text-left transition-all duration-200",
+                isSelected
+                  ? "border-reckitt-pink bg-primary-fixed/20 shadow-sm"
+                  : "border-border-subtle bg-white hover:border-secondary/40 hover:shadow-card"
               )}
-              aria-pressed={selected}
+              aria-pressed={isSelected}
             >
-              <div className="flex items-start justify-between gap-3">
-                {/* Icon */}
+              <div className="flex items-center gap-4">
+                {/* Icon circle */}
                 <div
                   className={cn(
-                    "flex h-12 w-12 items-center justify-center rounded-xl text-2xl transition-colors",
-                    selected ? "bg-white shadow-sm" : "bg-brand-pinkSoft"
+                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl transition-all duration-200",
+                    isSelected
+                      ? "bg-reckitt-pink/10"
+                      : "bg-surface-container-low group-hover:scale-110"
                   )}
                   aria-hidden="true"
                 >
                   {option.icon}
                 </div>
-                {/* Check/arrow indicator */}
-                <div
-                  className={cn(
-                    "flex h-7 w-7 items-center justify-center rounded-full text-xs transition-colors",
-                    selected
-                      ? "bg-brand-pink text-white"
-                      : "border border-slate-200 text-slate-300 group-hover:border-brand-pink group-hover:text-brand-pink"
-                  )}
-                >
-                  {selected ? (
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="1.5,5 4,7.5 8.5,2.5" />
-                    </svg>
-                  ) : (
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="3" y1="5" x2="7" y2="5" />
-                      <polyline points="5.5,3 7.5,5 5.5,7" />
-                    </svg>
-                  )}
+                <div>
+                  <p className={cn("text-sm font-semibold", isSelected ? "text-deep-navy" : "text-on-surface")}>
+                    {option.label}
+                  </p>
+                  <p className="text-xs text-secondary">{option.description}</p>
                 </div>
               </div>
-              <h2
+
+              {/* Check / arrow indicator */}
+              <span
                 className={cn(
-                  "mt-4 text-base font-black transition-colors",
-                  selected ? "text-brand-pink" : "text-brand-navy"
+                  "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs transition-all duration-200",
+                  isSelected
+                    ? "bg-reckitt-pink text-white"
+                    : "border border-border-subtle text-secondary/40 group-hover:border-reckitt-pink group-hover:text-reckitt-pink"
                 )}
               >
-                {option.label}
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-slate-500">
-                {option.description}
-              </p>
+                {isSelected ? (
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" />
+                  </svg>
+                ) : (
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="3" y1="5" x2="7" y2="5" /><polyline points="5.5,3 7.5,5 5.5,7" />
+                  </svg>
+                )}
+              </span>
             </button>
           );
         })}
-      </div>
 
-      {/* Hint */}
-      <div className="mt-5 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-        <p className="text-sm text-slate-500">
-          <span className="font-semibold text-brand-pink">Not sure?</span> Pick the
-          closest option — the next questions help refine the recommendation.
-        </p>
+        {/* Hint */}
+        <div className="mt-1 rounded-lg border border-border-subtle bg-surface-container-low/50 p-4">
+          <p className="text-xs text-secondary">
+            <span className="font-semibold text-deep-navy">Not sure?</span>{" "}
+            Pick the closest option — the next questions help refine the recommendation.
+          </p>
+        </div>
       </div>
     </section>
   );

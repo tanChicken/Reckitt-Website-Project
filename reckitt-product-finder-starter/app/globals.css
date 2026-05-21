@@ -3,78 +3,51 @@
 @tailwind utilities;
 
 :root {
-  --brand-pink: #f20683;
-  --brand-pink-dark: #b80461;
-  --brand-navy: #07133a;
-  --brand-ink: #172033;
-  --surface: #ffffff;
-  --surface-soft: #fff0f8;
+  --reckitt-pink:  #E80044;
+  --deep-navy:     #001E50;
+  --surface-gray:  #F8F9FB;
+  --border-subtle: #E7E9EF;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-  color: var(--brand-ink);
-  background:
-    radial-gradient(ellipse at 8% 2%, rgba(242, 6, 131, 0.11) 0%, transparent 30rem),
-    radial-gradient(ellipse at 92% 8%, rgba(242, 6, 131, 0.06) 0%, transparent 25rem),
-    radial-gradient(ellipse at 50% 96%, rgba(7, 19, 58, 0.05) 0%, transparent 30rem),
-    linear-gradient(180deg, #ffffff 0%, #fefbfe 40%, #fafaff 70%, #ffffff 100%);
+  color: #151c27;
+  background-color: #F8F9FB;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display font applied to primary headings */
+/* Manrope for all primary headings */
 h1 {
-  font-family: var(--font-display), var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-manrope), var(--font-inter), system-ui, sans-serif;
 }
 
-button,
-a,
-input,
-select,
-textarea {
+button, a, input, select, textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
 :focus-visible {
-  outline: 3px solid #f20683;
-  outline-offset: 3px;
+  outline: 2px solid #E80044;
+  outline-offset: 2px;
   border-radius: 4px;
 }
 
 ::selection {
-  background: #f20683;
-  color: white;
+  background: #ffdada;
+  color: #ba0035;
 }
 
-/* Gradient text utility */
-.text-gradient-pink {
-  background: linear-gradient(130deg, #f20683 0%, #b80461 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* ─── Animations ─────────────────────────────────── */
 
-/* Step transition animation */
 @keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -83,54 +56,25 @@ textarea {
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-slide-up {
-  animation: fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+.animate-fade-slide-up { animation: fadeSlideUp 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in       { animation: fadeIn 0.25s ease both; }
+.animate-scale-in      { animation: scaleIn 0.3s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-slide-down    { animation: slideDown 0.25s cubic-bezier(0.22,1,0.36,1) both; }
 
-.animate-fade-in {
-  animation: fadeIn 0.25s ease both;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+/* ─── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #f9c3e0;
-  border-radius: 99px;
+  background: #dce2f3;
+  border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #f20683;
-}
+::-webkit-scrollbar-thumb:hover { background: #E80044; }

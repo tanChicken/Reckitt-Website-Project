@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Treatment Recommendation | Moonshot Pilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f0f3ff",
+                    "secondary": "#475d92",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-gray": "#F8F9FB",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "outline": "#926e6f",
+                    "on-tertiary-container": "#fffcff",
+                    "surface-variant": "#dce2f3",
+                    "tertiary-fixed": "#ffdad3",
+                    "primary": "#ba0035",
+                    "primary-fixed-dim": "#ffb3b6",
+                    "background": "#f9f9ff",
+                    "primary-container": "#e80044",
+                    "on-primary-fixed": "#40000c",
+                    "border-subtle": "#E7E9EF",
+                    "secondary-fixed": "#d9e2ff",
+                    "tertiary-container": "#d63c23",
+                    "on-secondary-container": "#394f83",
+                    "primary-fixed": "#ffdada",
+                    "reckitt-pink": "#E80044",
+                    "on-surface": "#151c27",
+                    "surface-container-high": "#e2e8f8",
+                    "surface-container-highest": "#dce2f3",
+                    "on-primary-container": "#fffbff",
+                    "surface-dim": "#d3daea",
+                    "on-surface-variant": "#5d3f40",
+                    "inverse-primary": "#ffb3b6",
+                    "inverse-surface": "#2a313d",
+                    "on-tertiary-fixed-variant": "#8f1000",
+                    "tertiary-fixed-dim": "#ffb4a6",
+                    "on-background": "#151c27",
+                    "deep-navy": "#001E50",
+                    "secondary-fixed-dim": "#b0c6ff",
+                    "secondary-container": "#adc3fe",
+                    "on-primary-fixed-variant": "#920027",
+                    "surface-tint": "#be0036",
+                    "outline-variant": "#e7bcbd",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#3f0300",
+                    "energy-orange": "#FF593D",
+                    "on-secondary-fixed-variant": "#2f4578",
+                    "tertiary": "#b3220c",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#001945",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eefe",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "margin-tablet": "32px",
+                    "margin-mobile": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "display-lg-mobile": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .clinical-glass {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-surface-gray font-body-md text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-bold text-deep-navy dark:text-inverse-on-surface">Moonshot Pilot</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Home</a>
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Symptom Checker</a>
+<a class="text-label-md font-label-md text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1" href="#">Products</a>
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Support</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-deep-navy dark:text-inverse-on-surface p-2 rounded-full hover:bg-surface-container-low transition-all">account_circle</button>
+</div>
+</nav>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Page Header -->
+<div class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-deep-navy mb-2">Recommended Treatment</h1>
+<p class="font-body-lg text-body-lg text-secondary">Based on your reported symptoms, our clinical engine suggests the following care plan.</p>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Primary Product Section -->
+<div class="lg:col-span-8 space-y-gutter">
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-shadow duration-300">
+<div class="md:w-2/5 relative bg-white flex items-center justify-center p-8 border-r border-border-subtle">
+<img alt="Nurofen Product" class="w-full h-auto object-contain max-h-64" data-alt="A clean, professional studio shot of a white medicine box with bold blue and red accents, placed on a pristine white surface. The lighting is soft and high-key, reflecting a clinical healthcare environment. The background is a soft neutral gray, maintaining a sophisticated and modern aesthetic that conveys trust and scientific excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_b5iPGppE1s3tQaVZE15qPDz3PYYqbJJAKOXUi8iFC6Aq_xJbyCVr7qsjscm6nYrBmPN3A-TUeqs_tItslciUhKy2kTZ-WStTA_SReaaVYefDtaXdlOlS79Mh7aWd-ixqZz034uAEc2QTyKLKeQ-EOJPvlbA19bHLOMuXqCoNSxTxjFMn8-uWtkwrHW8egSaNpxHDxuV2XputVlaC0IunRvmLbBrKGqXlf11dRq7v1Nf9oTHU3T63WO15VpVv8gEHNTjEz6c0zakh"/>
+<div class="absolute top-4 left-4 bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-label-sm font-label-sm">Primary Recommendation</div>
+</div>
+<div class="md:w-3/5 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-deep-navy">Nurofen</h2>
+<p class="font-label-md text-label-md text-secondary">200mg Ibuprofen Tablets</p>
+</div>
+<span class="material-symbols-outlined text-reckitt-pink">verified</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-deep-navy mt-0.5">schedule</span>
+<div>
+<p class="font-label-md text-label-md text-deep-navy">Dosage</p>
+<p class="font-body-sm text-body-sm text-secondary">1-2 tablets every 4-6 hours as required. Do not exceed 6 tablets in any 24-hour period.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-deep-navy mt-0.5">check_circle</span>
+<div>
+<p class="font-label-md text-label-md text-deep-navy">Key Benefits</p>
+<ul class="list-disc list-inside font-body-sm text-body-sm text-secondary ml-1">
+<li>Targeted relief from inflammatory pain</li>
+<li>Fast-acting formula for headache &amp; fever</li>
+<li>Up to 8 hours of consistent relief</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-reckitt-pink text-white font-label-md text-label-md py-4 rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">local_pharmacy</span>
+                                Find at Pharmacy
+                            </button>
+<button class="flex-1 border border-deep-navy text-deep-navy font-label-md text-label-md py-4 rounded-lg hover:bg-surface-container-low active:scale-95 transition-all">
+                                View Product Details
+                            </button>
+</div>
+</div>
+</div>
+<!-- Secondary Care Advice -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="p-6 bg-surface-container rounded-lg border border-border-subtle flex gap-4">
+<span class="material-symbols-outlined text-deep-navy p-3 bg-white rounded-full h-fit">water_drop</span>
+<div>
+<h3 class="font-label-md text-label-md text-deep-navy mb-1">Stay Hydrated</h3>
+<p class="font-body-sm text-body-sm text-secondary">Increase your fluid intake while taking this medication to support recovery.</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container rounded-lg border border-border-subtle flex gap-4">
+<span class="material-symbols-outlined text-deep-navy p-3 bg-white rounded-full h-fit">bedtime</span>
+<div>
+<h3 class="font-label-md text-label-md text-deep-navy mb-1">Rest and Recover</h3>
+<p class="font-body-sm text-body-sm text-secondary">Ensure adequate rest to allow the body to manage inflammation effectively.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Content -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Safety & Warnings Section -->
+<section class="bg-surface-container-lowest border border-border-subtle rounded-lg p-8">
+<div class="flex items-center gap-2 mb-6 text-error">
+<span class="material-symbols-outlined">warning</span>
+<h2 class="font-label-md text-label-md font-bold uppercase tracking-wider">Safety &amp; Warnings</h2>
+</div>
+<div class="space-y-6">
+<div class="pb-4 border-b border-border-subtle">
+<h4 class="font-label-sm text-label-sm text-deep-navy mb-1">Allergy Warning</h4>
+<p class="font-body-sm text-body-sm text-secondary">Do not use if you are allergic to aspirin or any other NSAIDs.</p>
+</div>
+<div class="pb-4 border-b border-border-subtle">
+<h4 class="font-label-sm text-label-sm text-deep-navy mb-1">Medical Conditions</h4>
+<p class="font-body-sm text-body-sm text-secondary">Consult a doctor if you have stomach ulcers, kidney disease, or are pregnant.</p>
+</div>
+<div class="pb-4 border-b border-border-subtle">
+<h4 class="font-label-sm text-label-sm text-deep-navy mb-1">Concomitant Use</h4>
+<p class="font-body-sm text-body-sm text-secondary">Avoid taking other ibuprofen-containing products at the same time.</p>
+</div>
+</div>
+<button class="mt-6 w-full text-center text-primary font-label-sm text-label-sm hover:underline">Download Full Patient Leaflet</button>
+</section>
+<!-- Support/Clinical Context -->
+<div class="bg-deep-navy text-white rounded-lg p-8 relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md mb-2">Need Help?</h3>
+<p class="font-body-sm text-body-sm text-secondary-fixed-dim mb-6">Our clinicians are available 24/7 if your symptoms persist or worsen.</p>
+<button class="w-full bg-white text-deep-navy font-label-md text-label-md py-3 rounded-lg hover:bg-surface-container-high transition-colors">Talk to a Pharmacist</button>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-primary opacity-20 rounded-full blur-3xl"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-navy dark:bg-surface-on-surface mt-12">
+<div class="w-full py-12 px-margin-desktop max-w-container-max mx-auto flex flex-col gap-base">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+<div class="text-headline-sm font-headline-sm font-bold text-reckitt-pink">Moonshot Pilot</div>
+<div class="flex flex-wrap gap-6">
+<a class="text-label-sm font-label-sm text-surface-variant hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Medical Disclaimer</a>
+<a class="text-label-sm font-label-sm text-surface-variant hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-surface-variant hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-surface-variant hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Contact Us</a>
+</div>
+</div>
+<div class="border-t border-white/10 pt-8">
+<p class="text-body-sm font-body-sm text-surface-container-lowest opacity-70">
+                    © 2024 Reckitt. This platform is for informational purposes only and does not constitute medical advice.
+                </p>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

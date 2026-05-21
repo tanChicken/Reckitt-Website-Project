@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Health Questionnaire | Moonshot Pilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f0f3ff",
+                        "secondary": "#475d92",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-gray": "#F8F9FB",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "outline": "#926e6f",
+                        "on-tertiary-container": "#fffcff",
+                        "surface-variant": "#dce2f3",
+                        "tertiary-fixed": "#ffdad3",
+                        "primary": "#ba0035",
+                        "primary-fixed-dim": "#ffb3b6",
+                        "background": "#f9f9ff",
+                        "primary-container": "#e80044",
+                        "on-primary-fixed": "#40000c",
+                        "border-subtle": "#E7E9EF",
+                        "secondary-fixed": "#d9e2ff",
+                        "tertiary-container": "#d63c23",
+                        "on-secondary-container": "#394f83",
+                        "primary-fixed": "#ffdada",
+                        "reckitt-pink": "#E80044",
+                        "on-surface": "#151c27",
+                        "surface-container-high": "#e2e8f8",
+                        "surface-container-highest": "#dce2f3",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#d3daea",
+                        "on-surface-variant": "#5d3f40",
+                        "inverse-primary": "#ffb3b6",
+                        "inverse-surface": "#2a313d",
+                        "on-tertiary-fixed-variant": "#8f1000",
+                        "tertiary-fixed-dim": "#ffb4a6",
+                        "on-background": "#151c27",
+                        "deep-navy": "#001E50",
+                        "secondary-fixed-dim": "#b0c6ff",
+                        "secondary-container": "#adc3fe",
+                        "on-primary-fixed-variant": "#920027",
+                        "surface-tint": "#be0036",
+                        "outline-variant": "#e7bcbd",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed": "#3f0300",
+                        "energy-orange": "#FF593D",
+                        "on-secondary-fixed-variant": "#2f4578",
+                        "tertiary": "#b3220c",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001945",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e7eefe",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-tablet": "32px",
+                        "margin-mobile": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .option-card-checked {
+            border-color: #E80044 !important;
+            background-color: #fffbff !important;
+            box-shadow: 0 4px 16px rgba(0, 30, 80, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface-gray text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-bold text-deep-navy dark:text-inverse-on-surface">
+                Moonshot Pilot
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Home</a>
+<a class="text-label-md font-label-md text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1" href="#">Symptom Checker</a>
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Products</a>
+<a class="text-label-md font-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Support</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-variant transition-all duration-200">
+<span class="material-symbols-outlined text-deep-navy" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop py-12">
+<div class="w-full max-w-3xl bg-surface-container-lowest rounded-xl p-8 md:p-12 border border-border-subtle transition-all duration-300">
+<!-- Progress Tracker -->
+<div class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<span class="text-label-md font-label-md text-secondary">Step 2 of 4</span>
+<span class="text-label-sm font-label-sm text-deep-navy opacity-60">Duration Assessment</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-deep-navy to-reckitt-pink transition-all duration-500 ease-out" style="width: 50%;"></div>
+</div>
+</div>
+<!-- Question Heading -->
+<div class="mb-10 text-center md:text-left">
+<h1 class="font-headline-lg text-headline-lg text-deep-navy mb-4 md:font-headline-lg md:text-headline-lg">
+                    How long have you been experiencing these symptoms?
+                </h1>
+<p class="font-body-md text-body-md text-secondary">
+                    Select the option that best describes your situation to help us provide more accurate guidance.
+                </p>
+</div>
+<!-- Options Grid (Asymmetric layout feel) -->
+<form class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12" id="questionnaire-form">
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="duration" type="radio" value="24h"/>
+<div class="h-full border border-border-subtle rounded-lg p-6 transition-all duration-200 peer-checked:border-reckitt-pink peer-checked:bg-primary-fixed/20 hover:border-secondary/40 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</div>
+<span class="font-label-md text-body-lg text-deep-navy">Less than 24 hours</span>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-border-subtle peer-checked:border-reckitt-pink peer-checked:bg-reckitt-pink flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="duration" type="radio" value="1-3d"/>
+<div class="h-full border border-border-subtle rounded-lg p-6 transition-all duration-200 peer-checked:border-reckitt-pink peer-checked:bg-primary-fixed/20 hover:border-secondary/40 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+<span class="font-label-md text-body-lg text-deep-navy">1-3 days</span>
+</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="duration" type="radio" value="4-7d"/>
+<div class="h-full border border-border-subtle rounded-lg p-6 transition-all duration-200 peer-checked:border-reckitt-pink peer-checked:bg-primary-fixed/20 hover:border-secondary/40 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="date_range">date_range</span>
+</div>
+<span class="font-label-md text-body-lg text-deep-navy">4-7 days</span>
+</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="duration" type="radio" value="week+"/>
+<div class="h-full border border-border-subtle rounded-lg p-6 transition-all duration-200 peer-checked:border-reckitt-pink peer-checked:bg-primary-fixed/20 hover:border-secondary/40 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+<span class="font-label-md text-body-lg text-deep-navy">Over a week</span>
+</div>
+</label>
+</form>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-border-subtle">
+<button class="w-full sm:w-auto px-8 py-3 rounded-lg border border-deep-navy text-deep-navy font-label-md hover:bg-surface-container-low transition-all active:scale-95 flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                    Previous
+                </button>
+<button class="w-full sm:w-auto px-12 py-3 rounded-lg bg-reckitt-pink text-white font-label-md hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/20 flex items-center justify-center gap-2" type="submit">
+                    Next
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Supportive Visual Info -->
+<div class="mt-12 max-w-3xl w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low/50 p-6 rounded-lg border border-border-subtle/50 flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+<h3 class="font-label-md text-deep-navy">Privacy Protected</h3>
+<p class="text-label-sm text-secondary">Your data is encrypted and handled according to medical standards.</p>
+</div>
+<div class="bg-surface-container-low/50 p-6 rounded-lg border border-border-subtle/50 flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="clinical_notes">clinical_notes</span>
+<h3 class="font-label-md text-deep-navy">Clinically Vetted</h3>
+<p class="text-label-sm text-secondary">Questions designed by healthcare professionals for accuracy.</p>
+</div>
+<div class="bg-surface-container-low/50 p-6 rounded-lg border border-border-subtle/50 flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+<h3 class="font-label-md text-deep-navy">Immediate Help</h3>
+<p class="text-label-sm text-secondary">If symptoms are severe, please call emergency services immediately.</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-navy dark:bg-surface-on-surface text-surface-container-lowest dark:text-surface-container-lowest full-width">
+<div class="w-full py-12 px-margin-desktop max-w-container-max mx-auto flex flex-col gap-base">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
+<div class="text-headline-sm font-headline-sm font-bold text-reckitt-pink">Reckitt</div>
+<div class="flex flex-wrap gap-6">
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Medical Disclaimer</a>
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-surface-variant dark:text-surface-dim hover:text-surface-container-lowest transition-colors hover:underline decoration-reckitt-pink" href="#">Contact Us</a>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-surface-variant opacity-80 max-w-2xl">
+                © 2024 Reckitt. This platform is for informational purposes only and does not constitute medical advice.
+            </p>
+</div>
+</footer>
+<script>
+        // Simple Interaction: Toggle visual feedback for cards
+        const form = document.getElementById('questionnaire-form');
+        const inputs = form.querySelectorAll('input[type="radio"]');
+        
+        inputs.forEach(input => {
+            input.addEventListener('change', () => {
+                // Clear all states first
+                inputs.forEach(i => {
+                    i.parentElement.querySelector('div').classList.remove('shadow-md', 'scale-[1.02]');
+                });
+                // Add state to checked
+                if(input.checked) {
+                    input.parentElement.querySelector('div').classList.add('shadow-md', 'scale-[1.02]');
+                }
+            });
+        });
+
+        // "Next" button interaction simulation
+        const nextBtn = document.querySelector('button[type="submit"]');
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const checked = form.querySelector('input[name="duration"]:checked');
+            if(!checked) {
+                alert('Please select an option to proceed.');
+                return;
+            }
+            nextBtn.innerHTML = 'Processing...';
+            setTimeout(() => {
+                nextBtn.innerHTML = 'Next <span class="material-symbols-outlined">arrow_forward</span>';
+            }, 1000);
+        });
+    </script>
+</body></html>

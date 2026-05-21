@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Moonshot Pilot | Symptom Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f0f3ff",
+                        "secondary": "#475d92",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-gray": "#F8F9FB",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "outline": "#926e6f",
+                        "on-tertiary-container": "#fffcff",
+                        "surface-variant": "#dce2f3",
+                        "tertiary-fixed": "#ffdad3",
+                        "primary": "#ba0035",
+                        "primary-fixed-dim": "#ffb3b6",
+                        "background": "#f9f9ff",
+                        "primary-container": "#e80044",
+                        "on-primary-fixed": "#40000c",
+                        "border-subtle": "#E7E9EF",
+                        "secondary-fixed": "#d9e2ff",
+                        "tertiary-container": "#d63c23",
+                        "on-secondary-container": "#394f83",
+                        "primary-fixed": "#ffdada",
+                        "reckitt-pink": "#E80044",
+                        "on-surface": "#151c27",
+                        "surface-container-high": "#e2e8f8",
+                        "surface-container-highest": "#dce2f3",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#d3daea",
+                        "on-surface-variant": "#5d3f40",
+                        "inverse-primary": "#ffb3b6",
+                        "inverse-surface": "#2a313d",
+                        "on-tertiary-fixed-variant": "#8f1000",
+                        "tertiary-fixed-dim": "#ffb4a6",
+                        "on-background": "#151c27",
+                        "deep-navy": "#001E50",
+                        "secondary-fixed-dim": "#b0c6ff",
+                        "secondary-container": "#adc3fe",
+                        "on-primary-fixed-variant": "#920027",
+                        "surface-tint": "#be0036",
+                        "outline-variant": "#e7bcbd",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed": "#3f0300",
+                        "energy-orange": "#FF593D",
+                        "on-secondary-fixed-variant": "#2f4578",
+                        "tertiary": "#b3220c",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001945",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e7eefe",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-tablet": "32px",
+                        "margin-mobile": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #E7E9EF;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .hotspot {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hotspot:hover {
+            transform: scale(1.2);
+            background: rgba(232, 0, 68, 0.2);
+            box-shadow: 0 0 15px rgba(232, 0, 68, 0.4);
+        }
+
+        .active-hotspot {
+            background: #E80044 !important;
+            box-shadow: 0 0 12px rgba(232, 0, 68, 0.5);
+            transform: scale(1.2);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dce2f3;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-deep-navy font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border-subtle flex justify-between items-center w-full px-margin-desktop py-4">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-bold tracking-tight text-deep-navy">Moonshot Pilot</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-reckitt-pink font-label-md border-b-2 border-reckitt-pink pb-1" href="#">Symptom Checker</a>
+<a class="text-deep-navy hover:text-reckitt-pink transition-colors duration-300 font-label-md" href="#">Medical History</a>
+<a class="text-deep-navy hover:text-reckitt-pink transition-colors duration-300 font-label-md" href="#">Find Specialists</a>
+</div>
+<div class="flex items-center gap-gutter">
+<button class="hidden lg:flex items-center gap-2 text-deep-navy font-label-md px-4 py-2 rounded-lg hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+            Emergency Support
+        </button>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-deep-navy cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-all" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-deep-navy cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-all" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-80 fixed left-0 top-0 z-40 bg-surface-container-low border-r border-border-subtle flex flex-col pt-24 pb-8">
+<div class="px-8 mb-8">
+<h2 class="text-label-sm font-bold uppercase tracking-widest text-deep-navy/60 mb-1">Symptom Analysis</h2>
+<p class="text-label-sm text-deep-navy font-medium">Moonshot Pilot AI Engine</p>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-4 cursor-pointer bg-reckitt-pink text-white rounded-lg font-label-md px-4 py-3 mx-4 transition-all duration-200" id="nav-overview" onclick="selectCategory('overview')">
+<span class="material-symbols-outlined" data-icon="medical_information">medical_information</span>
+<span class="font-label-md">Overview</span>
+</div>
+<div class="flex items-center gap-4 cursor-pointer text-deep-navy/70 px-4 py-3 mx-4 hover:bg-white hover:text-deep-navy transition-all duration-200 rounded-lg" id="nav-head" onclick="selectCategory('head')">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md">Head &amp; Neck</span>
+</div>
+<div class="flex items-center gap-4 cursor-pointer text-deep-navy/70 px-4 py-3 mx-4 hover:bg-white hover:text-deep-navy transition-all duration-200 rounded-lg" id="nav-chest" onclick="selectCategory('chest')">
+<span class="material-symbols-outlined" data-icon="body_system">body_system</span>
+<span class="font-label-md">Chest &amp; Torso</span>
+</div>
+<div class="flex items-center gap-4 cursor-pointer text-deep-navy/70 px-4 py-3 mx-4 hover:bg-white hover:text-deep-navy transition-all duration-200 rounded-lg" id="nav-limbs" onclick="selectCategory('limbs')">
+<span class="material-symbols-outlined" data-icon="accessibility_new">accessibility_new</span>
+<span class="font-label-md">Limbs</span>
+</div>
+<div class="flex items-center gap-4 cursor-pointer text-deep-navy/70 px-4 py-3 mx-4 hover:bg-white hover:text-deep-navy transition-all duration-200 rounded-lg" id="nav-skin" onclick="selectCategory('skin')">
+<span class="material-symbols-outlined" data-icon="dermatology">dermatology</span>
+<span class="font-label-md">Skin &amp; Surface</span>
+</div>
+</div>
+<div class="px-4 pt-4 border-t border-border-subtle mt-4">
+<button class="w-full bg-deep-navy text-white py-4 rounded-xl font-label-md shadow-lg hover:brightness-110 active:scale-[0.98] transition-all mb-4">
+            Analyze Symptoms
+        </button>
+<div class="flex items-center gap-4 cursor-pointer text-deep-navy/60 px-4 py-2 hover:text-reckitt-pink transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-sm">Settings</span>
+</div>
+<div class="flex items-center gap-4 cursor-pointer text-deep-navy/60 px-4 py-2 hover:text-reckitt-pink transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="gavel">gavel</span>
+<span class="text-label-sm">Medical Ethics</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-80 pt-20 h-screen overflow-hidden flex flex-col">
+<div class="p-margin-desktop flex flex-1 gap-gutter overflow-hidden">
+<!-- Left Side: Interactive Body Map -->
+<div class="w-1/2 flex flex-col">
+<div class="mb-8 animate-fade-in">
+<h1 class="font-headline-lg text-headline-lg text-deep-navy tracking-tight">Body Explorer</h1>
+<p class="text-body-md text-deep-navy/60 mt-1">Select an area on the clinical model to refine your diagnosis.</p>
+</div>
+<div class="flex-1 relative glass-card rounded-2xl overflow-hidden flex justify-center items-center p-8 border-border-subtle group">
+<!-- Soft Gradient Background -->
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-container-low to-white opacity-40"></div>
+<div class="relative h-full aspect-[2/3]">
+<img alt="Clinical body map" class="h-full object-contain filter" src="https://lh3.googleusercontent.com/aida/ADBb0uiIpoDZGNzyTiVOwEY5BZl_fmFa-9oh9Q3Xh6cIrDuRiylWMBRMsMTwvJE0SGJGln0CZRNFA_jQ_BNs7-O3PN6G5-XEDRucyiL2uZv_zgurpKjCSijokIUoxjZlfSIzpGurge8ZteMoWJh6q7V_r5kiXj4Upng9pUQxburxFe5ubLgvbQ_ExAdymWaq2-S893KtOjQLIsdNcgvxIS-0srs0H5CZCipY1ZNUMq6gcfp-aEB22KxgQluSlwhp"/>
+<!-- Hotspots -->
+<div class="hotspot absolute top-[5%] left-[45%] w-5 h-5 rounded-full bg-white border-2 border-reckitt-pink/30 cursor-pointer active-hotspot" id="hotspot-head" onclick="selectCategory('head')"></div>
+<div class="hotspot absolute top-[15%] left-[48%] w-5 h-5 rounded-full bg-white border-2 border-reckitt-pink/30 cursor-pointer" id="hotspot-throat" onclick="selectCategory('throat')"></div>
+<div class="hotspot absolute top-[28%] left-[44%] w-5 h-5 rounded-full bg-white border-2 border-reckitt-pink/30 cursor-pointer" id="hotspot-heart" onclick="selectCategory('heart')"></div>
+<div class="hotspot absolute top-[25%] left-[55%] w-5 h-5 rounded-full bg-white border-2 border-reckitt-pink/30 cursor-pointer" id="hotspot-chest" onclick="selectCategory('chest')"></div>
+<div class="hotspot absolute top-[40%] left-[48%] w-5 h-5 rounded-full bg-white border-2 border-reckitt-pink/30 cursor-pointer" id="hotspot-stomach" onclick="selectCategory('stomach')"></div>
+</div>
+<!-- Tech Overlay Labels -->
+<div class="absolute bottom-6 left-6 right-6 flex justify-center pointer-events-none">
+<div class="flex items-center gap-2 bg-deep-navy text-white px-4 py-2 rounded-full shadow-lg">
+<div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+<span class="text-label-sm font-bold uppercase tracking-wider">Clinical Model Active</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Detailed Lists (Bento Style) -->
+<div class="w-1/2 flex flex-col gap-gutter overflow-y-auto pr-4 pb-8">
+<!-- Active Category Header Card -->
+<div class="glass-card p-6 rounded-2xl animate-fade-in flex items-center justify-between border-l-4 border-l-reckitt-pink" id="active-category-card">
+<div>
+<h3 class="font-headline-md text-deep-navy" id="category-title">Head</h3>
+<p class="text-label-sm text-deep-navy/50" id="category-count">3 symptoms identified in this region</p>
+</div>
+<div class="bg-surface-container-high text-deep-navy p-3 rounded-xl">
+<span class="material-symbols-outlined text-[32px]" data-icon="person" id="category-icon">person</span>
+</div>
+</div>
+<!-- Symptom Interactive List -->
+<div class="flex flex-col gap-3">
+<h4 class="text-label-sm font-bold text-deep-navy/40 uppercase tracking-widest px-1">Common Symptoms</h4>
+<div class="space-y-2" id="symptom-list">
+<!-- Dynamic Content Placeholder -->
+</div>
+</div>
+<!-- Contextual Analysis Card -->
+<div class="bg-surface-container p-6 rounded-2xl animate-fade-in" style="animation-delay: 0.15s">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-reckitt-pink" data-icon="auto_awesome">auto_awesome</span>
+<h4 class="font-label-md text-deep-navy">Clinical Prediction</h4>
+</div>
+<p class="text-body-md text-deep-navy/70 leading-relaxed">
+                    Based on your current selections, there is a <span class="font-bold text-reckitt-pink">74% correlation</span> with localized environmental factors. Consider checking local air quality and allergy alerts.
+                </p>
+<div class="mt-4 flex gap-2">
+<span class="px-3 py-1 bg-white rounded-md text-label-sm text-deep-navy font-bold border border-border-subtle">Inflammation</span>
+<span class="px-3 py-1 bg-white rounded-md text-label-sm text-deep-navy font-bold border border-border-subtle">Seasonal</span>
+</div>
+</div>
+<!-- Action Block -->
+<div class="bg-reckitt-pink p-6 rounded-2xl text-white mt-auto shadow-xl">
+<div class="flex items-center justify-between mb-4">
+<p class="text-label-md font-bold uppercase tracking-wider">Ready to continue?</p>
+<span class="material-symbols-outlined opacity-60" data-icon="keyboard_double_arrow_right">keyboard_double_arrow_right</span>
+</div>
+<button class="w-full bg-white text-reckitt-pink py-4 rounded-xl font-bold text-headline-lg-mobile shadow-md hover:bg-surface-container-low transition-all active:scale-95">
+                    Proceed to Lab Tests
+                </button>
+</div>
+</div>
+</div>
+</main>
+<script>
+    const symptomData = {
+        head: {
+            title: "Head & Neck",
+            icon: "person",
+            count: "4 symptoms listed",
+            items: ["Dizziness", "Sharp Headache", "Cloudy Vision", "Tinnitus"]
+        },
+        throat: {
+            title: "Throat",
+            icon: "vital_signs",
+            count: "2 symptoms listed",
+            items: ["Hoarseness", "Difficulty Swallowing"]
+        },
+        heart: {
+            title: "Heart",
+            icon: "favorite",
+            count: "3 symptoms listed",
+            items: ["Palpitations", "Rapid Heart Rate", "Arrhythmia"]
+        },
+        chest: {
+            title: "Chest & Torso",
+            icon: "body_system",
+            count: "3 symptoms listed",
+            items: ["Tightness", "Shortness of Breath", "Coughing"]
+        },
+        stomach: {
+            title: "Stomach",
+            icon: "ulna_radius",
+            count: "5 symptoms listed",
+            items: ["Nausea", "Bloating", "Acute Cramping", "Acid Reflux", "Indigestion"]
+        },
+        overview: {
+            title: "Body Overview",
+            icon: "medical_information",
+            count: "Global Assessment",
+            items: ["Fatigue", "Muscle Weakness", "Joint Pain", "Chills"]
+        },
+        limbs: {
+            title: "Limbs",
+            icon: "accessibility_new",
+            count: "2 symptoms listed",
+            items: ["Numbness", "Muscle Spasms"]
+        },
+        skin: {
+            title: "Skin & Surface",
+            icon: "dermatology",
+            count: "1 symptom listed",
+            items: ["Localized Rash"]
+        }
+    };
+
+    function selectCategory(cat) {
+        const data = symptomData[cat];
+        
+        // Update Text Content
+        document.getElementById('category-title').innerText = data.title;
+        document.getElementById('category-count').innerText = data.count;
+        document.getElementById('category-icon').innerText = data.icon;
+
+        // Update Symptom List with animation
+        const list = document.getElementById('symptom-list');
+        list.innerHTML = '';
+        data.items.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = `flex items-center justify-between p-4 bg-white rounded-xl border border-border-subtle hover:border-reckitt-pink hover:shadow-sm transition-all cursor-pointer animate-fade-in group`;
+            div.style.animationDelay = `${index * 0.05}s`;
+            div.innerHTML = `
+                <span class="text-body-md font-semibold text-deep-navy">${item}</span>
+                <span class="material-symbols-outlined text-reckitt-pink opacity-0 group-hover:opacity-100 transition-opacity" data-icon="add_circle">add_circle</span>
+            `;
+            list.appendChild(div);
+        });
+
+        // Handle Hotspot UI
+        document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active-hotspot'));
+        const specificHotspot = document.getElementById(`hotspot-${cat}`);
+        if (specificHotspot) specificHotspot.classList.add('active-hotspot');
+
+        // Handle SideNav UI
+        document.querySelectorAll('[id^="nav-"]').forEach(n => {
+            n.className = "flex items-center gap-4 cursor-pointer text-deep-navy/70 px-4 py-3 mx-4 hover:bg-white hover:text-deep-navy transition-all duration-200 rounded-lg";
+        });
+        const navItem = document.getElementById(`nav-${cat}`);
+        if (navItem) {
+            navItem.className = "flex items-center gap-4 cursor-pointer bg-reckitt-pink text-white rounded-lg font-label-md px-4 py-3 mx-4 transition-all duration-200";
+        }
+    }
+
+    // Initialize with Head
+    document.addEventListener('DOMContentLoaded', () => {
+        selectCategory('head');
+    });
+</script>
+</body></html>

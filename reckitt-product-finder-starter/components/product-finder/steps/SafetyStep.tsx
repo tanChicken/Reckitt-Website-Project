@@ -1,5 +1,4 @@
 import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import type { RecommendationResult } from "@/types/productFinder";
 
 interface SafetyStepProps {
@@ -24,7 +23,6 @@ const safetyCards = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="7" r="3" />
         <path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6" />
-        <path d="M14 3l2 2" /><path d="M16 3l-2 2" />
       </svg>
     ),
     title: "Talk to a pharmacist or doctor",
@@ -59,19 +57,19 @@ export default function SafetyStep({
 }: SafetyStepProps) {
   return (
     <section aria-labelledby="safety-heading">
-      {/* Step header */}
-      <div className="mb-7 flex items-start justify-between gap-4">
+      {/* ── Header — no step badge, epilogue feel ─── */}
+      <div className="mb-8 flex items-start justify-between gap-4">
         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-pinkSoft px-3 py-1 text-xs font-black uppercase tracking-widest text-brand-pink">
-            Step 4 of 4
+          <span className="text-xs font-bold uppercase tracking-widest text-secondary">
+            Safety &amp; Next Steps
           </span>
           <h1
             id="safety-heading"
-            className="mt-3 text-3xl font-black leading-tight text-brand-navy sm:text-4xl"
+            className="mt-2 font-display text-3xl font-bold leading-tight text-deep-navy sm:text-4xl"
           >
             Use safely. Feel better.
           </h1>
-          <p className="mt-2 text-slate-500">Your wellbeing comes first.</p>
+          <p className="mt-2 text-sm text-secondary">Your wellbeing comes first.</p>
         </div>
         <Button variant="ghost" onClick={onBack} className="shrink-0 text-sm">
           ← Back
@@ -79,69 +77,66 @@ export default function SafetyStep({
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[1fr_1.4fr]">
-        {/* Left: summary card */}
-        <Card className="flex flex-col items-center p-8 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-brand-pink shadow-pink">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 3L4 9v9c0 7.9 6 15.3 14 17 8-1.7 14-9.1 14-17V9L18 3z" />
-              <polyline points="12,18 16,22 24,14" />
+        {/* ── Left: recommendation summary ─────────── */}
+        <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-white p-8 text-center">
+          <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-reckitt-pink shadow-pink">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 2L3 7v7c0 6.1 4.7 11.8 11 13 6.3-1.2 11-6.9 11-13V7L14 2z" />
+              <polyline points="9,14 12,17 19,10" />
             </svg>
           </div>
-          <h2 className="mt-5 text-xl font-black text-brand-navy">
+          <h2 className="mt-4 font-display text-lg font-bold text-deep-navy">
             Safety-first recommendation
           </h2>
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-2 text-sm text-secondary">
             Suggested category:{" "}
-            <strong className="text-brand-navy">
-              {recommendation.primary.brand}
-            </strong>
+            <strong className="font-bold text-deep-navy">{recommendation.primary.brand}</strong>
           </p>
-          <div className="mt-5 w-full rounded-2xl border border-green-100 bg-green-50 p-4 text-left">
+
+          {/* Next steps list */}
+          <div className="mt-5 w-full rounded-xl border border-border-subtle bg-surface-container-low/50 p-4 text-left">
             {recommendation.nextSteps.map((step) => (
-              <div key={step} className="flex items-start gap-2.5 py-1">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="mt-0.5 shrink-0 text-green-600" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div key={step} className="flex items-start gap-2.5 py-1.5">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="mt-0.5 shrink-0 text-reckitt-pink" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="2,7 5.5,10.5 12,3.5" />
                 </svg>
-                <p className="text-sm leading-6 text-slate-600">{step}</p>
+                <p className="text-sm leading-6 text-on-surface">{step}</p>
               </div>
             ))}
           </div>
-        </Card>
+        </div>
 
-        {/* Right: safety guidance cards */}
+        {/* ── Right: safety guidance cards ─────────── */}
         <div className="grid gap-3 content-start">
           {safetyCards.map(({ icon, title, text }) => (
-            <Card key={title} className="p-4">
-              <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-pinkSoft text-brand-pink">
-                  {icon}
-                </div>
-                <div>
-                  <h3 className="text-sm font-black text-brand-navy">{title}</h3>
-                  <p className="mt-1 text-sm leading-6 text-slate-500">{text}</p>
-                </div>
+            <div key={title} className="flex gap-4 rounded-xl border border-border-subtle bg-white p-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-container-low text-reckitt-pink">
+                {icon}
               </div>
-            </Card>
+              <div>
+                <h3 className="text-sm font-bold text-deep-navy">{title}</h3>
+                <p className="mt-1 text-sm leading-6 text-secondary">{text}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Actions */}
-      <div className="mt-7 flex flex-wrap items-center justify-end gap-3">
-        <Button variant="secondary" onClick={onBack}>
-          Back
-        </Button>
+      {/* ── Actions ───────────────────────────────── */}
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border-subtle pt-6">
         <Button variant="secondary" onClick={onRestart}>
           Start over
         </Button>
         <Button
           onClick={() =>
-            alert(
-              "Connect this to your product page, pharmacy locator, or CRM flow."
-            )
+            alert("Connect this to your product page, pharmacy locator, or CRM flow.")
           }
+          className="gap-2"
         >
-          View products →
+          View products
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <line x1="3" y1="7" x2="11" y2="7" /><polyline points="8.5,4.5 11,7 8.5,9.5" />
+          </svg>
         </Button>
       </div>
     </section>

@@ -18,52 +18,22 @@ import type {
   SeverityId,
 } from "@/types/productFinder";
 import Image from "next/image";
+import Link from "next/link";
 
-const initialAnswers: FinderAnswers = {
-  preferenceIds: [],
-};
+const initialAnswers: FinderAnswers = { preferenceIds: [] };
 
 const trustFeatures = [
-  {
-    iconPath: "/shield.png",
-    title: "Trusted brands",
-    text: "Known health, hygiene, and home-care categories.",
-  },
-  {
-    iconPath: "/user.png",
-    title: "Personalized",
-    text: "Simple questions guide the recommendation.",
-  },
-  {
-    iconPath: "/lock.png",
-    title: "Responsible",
-    text: "Safety notes and label guidance are included.",
-  },
-  {
-    iconPath: "/heartCross.png",
-    title: "Everyday care",
-    text: "Designed for common FMCG discovery journeys.",
-  },
-  {
-    iconPath: "/heart.png",
-    title: "Marketing-ready",
-    text: "Tracks starts, drop-offs, and product interest.",
-  },
+  { icon: "🛡", title: "Trusted brands",    text: "Known health, hygiene, and home-care categories."    },
+  { icon: "👤", title: "Personalized",      text: "Simple questions guide the recommendation."          },
+  { icon: "🔒", title: "Responsible",       text: "Safety notes and label guidance are included."       },
+  { icon: "❤", title: "Everyday care",     text: "Designed for common FMCG discovery journeys."        },
+  { icon: "📊", title: "Marketing-ready",   text: "Tracks starts, drop-offs, and product interest."     },
 ];
 
 const footerLinks = [
-  {
-    heading: "Product Finder",
-    links: ["How it works", "Our brands", "Health categories", "FAQs"],
-  },
-  {
-    heading: "Company",
-    links: ["About Reckitt", "Sustainability", "Investors", "Careers"],
-  },
-  {
-    heading: "Support",
-    links: ["Safety guidance", "Contact us", "Privacy policy", "Terms of use"],
-  },
+  { heading: "Product Finder", links: ["How it works", "Our brands", "Health categories", "FAQs"]         },
+  { heading: "Company",        links: ["About Reckitt", "Sustainability", "Investors", "Careers"]          },
+  { heading: "Support",        links: ["Safety guidance", "Contact us", "Privacy policy", "Terms of use"] },
 ];
 
 export default function ProductFinder() {
@@ -112,14 +82,12 @@ export default function ProductFinder() {
 
       <main
         id="main-content"
-        className="mx-auto w-full max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12"
+        className="mx-auto w-full max-w-container-max px-4 pb-12 pt-8 sm:px-8 sm:pt-10 lg:px-16 lg:pt-12"
       >
-        {/* Wizard card with step transition */}
-        <Card className="min-h-[580px] p-5 sm:p-8 lg:p-10">
+        {/* Wizard card */}
+        <Card className="min-h-[600px] p-5 shadow-card sm:p-8 lg:p-10">
           <div key={step} className="animate-fade-slide-up">
-            {step === 0 && (
-              <WelcomeStep onStart={() => moveTo(1, "finder_started")} />
-            )}
+            {step === 0 && <WelcomeStep onStart={() => moveTo(1, "finder_started")} />}
             {step === 1 && (
               <NeedSelectionStep
                 selectedNeedId={answers.needId}
@@ -154,67 +122,63 @@ export default function ProductFinder() {
           </div>
         </Card>
 
-        {/* Trust features section */}
+        {/* Trust features */}
         <section
-          className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5"
+          className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-5"
           aria-label="Trust features"
         >
-          {trustFeatures.map(({ iconPath, title, text }) => (
-            <Card
+          {trustFeatures.map(({ icon, title, text }) => (
+            <div
               key={title}
-              className="group p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-cardHover"
+              className="group flex flex-col gap-3 rounded-xl border border-border-subtle bg-white p-5 transition-all duration-200 hover:-translate-y-px hover:shadow-card"
             >
               <div
                 aria-hidden="true"
-                className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-pinkSoft transition-colors group-hover:bg-brand-pinkMid"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-container-low text-xl"
               >
-                <Image
-                  src={iconPath}
-                  alt=""
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
+                {icon}
               </div>
-              <h2 className="mt-3 text-sm font-black text-brand-navy">{title}</h2>
-              <p className="mt-1.5 text-sm leading-6 text-slate-500">{text}</p>
-            </Card>
+              <div>
+                <h2 className="text-sm font-bold text-deep-navy">{title}</h2>
+                <p className="mt-1 text-xs leading-5 text-secondary">{text}</p>
+              </div>
+            </div>
           ))}
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="mt-6 border-t border-slate-200 bg-brand-navy">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          {/* Top row: logo + link columns */}
+      {/* ── Footer ──────────────────────────────────── */}
+      <footer className="mt-4 border-t border-white/10 bg-deep-navy">
+        <div className="mx-auto max-w-container-max px-4 py-12 sm:px-8 lg:px-16">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Brand column */}
             <div className="lg:col-span-1">
               <Image
                 src="/reckitt-logo.png"
                 alt="Reckitt"
-                width={100}
-                height={32}
+                width={96}
+                height={30}
                 className="object-contain brightness-0 invert"
               />
-              <p className="mt-4 text-sm leading-6 text-slate-400">
+              <p className="mt-4 text-sm leading-6 text-secondary-fixed-dim">
                 Making access to health, hygiene and nutrition a right, not a privilege.
               </p>
             </div>
 
             {footerLinks.map(({ heading, links }) => (
               <div key={heading}>
-                <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-surface-variant">
                   {heading}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="mt-4 space-y-3">
                   {links.map((link) => (
                     <li key={link}>
-                      <a
+                      <Link
                         href="#"
-                        className="text-sm text-slate-400 transition-colors duration-150 hover:text-white"
+                        className="text-sm text-secondary-fixed-dim transition-colors duration-150 hover:text-white"
                       >
                         {link}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -222,12 +186,11 @@ export default function ProductFinder() {
             ))}
           </div>
 
-          {/* Bottom row: legal */}
           <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-surface-variant">
               © {new Date().getFullYear()} Reckitt Benckiser Group PLC. All rights reserved.
             </p>
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-surface-variant/60">
               This tool provides general guidance only — not medical advice.
             </p>
           </div>
