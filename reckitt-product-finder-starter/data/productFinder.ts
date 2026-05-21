@@ -1,4 +1,11 @@
-import type { AudienceId, ChoiceOption, SymsptomType, PreferenceId, ProductItem, SeverityId, BodyPartId } from "@/types/productFinder";
+import type {
+  AudienceId,
+  ChoiceOption,
+  SymsptomType,
+  PreferenceId,
+  ProductItem,
+  SeverityId, BodyPartId,
+} from "@/types/productFinder";
 
 // export const needOptions: NeedOption[] = [
 //   {
@@ -53,26 +60,74 @@ export const bodySymptoms: SymsptomType[] = [
   { id: "stomach", symptom: ["Stomach Ache", "Indigestion", "Nausea", "Bloating", "Gas"], icon: "🔥" }
 ];
 export const audienceOptions: ChoiceOption<AudienceId>[] = [
-  { id: "adult", label: "Adult", description: "18 years old and above.", icon: "👤" },
+  {
+    id: "adult",
+    label: "Adult",
+    description: "18 years old and above.",
+    icon: "👤",
+  },
   { id: "teen", label: "Teen", description: "13–17 years old.", icon: "🙂" },
-  { id: "child", label: "Child", description: "Under 13 years old.", icon: "🧒" },
-  { id: "someone-else", label: "Someone else", description: "I am helping another person.", icon: "👥" }
+  {
+    id: "child",
+    label: "Child",
+    description: "Under 13 years old.",
+    icon: "🧒",
+  },
 ];
 
 export const severityOptions: ChoiceOption<SeverityId>[] = [
   { id: "mild", label: "Mild", description: "I can manage it.", icon: "😊" },
-  { id: "moderate", label: "Moderate", description: "It feels uncomfortable.", icon: "😐" },
-  { id: "severe", label: "Severe", description: "It is difficult to manage.", icon: "⚠️" },
-  { id: "not-sure", label: "Not sure", description: "I need safer guidance.", icon: "❔" }
+  {
+    id: "moderate",
+    label: "Moderate",
+    description: "It feels uncomfortable.",
+    icon: "😐",
+  },
+  {
+    id: "severe",
+    label: "Severe",
+    description: "It is difficult to manage.",
+    icon: "⚠️",
+  },
 ];
 
 export const preferenceOptions: ChoiceOption<PreferenceId>[] = [
-  { id: "fast-relief", label: "Fast relief", description: "Prioritise speed.", icon: "⚡" },
-  { id: "long-lasting", label: "Long lasting", description: "Prioritise duration.", icon: "⏱️" },
-  { id: "gentle", label: "Gentle", description: "Suitable for sensitive needs.", icon: "🌿" },
-  { id: "easy-to-use", label: "Easy to use", description: "Simple formats or routines.", icon: "✅" },
-  { id: "non-drowsy", label: "Non-drowsy", description: "Avoid sleepy-feeling options.", icon: "☀️" },
-  { id: "trusted-brand", label: "Trusted brand", description: "Known household brands.", icon: "⭐" }
+  {
+    id: "fast-relief",
+    label: "Fast relief",
+    description: "Prioritise speed.",
+    icon: "⚡",
+  },
+  {
+    id: "long-lasting",
+    label: "Long lasting",
+    description: "Prioritise duration.",
+    icon: "⏱️",
+  },
+  {
+    id: "gentle",
+    label: "Gentle",
+    description: "Suitable for sensitive needs.",
+    icon: "🌿",
+  },
+  {
+    id: "easy-to-use",
+    label: "Easy to use",
+    description: "Simple formats or routines.",
+    icon: "✅",
+  },
+  {
+    id: "non-drowsy",
+    label: "Non-drowsy",
+    description: "Avoid sleepy-feeling options.",
+    icon: "☀️",
+  },
+  {
+    id: "trusted-brand",
+    label: "Trusted brand",
+    description: "Known household brands.",
+    icon: "⭐",
+  },
 ];
 
 export const productItems: ProductItem[] = [
