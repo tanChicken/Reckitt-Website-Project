@@ -34,12 +34,15 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           {/* Skip link */}
-          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-brand-pink focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-brand-pink focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white"
+          >
             Skip to main content
           </a>
 
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 shrink-0">
+          <a href="/" className="flex shrink-0 items-center gap-3">
             <Image
               src="/reckitt-logo.png"
               alt="Reckitt"
@@ -50,22 +53,30 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
             />
           </a>
 
-          {/* Desktop nav links */}
+          {/* Desktop nav links + CTA */}
           <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-brand-pinkSoft hover:text-brand-pink"
+                className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-brand-pinkSoft hover:text-brand-pink"
               >
                 {link.label}
               </a>
             ))}
+            {currentStep === 0 && (
+              <a
+                href="#main-content"
+                className="ml-3 inline-flex min-h-9 items-center justify-center rounded-full bg-gradient-to-r from-brand-pink to-brand-pinkDark px-5 text-sm font-semibold text-white shadow-pink transition-all duration-200 hover:-translate-y-0.5 hover:shadow-pinkLg active:scale-95"
+              >
+                Find Product →
+              </a>
+            )}
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:bg-brand-pinkSoft hover:text-brand-pink md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition-all duration-200 hover:bg-brand-pinkSoft hover:text-brand-pink md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
@@ -87,18 +98,27 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
 
         {/* Mobile dropdown */}
         {mobileOpen && (
-          <div className="animate-fade-in border-t border-slate-100 bg-white px-4 pb-4 md:hidden">
-            <div className="flex flex-col gap-1 pt-2">
+          <div className="animate-slide-down border-t border-slate-100 bg-white px-4 pb-5 md:hidden">
+            <div className="flex flex-col gap-1 pt-3">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-pinkSoft hover:text-brand-pink"
+                  className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition-all duration-200 hover:bg-brand-pinkSoft hover:text-brand-pink"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
+              {currentStep === 0 && (
+                <a
+                  href="#main-content"
+                  className="mt-2 flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-pink to-brand-pinkDark px-4 py-3 text-sm font-semibold text-white shadow-pink transition-all duration-200 hover:shadow-pinkLg"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Find My Product →
+                </a>
+              )}
             </div>
           </div>
         )}
@@ -117,7 +137,7 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
                     <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                       <div
                         className={[
-                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-black transition-colors",
+                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-black transition-all duration-300",
                           done
                             ? "bg-brand-pink text-white"
                             : active
@@ -135,17 +155,17 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
                       </div>
                       <span
                         className={[
-                          "hidden text-xs font-semibold sm:block",
-                          active ? "text-brand-navy" : done ? "text-slate-400" : "text-slate-400",
+                          "hidden text-xs font-semibold transition-colors duration-300 sm:block",
+                          active ? "text-brand-navy" : done ? "text-brand-pink" : "text-slate-400",
                         ].join(" ")}
                       >
                         {step.label}
                       </span>
                     </div>
                     {i < steps.length - 1 && (
-                      <div className="h-px flex-1 rounded-full bg-slate-200 overflow-hidden">
+                      <div className="h-px flex-1 overflow-hidden rounded-full bg-slate-200">
                         <div
-                          className="h-full bg-brand-pink transition-all duration-500"
+                          className="h-full rounded-full bg-gradient-to-r from-brand-pink to-brand-pinkDark transition-all duration-500"
                           style={{ width: done ? "100%" : "0%" }}
                         />
                       </div>

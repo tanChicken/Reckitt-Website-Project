@@ -10,9 +10,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-brand-pink text-white shadow-pink hover:bg-brand-pinkDark active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none",
+    "bg-gradient-to-r from-brand-pink to-brand-pinkDark text-white shadow-pink hover:shadow-pinkLg hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:translate-y-0",
   secondary:
-    "border border-pink-200 bg-white text-brand-pink hover:bg-brand-pinkSoft hover:border-brand-pink active:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
+    "border border-pink-200 bg-white text-brand-pink hover:bg-brand-pinkSoft hover:border-brand-pink hover:-translate-y-0.5 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
   ghost:
     "text-slate-600 hover:bg-slate-100 hover:text-brand-navy active:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
 };
@@ -26,7 +26,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        "inline-flex min-h-11 items-center justify-center rounded-full px-6 text-sm font-semibold tracking-wide transition duration-200",
+        "inline-flex min-h-11 items-center justify-center rounded-full px-6 text-sm font-semibold tracking-wide transition-all duration-200",
         variantClasses[variant],
         className
       )}

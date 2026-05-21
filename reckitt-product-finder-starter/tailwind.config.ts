@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-inter)", "system-ui", "sans-serif"],
       },
       colors: {
         brand: {
@@ -27,6 +28,7 @@ const config: Config = {
         card: "0 4px 24px rgba(15, 23, 42, 0.07), 0 1px 4px rgba(15, 23, 42, 0.04)",
         cardHover: "0 12px 40px rgba(15, 23, 42, 0.12), 0 2px 8px rgba(15, 23, 42, 0.06)",
         pink: "0 8px 30px rgba(242, 6, 131, 0.25)",
+        pinkLg: "0 16px 48px rgba(242, 6, 131, 0.38)",
         nav: "0 1px 0 rgba(15, 23, 42, 0.06)",
       },
       borderRadius: {
@@ -50,11 +52,16 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        slideDown: {
+          "0%": { opacity: "0", transform: "translateY(-8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "fade-slide-up": "fadeSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
         "fade-in": "fadeIn 0.25s ease both",
         "scale-in": "scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "slide-down": "slideDown 0.25s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
       transitionTimingFunction: {
         spring: "cubic-bezier(0.22, 1, 0.36, 1)",

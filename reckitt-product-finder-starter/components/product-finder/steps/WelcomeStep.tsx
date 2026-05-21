@@ -12,12 +12,12 @@ const quickFeatures = [
 ];
 
 const showcaseProducts = [
-  { brand: "Strepsils", label: "Sore throat" },
-  { brand: "Nurofen", label: "Pain & fever" },
-  { brand: "Mucinex", label: "Cough & mucus" },
-  { brand: "Gaviscon", label: "Heartburn" },
-  { brand: "Dettol", label: "Hygiene" },
-  { brand: "Finish", label: "Home care" },
+  { brand: "Strepsils", label: "Sore throat",    initials: "ST", bg: "from-amber-50 to-orange-50",  text: "text-orange-500"  },
+  { brand: "Nurofen",   label: "Pain & fever",   initials: "NU", bg: "from-rose-50 to-red-50",      text: "text-rose-500"    },
+  { brand: "Mucinex",   label: "Cough & mucus",  initials: "MU", bg: "from-sky-50 to-blue-50",      text: "text-blue-500"    },
+  { brand: "Gaviscon",  label: "Heartburn",       initials: "GA", bg: "from-teal-50 to-emerald-50",  text: "text-teal-600"    },
+  { brand: "Dettol",    label: "Hygiene",         initials: "DE", bg: "from-green-50 to-lime-50",    text: "text-green-600"   },
+  { brand: "Finish",    label: "Home care",       initials: "FI", bg: "from-violet-50 to-purple-50", text: "text-violet-600"  },
 ];
 
 export default function WelcomeStep({ onStart }: WelcomeStepProps) {
@@ -28,9 +28,12 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
     >
       {/* Left: hero copy */}
       <div className="space-y-8">
-        {/* Badge */}
+        {/* Animated live badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-brand-pinkSoft px-4 py-2">
-          <span className="h-2 w-2 rounded-full bg-brand-pink" aria-hidden="true" />
+          <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-pink opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-pink" />
+          </span>
           <span className="text-sm font-semibold text-brand-pink">Welcome to Reckitt</span>
         </div>
 
@@ -41,7 +44,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             className="max-w-xl text-4xl font-black leading-[1.1] tracking-tight text-brand-navy sm:text-5xl md:text-6xl"
           >
             Find the right care{" "}
-            <span className="text-brand-pink">in under a minute</span>
+            <span className="text-gradient-pink">in under a minute</span>
           </h1>
           <p className="max-w-lg text-base leading-7 text-slate-500 sm:text-lg">
             Answer a few simple questions and get a responsible product-category
@@ -70,7 +73,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
           {quickFeatures.map(({ iconPath, title, text }) => (
             <div
               key={title}
-              className="flex items-start gap-3 rounded-2xl border border-slate-100 bg-white p-4 shadow-card"
+              className="flex items-start gap-3 rounded-2xl border border-slate-100 bg-white p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-cardHover"
             >
               <div
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-pinkSoft"
@@ -87,19 +90,26 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
         </div>
       </div>
 
-      {/* Right: product showcase card */}
+      {/* Right: product showcase */}
       <div className="rounded-4xl border border-pink-100 bg-gradient-to-br from-brand-pinkSoft via-white to-pink-50 p-6 shadow-soft">
-        <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-pink">
-          Example categories
-        </p>
-        <div className="mt-5 grid grid-cols-2 gap-3">
-          {showcaseProducts.map(({ brand, label }) => (
+        <div className="mb-5 flex items-center justify-between">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-brand-pink">
+            Example categories
+          </p>
+          <span className="rounded-full border border-pink-100 bg-white px-2.5 py-1 text-xs font-semibold text-slate-500 shadow-sm">
+            6 brands
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {showcaseProducts.map(({ brand, label, initials, bg, text }) => (
             <div
               key={brand}
-              className="group rounded-2xl border border-pink-100 bg-white p-4 shadow-card transition hover:border-brand-pink hover:shadow-cardHover"
+              className="group rounded-2xl border border-pink-100 bg-white p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-pink hover:shadow-cardHover"
             >
-              <div className="grid h-14 w-full place-items-center rounded-xl bg-brand-pinkSoft text-lg font-black text-brand-pink transition group-hover:bg-brand-pinkMid">
-                {brand.slice(0, 2).toUpperCase()}
+              <div
+                className={`grid h-14 w-full place-items-center rounded-xl bg-gradient-to-br ${bg} text-lg font-black ${text}`}
+              >
+                {initials}
               </div>
               <p className="mt-2.5 text-sm font-black text-brand-navy">{brand}</p>
               <p className="text-xs text-slate-500">{label}</p>

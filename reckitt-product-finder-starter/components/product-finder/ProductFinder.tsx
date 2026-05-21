@@ -51,6 +51,21 @@ const trustFeatures = [
   },
 ];
 
+const footerLinks = [
+  {
+    heading: "Product Finder",
+    links: ["How it works", "Our brands", "Health categories", "FAQs"],
+  },
+  {
+    heading: "Company",
+    links: ["About Reckitt", "Sustainability", "Investors", "Careers"],
+  },
+  {
+    heading: "Support",
+    links: ["Safety guidance", "Contact us", "Privacy policy", "Terms of use"],
+  },
+];
+
 export default function ProductFinder() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<FinderAnswers>(initialAnswers);
@@ -97,7 +112,7 @@ export default function ProductFinder() {
 
       <main
         id="main-content"
-        className="mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12"
+        className="mx-auto w-full max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12"
       >
         {/* Wizard card with step transition */}
         <Card className="min-h-[580px] p-5 sm:p-8 lg:p-10">
@@ -166,12 +181,58 @@ export default function ProductFinder() {
             </Card>
           ))}
         </section>
-
-        {/* Footer note */}
-        <p className="mt-8 text-center text-xs text-slate-400">
-          © {new Date().getFullYear()} Reckitt. This tool provides general guidance only — not medical advice.
-        </p>
       </main>
+
+      {/* Footer */}
+      <footer className="mt-6 border-t border-slate-200 bg-brand-navy">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          {/* Top row: logo + link columns */}
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="lg:col-span-1">
+              <Image
+                src="/reckitt-logo.png"
+                alt="Reckitt"
+                width={100}
+                height={32}
+                className="object-contain brightness-0 invert"
+              />
+              <p className="mt-4 text-sm leading-6 text-slate-400">
+                Making access to health, hygiene and nutrition a right, not a privilege.
+              </p>
+            </div>
+
+            {footerLinks.map(({ heading, links }) => (
+              <div key={heading}>
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">
+                  {heading}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="text-sm text-slate-400 transition-colors duration-150 hover:text-white"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom row: legal */}
+          <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs text-slate-500">
+              © {new Date().getFullYear()} Reckitt Benckiser Group PLC. All rights reserved.
+            </p>
+            <p className="text-xs text-slate-600">
+              This tool provides general guidance only — not medical advice.
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
