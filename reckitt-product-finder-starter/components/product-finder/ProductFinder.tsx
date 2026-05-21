@@ -23,17 +23,46 @@ import Link from "next/link";
 const initialAnswers: FinderAnswers = { preferenceIds: [] };
 
 const trustFeatures = [
-  { icon: "🛡", title: "Trusted brands",    text: "Known health, hygiene, and home-care categories."    },
-  { icon: "👤", title: "Personalized",      text: "Simple questions guide the recommendation."          },
-  { icon: "🔒", title: "Responsible",       text: "Safety notes and label guidance are included."       },
-  { icon: "❤", title: "Everyday care",     text: "Designed for common FMCG discovery journeys."        },
-  { icon: "📊", title: "Marketing-ready",   text: "Tracks starts, drop-offs, and product interest."     },
+  {
+    icon: "🛡",
+    title: "Trusted brands",
+    text: "Known health, hygiene, and home-care categories.",
+  },
+  {
+    icon: "👤",
+    title: "Personalized",
+    text: "Simple questions guide the recommendation.",
+  },
+  {
+    icon: "🔒",
+    title: "Responsible",
+    text: "Safety notes and label guidance are included.",
+  },
+  {
+    icon: "❤",
+    title: "Everyday care",
+    text: "Designed for common FMCG discovery journeys.",
+  },
+  {
+    icon: "📊",
+    title: "Marketing-ready",
+    text: "Tracks starts, drop-offs, and product interest.",
+  },
 ];
 
 const footerLinks = [
-  { heading: "Product Finder", links: ["How it works", "Our brands", "Health categories", "FAQs"]         },
-  { heading: "Company",        links: ["About Reckitt", "Sustainability", "Investors", "Careers"]          },
-  { heading: "Support",        links: ["Safety guidance", "Contact us", "Privacy policy", "Terms of use"] },
+  {
+    heading: "Product Finder",
+    links: ["How it works", "Our brands", "Health categories", "FAQs"],
+  },
+  {
+    heading: "Company",
+    links: ["About Reckitt", "Sustainability", "Investors", "Careers"],
+  },
+  {
+    heading: "Support",
+    links: ["Safety guidance", "Contact us", "Privacy policy", "Terms of use"],
+  },
 ];
 
 export default function ProductFinder() {
@@ -87,7 +116,9 @@ export default function ProductFinder() {
         {/* Wizard card */}
         <Card className="min-h-[600px] p-5 shadow-card sm:p-8 lg:p-10">
           <div key={step} className="animate-fade-slide-up">
-            {step === 0 && <WelcomeStep onStart={() => moveTo(1, "finder_started")} />}
+            {step === 0 && (
+              <WelcomeStep onStart={() => moveTo(1, "finder_started")} />
+            )}
             {step === 1 && (
               <NeedSelectionStep
                 selectedNeedId={answers.needId}
@@ -121,30 +152,6 @@ export default function ProductFinder() {
             )}
           </div>
         </Card>
-
-        {/* Trust features */}
-        <section
-          className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-5"
-          aria-label="Trust features"
-        >
-          {trustFeatures.map(({ icon, title, text }) => (
-            <div
-              key={title}
-              className="group flex flex-col gap-3 rounded-xl border border-border-subtle bg-white p-5 transition-all duration-200 hover:-translate-y-px hover:shadow-card"
-            >
-              <div
-                aria-hidden="true"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-container-low text-xl"
-              >
-                {icon}
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-deep-navy">{title}</h2>
-                <p className="mt-1 text-xs leading-5 text-secondary">{text}</p>
-              </div>
-            </div>
-          ))}
-        </section>
       </main>
 
       {/* ── Footer ──────────────────────────────────── */}
@@ -161,7 +168,8 @@ export default function ProductFinder() {
                 className="object-contain brightness-0 invert"
               />
               <p className="mt-4 text-sm leading-6 text-secondary-fixed-dim">
-                Making access to health, hygiene and nutrition a right, not a privilege.
+                Making access to health, hygiene and nutrition a right, not a
+                privilege.
               </p>
             </div>
 
@@ -188,7 +196,8 @@ export default function ProductFinder() {
 
           <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-surface-variant">
-              © {new Date().getFullYear()} Reckitt Benckiser Group PLC. All rights reserved.
+              © {new Date().getFullYear()} Reckitt Benckiser Group PLC. All
+              rights reserved.
             </p>
             <p className="text-xs text-surface-variant/60">
               This tool provides general guidance only — not medical advice.
