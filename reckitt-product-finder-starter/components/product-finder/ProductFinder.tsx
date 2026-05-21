@@ -10,10 +10,17 @@ import WelcomeStep from "@/components/product-finder/steps/WelcomeStep";
 import Card from "@/components/ui/Card";
 import { trackFunnelEvent } from "@/lib/analytics";
 import { getRecommendation } from "@/lib/recommendation";
-import type { AudienceId, FinderAnswers, NeedId, PreferenceId, SeverityId } from "@/types/productFinder";
+import type {
+  AudienceId,
+  FinderAnswers,
+  NeedId,
+  PreferenceId,
+  SeverityId,
+} from "@/types/productFinder";
+import Image from "next/image";
 
 const initialAnswers: FinderAnswers = {
-  preferenceIds: []
+  preferenceIds: [],
 };
 
 export default function ProductFinder() {
@@ -60,9 +67,14 @@ export default function ProductFinder() {
   return (
     <>
       <ProgressHeader currentStep={step} />
-      <main id="main-content" className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <main
+        id="main-content"
+        className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8"
+      >
         <Card className="min-h-[620px] p-5 sm:p-8 lg:p-10">
-          {step === 0 && <WelcomeStep onStart={() => moveTo(1, "finder_started")} />}
+          {step === 0 && (
+            <WelcomeStep onStart={() => moveTo(1, "finder_started")} />
+          )}
 
           {step === 1 && (
             <NeedSelectionStep
@@ -99,17 +111,51 @@ export default function ProductFinder() {
             />
           )}
         </Card>
-
-        <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5" aria-label="Trust features">
+        {/*Replaced footer card section emojis w/ lineart*/}
+        <section
+          className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5"
+          aria-label="Trust features"
+        >
           {[
-            ["🛡️", "Trusted brands", "Known health, hygiene, and home-care categories."],
-            ["👤", "Personalized", "Simple questions guide the recommendation."],
-            ["🔒", "Responsible", "Safety notes and label guidance are included."],
-            ["🌿", "Everyday care", "Designed for common FMCG discovery journeys."],
-            ["💗", "Marketing-ready", "Tracks starts, drop-offs, and product interest."]
-          ].map(([icon, title, text]) => (
+            [
+              "/shield.png",
+              "Trusted brands",
+              "Known health, hygiene, and home-care categories.",
+            ],
+            [
+              "/user.png",
+              "Personalized",
+              "Simple questions guide the recommendation.",
+            ],
+            [
+              "/lock.png",
+              "Responsible",
+              "Safety notes and label guidance are included.",
+            ],
+            [
+              "/heartCross.png",
+              "Everyday care",
+              "Designed for common FMCG discovery journeys.",
+            ],
+            [
+              "/heart.png",
+              "Marketing-ready",
+              "Tracks starts, drop-offs, and product interest.",
+            ],
+          ].map(([iconPath, title, text]) => (
             <Card key={title} className="p-5">
-              <div className="text-3xl" aria-hidden="true">{icon}</div>
+              <div
+                aria-hidden="true"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-pinkSoft"
+              >
+                <Image
+                  src={iconPath}
+                  alt={`${title} icon`}
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
+              </div>
               <h2 className="mt-3 font-black text-brand-navy">{title}</h2>
               <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
             </Card>
