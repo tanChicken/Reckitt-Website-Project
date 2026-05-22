@@ -12,12 +12,10 @@ const quickFeatures = [
 ];
 
 const showcaseProducts = [
-  { brand: "Strepsils", label: "Sore throat",   initials: "ST", accent: "#FF8C42" },
-  { brand: "Nurofen",   label: "Pain & fever",  initials: "NU", accent: "#E80044" },
-  { brand: "Mucinex",   label: "Cough & mucus", initials: "MU", accent: "#2563EB" },
-  { brand: "Gaviscon",  label: "Heartburn",     initials: "GA", accent: "#059669" },
-  { brand: "Dettol",    label: "Hygiene",       initials: "DE", accent: "#16A34A" },
-  { brand: "Finish",    label: "Home care",     initials: "FI", accent: "#7C3AED" },
+  { brand: "Strepsils", label: "Sore throat & cough", logo: "/brands/strepsils.png" },
+  { brand: "Nurofen",   label: "Pain & fever",        logo: "/brands/nurofen.png"   },
+  { brand: "Gaviscon",  label: "Heartburn & indigestion", logo: "/brands/gaviscon.png" },
+  { brand: "Cardiprin", label: "Cardiovascular care", logo: "/brands/cardiprin.png" },
 ];
 
 export default function WelcomeStep({ onStart }: WelcomeStepProps) {
@@ -95,27 +93,24 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             Example categories
           </p>
           <span className="rounded-full border border-border-subtle px-2.5 py-1 text-xs font-semibold text-secondary">
-            6 brands
+            4 brands
           </span>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          {showcaseProducts.map(({ brand, label, initials, accent }) => (
+          {showcaseProducts.map(({ brand, label, logo }) => (
             <div
               key={brand}
               className="group rounded-xl border border-border-subtle bg-surface-gray p-4 transition-all duration-200 hover:-translate-y-px hover:border-reckitt-pink/30 hover:shadow-card"
             >
-              {/*
-               * ── MEDIA PLACEMENT (showcase card) ─────────────────
-               * Replace the initials block below with a product image:
-               *   <img src="/products/{id}.png" alt={brand} className="h-14 w-full object-contain" />
-               * File: /public/products/[product-id].png
-               * ────────────────────────────────────────────────────
-               */}
-              <div
-                className="grid h-14 w-full place-items-center rounded-lg text-lg font-bold"
-                style={{ backgroundColor: `${accent}15`, color: accent }}
-              >
-                {initials}
+              {/* Brand logo — store at /public/brands/<brand-lowercase>.png */}
+              <div className="flex h-14 w-full items-center justify-center rounded-lg bg-white p-2">
+                <Image
+                  src={logo}
+                  alt={`${brand} logo`}
+                  width={160}
+                  height={56}
+                  className="h-full w-full object-contain"
+                />
               </div>
               <p className="mt-2.5 text-sm font-bold text-deep-navy">{brand}</p>
               <p className="text-xs text-secondary">{label}</p>
