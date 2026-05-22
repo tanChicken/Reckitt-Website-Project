@@ -38,6 +38,11 @@ export interface ProductItem {
   needId: BodyPartId;
   imageLabel: string;
   tags: string[];
+  url?: string;
+  suitableFor?: {
+    audiences?: AudienceId[];
+    severities?: SeverityId[];
+  };
 }
 
 export interface FinderAnswers {

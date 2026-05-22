@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { bodyParts, bodySymptoms } from "@/data/productFinder";
 import { cn } from "@/lib/cn";
-import type { BodyPartId } from "@/types/productFinder";
+import type { BodyPartId, FinderAnswers} from "@/types/productFinder";
 import Image from "next/image";
 const dotPositions: Record<BodyPartId, { top: string; left: string }> = {
   head: { top: "20%", left: "50%" },
@@ -274,7 +274,7 @@ export default function NeedSelectionStep({
           ← Back
         </Button>
         <Button
-          onClick={onContinue}
+          onClick={() => onSelect(activePartId)}
           disabled={!canContinue}
           className="w-full justify-center gap-2 sm:w-auto sm:px-10"
         >

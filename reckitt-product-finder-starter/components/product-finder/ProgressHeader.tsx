@@ -14,8 +14,6 @@ const steps = [
 const navLinks = [
   { label: "Symptom Finder", href: "/#main-content" },
   { label: "Products",       href: "/products"      },
-  { label: "Health Hub",     href: "#"              },
-  { label: "Support",        href: "#"              },
 ];
 
 interface ProgressHeaderProps {

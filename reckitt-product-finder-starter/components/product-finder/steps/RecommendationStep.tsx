@@ -1,6 +1,7 @@
 import Button from "@/components/ui/Button";
 import type { RecommendationResult } from "@/types/productFinder";
 import Image from "next/image";
+import Link from "next/link";
 
 interface RecommendationStepProps {
   recommendation: RecommendationResult;
@@ -140,6 +141,16 @@ export default function RecommendationStep({
                   >
                     View Safety Notes
                   </Button>
+                  {recommendation.primary.url && (
+                    <Link
+                      href={recommendation.primary.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center rounded-lg border border-deep-navy px-4 py-2 text-sm font-semibold text-deep-navy transition-colors hover:bg-deep-navy hover:text-white"
+                    >
+                      View Product →
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

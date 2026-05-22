@@ -8,7 +8,10 @@ export async function POST(request: NextRequest) {
   const event = await request.json();
 
   // For local development only. Replace this with your real analytics integration.
-  console.log("[product-finder-event]", event);
+  console.log("[product-finder-event]", {
+    ...event,
+    bodyPart: event.answers?.needId ?? null,
+  });
 
   return NextResponse.json({ ok: true });
 }
