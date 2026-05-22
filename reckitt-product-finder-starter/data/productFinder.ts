@@ -205,222 +205,239 @@ export const preferenceOptions: ChoiceOption<PreferenceId>[] = [
 ];
 
 export const productItems: ProductItem[] = [
-  // ── HEAD ──────────────────────────────────────────────────────────────────
-  // Best for adults/teens with moderate-to-severe head pain (fast ibuprofen)
+
+  // ── HEAD — Nurofen range ───────────────────────────────────────────────────
+  // priority guide: 5=baseline, higher=preferred when tied in same tier
+  {
+    id: "nurofen-regular",
+    brand: "Nurofen Regular",
+    category: "Pain & fever relief",
+    description:
+      "Standard ibuprofen 200 mg tablets that relieve headaches, migraines, dental pain, fever and inflammation.",
+    needId: "head",
+    imageLabel: "NR",
+    tags: ["Ibuprofen 200mg", "Pain relief", "Fever"],
+    url: "https://www.nurofen.com.au/products/nurofen-tablets/",
+    priority: 5,
+    suitableFor: {
+      audiences: ["adult", "teen"],
+      severities: ["mild", "moderate"],
+    },
+  },
   {
     id: "nurofen-express",
     brand: "Nurofen Express",
-    category: "Pain & fever relief",
-    description: "Fast-acting ibuprofen capsules for headaches, migraines, and dental pain.",
+    category: "Fast-acting pain & fever relief",
+    description:
+      "Ibuprofen lysine 342 mg caplets — targets pain in 10 minutes and relieves fever and inflammation.",
     needId: "head",
-    imageLabel: "NF",
-    tags: ["Ibuprofen", "Fast relief", "Adult"],
-    url: "https://www.nurofen.com.au/products/",
+    imageLabel: "NE",
+    tags: ["Ibuprofen Lysine", "10-min relief", "Fast acting"],
+    url: "https://www.nurofen.com.au/products/nurofen-express/",
+    priority: 6,
     suitableFor: {
       audiences: ["adult", "teen"],
       severities: ["moderate", "severe"],
     },
   },
-  // Gentle paracetamol — adults/teens with mild symptoms
   {
-    id: "panadol",
-    brand: "Panadol",
-    category: "Pain & fever relief",
-    description: "Gentle paracetamol tablets for mild headaches and low-grade fever.",
+    id: "nurofen-nuromol",
+    brand: "Nurofen Nuromol",
+    category: "Dual-action pain relief",
+    description:
+      "Combines ibuprofen 200 mg and paracetamol 500 mg for double-action relief lasting up to 8 hours.",
     needId: "head",
-    imageLabel: "PD",
-    tags: ["Paracetamol", "Gentle", "Fever"],
-    url: "https://www.panadol.com/en-au/products/",
+    imageLabel: "NM",
+    tags: ["Dual action", "8-hour relief", "Ibuprofen + Paracetamol"],
+    url: "https://www.nurofen.com.au/products/nuromol/",
+    priority: 7,
     suitableFor: {
-      audiences: ["adult", "teen"],
-      severities: ["mild", "moderate"],
+      audiences: ["adult"],
+      severities: ["moderate", "severe"],
     },
   },
-  // Children's formula — only for child audience
   {
-    id: "panadol-children",
-    brand: "Panadol Children's",
+    id: "nurofen-children",
+    brand: "Nurofen for Children",
     category: "Children's pain & fever relief",
-    description: "Paracetamol suspension specially formulated for children's headaches and fever.",
+    description:
+      "Ibuprofen 100 mg/5 ml oral suspension for children aged 6 months to 12 years. Relieves fever, pain and inflammation.",
     needId: "head",
-    imageLabel: "PC",
-    tags: ["Children", "Paracetamol", "Suspension"],
-    url: "https://www.panadol.com/en-au/products/childrens/",
+    imageLabel: "NC",
+    tags: ["Children 6mo–12yr", "Suspension", "Ibuprofen"],
+    url: "https://www.nurofen.com.au/products/nurofen-for-children/",
+    priority: 8,
     suitableFor: {
       audiences: ["child"],
       severities: ["mild", "moderate"],
     },
   },
 
-  // ── THROAT ────────────────────────────────────────────────────────────────
-  // Adults/teens — mild throat irritation
+  // ── THROAT — Strepsils range ───────────────────────────────────────────────
   {
-    id: "strepsils",
+    id: "strepsils-original",
     brand: "Strepsils",
-    category: "Sore throat relief",
-    description: "Antibacterial lozenges to soothe sore throats and relieve hoarseness.",
+    category: "Sore throat relief — mild",
+    description:
+      "Antibacterial and antiviral lozenges that soothe a dry, scratchy sore throat and relieve pain within 5 minutes, lasting up to 2 hours. Available in Honey, Orange with Vitamin C, Original, Extra Strong, Cool and Sugar Free Lemon. Suitable for ages 6+.",
     needId: "throat",
-    imageLabel: "ST",
-    tags: ["Lozenges", "Throat care", "Popular"],
+    imageLabel: "SO",
+    tags: ["Lozenges", "Antibacterial", "Ages 6+"],
     url: "https://www.strepsils.com.au/products/",
+    priority: 4,
     suitableFor: {
-      audiences: ["adult", "teen"],
-      severities: ["mild", "moderate"],
-    },
-  },
-  // Adults — moderate-to-severe throat inflammation
-  {
-    id: "difflam",
-    brand: "Difflam",
-    category: "Anti-inflammatory throat spray",
-    description: "Benzydamine throat spray providing targeted anti-inflammatory and numbing relief.",
-    needId: "throat",
-    imageLabel: "DF",
-    tags: ["Spray", "Anti-inflammatory", "Numbing"],
-    url: "https://www.difflam.com.au/",
-    suitableFor: {
-      audiences: ["adult"],
-      severities: ["moderate", "severe"],
-    },
-  },
-  // Children — mild sore throat
-  {
-    id: "strepsils-children",
-    brand: "Strepsils Junior",
-    category: "Children's sore throat relief",
-    description: "Gentle sugar-free lozenges for children's sore throats and throat irritation.",
-    needId: "throat",
-    imageLabel: "SJ",
-    tags: ["Children", "Sugar-free", "Lozenges"],
-    url: "https://www.strepsils.com.au/products/",
-    suitableFor: {
-      audiences: ["child"],
+      audiences: ["adult", "teen", "child"],
       severities: ["mild"],
     },
   },
-
-  // ── HEART (heartburn / acid reflux) ───────────────────────────────────────
-  // Adults/teens — mild to moderate reflux
   {
-    id: "cardiprin",
-    brand: "Cardiprin",
-    category: "Heartburn & acid reflux",
-    description: "Fast-acting antacid liquid that forms a protective raft to block acid reflux.",
-    needId: "heart",
-    imageLabel: "GV",
-    tags: ["Antacid", "Reflux", "Fast relief"],
-    url: "https://www.gaviscon.com.au/products/",
+    id: "strepsils-max-triple",
+    brand: "Strepsils Max Triple Action",
+    category: "Sore throat relief — moderate",
+    description:
+      "Hexylrescorcinol 24 mg lozenges with anaesthetic, antiseptic and anti-inflammatory action for painful sore throats. Relieves pain from 1 minute, lasting up to 2 hours. Suitable for ages 6+.",
+    needId: "throat",
+    imageLabel: "SM",
+    tags: ["Hexylrescorcinol", "Triple action", "Painful throat"],
+    url: "https://www.strepsils.com.au/products/strepsils-max/",
+    priority: 6,
     suitableFor: {
-      audiences: ["adult", "teen"],
-      severities: ["mild", "moderate"],
-    },
-  },
-  // Adults — frequent or severe heartburn
-  {
-    id: "nexium",
-    brand: "Nexium 24HR",
-    category: "Proton pump inhibitor",
-    description: "Esomeprazole tablets for frequent heartburn, providing 24-hour acid control.",
-    needId: "heart",
-    imageLabel: "NX",
-    tags: ["PPI", "24-hour relief", "Adult"],
-    url: "https://www.nexium.com/",
-    suitableFor: {
-      audiences: ["adult"],
+      audiences: ["adult", "teen", "child"],
       severities: ["moderate"],
     },
   },
-
-  // ── CHEST ─────────────────────────────────────────────────────────────────
-  // Adults/teens — chest congestion and mucus
   {
-    id: "mucinex",
-    brand: "Mucinex",
-    category: "Chest congestion relief",
-    description: "Guaifenesin expectorant that loosens and thins mucus to ease chest congestion.",
-    needId: "chest",
-    imageLabel: "MX",
-    tags: ["Expectorant", "Mucus relief", "Adult"],
-    url: "https://www.mucinex.com/products/",
+    id: "strepsils-max-pro",
+    brand: "Strepsils Max Pro",
+    category: "Sore throat relief — severe",
+    description:
+      "Flurbiprofen 8.75 mg lozenges for swollen, red and severely inflamed throats. Alcohol-free and sugar-free. Relieves pain from 1 minute, lasting up to 6 hours. For ages 12+.",
+    needId: "throat",
+    imageLabel: "SP",
+    tags: ["Flurbiprofen", "6-hour relief", "Inflamed throat"],
+    url: "https://www.strepsils.com.au/products/strepsils-max-pro/",
+    priority: 7,
+    suitableFor: {
+      audiences: ["adult", "teen"],
+      severities: ["severe"],
+    },
+  },
+  {
+    id: "strepsils-max-pro-spray",
+    brand: "Strepsils Max Pro Spray",
+    category: "Sore throat spray — severe",
+    description:
+      "Flurbiprofen 8.75 mg/10 ml fine mist spray for severely inflamed throats. Delivers targeted relief especially useful in the morning or at night. Alcohol-free and sugar-free. Adults 18+ only.",
+    needId: "throat",
+    imageLabel: "SS",
+    tags: ["Spray", "Flurbiprofen", "Adults 18+"],
+    url: "https://www.strepsils.com.au/products/strepsils-max-pro-spray/",
+    priority: 8,
+    suitableFor: {
+      audiences: ["adult"],
+      severities: ["severe"],
+    },
+  },
+  {
+    id: "strepsils-max-plus",
+    brand: "Strepsils Max Plus",
+    category: "Sore throat relief — strong numbing",
+    description:
+      "Lignocaine HCl lozenges with fast-acting local anaesthetic plus 2 antiseptics. Provides numbing relief from 1 minute, lasting up to 2 hours. For ages 12+.",
+    needId: "throat",
+    imageLabel: "SX",
+    tags: ["Lignocaine", "Numbing", "Antiseptic"],
+    url: "https://www.strepsils.com.au/products/",
+    priority: 5,
     suitableFor: {
       audiences: ["adult", "teen"],
       severities: ["moderate", "severe"],
     },
   },
-  // Adults/teens — mild cough and chest tightness
+
+  // ── CHEST — Strepsils Chesty Cough ────────────────────────────────────────
   {
-    id: "robitussin",
-    brand: "Robitussin",
-    category: "Cough & chest relief",
-    description: "Cough syrup to relieve mild chest congestion and suppress irritating coughs.",
+    id: "strepsils-chesty-cough",
+    brand: "Strepsils Chesty Cough",
+    category: "Chesty cough & mucus relief",
+    description:
+      "Ambroxol HCl 15 mg lozenges that loosen and thin phlegm, clear the airways and ease chesty coughing. Suitable for ages 12+.",
     needId: "chest",
-    imageLabel: "RB",
-    tags: ["Cough syrup", "Mild relief", "Popular"],
-    url: "https://www.robitussin.com/",
+    imageLabel: "SC",
+    tags: ["Ambroxol", "Mucus relief", "Chesty cough"],
+    url: "https://www.strepsils.com.au/products/strepsils-chesty-cough/",
+    priority: 5,
     suitableFor: {
       audiences: ["adult", "teen"],
       severities: ["mild", "moderate"],
     },
   },
-  // Children — mild chest/cough symptoms
-  {
-    id: "dimetapp-children",
-    brand: "Dimetapp Children's",
-    category: "Children's cough & chest relief",
-    description: "Children's cold and cough liquid for mild chest congestion and runny nose.",
-    needId: "chest",
-    imageLabel: "DM",
-    tags: ["Children", "Cold relief", "Liquid"],
-    url: "https://www.dimetapp.com.au/",
-    suitableFor: {
-      audiences: ["child"],
-      severities: ["mild", "moderate"],
-    },
-  },
 
-  // ── STOMACH ───────────────────────────────────────────────────────────────
-  // All ages — mild indigestion and bloating
+  // ── STOMACH — Gaviscon range ──────────────────────────────────────────────
   {
-    id: "mylanta",
-    brand: "Mylanta",
-    category: "Indigestion & bloating relief",
-    description: "Antacid liquid to quickly neutralise stomach acid and relieve bloating and gas.",
+    id: "gaviscon-original",
+    brand: "Gaviscon Original",
+    category: "Heartburn & indigestion — mild",
+    description:
+      "Sodium alginate antacid liquid or tablets — first-line treatment for mild GERD/heartburn. Forms a protective raft over stomach acid. Soothes within 3 minutes, lasts up to 4 hours. Available as bottle, sachet or tablet.",
     needId: "stomach",
-    imageLabel: "MY",
-    tags: ["Antacid", "Bloating", "Gas relief"],
-    url: "https://www.mylanta.com.au/",
+    imageLabel: "GO",
+    tags: ["Sodium Alginate", "Natural seaweed", "Mild GERD"],
+    url: "https://www.gaviscon.com.au/products/",
+    priority: 5,
     suitableFor: {
-      severities: ["mild", "moderate"],
+      audiences: ["adult", "teen"],
+      severities: ["mild"],
     },
   },
-  // Adults — moderate-to-severe stomach cramps
   {
-    id: "buscopan",
-    brand: "Buscopan",
-    category: "Stomach cramp relief",
-    description: "Antispasmodic tablets that relax stomach muscle cramps and abdominal pain.",
+    id: "gaviscon-double-action",
+    brand: "Gaviscon Double Action",
+    category: "Heartburn & indigestion — moderate",
+    description:
+      "Sodium alginate + calcium carbonate formula for mild-to-moderate GERD. Highest calcium carbonate content in the Gaviscon range for effective relief. Sugar-free and gluten-free. Soothes within 3 minutes, lasts up to 4 hours.",
     needId: "stomach",
-    imageLabel: "BS",
-    tags: ["Antispasmodic", "Cramps", "Adult"],
-    url: "https://www.buscopan.com.au/",
+    imageLabel: "GD",
+    tags: ["Double action", "Sugar-free", "Gluten-free"],
+    url: "https://www.gaviscon.com.au/products/gaviscon-double-action/",
+    priority: 6,
+    suitableFor: {
+      audiences: ["adult", "teen"],
+      severities: ["moderate"],
+    },
+  },
+  {
+    id: "gaviscon-advance",
+    brand: "Gaviscon Advance",
+    category: "Heartburn & indigestion — moderate to severe",
+    description:
+      "Highest alginate concentration (2×) and lowest sodium content in the Gaviscon range. Recommended for moderate-to-severe GERD and safe for pregnant and breastfeeding women. Sugar-free and gluten-free.",
+    needId: "stomach",
+    imageLabel: "GA",
+    tags: ["Advance formula", "Pregnancy safe", "Low sodium"],
+    url: "https://www.gaviscon.com.au/products/gaviscon-advance/",
+    priority: 7,
     suitableFor: {
       audiences: ["adult"],
       severities: ["moderate", "severe"],
     },
   },
-  // Adults/teens — mild indigestion and stomach upset
+
+  // ── HEART — Cardiprin ─────────────────────────────────────────────────────
   {
-    id: "gaviscon-stomach",
-    brand: "Gaviscon",
-    category: "Indigestion & stomach relief",
-    description: "Provides relief from indigestion, nausea, and general stomach discomfort.",
-    needId: "stomach",
-    imageLabel: "GS",
-    tags: ["Antacid", "Indigestion", "Nausea"],
-    url: "https://www.gaviscon.com.au/products/",
+    id: "cardiprin",
+    brand: "Cardiprin 100",
+    category: "Cardiovascular risk prevention",
+    description:
+      "Aspirin 100 mg daily tablet that reduces platelet stickiness to help prevent blood clots, lowering the risk of stroke and heart attack. Dissolves on the tongue for rapid absorption. Must be taken under medical supervision — adults only, not for children under 16.",
+    needId: "heart",
+    imageLabel: "CP",
+    tags: ["Aspirin 100mg", "Daily prevention", "Adults only"],
+    url: "https://www.cardiprin.com.au/",
+    priority: 5,
     suitableFor: {
-      audiences: ["adult", "teen"],
-      severities: ["mild"],
+      audiences: ["adult"],
+      severities: ["mild", "moderate"],
     },
   },
 ];

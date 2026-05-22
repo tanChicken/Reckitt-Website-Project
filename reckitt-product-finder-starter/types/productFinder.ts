@@ -39,6 +39,7 @@ export interface ProductItem {
   imageLabel: string;
   tags: string[];
   url?: string;
+  priority?: number; // 1–10, higher wins ties within the same tier. Default 5.
   suitableFor?: {
     audiences?: AudienceId[];
     severities?: SeverityId[];
@@ -59,6 +60,8 @@ export interface RecommendationResult {
   primary: ProductItem;
   alternatives: ProductItem[];
   nextSteps: string[];
+  matchTier: 1 | 2 | 3; // 1=exact, 2=age matched/severity relaxed, 3=body part only
+  tierDisclaimer?: string; // shown as a banner for tier 2 and 3
 }
 
 export interface FunnelEvent {

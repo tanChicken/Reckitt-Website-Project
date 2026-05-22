@@ -44,6 +44,17 @@ export default function RecommendationStep({
         </Button>
       </div>
 
+      {/* ── Tier 2 / 3 disclaimer banner ────────────────── */}
+      {recommendation.tierDisclaimer && (
+        <div className="mb-6 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+          <span className="mt-0.5 shrink-0 text-amber-500" aria-hidden="true">⚠</span>
+          <p className="text-sm leading-6 text-amber-800">
+            <span className="font-semibold">Closest available match — </span>
+            {recommendation.tierDisclaimer}
+          </p>
+        </div>
+      )}
+
       {/* ── Main grid: 8 + 4 columns on large screens ── */}
       <div className="grid gap-5 lg:grid-cols-12 lg:items-stretch">
         {/* ── Left: primary product + care advice ─────── */}
@@ -82,12 +93,17 @@ export default function RecommendationStep({
 
                 {/* Image placeholder */}
                 <div className="flex flex-col items-center gap-3 text-center">
-                  <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-surface-container-low text-3xl font-bold text-secondary">
+                  {/* <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-surface-container-low text-3xl font-bold text-secondary">
                     {recommendation.primary.imageLabel}
                   </div>
                   <code className="text-xs text-secondary/50">
                     📁 /public/products/{recommendation.primary.id}.png
-                  </code>
+                  </code> */}
+                  <img
+                    src={`/products/${recommendation.primary.id}.png`}
+                    alt={recommendation.primary.brand}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               </div>
 
