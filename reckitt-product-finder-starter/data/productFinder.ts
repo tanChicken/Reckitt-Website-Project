@@ -4,7 +4,8 @@ import type {
   SymsptomType,
   PreferenceId,
   ProductItem,
-  SeverityId, BodyPartId,
+  SeverityId,
+  BodyPartId,
 } from "@/types/productFinder";
 
 // export const needOptions: NeedOption[] = [
@@ -46,48 +47,121 @@ import type {
 //   }
 // ];
 export const bodyParts: ChoiceOption<BodyPartId>[] = [
-  { id: "head", label: "Head", description: "Head-related symptoms.", icon: "🧠" },
-  { id: "throat", label: "Throat", description: "Throat-related symptoms.", icon: "�️" },
-  { id: "heart", label: "Heart", description: "Heart-related symptoms.", icon: "❤️" },
-  { id: "chest", label: "Chest", description: "Chest-related symptoms.", icon: "🫁" },
-  { id: "stomach", label: "Stomach", description: "Stomach-related symptoms.", icon: "🔥" }
+  {
+    id: "head",
+    label: "Head",
+    description: "Head-related symptoms.",
+    icon: "/head.png",
+  },
+  {
+    id: "throat",
+    label: "Throat",
+    description: "Throat-related symptoms.",
+    icon: "/throat.png",
+  },
+  {
+    id: "heart",
+    label: "Heart",
+    description: "Heart-related symptoms.",
+    icon: "/heartQ.png",
+  },
+  {
+    id: "chest",
+    label: "Chest",
+    description: "Chest-related symptoms.",
+    icon: "/chest.png",
+  },
+  {
+    id: "stomach",
+    label: "Stomach",
+    description: "Stomach-related symptoms.",
+    icon: "/stomach.png",
+  },
 ];
 export const bodySymptoms: SymsptomType[] = [
-  { id: "head", symptom: ["Headache", "Migraine", "Fever", "Dental Pain", "Menstrual Pain"], icon: "🧠" },
-  { id: "throat", symptom: ["Sore Throat", "Cough", "Hoarseness", "Throat Irritation", "Difficulty Swallowing"], icon: "️" },
-  { id: "heart", symptom: ["Heart Attack", "Chest Pain", "Shortness of Breath", "Palpitations", "Irregular Heartbeat"], icon: "❤️" },
-  { id: "chest", symptom: ["Chest Pain", "Shortness of Breath", "Cough", "Chest Congestion", "Chest Tightness"], icon: "🫁" },
-  { id: "stomach", symptom: ["Stomach Ache", "Indigestion", "Nausea", "Bloating", "Gas"], icon: "🔥" }
+  {
+    id: "head",
+    symptom: ["Headache", "Migraine", "Fever", "Dental Pain", "Menstrual Pain"],
+    icon: "🧠",
+  },
+  {
+    id: "throat",
+    symptom: [
+      "Sore Throat",
+      "Cough",
+      "Hoarseness",
+      "Throat Irritation",
+      "Difficulty Swallowing",
+    ],
+    icon: "️",
+  },
+  {
+    id: "heart",
+    symptom: [
+      "Heart Attack",
+      "Chest Pain",
+      "Shortness of Breath",
+      "Palpitations",
+      "Irregular Heartbeat",
+    ],
+    icon: "❤️",
+  },
+  {
+    id: "chest",
+    symptom: [
+      "Chest Pain",
+      "Shortness of Breath",
+      "Cough",
+      "Chest Congestion",
+      "Chest Tightness",
+    ],
+    icon: "🫁",
+  },
+  {
+    id: "stomach",
+    symptom: ["Stomach Ache", "Indigestion", "Nausea", "Bloating", "Gas"],
+    icon: "🔥",
+  },
 ];
 export const audienceOptions: ChoiceOption<AudienceId>[] = [
   {
     id: "adult",
     label: "Adult",
     description: "18 years old and above.",
-    icon: "👤",
+    icon: "/adult.png",
   },
-  { id: "teen", label: "Teen", description: "13–17 years old.", icon: "🙂" },
+  {
+    id: "teen",
+    label: "Teen",
+    description: "13–17 years old.",
+    icon: "/teen.png",
+  },
   {
     id: "child",
     label: "Child",
     description: "Under 13 years old.",
-    icon: "🧒",
+    icon: "/child.png",
   },
 ];
 
 export const severityOptions: ChoiceOption<SeverityId>[] = [
-  { id: "mild", label: "Mild", description: "I can manage it.", icon: "😊" },
+  {
+    id: "mild",
+    label: "Mild",
+    description: "I can manage it.",
+    icon: "/mild.png",
+  },
   {
     id: "moderate",
     label: "Moderate",
     description: "It feels uncomfortable.",
-    icon: "😐",
+    icon: "/moderate.png",
   },
   {
     id: "severe",
     label: "Severe",
     description: "It is difficult to manage.",
-    icon: "⚠️",
+    icon: "/severe.png",
   },
 ];
 
@@ -135,9 +209,10 @@ export const productItems: ProductItem[] = [
     id: "strepsils",
     brand: "Strepsils",
     category: "Sore throat relief",
-    description: "A throat-care category for users looking for sore throat support.",
+    description:
+      "A throat-care category for users looking for sore throat support.",
     needId: "head",
     imageLabel: "ST",
-    tags: ["Lozenges", "Throat care", "Popular"]
-  }
+    tags: ["Lozenges", "Throat care", "Popular"],
+  },
 ];

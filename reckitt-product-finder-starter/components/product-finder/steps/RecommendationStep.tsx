@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import type { RecommendationResult } from "@/types/productFinder";
+import Image from "next/image";
 
 interface RecommendationStepProps {
   recommendation: RecommendationResult;
@@ -33,7 +34,11 @@ export default function RecommendationStep({
             following care plan.
           </p>
         </div>
-        <Button variant="ghost" onClick={onBack} className="shrink-0 self-start text-sm">
+        <Button
+          variant="ghost"
+          onClick={onBack}
+          className="shrink-0 self-start text-sm"
+        >
           ← Back
         </Button>
       </div>
@@ -97,23 +102,18 @@ export default function RecommendationStep({
                         {recommendation.primary.category}
                       </p>
                     </div>
+                    {/* Verified Recommendation Image */}
                     <span
-                      className="text-reckitt-pink"
+                      className="text-reckitt-pink flex items-center justify-center"
                       aria-label="Verified recommendation"
                     >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M9 11l2 2 4-4" />
-                        <circle cx="10" cy="10" r="8" />
-                      </svg>
+                      <Image
+                        src="/checkIndicator.png"
+                        alt="Verified"
+                        width={50}
+                        height={50}
+                        className="object-contain"
+                      />
                     </span>
                   </div>
 
@@ -135,7 +135,6 @@ export default function RecommendationStep({
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <Button
-                    variant="secondary"
                     onClick={onContinue}
                     className="flex-1 bg-red-600 text-white border-red-600 hover:bg-red-700 hover hover:text-white hover:border-red-700"
                   >
@@ -145,35 +144,6 @@ export default function RecommendationStep({
               </div>
             </div>
           </div>
-
-          {/* Secondary care advice */}
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              {
-                icon: "💧",
-                title: "Stay Hydrated",
-                text: "Increase fluid intake to support recovery.",
-              },
-              {
-                icon: "😴",
-                title: "Rest and Recover",
-                text: "Allow the body to manage inflammation effectively.",
-              },
-            ].map(({ icon, title, text }) => (
-              <div
-                key={title}
-                className="flex gap-4 rounded-xl border border-border-subtle bg-surface-container p-5"
-              >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-xl shadow-card">
-                  {icon}
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-deep-navy">{title}</h3>
-                  <p className="mt-0.5 text-sm text-secondary">{text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* ── Right sidebar ───────────────────────────── */}
@@ -181,21 +151,16 @@ export default function RecommendationStep({
           {/* Safety & Warnings */}
           <div className="flex h-full flex-col rounded-xl border border-border-subtle bg-white p-6">
             <div className="mb-5 flex items-center gap-2 text-error">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M9 2L1 15h16L9 2z" />
-                <line x1="9" y1="8" x2="9" y2="11" />
-                <circle cx="9" cy="13.5" r="0.5" fill="currentColor" />
-              </svg>
+              <span className="flex h-5 w-5 items-center justify-center">
+                <Image
+                  src="/caution.png"
+                  alt="Safety warning"
+                  width={80}
+                  height={80}
+                  className="object-contain"
+                  aria-hidden="true"
+                />
+              </span>
               <h2 className="text-xs font-bold uppercase tracking-wider">
                 Safety &amp; Warnings
               </h2>

@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import Pill from "@/components/ui/Pill";
+import Image from "next/image";
 import { audienceOptions, severityOptions } from "@/data/productFinder";
 import type {
   AudienceId,
@@ -107,12 +107,14 @@ export default function QuestionsStep({
                   `}
                 >
                   {/* Icon */}
-                  <div
-                    className="
-                    flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-container-low text-xl
-                    transition-transform duration-200 group-hover:scale-105"
-                  >
-                    {option.icon}
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-container-low transition-transform duration-200 group-hover:scale-105 overflow-hidden">
+                    <Image
+                      src={option.icon}
+                      alt={"${option.label}"}
+                      width={80}
+                      height={80}
+                      className="h-30 w-30 object-contain"
+                    />
                   </div>
 
                   {/* Content */}
@@ -168,30 +170,82 @@ export default function QuestionsStep({
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3">
-          {severityOptions.map((option) => (
-            <Pill
-              key={option.id}
-              selected={answers.severityId === option.id}
-              onClick={() => setSeverity(option.id)}
-              className="p-4"
-            >
-              <div className="flex flex-col xl:flex-row items-center gap-3 text-center xl:text-left">
-                <span className="text-xl leading-none" aria-hidden="true">
-                  {option.icon}
-                </span>
+          {severityOptions.map((option) => {
+            const isSelected = answers.severityId === option.id;
 
-                <div>
-                  <span className="block text-sm font-semibold">
-                    {option.label}
-                  </span>
+            return (
+              <label key={option.id} className="relative cursor-pointer group">
+                <input
+                  type="radio"
+                  name="severity"
+                  value={option.id}
+                  checked={isSelected}
+                  onChange={() => setSeverity(option.id)}
+                  className="sr-only"
+                />
 
-                  <span className="mt-0.5 block text-xs text-secondary">
-                    {option.description}
-                  </span>
+                <div
+                  className={`
+              flex h-full flex-col xl:flex-row items-center gap-3
+              rounded-xl border bg-white p-4
+              text-center xl:text-left
+              transition-all duration-200
+              hover:border-secondary/40 hover:shadow-card
+              ${
+                isSelected
+                  ? "border-reckitt-pink bg-primary-fixed/20 shadow-card"
+                  : "border-border-subtle"
+              }
+            `}
+                >
+                  {/* Icon */}
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-container-low transition-transform duration-200 group-hover:scale-105 overflow-hidden">
+                    <Image
+                      src={option.icon}
+                      alt={"${option.label}"}
+                      width={80}
+                      height={80}
+                      className="h-10 w-10 object-contain"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="mb-4 xl:mb-0">
+                    <p className="text-sm font-semibold text-deep-navy">
+                      {option.label}
+                    </p>
+
+                    <p className="text-xs text-secondary">
+                      {option.description}
+                    </p>
+                  </div>
+
+                  {/* Radio Indicator */}
+                  <div
+                    className={`
+                absolute right-3 top-3
+                xl:top-1/2 xl:-translate-y-1/2
+                flex h-5 w-5 items-center justify-center
+                rounded-full border-2 transition-all duration-200
+                ${
+                  isSelected
+                    ? "border-reckitt-pink bg-reckitt-pink"
+                    : "border-border-subtle bg-white"
+                }
+              `}
+                  >
+                    <div
+                      className={`
+                  h-2 w-2 rounded-full bg-white
+                  transition-opacity duration-200
+                  ${isSelected ? "opacity-100" : "opacity-0"}
+                `}
+                    />
+                  </div>
                 </div>
-              </div>
-            </Pill>
-          ))}
+              </label>
+            );
+          })}
         </div>
       </div>
 
