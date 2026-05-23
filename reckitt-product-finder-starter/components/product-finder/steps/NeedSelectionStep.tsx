@@ -37,21 +37,21 @@ export default function NeedSelectionStep({
   return (
     <section
       aria-labelledby="need-heading"
-      className="flex flex-col gap-5 w-full"
+      className="flex w-full flex-col gap-5 pb-24 sm:pb-0"
     >
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <div className="border-b border-border-subtle pb-4">
-        <span className="text-xs font-bold uppercase tracking-widest text-secondary">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs">
           Symptom Analysis
         </span>
         <h1
           id="need-heading"
-          className="mt-2 font-display text-2xl font-bold leading-tight tracking-tight text-deep-navy sm:text-3xl lg:text-4xl"
+          className="mt-2 font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-deep-navy sm:text-3xl lg:text-4xl"
         >
           Where does it hurt?
         </h1>
-        <p className="mt-1.5 text-sm leading-6 text-secondary">
-          Select a body area to see relevant symptoms.
+        <p className="mt-1.5 text-sm leading-6 text-secondary sm:text-base">
+          Tap a body area to see relevant symptoms.
         </p>
       </div>
 
@@ -264,26 +264,21 @@ export default function NeedSelectionStep({
         </div>
       </div>
 
-      {/* ── Action bar ─────────────────────────────────────────────────── */}
-      <div className="flex flex-col gap-3 border-t border-border-subtle pt-5 sm:flex-row sm:items-center sm:justify-end">
+      {/* ── Desktop action bar ─────────────────────────────────────────── */}
+      <div className="hidden border-t border-border-subtle pt-5 sm:flex sm:items-center sm:justify-end sm:gap-3">
         <Button
           variant="ghost"
           onClick={onBack}
-          className="w-full justify-center sm:w-auto text-sm"
+          className="text-sm"
         >
           ← Back
         </Button>
         <Button
           onClick={() => onSelect(activePartId)}
           disabled={!canContinue}
-          className="w-full justify-center gap-2 sm:w-auto sm:px-10"
+          className="gap-2 px-10"
         >
-          <span className="hidden sm:inline">
-            {canContinue ? "See my recommendation" : "Select a body area first"}
-          </span>
-          <span className="sm:hidden">
-            {canContinue ? "Continue" : "Select an area first"}
-          </span>
+          {canContinue ? "See my recommendation" : "Select a body area first"}
           {canContinue && (
             <svg
               width="16"
@@ -301,6 +296,60 @@ export default function NeedSelectionStep({
             </svg>
           )}
         </Button>
+      </div>
+
+      {/* ── Mobile sticky bottom CTA ───────────────────────────────────── */}
+      <div
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] backdrop-blur sm:hidden"
+        role="group"
+        aria-label="Step navigation"
+      >
+        <div className="flex items-center gap-2">
+          <Button
+            variant="secondary"
+            onClick={onBack}
+            className="min-h-[52px] shrink-0 px-4"
+            aria-label="Back"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="12" y1="8" x2="4" y2="8" />
+              <polyline points="7,5 4,8 7,11" />
+            </svg>
+          </Button>
+          <Button
+            onClick={() => onSelect(activePartId)}
+            disabled={!canContinue}
+            className="min-h-[52px] flex-1 gap-2 text-base font-bold"
+          >
+            {canContinue ? "Continue" : "Select a body area"}
+            {canContinue && (
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="4" y1="8" x2="12" y2="8" />
+                <polyline points="9,5 12,8 9,11" />
+              </svg>
+            )}
+          </Button>
+        </div>
       </div>
     </section>
   );

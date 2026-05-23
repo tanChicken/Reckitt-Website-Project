@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ProgressHeader from "@/components/product-finder/ProgressHeader";
 import NeedSelectionStep from "@/components/product-finder/steps/NeedSelectionStep";
 import QuestionsStep from "@/components/product-finder/steps/QuestionsStep";
@@ -22,34 +22,6 @@ import Link from "next/link";
 
 const initialAnswers: FinderAnswers = { preferenceIds: [] };
 
-const trustFeatures = [
-  {
-    icon: "🛡",
-    title: "Trusted brands",
-    text: "Known health, hygiene, and home-care categories.",
-  },
-  {
-    icon: "👤",
-    title: "Personalized",
-    text: "Simple questions guide the recommendation.",
-  },
-  {
-    icon: "🔒",
-    title: "Responsible",
-    text: "Safety notes and label guidance are included.",
-  },
-  {
-    icon: "❤",
-    title: "Everyday care",
-    text: "Designed for common FMCG discovery journeys.",
-  },
-  {
-    icon: "📊",
-    title: "Marketing-ready",
-    text: "Tracks starts, drop-offs, and product interest.",
-  },
-];
-
 const footerLinks = [
   {
     heading: "Product Finder",
@@ -68,8 +40,25 @@ const footerLinks = [
 export default function ProductFinder() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<FinderAnswers>(initialAnswers);
+  const isInitialMount = useRef(true);
 
   const recommendation = useMemo(() => getRecommendation(answers), [answers]);
+
+  // Scroll to the top of the wizard whenever the step changes (skip initial mount).
+  // Respects prefers-reduced-motion for accessibility.
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  }, [step]);
 
   function moveTo(nextStep: number, eventName: string, nextAnswers = answers) {
     setStep(nextStep);
@@ -111,10 +100,10 @@ export default function ProductFinder() {
 
       <main
         id="main-content"
-        className="mx-auto w-full max-w-container-max px-4 pb-12 pt-8 sm:px-8 sm:pt-10 lg:px-16 lg:pt-12"
+        className="mx-auto w-full max-w-container-max px-4 pb-12 pt-6 sm:px-8 sm:pt-10 lg:px-16 lg:pt-12"
       >
         {/* Wizard card */}
-        <Card className="min-h-[600px] p-5 shadow-card sm:p-8 lg:p-10">
+        <Card className="min-h-[500px] p-4 shadow-card sm:min-h-[600px] sm:p-8 lg:p-10">
           <div key={step} className="animate-fade-slide-up">
             {step === 0 && (
               <WelcomeStep onStart={() => moveTo(1, "finder_started")} />
