@@ -18,13 +18,26 @@ const navLinks = [
 
 interface ProgressHeaderProps {
   currentStep: number;
+  /** Called when the user clicks the logo or "Symptom Finder" nav link while already on /. Should reset the wizard to the welcome step. */
+  onHomeClick?: () => void;
 }
 
-export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
+export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const showProgress = currentStep >= 1 && currentStep <= 4;
   // Step 4 (Safety) shows progress bar fully complete
   const effectiveStep = currentStep > 3 ? 4 : currentStep;
+
+  // If we're already on the home route, intercept the click and reset the wizard
+  // via the callback instead of letting Next.js no-op the navigation.
+  function handleHomeClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (!onHomeClick) return;
+    if (typeof window !== "undefined" && window.location.pathname === "/") {
+      event.preventDefault();
+      onHomeClick();
+    }
+    setMobileOpen(false);
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -41,8 +54,13 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
             Skip to main content
           </a>
 
-          {/* Logo */}
-          <Link href="/" className="flex shrink-0 items-center">
+          {/* Logo — clicking returns to the welcome page (resets the wizard) */}
+          <Link
+            href="/"
+            onClick={handleHomeClick}
+            className="flex shrink-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2"
+            aria-label="Reckitt — back to welcome page"
+          >
             <Image
               src="/reckitt-logo.png"
               alt="Reckitt"
@@ -55,18 +73,23 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
 
           {/* Desktop links */}
           <div className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="rounded-lg px-4 py-2 text-sm font-semibold text-secondary transition-all duration-200 hover:bg-surface-container-low hover:text-deep-navy"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isFinderLink = link.href.startsWith("/#") || link.href === "/";
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={isFinderLink ? handleHomeClick : undefined}
+                  className="rounded-lg px-4 py-2 text-sm font-semibold text-secondary transition-all duration-200 hover:bg-surface-container-low hover:text-deep-navy"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             {currentStep === 0 && (
               <Link
                 href="/#main-content"
+                onClick={handleHomeClick}
                 className="ml-4 inline-flex min-h-10 items-center justify-center rounded-lg bg-reckitt-pink px-5 text-sm font-semibold text-white shadow-pink transition-all duration-200 hover:brightness-110 active:scale-95"
               >
                 Start Finder →
@@ -97,21 +120,27 @@ export default function ProgressHeader({ currentStep }: ProgressHeaderProps) {
         {mobileOpen && (
           <div className="animate-slide-down border-t border-border-subtle bg-white px-4 pb-5 md:hidden">
             <div className="flex flex-col gap-1 pt-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="rounded-lg px-4 py-3 text-sm font-semibold text-secondary transition-all hover:bg-surface-container-low hover:text-deep-navy"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isFinderLink = link.href.startsWith("/#") || link.href === "/";
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="rounded-lg px-4 py-3 text-sm font-semibold text-secondary transition-all hover:bg-surface-container-low hover:text-deep-navy"
+                    onClick={(e) => {
+                      if (isFinderLink) handleHomeClick(e);
+                      else setMobileOpen(false);
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
               {currentStep === 0 && (
                 <Link
                   href="/#main-content"
                   className="mt-2 flex items-center justify-center rounded-lg bg-reckitt-pink px-4 py-3 text-sm font-semibold text-white"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={handleHomeClick}
                 >
                   Start Finder →
                 </Link>

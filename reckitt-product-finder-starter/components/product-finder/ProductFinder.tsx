@@ -96,7 +96,7 @@ export default function ProductFinder() {
 
   return (
     <>
-      <ProgressHeader currentStep={step} />
+      <ProgressHeader currentStep={step} onHomeClick={restart} />
 
       <main
         id="main-content"

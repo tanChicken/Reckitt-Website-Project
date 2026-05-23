@@ -223,6 +223,10 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["mild", "moderate"],
     },
+    variants: [
+      { id: "12s", label: "12 tablets", subLabel: "Ibuprofen 200 mg" },
+      { id: "24s", label: "24 tablets", subLabel: "Ibuprofen 200 mg" },
+    ],
   },
   {
     id: "nurofen-express",
@@ -279,7 +283,7 @@ export const productItems: ProductItem[] = [
     brand: "Strepsils",
     category: "Sore throat relief — mild",
     description:
-      "Antibacterial and antiviral lozenges that soothe a dry, scratchy sore throat and relieve pain within 5 minutes, lasting up to 2 hours. Available in Honey, Orange with Vitamin C, Original, Extra Strong, Cool and Sugar Free Lemon. Suitable for ages 6+.",
+      "Antibacterial and antiviral lozenges that soothe a dry, scratchy sore throat and relieve pain within 5 minutes, lasting up to 2 hours. Suitable for ages 6+.",
     needId: "throat",
     imageLabel: "SO",
     tags: ["Lozenges", "Antibacterial", "Ages 6+"],
@@ -289,6 +293,20 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen", "child"],
       severities: ["mild"],
     },
+    variants: [
+      {
+        id: "6-pack",
+        label: "6 Pack",
+        subLabel: "Soothing classic — 24 lozenges",
+        description: "Honey-flavoured lozenges that soothe and moisturise a dry, scratchy throat with antibacterial action.",
+      },
+      {
+        id: "24-pack",
+        label: "24 Pack",
+        subLabel: "With added Vitamin C — 24 lozenges",
+        description: "Orange-flavoured lozenges with added Vitamin C to soothe a dry, scratchy throat.",
+      },
+    ],
   },
   {
     id: "strepsils-max-triple",
@@ -305,6 +323,10 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen", "child"],
       severities: ["moderate"],
     },
+    variants: [
+      { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack" },
+      { id: "24s", label: "24 lozenges", subLabel: "Standard pack" },
+    ],
   },
   {
     id: "strepsils-max-pro",
@@ -321,6 +343,9 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["severe"],
     },
+    variants: [
+      { id: "16s", label: "16 lozenges", subLabel: "Standard pack" },
+    ],
   },
   {
     id: "strepsils-max-pro-spray",
@@ -353,6 +378,10 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["moderate", "severe"],
     },
+    variants: [
+      { id: "6s", label: "6 lozenges", subLabel: "Trial pack" },
+      { id: "16s", label: "16 lozenges", subLabel: "Standard pack" },
+    ],
   },
 
   // ── CHEST — Strepsils Chesty Cough ────────────────────────────────────────
@@ -371,6 +400,10 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["mild", "moderate"],
     },
+    variants: [
+      { id: "8s", label: "8 lozenges", subLabel: "Trial pack" },
+      { id: "24s", label: "24 lozenges", subLabel: "Standard pack" },
+    ],
   },
 
   // ── STOMACH — Gaviscon range ──────────────────────────────────────────────
@@ -379,7 +412,7 @@ export const productItems: ProductItem[] = [
     brand: "Gaviscon Original",
     category: "Heartburn & indigestion — mild",
     description:
-      "Sodium alginate antacid liquid or tablets — first-line treatment for mild GERD/heartburn. Forms a protective raft over stomach acid. Soothes within 3 minutes, lasts up to 4 hours. Available as bottle, sachet or tablet.",
+      "Sodium alginate antacid — first-line treatment for mild GERD/heartburn. Forms a protective raft over stomach acid. Soothes within 3 minutes, lasts up to 4 hours.",
     needId: "stomach",
     imageLabel: "GO",
     tags: ["Sodium Alginate", "Natural seaweed", "Mild GERD"],
@@ -389,13 +422,33 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["mild"],
     },
+    variants: [
+      {
+        id: "bottle-200ml",
+        label: "Bottle 200 ml",
+        subLabel: "Peppermint liquid",
+        description: "200 ml peppermint liquid bottle. 10 ml after meals, up to 4× daily.",
+      },
+      {
+        id: "sachet-24",
+        label: "Sachets × 24",
+        subLabel: "On-the-go single-serve",
+        description: "24 single-serve sachets — 10 ml each. Convenient for travel and work.",
+      },
+      {
+        id: "tablet-16",
+        label: "Tablets × 16",
+        subLabel: "Chewable tablets",
+        description: "16 chewable tablets — 2 tablets up to 4× daily, ideal when liquid is inconvenient.",
+      },
+    ],
   },
   {
     id: "gaviscon-double-action",
     brand: "Gaviscon Double Action",
     category: "Heartburn & indigestion — moderate",
     description:
-      "Sodium alginate + calcium carbonate formula for mild-to-moderate GERD. Highest calcium carbonate content in the Gaviscon range for effective relief. Sugar-free and gluten-free. Soothes within 3 minutes, lasts up to 4 hours.",
+      "Sodium alginate + calcium carbonate formula for mild-to-moderate GERD. Highest calcium carbonate content in the Gaviscon range. Sugar-free and gluten-free.",
     needId: "stomach",
     imageLabel: "GD",
     tags: ["Double action", "Sugar-free", "Gluten-free"],
@@ -405,6 +458,32 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["moderate"],
     },
+    variants: [
+      {
+        id: "bottle-300ml",
+        label: "Bottle 300 ml",
+        subLabel: "Family size",
+        description: "300 ml liquid bottle for regular at-home use. 10 ml after meals, up to 4× daily.",
+      },
+      {
+        id: "bottle-150ml",
+        label: "Bottle 150 ml",
+        subLabel: "Compact size",
+        description: "150 ml liquid bottle — compact and travel-friendly.",
+      },
+      {
+        id: "sachet-24",
+        label: "Sachets × 24",
+        subLabel: "On-the-go single-serve",
+        description: "24 single-serve 10 ml sachets — convenient and portion-controlled.",
+      },
+      {
+        id: "tablet-16",
+        label: "Tablets × 16",
+        subLabel: "Chewable tablets",
+        description: "16 chewable tablets — 2 tablets up to 4× daily.",
+      },
+    ],
   },
   {
     id: "gaviscon-advance",
@@ -421,6 +500,20 @@ export const productItems: ProductItem[] = [
       audiences: ["adult"],
       severities: ["moderate", "severe"],
     },
+    variants: [
+      {
+        id: "bottle-150ml",
+        label: "Bottle 150 ml",
+        subLabel: "Liquid — fastest soothing",
+        description: "150 ml liquid bottle. Soothes within 3 minutes, lasts up to 4 hours. 10 ml after meals.",
+      },
+      {
+        id: "sachet-24",
+        label: "Sachets × 24",
+        subLabel: "On-the-go single-serve",
+        description: "24 single-serve 10 ml sachets — portion-controlled and travel-friendly.",
+      },
+    ],
   },
 
   // ── HEART — Cardiprin ─────────────────────────────────────────────────────

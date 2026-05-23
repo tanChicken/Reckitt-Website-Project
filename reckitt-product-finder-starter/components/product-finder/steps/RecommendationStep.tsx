@@ -1,5 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
-import type { RecommendationResult } from "@/types/productFinder";
+import type { ProductVariant, RecommendationResult } from "@/types/productFinder";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,6 +18,27 @@ export default function RecommendationStep({
   onBack,
 }: RecommendationStepProps) {
   const isStandard = recommendation.safetyLevel === "standard";
+  const product = recommendation.primary;
+  const variants: ProductVariant[] = product.variants ?? [];
+  const hasMultipleVariants = variants.length > 1;
+
+  // Track which variant the user is viewing. Reset whenever the primary product changes.
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
+    variants[0]?.id ?? null,
+  );
+
+  useEffect(() => {
+    setSelectedVariantId(product.variants?.[0]?.id ?? null);
+  }, [product.id, product.variants]);
+
+  const selectedVariant: ProductVariant | null =
+    variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null;
+
+  // Derive display values — variant fields fall back to the product's own fields.
+  const displayDescription = selectedVariant?.description ?? product.description;
+  const displayUrl = selectedVariant?.url ?? product.url;
+  const displayImageId = selectedVariant?.imageId ?? product.id;
+  const displayPrice = selectedVariant?.price;
 
   return (
     <section aria-labelledby="recommendation-heading">
@@ -79,29 +103,12 @@ export default function RecommendationStep({
 
       {/* ── Main grid: 8 + 4 columns on large screens ── */}
       <div className="grid gap-5 lg:grid-cols-12 lg:items-stretch">
-        {/* ── Left: primary product + care advice ─────── */}
+        {/* ── Left: primary product + variants ───────── */}
         <div className="flex flex-col gap-5 lg:col-span-8">
-          {/* Primary product card */}
           <div className="overflow-hidden rounded-xl border border-border-subtle bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover">
             <div className="flex flex-col md:flex-row">
-              {/*
-               * ── MEDIA PLACEMENT ────────────────────────────────────
-               * Place the primary product image here.
-               * Recommended : studio white-background PNG, no shadow
-               * Size        : 400 × 400 px minimum
-               * File        : /public/products/[product-id].png
-               *               e.g. /public/products/nurofen.png
-               *
-               * To activate: replace the placeholder block below with:
-               *   <img
-               *     src={`/products/${recommendation.primary.id}.png`}
-               *     alt={recommendation.primary.brand}
-               *     className="w-full h-full object-contain"
-               *   />
-               * ───────────────────────────────────────────────────────
-               */}
+              {/* ── Image column ───────────────────────────── */}
               <div className="relative flex items-center justify-center border-border-subtle bg-surface-gray p-6 md:w-2/5 md:border-r md:p-8">
-                {/* Safety badge */}
                 <span
                   className={[
                     "absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-bold sm:left-4 sm:top-4 sm:px-3 sm:text-xs",
@@ -113,35 +120,34 @@ export default function RecommendationStep({
                   {isStandard ? "✓ Best Match" : "⚠ Safety check"}
                 </span>
 
-                {/* Image placeholder */}
+                {/* Product image — swaps when a variant with its own imageId is selected */}
                 <div className="flex flex-col items-center gap-3 text-center">
-                  {/* <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-surface-container-low text-3xl font-bold text-secondary">
-                    {recommendation.primary.imageLabel}
-                  </div>
-                  <code className="text-xs text-secondary/50">
-                    📁 /public/products/{recommendation.primary.id}.png
-                  </code> */}
                   <img
-                    src={`/products/${recommendation.primary.id}.png`}
-                    alt={recommendation.primary.brand}
-                    className="w-full h-full object-contain"
+                    key={displayImageId}
+                    src={`/products/${displayImageId}.png`}
+                    alt={product.brand}
+                    className="h-full w-full animate-fade-slide-up object-contain"
                   />
                 </div>
               </div>
 
-              {/* Product details */}
+              {/* ── Detail column ──────────────────────────── */}
               <div className="flex flex-col justify-between p-5 md:w-3/5 md:p-8">
                 <div>
                   <div className="mb-3 flex items-start justify-between gap-3 sm:mb-4">
                     <div className="min-w-0">
                       <h2 className="font-display text-xl font-bold leading-tight text-deep-navy sm:text-2xl">
-                        {recommendation.primary.brand}
+                        {product.brand}
                       </h2>
                       <p className="mt-0.5 text-xs font-semibold text-secondary sm:text-sm">
-                        {recommendation.primary.category}
+                        {product.category}
                       </p>
+                      {selectedVariant?.subLabel && (
+                        <p className="mt-1 text-xs font-medium text-reckitt-pink sm:text-sm">
+                          {selectedVariant.subLabel}
+                        </p>
+                      )}
                     </div>
-                    {/* Verified badge */}
                     <span
                       className="flex shrink-0 items-center justify-center text-reckitt-pink"
                       aria-label="Verified recommendation"
@@ -157,11 +163,73 @@ export default function RecommendationStep({
                   </div>
 
                   <p className="mb-4 text-sm leading-6 text-secondary sm:mb-5">
-                    {recommendation.explanation}
+                    {displayDescription}
                   </p>
 
+                  {/* ── Variant selector ─────────────────────── */}
+                  {hasMultipleVariants && (
+                    <div className="mb-4 sm:mb-5">
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
+                        Available options
+                      </p>
+                      <div
+                        role="radiogroup"
+                        aria-label="Product variants"
+                        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:overflow-visible"
+                      >
+                        {variants.map((variant) => {
+                          const isSelected = variant.id === selectedVariant?.id;
+                          return (
+                            <button
+                              key={variant.id}
+                              type="button"
+                              role="radio"
+                              aria-checked={isSelected}
+                              onClick={() => setSelectedVariantId(variant.id)}
+                              className={[
+                                "group inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-3.5 py-2 text-sm font-semibold transition-all duration-150",
+                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2",
+                                isSelected
+                                  ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
+                                  : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
+                              ].join(" ")}
+                            >
+                              {isSelected && (
+                                <svg
+                                  width="12"
+                                  height="12"
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <polyline points="2,6 5,9 10,3" />
+                                </svg>
+                              )}
+                              <span>{variant.label}</span>
+                              {variant.price && (
+                                <span
+                                  className={[
+                                    "text-xs font-bold",
+                                    isSelected ? "text-white/90" : "text-secondary",
+                                  ].join(" ")}
+                                >
+                                  {variant.price}
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tags */}
                   <div className="flex flex-wrap gap-1.5">
-                    {recommendation.primary.tags.map((tag) => (
+                    {product.tags.map((tag) => (
                       <span
                         key={tag}
                         className="rounded-full border border-border-subtle bg-surface-container-low px-2.5 py-0.5 text-xs font-semibold text-secondary"
@@ -172,6 +240,7 @@ export default function RecommendationStep({
                   </div>
                 </div>
 
+                {/* CTAs */}
                 <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:flex-row sm:gap-3">
                   <Button
                     onClick={onContinue}
@@ -179,14 +248,18 @@ export default function RecommendationStep({
                   >
                     View Safety Notes
                   </Button>
-                  {recommendation.primary.url && (
+                  {displayUrl && (
                     <Link
-                      href={recommendation.primary.url}
+                      href={displayUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-[52px] flex-1 items-center justify-center rounded-lg border border-deep-navy px-4 text-base font-bold text-deep-navy transition-colors hover:bg-deep-navy hover:text-white sm:min-h-11 sm:text-sm sm:font-semibold"
+                      className="inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-lg border border-deep-navy px-4 text-base font-bold text-deep-navy transition-colors hover:bg-deep-navy hover:text-white sm:min-h-11 sm:text-sm sm:font-semibold"
                     >
-                      View Product →
+                      View Product
+                      {displayPrice && (
+                        <span className="text-sm font-bold">· {displayPrice}</span>
+                      )}
+                      <span aria-hidden="true">→</span>
                     </Link>
                   )}
                 </div>
@@ -197,7 +270,6 @@ export default function RecommendationStep({
 
         {/* ── Right sidebar ───────────────────────────── */}
         <div className="flex h-full flex-col gap-5 lg:col-span-4">
-          {/* Safety & Warnings */}
           <div className="flex h-full flex-col rounded-xl border border-border-subtle bg-white p-4 sm:p-6">
             <div className="mb-4 flex items-center gap-2 text-error sm:mb-5">
               <span className="flex h-5 w-5 items-center justify-center">

@@ -30,6 +30,16 @@ export interface ChoiceOption<T extends string> {
   icon: string;
 }
 
+export interface ProductVariant {
+  id: string;            // unique within this product's variants
+  label: string;         // primary chip text e.g. "Honey", "200 ml bottle", "24-pack"
+  subLabel?: string;     // optional secondary line under selected variant title
+  imageId?: string;      // overrides product.id when locating /products/<id>.png
+  description?: string;  // overrides product.description when this variant is selected
+  url?: string;          // overrides product.url when this variant is selected
+  price?: string;        // optional retail price string, e.g. "$8.99"
+}
+
 export interface ProductItem {
   id: string;
   brand: string;
@@ -44,6 +54,7 @@ export interface ProductItem {
     audiences?: AudienceId[];
     severities?: SeverityId[];
   };
+  variants?: ProductVariant[];
 }
 
 export interface FinderAnswers {
