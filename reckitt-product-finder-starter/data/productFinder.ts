@@ -148,19 +148,22 @@ export const severityOptions: ChoiceOption<SeverityId>[] = [
   {
     id: "mild",
     label: "Mild",
-    description: "I can manage it.",
+    description:
+      "Occasional symptoms that are noticeable but don’t affect daily activities",
     icon: "/mild.png",
   },
   {
     id: "moderate",
     label: "Moderate",
-    description: "It feels uncomfortable.",
+    description:
+      "Regular symptoms that may interfere with daily tasks or concentration.",
     icon: "/moderate.png",
   },
   {
     id: "severe",
     label: "Severe",
-    description: "It is difficult to manage.",
+    description:
+      "Persistent symptoms that significantly disrupt daily activities and comfort.",
     icon: "/severe.png",
   },
 ];
@@ -205,7 +208,6 @@ export const preferenceOptions: ChoiceOption<PreferenceId>[] = [
 ];
 
 export const productItems: ProductItem[] = [
-
   // ── HEAD — Nurofen range ───────────────────────────────────────────────────
   // priority guide: 5=baseline, higher=preferred when tied in same tier
   {
@@ -298,13 +300,15 @@ export const productItems: ProductItem[] = [
         id: "6-pack",
         label: "6 Pack",
         subLabel: "Soothing classic — 24 lozenges",
-        description: "Honey-flavoured lozenges that soothe and moisturise a dry, scratchy throat with antibacterial action.",
+        description:
+          "Honey-flavoured lozenges that soothe and moisturise a dry, scratchy throat with antibacterial action.",
       },
       {
         id: "24-pack",
         label: "24 Pack",
         subLabel: "With added Vitamin C — 24 lozenges",
-        description: "Orange-flavoured lozenges with added Vitamin C to soothe a dry, scratchy throat.",
+        description:
+          "Orange-flavoured lozenges with added Vitamin C to soothe a dry, scratchy throat.",
       },
     ],
   },
@@ -343,9 +347,7 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["severe"],
     },
-    variants: [
-      { id: "16s", label: "16 lozenges", subLabel: "Standard pack" },
-    ],
+    variants: [{ id: "16s", label: "16 lozenges", subLabel: "Standard pack" }],
   },
   {
     id: "strepsils-max-pro-spray",
@@ -427,19 +429,22 @@ export const productItems: ProductItem[] = [
         id: "bottle-200ml",
         label: "Bottle 200 ml",
         subLabel: "Peppermint liquid",
-        description: "200 ml peppermint liquid bottle. 10 ml after meals, up to 4× daily.",
+        description:
+          "200 ml peppermint liquid bottle. 10 ml after meals, up to 4× daily.",
       },
       {
         id: "sachet-24",
         label: "Sachets × 24",
         subLabel: "On-the-go single-serve",
-        description: "24 single-serve sachets — 10 ml each. Convenient for travel and work.",
+        description:
+          "24 single-serve sachets — 10 ml each. Convenient for travel and work.",
       },
       {
         id: "tablet-16",
         label: "Tablets × 16",
         subLabel: "Chewable tablets",
-        description: "16 chewable tablets — 2 tablets up to 4× daily, ideal when liquid is inconvenient.",
+        description:
+          "16 chewable tablets — 2 tablets up to 4× daily, ideal when liquid is inconvenient.",
       },
     ],
   },
@@ -463,7 +468,8 @@ export const productItems: ProductItem[] = [
         id: "bottle-300ml",
         label: "Bottle 300 ml",
         subLabel: "Family size",
-        description: "300 ml liquid bottle for regular at-home use. 10 ml after meals, up to 4× daily.",
+        description:
+          "300 ml liquid bottle for regular at-home use. 10 ml after meals, up to 4× daily.",
       },
       {
         id: "bottle-150ml",
@@ -475,7 +481,8 @@ export const productItems: ProductItem[] = [
         id: "sachet-24",
         label: "Sachets × 24",
         subLabel: "On-the-go single-serve",
-        description: "24 single-serve 10 ml sachets — convenient and portion-controlled.",
+        description:
+          "24 single-serve 10 ml sachets — convenient and portion-controlled.",
       },
       {
         id: "tablet-16",
@@ -505,13 +512,15 @@ export const productItems: ProductItem[] = [
         id: "bottle-150ml",
         label: "Bottle 150 ml",
         subLabel: "Liquid — fastest soothing",
-        description: "150 ml liquid bottle. Soothes within 3 minutes, lasts up to 4 hours. 10 ml after meals.",
+        description:
+          "150 ml liquid bottle. Soothes within 3 minutes, lasts up to 4 hours. 10 ml after meals.",
       },
       {
         id: "sachet-24",
         label: "Sachets × 24",
         subLabel: "On-the-go single-serve",
-        description: "24 single-serve 10 ml sachets — portion-controlled and travel-friendly.",
+        description:
+          "24 single-serve 10 ml sachets — portion-controlled and travel-friendly.",
       },
     ],
   },

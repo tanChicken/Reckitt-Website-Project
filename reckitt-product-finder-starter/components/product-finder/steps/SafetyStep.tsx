@@ -131,7 +131,9 @@ export default function SafetyStep({
                 >
                   <polyline points="2,7 5.5,10.5 12,3.5" />
                 </svg>
-                <p className="text-sm leading-5 text-on-surface sm:leading-6">{step}</p>
+                <p className="text-sm leading-5 text-on-surface sm:leading-6">
+                  {step}
+                </p>
               </div>
             ))}
           </div>
@@ -144,19 +146,21 @@ export default function SafetyStep({
               key={title}
               className="flex items-center gap-3 rounded-2xl border border-border-subtle bg-white p-3.5 sm:gap-4 sm:p-4"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-surface-container-low">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-surface-container-low">
                 <Image
                   src={icon}
                   alt=""
-                  width={20}
-                  height={20}
-                  className="h-5 w-5 object-contain"
+                  width={62}
+                  height={62}
+                  className="h-8 w-8 object-contain"
                 />
               </div>
 
               <div className="min-w-0">
                 <h3 className="text-sm font-bold text-deep-navy">{title}</h3>
-                <p className="mt-0.5 text-xs leading-5 text-secondary sm:mt-1 sm:text-sm sm:leading-6">{text}</p>
+                <p className="mt-0.5 text-xs leading-5 text-secondary sm:mt-1 sm:text-sm sm:leading-6">
+                  {text}
+                </p>
               </div>
             </div>
           ))}

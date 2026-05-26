@@ -6,16 +6,28 @@ interface WelcomeStepProps {
 }
 
 const quickFeatures = [
-  { icon: "⏱", title: "Quick",        text: "Takes 1–2 mins"              },
-  { icon: "🧭", title: "Guided",       text: "Step-by-step"                 },
-  { icon: "🛡", title: "Safety-first", text: "Label guidance included"      },
+  { icon: "⏱", title: "Quick", text: "Takes 1–2 mins" },
+  { icon: "🧭", title: "Guided", text: "Step-by-step" },
+  { icon: "🛡", title: "Safety-first", text: "Label guidance included" },
 ];
 
 const showcaseProducts = [
-  { brand: "Strepsils", label: "Sore throat & cough", logo: "/brands/strepsils.png" },
-  { brand: "Nurofen",   label: "Pain & fever",        logo: "/brands/nurofen.png"   },
-  { brand: "Gaviscon",  label: "Heartburn & indigestion", logo: "/brands/gaviscon.png" },
-  { brand: "Cardiprin", label: "Cardiovascular care", logo: "/brands/cardiprin.png" },
+  {
+    brand: "Strepsils",
+    label: "Sore throat & cough",
+    logo: "/brands/strepsils.png",
+  },
+  { brand: "Nurofen", label: "Pain & fever", logo: "/brands/nurofen.png" },
+  {
+    brand: "Gaviscon",
+    label: "Heartburn & indigestion",
+    logo: "/brands/gaviscon.png",
+  },
+  {
+    brand: "Cardiprin",
+    label: "Cardiovascular care",
+    logo: "/brands/cardiprin.png",
+  },
 ];
 
 export default function WelcomeStep({ onStart }: WelcomeStepProps) {
@@ -32,7 +44,9 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-reckitt-pink opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-reckitt-pink" />
           </span>
-          <span className="text-xs font-semibold text-deep-navy sm:text-sm">Welcome to Reckitt</span>
+          <span className="text-xs font-semibold text-deep-navy sm:text-sm">
+            Welcome to your SOS Corner
+          </span>
         </div>
 
         {/* Heading */}
@@ -42,7 +56,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             className="max-w-xl font-display text-[2.5rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
           >
             Find the right care{" "}
-            <span className="text-reckitt-pink">in under a minute</span>
+            <span className="text-reckitt-pink">in just a few steps</span>
           </h1>
           <p className="max-w-lg text-base leading-6 text-secondary sm:text-lg sm:leading-7">
             Answer a few simple questions for a tailored product suggestion.
@@ -60,7 +74,12 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
           <Button
             variant="secondary"
             className="min-h-[52px] w-full justify-center px-6 sm:min-h-11 sm:w-auto"
-            onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}
+            onClick={() =>
+              window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+              })
+            }
           >
             Learn more
           </Button>
@@ -80,7 +99,9 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
                 {icon}
               </div>
               <div>
-                <p className="text-xs font-bold text-deep-navy sm:text-sm">{title}</p>
+                <p className="text-xs font-bold text-deep-navy sm:text-sm">
+                  {title}
+                </p>
                 <p className="hidden text-xs text-secondary sm:block">{text}</p>
               </div>
             </div>
@@ -114,7 +135,9 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <p className="mt-2 text-sm font-bold text-deep-navy sm:mt-2.5">{brand}</p>
+              <p className="mt-2 text-sm font-bold text-deep-navy sm:mt-2.5">
+                {brand}
+              </p>
               <p className="text-xs leading-snug text-secondary">{label}</p>
             </div>
           ))}

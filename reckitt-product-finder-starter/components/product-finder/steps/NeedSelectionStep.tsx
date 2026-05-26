@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { bodyParts, bodySymptoms } from "@/data/productFinder";
 import { cn } from "@/lib/cn";
-import type { BodyPartId, FinderAnswers} from "@/types/productFinder";
+import type { BodyPartId, FinderAnswers } from "@/types/productFinder";
 import Image from "next/image";
 const dotPositions: Record<BodyPartId, { top: string; left: string }> = {
   head: { top: "20%", left: "50%" },
@@ -41,14 +41,12 @@ export default function NeedSelectionStep({
     >
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <div className="border-b border-border-subtle pb-4">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs">
-          Symptom Analysis
-        </span>
+        <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs"></span>
         <h1
           id="need-heading"
           className="mt-2 font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-deep-navy sm:text-3xl lg:text-4xl"
         >
-          Where does it hurt?
+          Please select the area where it hurts
         </h1>
         <p className="mt-1.5 text-sm leading-6 text-secondary sm:text-base">
           Tap a body area to see relevant symptoms.
@@ -266,11 +264,7 @@ export default function NeedSelectionStep({
 
       {/* ── Desktop action bar ─────────────────────────────────────────── */}
       <div className="hidden border-t border-border-subtle pt-5 sm:flex sm:items-center sm:justify-end sm:gap-3">
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="text-sm"
-        >
+        <Button variant="ghost" onClick={onBack} className="text-sm">
           ← Back
         </Button>
         <Button

@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
-import type { ProductVariant, RecommendationResult } from "@/types/productFinder";
+import type {
+  ProductVariant,
+  RecommendationResult,
+} from "@/types/productFinder";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,7 +38,8 @@ export default function RecommendationStep({
     variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null;
 
   // Derive display values — variant fields fall back to the product's own fields.
-  const displayDescription = selectedVariant?.description ?? product.description;
+  const displayDescription =
+    selectedVariant?.description ?? product.description;
   const displayUrl = selectedVariant?.url ?? product.url;
   const displayImageId = selectedVariant?.imageId ?? product.id;
   const displayPrice = selectedVariant?.price;
@@ -69,7 +73,7 @@ export default function RecommendationStep({
       <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
           <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs">
-            Recommended Relief
+            RECOMMENDED RELIEF
           </span>
           <h1
             id="recommendation-heading"
@@ -93,7 +97,9 @@ export default function RecommendationStep({
       {/* ── Tier 2 / 3 disclaimer banner ────────────────── */}
       {recommendation.tierDisclaimer && (
         <div className="mb-5 flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 sm:mb-6 sm:gap-3 sm:px-4 sm:py-3">
-          <span className="mt-0.5 shrink-0 text-amber-500" aria-hidden="true">⚠</span>
+          <span className="mt-0.5 shrink-0 text-amber-500" aria-hidden="true">
+            ⚠
+          </span>
           <p className="text-xs leading-5 text-amber-800 sm:text-sm sm:leading-6">
             <span className="font-semibold">Closest available match — </span>
             {recommendation.tierDisclaimer}
@@ -214,7 +220,9 @@ export default function RecommendationStep({
                                 <span
                                   className={[
                                     "text-xs font-bold",
-                                    isSelected ? "text-white/90" : "text-secondary",
+                                    isSelected
+                                      ? "text-white/90"
+                                      : "text-secondary",
                                   ].join(" ")}
                                 >
                                   {variant.price}
@@ -257,7 +265,9 @@ export default function RecommendationStep({
                     >
                       View Product
                       {displayPrice && (
-                        <span className="text-sm font-bold">· {displayPrice}</span>
+                        <span className="text-sm font-bold">
+                          · {displayPrice}
+                        </span>
                       )}
                       <span aria-hidden="true">→</span>
                     </Link>

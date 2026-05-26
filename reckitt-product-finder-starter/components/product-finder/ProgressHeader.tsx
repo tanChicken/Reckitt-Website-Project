@@ -6,14 +6,14 @@ import Link from "next/link";
 
 // 3 visible steps — Safety is an epilogue, not a numbered step
 const steps = [
-  { id: 1, label: "Symptoms"   },
+  { id: 1, label: "Symptoms" },
   { id: 2, label: "Assessment" },
-  { id: 3, label: "Results"    },
+  { id: 3, label: "Results" },
 ];
 
 const navLinks = [
   { label: "Symptom Finder", href: "/#main-content" },
-  { label: "Products",       href: "/products"      },
+  { label: "Products", href: "/products" },
 ];
 
 interface ProgressHeaderProps {
@@ -22,7 +22,10 @@ interface ProgressHeaderProps {
   onHomeClick?: () => void;
 }
 
-export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHeaderProps) {
+export default function ProgressHeader({
+  currentStep,
+  onHomeClick,
+}: ProgressHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const showProgress = currentStep >= 1 && currentStep <= 4;
   // Step 4 (Safety) shows progress bar fully complete
@@ -62,7 +65,7 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
             aria-label="Reckitt — back to welcome page"
           >
             <Image
-              src="/reckitt-logo.png"
+              src="/sosLogo.png"
               alt="Reckitt"
               width={100}
               height={32}
@@ -74,7 +77,8 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
           {/* Desktop links */}
           <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
-              const isFinderLink = link.href.startsWith("/#") || link.href === "/";
+              const isFinderLink =
+                link.href.startsWith("/#") || link.href === "/";
               return (
                 <Link
                   key={link.label}
@@ -105,12 +109,31 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
             onClick={() => setMobileOpen((v) => !v)}
           >
             {mobileOpen ? (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="2" y1="2" x2="16" y2="16" /><line x1="16" y1="2" x2="2" y2="16" />
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <line x1="2" y1="2" x2="16" y2="16" />
+                <line x1="16" y1="2" x2="2" y2="16" />
               </svg>
             ) : (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="2" y1="5" x2="16" y2="5" /><line x1="2" y1="9" x2="16" y2="9" /><line x1="2" y1="13" x2="16" y2="13" />
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <line x1="2" y1="5" x2="16" y2="5" />
+                <line x1="2" y1="9" x2="16" y2="9" />
+                <line x1="2" y1="13" x2="16" y2="13" />
               </svg>
             )}
           </button>
@@ -121,7 +144,8 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
           <div className="animate-slide-down border-t border-border-subtle bg-white px-4 pb-5 md:hidden">
             <div className="flex flex-col gap-1 pt-3">
               {navLinks.map((link) => {
-                const isFinderLink = link.href.startsWith("/#") || link.href === "/";
+                const isFinderLink =
+                  link.href.startsWith("/#") || link.href === "/";
                 return (
                   <Link
                     key={link.label}
@@ -156,10 +180,13 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
           <div className="mx-auto max-w-container-max px-4 py-3 sm:px-8 lg:px-16">
             <div className="flex items-center gap-2 sm:gap-3">
               {steps.map((step, i) => {
-                const done   = effectiveStep > step.id;
+                const done = effectiveStep > step.id;
                 const active = effectiveStep === step.id;
                 return (
-                  <div key={step.id} className="flex flex-1 items-center gap-2 sm:gap-3">
+                  <div
+                    key={step.id}
+                    className="flex flex-1 items-center gap-2 sm:gap-3"
+                  >
                     <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                       <div
                         className={[
@@ -171,7 +198,16 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
                         ].join(" ")}
                       >
                         {done ? (
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <svg
+                            width="10"
+                            height="10"
+                            viewBox="0 0 10 10"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
                             <polyline points="1.5,5 4,7.5 8.5,2.5" />
                           </svg>
                         ) : (
@@ -181,7 +217,11 @@ export default function ProgressHeader({ currentStep, onHomeClick }: ProgressHea
                       <span
                         className={[
                           "hidden text-xs font-semibold transition-colors duration-300 sm:block",
-                          active ? "text-deep-navy" : done ? "text-reckitt-pink" : "text-secondary opacity-60",
+                          active
+                            ? "text-deep-navy"
+                            : done
+                              ? "text-reckitt-pink"
+                              : "text-secondary opacity-60",
                         ].join(" ")}
                       >
                         {step.label}

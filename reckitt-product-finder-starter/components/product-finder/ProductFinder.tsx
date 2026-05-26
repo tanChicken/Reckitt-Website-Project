@@ -24,16 +24,12 @@ const initialAnswers: FinderAnswers = { preferenceIds: [] };
 
 const footerLinks = [
   {
-    heading: "Product Finder",
-    links: ["How it works", "Our brands", "Health categories", "FAQs"],
-  },
-  {
-    heading: "Company",
-    links: ["About Reckitt", "Sustainability", "Investors", "Careers"],
-  },
-  {
     heading: "Support",
-    links: ["Safety guidance", "Contact us", "Privacy policy", "Terms of use"],
+    links: [
+      { label: "Contact us", href: "/contact" },
+      { label: "Privacy policy", href: "/privacy" },
+      { label: "Terms of use", href: "/terms" },
+    ],
   },
 ];
 
@@ -147,35 +143,32 @@ export default function ProductFinder() {
       {/* ── Footer ──────────────────────────────────── */}
       <footer className="mt-4 border-t border-white/10 bg-deep-navy">
         <div className="mx-auto max-w-container-max px-4 py-12 sm:px-8 lg:px-16">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
             {/* Brand column */}
-            <div className="lg:col-span-1">
+            <div>
               <Image
-                src="/reckitt-logo.png"
+                src="/sosLogo.png"
                 alt="Reckitt"
                 width={96}
                 height={30}
                 className="object-contain brightness-0 invert"
               />
-              <p className="mt-4 text-sm leading-6 text-secondary-fixed-dim">
-                Making access to health, hygiene and nutrition a right, not a
-                privilege.
-              </p>
             </div>
 
             {footerLinks.map(({ heading, links }) => (
-              <div key={heading}>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-surface-variant">
+              <div key={heading} className="text-center sm:text-right">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-surface-variant">
                   {heading}
                 </h3>
-                <ul className="mt-4 space-y-3">
+
+                <ul className="mt-4 flex flex-wrap justify-center gap-6 sm:justify-end">
                   {links.map((link) => (
-                    <li key={link}>
+                    <li key={link.label}>
                       <Link
-                        href="#"
-                        className="text-sm text-secondary-fixed-dim transition-colors duration-150 hover:text-white"
+                        href={link.href}
+                        className="text-base text-secondary-fixed-dim transition-colors duration-150 hover:text-white"
                       >
-                        {link}
+                        {link.label}
                       </Link>
                     </li>
                   ))}
