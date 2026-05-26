@@ -70,6 +70,27 @@ button, a, input, select, textarea {
 .animate-scale-in      { animation: scaleIn 0.3s cubic-bezier(0.22,1,0.36,1) both; }
 .animate-slide-down    { animation: slideDown 0.25s cubic-bezier(0.22,1,0.36,1) both; }
 
+/* ─── Product Carousel ───────────────────────────── */
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.carousel-viewport:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track { animation: none; }
+}
+
 /* ─── Scrollbar ───────────────────────────────────── */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }

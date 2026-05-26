@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 
@@ -5,41 +8,39 @@ interface WelcomeStepProps {
   onStart: () => void;
 }
 
-const quickFeatures = [
-  { icon: "⏱", title: "Quick", text: "Takes 1–2 mins" },
-  { icon: "🧭", title: "Guided", text: "Step-by-step" },
-  { icon: "🛡", title: "Safety-first", text: "Label guidance included" },
+const slides = [
+  {
+    src: "/family-care.png",
+    alt: "A family using Reckitt products for everyday health and wellness",
+  },
+  {
+    src: "/kiosk.png",
+    alt: "Reckitt SOS Corner kiosk at a pharmacy",
+  },
 ];
 
-const showcaseProducts = [
-  {
-    brand: "Strepsils",
-    label: "Sore throat & cough",
-    logo: "/brands/strepsils.png",
-  },
-  { brand: "Nurofen", label: "Pain & fever", logo: "/brands/nurofen.png" },
-  {
-    brand: "Gaviscon",
-    label: "Heartburn & indigestion",
-    logo: "/brands/gaviscon.png",
-  },
-  {
-    brand: "Cardiprin",
-    label: "Cardiovascular care",
-    logo: "/brands/cardiprin.png",
-  },
-];
+const INTERVAL_MS = 4500;
 
 export default function WelcomeStep({ onStart }: WelcomeStepProps) {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setActive((prev) => (prev + 1) % slides.length),
+      INTERVAL_MS,
+    );
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section
-      className="grid gap-6 sm:gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center"
+      className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch"
       aria-labelledby="welcome-heading"
     >
-      {/* ── Left: hero copy ─────────────────────────── */}
-      <div className="space-y-5 lg:space-y-8">
+      {/* ── Right: hero copy ────────────────────────── */}
+      <div className="flex flex-col justify-center space-y-5 lg:space-y-7">
         {/* Status badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-3 py-1.5 shadow-card sm:px-4 sm:py-2">
+        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border-subtle bg-white px-3 py-1.5 shadow-card sm:px-4 sm:py-2">
           <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-reckitt-pink opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-reckitt-pink" />
@@ -50,97 +51,74 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
         </div>
 
         {/* Heading */}
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-3">
           <h1
             id="welcome-heading"
-            className="max-w-xl font-display text-[2.5rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
+            className="font-display text-[2.2rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
           >
             Find the right care{" "}
             <span className="text-reckitt-pink">in just a few steps</span>
           </h1>
-          <p className="max-w-lg text-base leading-6 text-secondary sm:text-lg sm:leading-7">
+          <p className="text-base leading-6 text-secondary sm:text-lg sm:leading-7">
             Answer a few simple questions for a tailored product suggestion.
           </p>
         </div>
 
-        {/* CTAs */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <Button
-            onClick={onStart}
-            className="min-h-[52px] w-full justify-center px-8 text-base font-bold sm:min-h-11 sm:w-auto"
-          >
-            Start now →
-          </Button>
-          <Button
-            variant="secondary"
-            className="min-h-[52px] w-full justify-center px-6 sm:min-h-11 sm:w-auto"
-            onClick={() =>
-              window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth",
-              })
-            }
-          >
-            Learn more
-          </Button>
-        </div>
-
-        {/* Feature mini cards */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          {quickFeatures.map(({ icon, title, text }) => (
-            <div
-              key={title}
-              className="flex flex-col items-center gap-2 rounded-xl border border-border-subtle bg-white p-3 text-center shadow-card transition-all duration-200 sm:flex-row sm:items-start sm:gap-3 sm:p-4 sm:text-left hover:-translate-y-px hover:shadow-card-hover"
-            >
-              <div
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-container-low text-xl"
-                aria-hidden="true"
-              >
-                {icon}
-              </div>
-              <div>
-                <p className="text-xs font-bold text-deep-navy sm:text-sm">
-                  {title}
-                </p>
-                <p className="hidden text-xs text-secondary sm:block">{text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* CTA */}
+        <Button
+          onClick={onStart}
+          className="min-h-[52px] w-full justify-center px-8 text-base font-bold sm:min-h-11 sm:w-auto"
+        >
+          Start Now →
+        </Button>
       </div>
 
-      {/* ── Right: product showcase ──────────────────── */}
-      <div className="rounded-2xl border border-border-subtle bg-white p-4 shadow-soft sm:p-6">
-        <div className="mb-4 flex items-center justify-between sm:mb-5">
-          <p className="text-xs font-bold uppercase tracking-widest text-secondary">
-            Example categories
-          </p>
-          <span className="rounded-full border border-border-subtle px-2.5 py-1 text-xs font-semibold text-secondary">
-            4 brands
-          </span>
-        </div>
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-          {showcaseProducts.map(({ brand, label, logo }) => (
-            <div
-              key={brand}
-              className="group rounded-xl border border-border-subtle bg-surface-gray p-3 transition-all duration-200 hover:-translate-y-px hover:border-reckitt-pink/30 hover:shadow-card sm:p-4"
-            >
-              {/* Brand logo — store at /public/brands/<brand-lowercase>.png */}
-              <div className="flex h-12 w-full items-center justify-center rounded-lg bg-white p-2 sm:h-14">
-                <Image
-                  src={logo}
-                  alt={`${brand} logo`}
-                  width={160}
-                  height={56}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              <p className="mt-2 text-sm font-bold text-deep-navy sm:mt-2.5">
-                {brand}
-              </p>
-              <p className="text-xs leading-snug text-secondary">{label}</p>
-            </div>
-          ))}
+            {/* ── Left: image carousel ────────────────────── */}
+      <div className="relative min-h-64 overflow-hidden rounded-2xl shadow-soft sm:min-h-80 lg:min-h-[440px]">
+        {slides.map((slide, i) => (
+          <div
+            key={slide.src}
+            className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            style={{ opacity: i === active ? 1 : 0 }}
+            aria-hidden={i !== active}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              className="object-cover"
+              priority={i === 0}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+            />
+          </div>
+        ))}
+
+        {/* Bottom gradient overlay */}
+        {/* <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-deep-navy/80 to-transparent" /> */}
+
+        {/* Slide label */}
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-5 pb-5">
+          {/* <div>
+            <p className="text-sm font-bold text-white">
+              {slides[active].label}
+            </p>
+            <p className="text-xs text-white/70">
+              {slides[active].sublabel}
+            </p>
+          </div> */}
+
+          {/* Dot indicators */}
+          <div className="flex items-center gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className="h-1.5 rounded-full bg-white transition-all duration-300"
+                style={{ width: i === active ? "24px" : "6px", opacity: i === active ? 1 : 0.45 }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
