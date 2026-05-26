@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,14 +11,9 @@ const steps = [
   { id: 3, label: "Results" },
 ];
 
-const navLinks = [
-  { label: "Symptom Finder", href: "/#main-content" },
-  { label: "Products", href: "/products" },
-];
-
 interface ProgressHeaderProps {
   currentStep: number;
-  /** Called when the user clicks the logo or "Symptom Finder" nav link while already on /. Should reset the wizard to the welcome step. */
+  /** Called when the user clicks the logo while already on /. Should reset the wizard to the welcome step. */
   onHomeClick?: () => void;
 }
 
@@ -26,30 +21,45 @@ export default function ProgressHeader({
   currentStep,
   onHomeClick,
 }: ProgressHeaderProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const showProgress = currentStep >= 1 && currentStep <= 4;
   // Step 4 (Safety) shows progress bar fully complete
   const effectiveStep = currentStep > 3 ? 4 : currentStep;
 
-  // If we're already on the home route, intercept the click and reset the wizard
-  // via the callback instead of letting Next.js no-op the navigation.
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    function handleScroll() {
+      // Fade out over the first 30% of the viewport height
+      const fadeDistance = window.innerHeight * 0.3;
+      const next = Math.max(0, 1 - window.scrollY / fadeDistance);
+      setOpacity(next);
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   function handleHomeClick(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!onHomeClick) return;
     if (typeof window !== "undefined" && window.location.pathname === "/") {
       event.preventDefault();
       onHomeClick();
     }
-    setMobileOpen(false);
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full">
-      {/* ── Nav bar ─────────────────────────────────── */}
-      <nav
-        className="w-full border-b border-border-subtle bg-white/95 backdrop-blur-md"
-        aria-label="Main navigation"
-      >
-        <div className="mx-auto flex w-full max-w-container-max items-center justify-between px-4 py-4 sm:px-8 lg:px-16">
+    <header
+      className="sticky top-0 z-50 w-full bg-surface-gray"
+      style={{
+        opacity,
+        pointerEvents: opacity < 0.05 ? "none" : "auto",
+      }}
+    >
+      <nav aria-label="Main navigation">
+        {/*
+          ↓ Change py-3 here to resize the header height (e.g. py-2 = smaller, py-5 = taller)
+        */}
+        <div className="relative mx-auto flex w-full max-w-container-max items-center px-4 py-2 sm:px-8 lg:px-16">
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-reckitt-pink focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white"
@@ -57,7 +67,7 @@ export default function ProgressHeader({
             Skip to main content
           </a>
 
-          {/* Logo — clicking returns to the welcome page (resets the wizard) */}
+          {/* Logo — left-anchored */}
           <Link
             href="/"
             onClick={handleHomeClick}
@@ -68,117 +78,15 @@ export default function ProgressHeader({
               src="/sosLogo.png"
               alt="Reckitt"
               width={100}
-              height={32}
+              height={30}
               className="object-contain"
               priority
             />
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => {
-              const isFinderLink =
-                link.href.startsWith("/#") || link.href === "/";
-              return (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={isFinderLink ? handleHomeClick : undefined}
-                  className="rounded-lg px-4 py-2 text-sm font-semibold text-secondary transition-all duration-200 hover:bg-surface-container-low hover:text-deep-navy"
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-            {currentStep === 0 && (
-              <Link
-                href="/#main-content"
-                onClick={handleHomeClick}
-                className="ml-4 inline-flex min-h-10 items-center justify-center rounded-lg bg-reckitt-pink px-5 text-sm font-semibold text-white shadow-pink transition-all duration-200 hover:brightness-110 active:scale-95"
-              >
-                Start Finder →
-              </Link>
-            )}
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border-subtle text-secondary transition-all duration-200 hover:bg-surface-container-low md:hidden"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((v) => !v)}
-          >
-            {mobileOpen ? (
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              >
-                <line x1="2" y1="2" x2="16" y2="16" />
-                <line x1="16" y1="2" x2="2" y2="16" />
-              </svg>
-            ) : (
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              >
-                <line x1="2" y1="5" x2="16" y2="5" />
-                <line x1="2" y1="9" x2="16" y2="9" />
-                <line x1="2" y1="13" x2="16" y2="13" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile dropdown */}
-        {mobileOpen && (
-          <div className="animate-slide-down border-t border-border-subtle bg-white px-4 pb-5 md:hidden">
-            <div className="flex flex-col gap-1 pt-3">
-              {navLinks.map((link) => {
-                const isFinderLink =
-                  link.href.startsWith("/#") || link.href === "/";
-                return (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="rounded-lg px-4 py-3 text-sm font-semibold text-secondary transition-all hover:bg-surface-container-low hover:text-deep-navy"
-                    onClick={(e) => {
-                      if (isFinderLink) handleHomeClick(e);
-                      else setMobileOpen(false);
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-              {currentStep === 0 && (
-                <Link
-                  href="/#main-content"
-                  className="mt-2 flex items-center justify-center rounded-lg bg-reckitt-pink px-4 py-3 text-sm font-semibold text-white"
-                  onClick={handleHomeClick}
-                >
-                  Start Finder →
-                </Link>
-              )}
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* ── Step progress bar ───────────────────────── */}
-      {showProgress && (
-        <div className="w-full border-b border-border-subtle bg-white/90 backdrop-blur-sm">
-          <div className="mx-auto max-w-container-max px-4 py-3 sm:px-8 lg:px-16">
-            <div className="flex items-center gap-2 sm:gap-3">
+          {/* Steps — absolutely centred in the header row */}
+          {showProgress && (
+            <div className="absolute left-1/2 -translate-x-1/2 flex w-44 items-center gap-2 sm:w-72 sm:gap-3">
               {steps.map((step, i) => {
                 const done = effectiveStep > step.id;
                 const active = effectiveStep === step.id;
@@ -190,7 +98,7 @@ export default function ProgressHeader({
                     <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                       <div
                         className={[
-                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all duration-300",
+                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all duration-300 sm:h-6 sm:w-6",
                           done || active
                             ? "bg-reckitt-pink text-white"
                             : "bg-surface-container-high text-secondary",
@@ -239,9 +147,9 @@ export default function ProgressHeader({
                 );
               })}
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </nav>
     </header>
   );
 }
