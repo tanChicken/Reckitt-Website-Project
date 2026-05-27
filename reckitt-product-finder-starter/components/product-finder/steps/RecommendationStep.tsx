@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Button from "@/components/ui/Button";
 import type {
   ProductVariant,
@@ -322,7 +323,7 @@ export default function RecommendationStep({
       </div>{/* end blurable wrapper */}
 
 {/* ── Medical Disclaimer Modal ─────────────────── */}
-      {disclaimerOpen && (
+      {disclaimerOpen && createPortal(
         <div
           className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
           style={{ backgroundColor: "rgba(228, 226, 226, 0.6)", backdropFilter: "blur(8px)" }}
@@ -332,7 +333,7 @@ export default function RecommendationStep({
           aria-labelledby="disclaimer-modal-title"
         >
           <div
-            className="animate-scale-in relative flex w-full max-h-[85vh] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-2xl sm:max-w-lg"
+            className="animate-scale-in relative flex w-full max-h-[85vh] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-2xl sm:max-w-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header
@@ -379,10 +380,10 @@ export default function RecommendationStep({
               <div className="flex flex-col gap-6 sm:gap-7">
                 {[
                   { id: 1, title: "Product Labeling",             text: "Always read the label before use." },
-                  { id: 2, title: "Medical Supervision Required", text: "Your doctor will advise you on how long you should continue to take Cardiprin 100. Make sure you see your doctor at regular intervals and discuss any questions that you may have with him or her. Cardiprin 100 should only be taken under medical supervision." },
-                  { id: 3, title: "Contraindications",            text: "Cardiprin 100 should not be taken by people who are allergic to salicylates or taking regular anticoagulant therapy. Precautions should be observed in patients with asthma or peptic ulcer." },
+                  { id: 2, title: "Medical Supervision Required", text: `Your doctor will advise you on how long you should continue to take ${product.brand}. Make sure you see your doctor at regular intervals and discuss any questions that you may have with him or her. ${product.brand} should only be taken under medical supervision.` },
+                  { id: 3, title: "Contraindications",            text: `${product.brand} should not be taken by people who are allergic to salicylates or taking regular anticoagulant therapy. Precautions should be observed in patients with asthma or peptic ulcer.` },
                   { id: 4, title: "Age Restriction",              text: "Not recommended for children and teenagers below 16 years old." },
-                  { id: 5, title: "Heartburn & Ulcer Warning",    text: "If you have a history of heartburn or ulcers, you may find that Cardiprin 100 affects your symptoms. If this occurs, consult your doctor." },
+                  { id: 5, title: "Heartburn & Ulcer Warning",    text: `If you have a history of heartburn or ulcers, you may find that ${product.brand} affects your symptoms. If this occurs, consult your doctor.` },
                 ].map(({ id, title, text }) => (
                   <div key={id} className="flex items-start gap-4">
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-reckitt-pink/10 text-xs font-bold text-reckitt-pink ring-4 ring-white">
@@ -407,7 +408,8 @@ export default function RecommendationStep({
               </Button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
