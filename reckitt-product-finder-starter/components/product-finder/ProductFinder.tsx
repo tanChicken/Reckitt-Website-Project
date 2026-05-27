@@ -99,7 +99,7 @@ export default function ProductFinder() {
         className="mx-auto w-full max-w-container-max px-4 pb-12 pt-6 sm:px-8 sm:pt-10 lg:px-16 lg:pt-12"
       >
         {/* Wizard card */}
-        <Card className="min-h-[800px] p-4 shadow-card sm:min-h-[650px] sm:p-8 lg:p-10">
+        <Card className="relative min-h-[800px] overflow-hidden p-4 shadow-card sm:min-h-[650px] sm:p-8 lg:p-10">
           <div key={step} className="animate-fade-slide-up">
             {step === 0 && (
               <WelcomeStep onStart={() => moveTo(1, "finder_started")} />

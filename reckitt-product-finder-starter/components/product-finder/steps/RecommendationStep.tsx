@@ -42,6 +42,8 @@ export default function RecommendationStep({
       if (e.key === "Escape") setDisclaimerOpen(false);
     }
     window.addEventListener("keydown", onKey);
+    // Ensure the card is scrolled into view so the absolute overlay is visible on mobile
+    document.getElementById("main-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
     return () => window.removeEventListener("keydown", onKey);
   }, [disclaimerOpen]);
 
@@ -328,6 +330,95 @@ export default function RecommendationStep({
           </div>
         </div>
       </div>
+
+{/* ── Medical Disclaimer Modal ─────────────────── */}
+      {disclaimerOpen && (
+        <div
+          className="animate-fade-in absolute inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          style={{ backgroundColor: "rgba(15, 23, 42, 0.6)", backdropFilter: "blur(8px)" }}
+          onClick={() => setDisclaimerOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="disclaimer-modal-title"
+        >
+          <div
+            className="animate-scale-in relative flex w-full max-h-[85vh] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-2xl sm:max-w-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="shrink-0 flex items-center justify-between gap-3 border-b border-border-subtle/60 bg-surface-container-low/30 px-6 py-5 sm:px-8">
+              <div className="flex items-center gap-3.5">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-error/10">
+                  <Image
+                    src="/caution.png"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h2
+                  id="disclaimer-modal-title"
+                  className="text-base font-bold text-deep-navy sm:text-lg"
+                >
+                  Safety &amp; Warnings
+                </h2>
+              </div>
+              <button
+                onClick={() => setDisclaimerOpen(false)}
+                aria-label="Close"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-secondary transition-colors hover:bg-surface-gray hover:text-deep-navy"
+              >
+                <svg width="12" height="12" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="1" y1="1" x2="10" y2="10" />
+                  <line x1="10" y1="1" x2="1" y2="10" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Body — scrollable, takes remaining height */}
+            <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5 sm:px-8 sm:py-7">
+              <div className="mb-7 flex items-start gap-3 rounded-xl border border-amber-200/60 bg-amber-50/50 p-4 shadow-sm">
+                <span className="mt-0.5 text-lg" aria-hidden="true">💡</span>
+                <p className="text-sm font-medium leading-relaxed text-amber-900">
+                  This tool is for informational purposes only and does not constitute medical advice.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-6 sm:gap-7">
+                {[
+                  { id: 1, title: "Product Labeling",             text: "Always read the label before use." },
+                  { id: 2, title: "Medical Supervision Required", text: "Your doctor will advise you on how long you should continue to take Cardiprin 100. Make sure you see your doctor at regular intervals and discuss any questions that you may have with him or her. Cardiprin 100 should only be taken under medical supervision." },
+                  { id: 3, title: "Contraindications",            text: "Cardiprin 100 should not be taken by people who are allergic to salicylates or taking regular anticoagulant therapy. Precautions should be observed in patients with asthma or peptic ulcer." },
+                  { id: 4, title: "Age Restriction",              text: "Not recommended for children and teenagers below 16 years old." },
+                  { id: 5, title: "Heartburn & Ulcer Warning",    text: "If you have a history of heartburn or ulcers, you may find that Cardiprin 100 affects your symptoms. If this occurs, consult your doctor." },
+                ].map(({ id, title, text }) => (
+                  <div key={id} className="flex items-start gap-4">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-reckitt-pink/10 text-xs font-bold text-reckitt-pink ring-4 ring-white">
+                      {id}
+                    </span>
+                    <div className="pt-0.5">
+                      <p className="text-sm font-bold tracking-wide text-deep-navy">{title}</p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-secondary sm:leading-7">{text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="shrink-0 border-t border-border-subtle/60 bg-surface-container-low/20 px-6 py-5 sm:px-8">
+              <Button
+                onClick={() => setDisclaimerOpen(false)}
+                className="w-full justify-center py-3.5 text-sm font-bold shadow-md transition-transform hover:scale-[1.01] active:scale-95"
+              >
+                I Understand
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

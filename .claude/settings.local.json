@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx next *')",
       "Bash(node -e ' *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(Get-ChildItem -Path . -Directory)",
+      "Bash(Select-Object Name)"
     ]
   }
 }
