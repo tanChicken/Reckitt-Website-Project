@@ -25,7 +25,7 @@ export default function QuestionsStep({
 }: QuestionsStepProps) {
   const canContinue = Boolean(answers.audienceId && answers.severityId);
 
-  const answeredCount = [answers.audienceId, answers.severityId].filter(
+  const answeredCount = [answers.audienceId, answers  .severityId].filter(
     Boolean,
   ).length;
 
@@ -35,7 +35,7 @@ export default function QuestionsStep({
       className="mx-auto max-w-3xl pb-24 sm:pb-0"
     >
       {/* ── Progress indicator ────────────────────── */}
-      <div className="mb-6 sm:mb-8">
+      {/* <div className="mb-6 sm:mb-8">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs">
             Diagnostic Assessment
@@ -51,7 +51,7 @@ export default function QuestionsStep({
             style={{ width: `${(answeredCount / 2) * 100}%` }}
           />
         </div>
-      </div>
+      </div> */}
 
       {/* ── Heading ───────────────────────────────── */}
       <div className="mb-6 sm:mb-8">
@@ -72,9 +72,9 @@ export default function QuestionsStep({
           <span className="block text-lg font-bold text-deep-navy sm:text-base">
             Who is this for?
           </span>
-          <span className="mt-0.5 block text-xs text-secondary sm:text-sm">
+          {/* <span className="mt-0.5 block text-xs text-secondary sm:text-sm">
             Affects safety guidance.
-          </span>
+          </span> */}
         </legend>
 
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -163,9 +163,9 @@ export default function QuestionsStep({
           <span className="block text-lg font-bold text-deep-navy sm:text-base">
             How severe is it?
           </span>
-          <span className="mt-0.5 block text-xs text-secondary sm:text-sm">
+          {/* <span className="mt-0.5 block text-xs text-secondary sm:text-sm">
             Not a diagnosis — helps tailor the suggestion.
-          </span>
+          </span> */}
         </legend>
 
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -251,7 +251,7 @@ export default function QuestionsStep({
       {/* ── Desktop action bar ────────────────────── */}
       <div className="hidden border-t border-border-subtle pt-6 sm:flex sm:items-center sm:justify-between sm:gap-3">
         <Button variant="secondary" onClick={onBack} className="gap-1.5">
-          <svg
+          {/* <svg
             width="14"
             height="14"
             viewBox="0 0 16 16"
@@ -264,7 +264,7 @@ export default function QuestionsStep({
           >
             <line x1="12" y1="8" x2="4" y2="8" />
             <polyline points="7,5 4,8 7,11" />
-          </svg>
+          </svg> */}
           Previous
         </Button>
 
@@ -273,8 +273,8 @@ export default function QuestionsStep({
           disabled={!canContinue}
           className="gap-2 px-10"
         >
-          {canContinue ? "See my recommendation" : "Answer both questions"}
-          {canContinue && (
+          Next
+          {/* {canContinue && (
             <svg
               width="14"
               height="14"
@@ -289,7 +289,7 @@ export default function QuestionsStep({
               <line x1="4" y1="8" x2="12" y2="8" />
               <polyline points="9,5 12,8 9,11" />
             </svg>
-          )}
+          )} */}
         </Button>
       </div>
 
@@ -326,23 +326,21 @@ export default function QuestionsStep({
             disabled={!canContinue}
             className="min-h-[52px] flex-1 gap-2 text-base font-bold"
           >
-            {canContinue ? "Continue" : `Answer ${2 - answeredCount} more`}
-            {canContinue && (
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="4" y1="8" x2="12" y2="8" />
-                <polyline points="9,5 12,8 9,11" />
-              </svg>
-            )}
+            Next
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="4" y1="8" x2="12" y2="8" />
+              <polyline points="9,5 12,8 9,11" />
+            </svg>
           </Button>
         </div>
       </div>

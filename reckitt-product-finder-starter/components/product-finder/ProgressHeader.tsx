@@ -49,7 +49,7 @@ export default function ProgressHeader({
 
   return (
     <header
-      className="sticky top-0 z-50 w-full bg-surface-gray"
+      className="sticky top-0 z-50 w-full"
       style={{
         opacity,
         pointerEvents: opacity < 0.05 ? "none" : "auto",

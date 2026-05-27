@@ -46,11 +46,11 @@ export default function NeedSelectionStep({
           id="need-heading"
           className="mt-2 font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-deep-navy sm:text-3xl lg:text-4xl"
         >
-          Please select the area where it hurts
+          Please select the area you’re experiencing discomfort
         </h1>
-        <p className="mt-1.5 text-sm leading-6 text-secondary sm:text-base">
+        {/* <p className="mt-1.5 text-sm leading-6 text-secondary sm:text-base">
           Tap a body area to see relevant symptoms.
-        </p>
+        </p> */}
       </div>
 
       {/* ── 3-column grid ──────────────────────────────────────────────── */}
@@ -60,67 +60,84 @@ export default function NeedSelectionStep({
        * Desktop (lg)    : 3 equal columns side-by-side
        */}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.1fr_1fr_1.1fr] lg:items-start">
-        {/* ── COL 1: Area selector ─────────────────────────────────────── */}
-        <div className="rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
-          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-secondary/60">
-            Body Area
-          </p>
-          {/*
-           * Mobile : horizontal scrollable pills (compact, finger-friendly)
-           * md+    : vertical full-width buttons
-           */}
-          <div className="flex gap-2 overflow-x-auto pb-1 md:flex-col md:gap-1.5 md:overflow-visible md:pb-0">
-            {bodyParts.map((area) => {
-              const isActive = area.id === activePartId;
-              return (
-                <button
-                  key={area.id}
-                  onClick={() => setActivePartId(area.id)}
-                  aria-pressed={isActive}
-                  className={cn(
-                    "flex shrink-0 items-center gap-1.5 border font-semibold transition-all duration-200",
-                    /* mobile pill style */
-                    "rounded-full px-3 py-1.5 text-xs whitespace-nowrap",
-                    /* md+ full-width style */
-                    "md:w-full md:shrink md:rounded-lg md:px-4 md:py-3 md:text-sm md:gap-3 md:whitespace-normal",
-                    isActive
-                      ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
-                      : "border-border-subtle bg-white text-on-surface hover:border-secondary/40 hover:shadow-card",
-                  )}
-                >
-                  {/* ── Changed from text span to Image component ── */}
-                  <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white transition-transform duration-200 group-hover:scale-105 overflow-hidden">
-                    <Image
-                      src={area.icon}
-                      alt={`${area.label} icon`}
-                      width={20}
-                      height={20}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
+        {/* ── COL 1: Area selector + desktop buttons ───────────────────── */}
+        <div className="flex flex-col gap-3">
+          <div className="rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-secondary/60">
+              Body Area
+            </p>
+            {/*
+             * Mobile : horizontal scrollable pills (compact, finger-friendly)
+             * md+    : vertical full-width buttons
+             */}
+            <div className="flex gap-2 overflow-x-auto pb-1 md:flex-col md:gap-1.5 md:overflow-visible md:pb-0">
+              {bodyParts.map((area) => {
+                const isActive = area.id === activePartId;
+                return (
+                  <button
+                    key={area.id}
+                    onClick={() => setActivePartId(area.id)}
+                    aria-pressed={isActive}
+                    className={cn(
+                      "flex shrink-0 items-center gap-1.5 border font-semibold transition-all duration-200",
+                      /* mobile pill style */
+                      "rounded-full px-3 py-1.5 text-xs whitespace-nowrap",
+                      /* md+ full-width style */
+                      "md:w-full md:shrink md:rounded-lg md:px-4 md:py-3 md:text-sm md:gap-3 md:whitespace-normal",
+                      isActive
+                        ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
+                        : "border-border-subtle bg-white text-on-surface hover:border-secondary/40 hover:shadow-card",
+                    )}
+                  >
+                    {/* ── Changed from text span to Image component ── */}
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white transition-transform duration-200 group-hover:scale-105 overflow-hidden">
+                      <Image
+                        src={area.icon}
+                        alt={`${area.label} icon`}
+                        width={20}
+                        height={20}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
 
-                  <span>{area.label}</span>
-                  {isActive && (
-                    <svg
-                      className="ml-auto hidden md:block shrink-0"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <polyline points="2,7 6,11 12,3" />
-                    </svg>
-                  )}
-                </button>
-              );
-            })}
+                    <span>{area.label}</span>
+                    {isActive && (
+                      <svg
+                        className="ml-auto hidden md:block shrink-0"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <polyline points="2,7 6,11 12,3" />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ── Desktop buttons: below the body area box ─────────────── */}
+          <div className="hidden sm:flex sm:items-center sm:justify-start sm:gap-3 mt-6">
+            <Button variant="secondary" onClick={onBack} className="text-sm">
+              Previous
+            </Button>
+            <Button
+              onClick={() => onSelect(activePartId)}
+              disabled={!canContinue}
+              className="gap-2 px-10"
+            >
+              Next
+            </Button>
           </div>
         </div>
+        
 
         {/* ── COL 2: Body diagram ──────────────────────────────────────── */}
         {/*
@@ -131,6 +148,7 @@ export default function NeedSelectionStep({
          */}
         <div>
           <div className="relative flex h-[220px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-border-subtle bg-white sm:h-[280px] md:h-[360px] lg:h-[420px]">
+            
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-surface-container-low/40 to-transparent" />
 
             <img
@@ -138,6 +156,12 @@ export default function NeedSelectionStep({
               alt="Body diagram showing selectable areas"
               className="relative z-10 h-full w-full object-contain p-4 sm:p-6"
             />
+            {/* ── Dynamic Instruction Hint ── */}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 rounded-full bg-reckitt-pink/10 px-3 py-1 text-reckitt-pink border border-reckitt-pink/20 shadow-sm animate-pulse whitespace-nowrap">
+              <span className="text-[11px] font-bold uppercase tracking-wider">
+                Tap a body area to get started
+              </span>
+            </div>
 
             {/* Hotspot dots */}
             {bodyParts.map((part) => {
@@ -262,37 +286,8 @@ export default function NeedSelectionStep({
         </div>
       </div>
 
-      {/* ── Desktop action bar ─────────────────────────────────────────── */}
-      <div className="hidden border-t border-border-subtle pt-5 sm:flex sm:items-center sm:justify-end sm:gap-3">
-        <Button variant="ghost" onClick={onBack} className="text-sm">
-          ← Back
-        </Button>
-        <Button
-          onClick={() => onSelect(activePartId)}
-          disabled={!canContinue}
-          className="gap-2 px-10"
-        >
-          {canContinue ? "See my recommendation" : "Select a body area first"}
-          {canContinue && (
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <line x1="4" y1="8" x2="12" y2="8" />
-              <polyline points="9,5 12,8 9,11" />
-            </svg>
-          )}
-        </Button>
-      </div>
 
-      {/* ── Mobile sticky bottom CTA ───────────────────────────────────── */}
+{/* ── Mobile sticky bottom CTA ───────────────────────────────────── */}
       <div
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] backdrop-blur sm:hidden"
         role="group"
@@ -325,7 +320,7 @@ export default function NeedSelectionStep({
             disabled={!canContinue}
             className="min-h-[52px] flex-1 gap-2 text-base font-bold"
           >
-            {canContinue ? "Continue" : "Select a body area"}
+            Next
             {canContinue && (
               <svg
                 width="16"

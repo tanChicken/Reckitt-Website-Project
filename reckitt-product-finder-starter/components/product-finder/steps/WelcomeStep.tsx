@@ -57,7 +57,12 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             className="font-display text-[2.2rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
           >
             Find the right care{" "}
-            <span className="text-reckitt-pink">in just a few steps</span>
+          </h1>
+          <h1
+            id="welcome-heading"
+            className="text-reckitt-pink font-display text-[2.2rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
+          >
+            in just a few steps
           </h1>
           <p className="text-base leading-6 text-secondary sm:text-lg sm:leading-7">
             Answer a few simple questions for a tailored product suggestion.
@@ -65,16 +70,18 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
         </div>
 
         {/* CTA */}
-        <Button
-          onClick={onStart}
-          className="min-h-[52px] w-full justify-center px-8 text-base font-bold sm:min-h-11 sm:w-auto"
-        >
-          Start Now →
-        </Button>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button
+            onClick={onStart}
+            className="min-h-[52px] w-full justify-center px-8 text-base font-bold sm:min-h-11 sm:w-auto"
+          >
+            Start Now →
+          </Button>
+        </div>
       </div>
 
-            {/* ── Left: image carousel ────────────────────── */}
-      <div className="relative min-h-64 overflow-hidden rounded-2xl shadow-soft sm:min-h-80 lg:min-h-[440px]">
+      {/* ── Left: image carousel ────────────────────── */}
+      <div className="relative min-h-64 overflow-hidden rounded-2xl shadow-soft sm:min-h-80 lg:min-h-[540px]">
         {slides.map((slide, i) => (
           <div
             key={slide.src}

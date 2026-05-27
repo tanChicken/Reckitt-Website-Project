@@ -149,21 +149,21 @@ export const severityOptions: ChoiceOption<SeverityId>[] = [
     id: "mild",
     label: "Mild",
     description:
-      "Occasional symptoms that are noticeable but don’t affect daily activities",
+      "Occasional discomfort",
     icon: "/mild.png",
   },
   {
     id: "moderate",
     label: "Moderate",
     description:
-      "Regular symptoms that may interfere with daily tasks or concentration.",
+      "Frequent discomfort",
     icon: "/moderate.png",
   },
   {
     id: "severe",
     label: "Severe",
     description:
-      "Persistent symptoms that significantly disrupt daily activities and comfort.",
+      "Constant discomfort",
     icon: "/severe.png",
   },
 ];
