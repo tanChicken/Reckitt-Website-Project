@@ -55,6 +55,9 @@ export interface ProductItem {
     severities?: SeverityId[];
   };
   variants?: ProductVariant[];
+  activeIngredient?: string;
+  dosage?: string;
+  keyBenefits?: string[];
 }
 
 export interface FinderAnswers {

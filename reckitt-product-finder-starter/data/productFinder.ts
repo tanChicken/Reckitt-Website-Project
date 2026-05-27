@@ -229,6 +229,9 @@ export const productItems: ProductItem[] = [
       { id: "12s", label: "12 tablets", subLabel: "Ibuprofen 200 mg" },
       { id: "24s", label: "24 tablets", subLabel: "Ibuprofen 200 mg" },
     ],
+    activeIngredient: "Ibuprofen 200 mg",
+    dosage: "1–2 tablets every 4–6 hours. Max 6 tablets/day.",
+    keyBenefits: ["Relieves headaches & migraines", "Reduces fever", "Anti-inflammatory"],
   },
   {
     id: "nurofen-express",
@@ -245,6 +248,9 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["moderate", "severe"],
     },
+    activeIngredient: "Ibuprofen Lysine 342 mg",
+    dosage: "1–2 caplets every 4–6 hours. Max 6 caplets/day.",
+    keyBenefits: ["Targets pain in 10 minutes", "Relieves fever", "Fast-acting formula"],
   },
   {
     id: "nurofen-nuromol",
@@ -261,6 +267,9 @@ export const productItems: ProductItem[] = [
       audiences: ["adult"],
       severities: ["moderate", "severe"],
     },
+    activeIngredient: "Ibuprofen 200 mg + Paracetamol 500 mg",
+    dosage: "1–2 tablets every 6–8 hours. Max 3 doses/day.",
+    keyBenefits: ["Dual-action pain relief", "Up to 8 hours relief", "Ibuprofen + Paracetamol"],
   },
   {
     id: "nurofen-children",
@@ -277,6 +286,9 @@ export const productItems: ProductItem[] = [
       audiences: ["child"],
       severities: ["mild", "moderate"],
     },
+    activeIngredient: "Ibuprofen 100 mg / 5 ml",
+    dosage: "Dose by weight every 6–8 hours. Max 3 doses/day.",
+    keyBenefits: ["Suitable for ages 6 months–12 years", "Relieves fever & pain", "Oral suspension"],
   },
 
   // ── THROAT — Strepsils range ───────────────────────────────────────────────
@@ -311,6 +323,9 @@ export const productItems: ProductItem[] = [
           "Orange-flavoured lozenges with added Vitamin C to soothe a dry, scratchy throat.",
       },
     ],
+    activeIngredient: "2,4-Dichlorobenzyl alcohol 1.2 mg + Amylmetacresol 0.6 mg",
+    dosage: "1 lozenge every 2–3 hours. Max 8 lozenges/day.",
+    keyBenefits: ["Antibacterial & antiviral", "Soothes in 5 minutes", "Suitable for ages 6+"],
   },
   {
     id: "strepsils-max-triple",
@@ -331,6 +346,9 @@ export const productItems: ProductItem[] = [
       { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack" },
       { id: "24s", label: "24 lozenges", subLabel: "Standard pack" },
     ],
+    activeIngredient: "Hexylrescorcinol 24 mg",
+    dosage: "1 lozenge every 2–3 hours. Max 8 lozenges/day.",
+    keyBenefits: ["Triple action relief", "Anaesthetic + antiseptic + anti-inflammatory", "Relieves from 1 minute"],
   },
   {
     id: "strepsils-max-pro",
@@ -348,6 +366,9 @@ export const productItems: ProductItem[] = [
       severities: ["severe"],
     },
     variants: [{ id: "16s", label: "16 lozenges", subLabel: "Standard pack" }],
+    activeIngredient: "Flurbiprofen 8.75 mg",
+    dosage: "1 lozenge every 3–6 hours. Max 5 lozenges/day.",
+    keyBenefits: ["Up to 6 hours relief", "Reduces throat inflammation", "Alcohol-free & sugar-free"],
   },
   {
     id: "strepsils-max-pro-spray",
@@ -364,6 +385,9 @@ export const productItems: ProductItem[] = [
       audiences: ["adult"],
       severities: ["severe"],
     },
+    activeIngredient: "Flurbiprofen 8.75 mg / 10 ml",
+    dosage: "2 sprays every 3–6 hours. Max 5 doses/day.",
+    keyBenefits: ["Fast targeted spray delivery", "Up to 6 hours relief", "Alcohol-free & sugar-free"],
   },
   {
     id: "strepsils-max-plus",
@@ -384,6 +408,9 @@ export const productItems: ProductItem[] = [
       { id: "6s", label: "6 lozenges", subLabel: "Trial pack" },
       { id: "16s", label: "16 lozenges", subLabel: "Standard pack" },
     ],
+    activeIngredient: "Lignocaine HCl 10 mg + 2 antiseptics",
+    dosage: "1 lozenge every 2–3 hours. Max 8 lozenges/day.",
+    keyBenefits: ["Fast-acting local anaesthetic", "Numbing relief from 1 minute", "Dual antiseptic action"],
   },
 
   // ── CHEST — Strepsils Chesty Cough ────────────────────────────────────────
@@ -406,6 +433,9 @@ export const productItems: ProductItem[] = [
       { id: "8s", label: "8 lozenges", subLabel: "Trial pack" },
       { id: "24s", label: "24 lozenges", subLabel: "Standard pack" },
     ],
+    activeIngredient: "Ambroxol HCl 15 mg",
+    dosage: "1 lozenge 3× daily. Max 3 lozenges/day.",
+    keyBenefits: ["Loosens & thins phlegm", "Clears airways", "Eases chesty cough"],
   },
 
   // ── STOMACH — Gaviscon range ──────────────────────────────────────────────
@@ -447,6 +477,9 @@ export const productItems: ProductItem[] = [
           "16 chewable tablets — 2 tablets up to 4× daily, ideal when liquid is inconvenient.",
       },
     ],
+    activeIngredient: "Sodium Alginate 500 mg + Sodium Bicarbonate 267 mg",
+    dosage: "10–20 ml after meals & at bedtime. Max 4× daily.",
+    keyBenefits: ["Forms protective raft over stomach acid", "Soothes in 3 minutes", "Lasts up to 4 hours"],
   },
   {
     id: "gaviscon-double-action",
@@ -491,6 +524,9 @@ export const productItems: ProductItem[] = [
         description: "16 chewable tablets — 2 tablets up to 4× daily.",
       },
     ],
+    activeIngredient: "Sodium Alginate 500 mg + Calcium Carbonate 325 mg",
+    dosage: "10–20 ml after meals & at bedtime. Max 4× daily.",
+    keyBenefits: ["Highest calcium carbonate in range", "Sugar-free & gluten-free", "Neutralises & blocks acid"],
   },
   {
     id: "gaviscon-advance",
@@ -523,6 +559,9 @@ export const productItems: ProductItem[] = [
           "24 single-serve 10 ml sachets — portion-controlled and travel-friendly.",
       },
     ],
+    activeIngredient: "Potassium Alginate 500 mg + Potassium Bicarbonate 200 mg",
+    dosage: "10–20 ml after meals & at bedtime. Max 4× daily.",
+    keyBenefits: ["2× alginate concentration", "Safe during pregnancy & breastfeeding", "Lowest sodium in range"],
   },
 
   // ── HEART — Cardiprin ─────────────────────────────────────────────────────
@@ -541,5 +580,8 @@ export const productItems: ProductItem[] = [
       audiences: ["adult"],
       severities: ["mild", "moderate"],
     },
+    activeIngredient: "Aspirin 100 mg",
+    dosage: "1 tablet daily. Must be taken under medical supervision.",
+    keyBenefits: ["Reduces blood clot risk", "Helps prevent stroke & heart attack", "Dissolves on tongue for fast absorption"],
   },
 ];

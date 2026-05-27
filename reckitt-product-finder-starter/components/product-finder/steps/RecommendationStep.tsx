@@ -59,6 +59,8 @@ export default function RecommendationStep({
 
   return (
     <section aria-labelledby="recommendation-heading">
+      {/* ── Blurable content — blur applied when modal is open ── */}
+      <div className={`transition-[filter] duration-300 ${disclaimerOpen ? "blur-sm" : ""}`}>
       {/* ── Mobile back link ─────────────────────────── */}
       <button
         type="button"
@@ -92,7 +94,7 @@ export default function RecommendationStep({
             id="recommendation-heading"
             className="mt-2 font-display text-[1.6rem] font-bold leading-[1.2] text-deep-navy sm:text-3xl lg:text-4xl"
           >
-            RECOMMENDED RELIEF
+            Recommended Relief
           </h1>
           <p className="mt-2 text-sm leading-6 text-secondary">
             Based on your symptoms, here is your tailored suggestion.
@@ -330,12 +332,13 @@ export default function RecommendationStep({
           </div>
         </div>
       </div>
+      </div>{/* end blurable wrapper */}
 
 {/* ── Medical Disclaimer Modal ─────────────────── */}
       {disclaimerOpen && (
         <div
           className="animate-fade-in absolute inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-          style={{ backgroundColor: "rgba(15, 23, 42, 0.6)", backdropFilter: "blur(8px)" }}
+          style={{ backgroundColor: "rgba(228, 226, 226, 0.6)", backdropFilter: "blur(8px)" }}
           onClick={() => setDisclaimerOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -345,7 +348,7 @@ export default function RecommendationStep({
             className="animate-scale-in relative flex w-full max-h-[85vh] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white shadow-2xl sm:max-w-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+            {/* Header
             <div className="shrink-0 flex items-center justify-between gap-3 border-b border-border-subtle/60 bg-surface-container-low/30 px-6 py-5 sm:px-8">
               <div className="flex items-center gap-3.5">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-error/10">
@@ -375,7 +378,7 @@ export default function RecommendationStep({
                   <line x1="10" y1="1" x2="1" y2="10" />
                 </svg>
               </button>
-            </div>
+            </div> */}
 
             {/* Body — scrollable, takes remaining height */}
             <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5 sm:px-8 sm:py-7">
