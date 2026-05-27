@@ -42,8 +42,6 @@ export default function RecommendationStep({
       if (e.key === "Escape") setDisclaimerOpen(false);
     }
     window.addEventListener("keydown", onKey);
-    // Ensure the card is scrolled into view so the absolute overlay is visible on mobile
-    document.getElementById("main-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
     return () => window.removeEventListener("keydown", onKey);
   }, [disclaimerOpen]);
 
@@ -132,7 +130,7 @@ export default function RecommendationStep({
               <div className="relative flex items-center justify-center border-border-subtle bg-surface-gray p-6 md:w-2/5 md:border-r md:p-8">
                 <span
                   className={[
-                    "absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-bold sm:left-4 sm:top-4 sm:px-3 sm:text-xs",
+                    "absolute left-3 top-3 z-10 rounded-full px-2.5 py-1 text-[11px] font-bold sm:left-4 sm:top-4 sm:px-3 sm:text-xs",
                     "bg-reckitt-pink/10 text-reckitt-pink",
                   ].join(" ")}
                 >
@@ -285,49 +283,38 @@ export default function RecommendationStep({
         {/* ── Right sidebar ───────────────────────────── */}
         <div className="flex h-full flex-col gap-5 lg:col-span-4">
           <div className="flex h-full flex-col rounded-xl border border-border-subtle bg-white p-4 sm:p-6">
-            <div className="mb-4 flex items-center gap-2 text-error sm:mb-5">
-              <span className="flex h-5 w-5 items-center justify-center">
-                <Image
-                  src="/caution.png"
-                  alt="Safety warning"
-                  width={80}
-                  height={80}
-                  className="object-contain"
-                  aria-hidden="true"
-                />
-              </span>
-              <h2 className="text-xs font-bold uppercase tracking-wider">
-                Safety &amp; Warnings
+            <div className="mb-4 flex items-center gap-2 sm:mb-5">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-deep-navy">
+                Product Details
               </h2>
             </div>
 
             <div className="flex flex-col gap-4 sm:gap-5">
-              {[
-                {
-                  title: "Allergy Warning",
-                  text: "Do not use if allergic to related compounds. Check the label.",
-                },
-                {
-                  title: "Medical Conditions",
-                  text: "Ask a pharmacist if pregnant, have ongoing conditions, or unsure.",
-                },
-                {
-                  title: "Concomitant Use",
-                  text: "Avoid taking similar products together. Read all labels.",
-                },
-              ].map(({ title, text }) => (
-                <div
-                  key={title}
-                  className="border-b border-border-subtle pb-4 last:border-0 last:pb-0 sm:pb-5"
-                >
-                  <p className="text-xs font-bold tracking-wide text-deep-navy">
-                    {title}
-                  </p>
-                  <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
-                    {text}
-                  </p>
-                </div>
-              ))}
+              <div className="border-b border-border-subtle pb-4 sm:pb-5">
+                <p className="text-xs font-bold tracking-wide text-deep-navy">Active Ingredient</p>
+                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
+                  {product.activeIngredient ?? "See product label"}
+                </p>
+              </div>
+
+              <div className="border-b border-border-subtle pb-4 sm:pb-5">
+                <p className="text-xs font-bold tracking-wide text-deep-navy">Dosage</p>
+                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
+                  {product.dosage ?? "Follow label instructions"}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-xs font-bold tracking-wide text-deep-navy">Key Benefits</p>
+                <ul className="mt-1.5 flex flex-col gap-1">
+                  {(product.keyBenefits ?? product.tags).map((benefit) => (
+                    <li key={benefit} className="flex items-start gap-1.5 text-xs leading-5 text-secondary sm:leading-6">
+                      <span className="mt-0.5 shrink-0 text-reckitt-pink">✓</span>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -337,7 +324,7 @@ export default function RecommendationStep({
 {/* ── Medical Disclaimer Modal ─────────────────── */}
       {disclaimerOpen && (
         <div
-          className="animate-fade-in absolute inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
           style={{ backgroundColor: "rgba(228, 226, 226, 0.6)", backdropFilter: "blur(8px)" }}
           onClick={() => setDisclaimerOpen(false)}
           role="dialog"
