@@ -125,7 +125,7 @@ export default function ProductFinder() {
             {step === 3 && (
               <RecommendationStep
                 recommendation={recommendation}
-                onContinue={() => moveTo(4, "recommendation_viewed")}
+                onRestart={restart}
                 onBack={() => moveTo(2, "back_to_questions")}
               />
             )}

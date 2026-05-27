@@ -11,13 +11,13 @@ import Link from "next/link";
 
 interface RecommendationStepProps {
   recommendation: RecommendationResult;
-  onContinue: () => void;
+  onRestart: () => void;
   onBack: () => void;
 }
 
 export default function RecommendationStep({
   recommendation,
-  onContinue,
+  onRestart,
   onBack,
 }: RecommendationStepProps) {
   const isStandard = recommendation.safetyLevel === "standard";
@@ -30,9 +30,20 @@ export default function RecommendationStep({
     variants[0]?.id ?? null,
   );
 
+  const [disclaimerOpen, setDisclaimerOpen] = useState(false);
+
   useEffect(() => {
     setSelectedVariantId(product.variants?.[0]?.id ?? null);
   }, [product.id, product.variants]);
+
+  useEffect(() => {
+    if (!disclaimerOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setDisclaimerOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [disclaimerOpen]);
 
   const selectedVariant: ProductVariant | null =
     variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null;
@@ -72,14 +83,14 @@ export default function RecommendationStep({
       {/* ── Page header ─────────────────────────────── */}
       <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs">
+          {/* <span className="text-[11px] font-bold uppercase tracking-widest text-secondary sm:text-xs">
             RECOMMENDED RELIEF
-          </span>
+          </span> */}
           <h1
             id="recommendation-heading"
             className="mt-2 font-display text-[1.6rem] font-bold leading-[1.2] text-deep-navy sm:text-3xl lg:text-4xl"
           >
-            {recommendation.headline}
+            RECOMMENDED RELIEF
           </h1>
           <p className="mt-2 text-sm leading-6 text-secondary">
             Based on your symptoms, here is your tailored suggestion.
@@ -118,12 +129,10 @@ export default function RecommendationStep({
                 <span
                   className={[
                     "absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-bold sm:left-4 sm:top-4 sm:px-3 sm:text-xs",
-                    isStandard
-                      ? "bg-reckitt-pink/10 text-reckitt-pink"
-                      : "bg-amber-100 text-amber-700",
+                    "bg-reckitt-pink/10 text-reckitt-pink",
                   ].join(" ")}
                 >
-                  {isStandard ? "✓ Best Match" : "⚠ Safety check"}
+                  ✓ Best Match
                 </span>
 
                 {/* Product image — swaps when a variant with its own imageId is selected */}
@@ -251,28 +260,19 @@ export default function RecommendationStep({
                 {/* CTAs */}
                 <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:flex-row sm:gap-3">
                   <Button
-                    onClick={onContinue}
-                    className="min-h-[52px] flex-1 border-red-600 bg-red-600 text-base font-bold text-white hover:border-red-700 hover:bg-red-700 hover:text-white sm:min-h-11 sm:text-sm"
-                  >
-                    View Safety Notes
+                    onClick={onRestart}
+                    variant ="primary"
+                    className="text-sm font-bold">
+                    Start Over
                   </Button>
-                  {displayUrl && (
-                    <Link
-                      href={displayUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-lg border border-deep-navy px-4 text-base font-bold text-deep-navy transition-colors hover:bg-deep-navy hover:text-white sm:min-h-11 sm:text-sm sm:font-semibold"
+                  <Button
+                      onClick={() => setDisclaimerOpen(true)}
+                      variant="ghost"
+                      className="text-sm font-bold bg-white text-surface border border-border-subtle hover:bg-surface-hover hover:text-surface-dark transition-colors"
                     >
-                      View Product
-                      {displayPrice && (
-                        <span className="text-sm font-bold">
-                          · {displayPrice}
-                        </span>
-                      )}
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  )}
-                </div>
+                      Medical Disclaimer
+                    </Button>
+                  </div>
               </div>
             </div>
           </div>
