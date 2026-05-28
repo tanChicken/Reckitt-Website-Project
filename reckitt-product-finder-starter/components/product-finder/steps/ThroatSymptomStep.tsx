@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export type ThroatSymptomId = "sore-throat" | "cough";
 
@@ -20,34 +21,13 @@ const throatOptions: {
     label: "Sore Throat",
     description: "Pain, scratchiness or irritation in the throat",
     icon: (
-      <svg
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-full"
-        aria-hidden="true"
-      >
-        <circle cx="24" cy="15" r="9" stroke="#1e3a5f" strokeWidth="2" />
-        <path
-          d="M15 24 L13 40 Q24 45 35 40 L33 24"
-          stroke="#1e3a5f"
-          strokeWidth="2"
-          fill="none"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M19 32 L29 32"
-          stroke="#e8234a"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M20 36 L28 36"
-          stroke="#e8234a"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
+      <Image
+        src="/sore-throat.png"
+        alt="Sore Throat icon"
+        width={32}
+        height={32}
+        className="object-contain"
+      />
     ),
   },
   {
@@ -55,43 +35,13 @@ const throatOptions: {
     label: "Cough",
     description: "Persistent cough, tickle or irritation in the airway",
     icon: (
-      <svg
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-full"
-        aria-hidden="true"
-      >
-        <circle cx="18" cy="18" r="9" stroke="#1e3a5f" strokeWidth="2" />
-        <path
-          d="M25 18 Q30 13 35 18"
-          stroke="#1e3a5f"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M25 24 Q32 18 40 24"
-          stroke="#1e3a5f"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M25 30 Q32 24 40 30"
-          stroke="#1e3a5f"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M25 36 Q32 30 40 36"
-          stroke="#1e3a5f"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-      </svg>
+      <Image
+        src="/cough.png" 
+        alt="Cough icon"
+        width={32}
+        height={32}
+        className="object-contain"
+      />
     ),
   },
 ];
