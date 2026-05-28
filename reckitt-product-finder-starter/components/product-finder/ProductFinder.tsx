@@ -70,7 +70,10 @@ export default function ProductFinder() {
   function setNeed(bodyPartId: BodyPartId) {
     const nextAnswers = { ...answers, needId: bodyPartId };
     setAnswers(nextAnswers);
-    const nextStep = bodyPartId === "throat" ? 2 : 3;
+    let nextStep: number;
+    if (bodyPartId === "throat") nextStep = 2;
+    else if (bodyPartId === "stomach") nextStep = 4;
+    else nextStep = 3;
     moveTo(nextStep, "need_selected", nextAnswers);
   }
 
@@ -154,11 +157,11 @@ export default function ProductFinder() {
               <RecommendationStep
                 recommendation={recommendation}
                 onRestart={restart}
-                onBack={() =>
-                  throatSymptomId === "cough"
-                    ? moveTo(2, "back_to_throat_symptom")
-                    : moveTo(3, "back_to_questions")
-                }
+                onBack={() => {
+                  if (throatSymptomId === "cough") moveTo(2, "back_to_throat_symptom");
+                  else if (answers.needId === "stomach") moveTo(1, "back_to_need");
+                  else moveTo(3, "back_to_questions");
+                }}
               />
             )}
             {step === 5 && (
