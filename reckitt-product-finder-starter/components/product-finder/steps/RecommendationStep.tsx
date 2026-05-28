@@ -197,13 +197,13 @@ export default function RecommendationStep({
                   {/* ── Flavour selector ─────────────────────── */}
                   {hasFlavors && (
                     <div className="mb-4 sm:mb-5">
-                      <p className="flex flex-wrap gap-2">
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
                         Flavour
                       </p>
                       <div
                         role="radiogroup"
                         aria-label="Product flavours"
-                        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:overflow-visible"
+                        className="flex flex-wrap gap-2"
                       >
                         {flavors.map((flavor) => {
                           const isSelected = flavor.id === selectedFlavor?.id;
