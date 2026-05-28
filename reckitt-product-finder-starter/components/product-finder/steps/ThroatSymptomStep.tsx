@@ -148,7 +148,7 @@ export default function ThroatSymptomStep({
                     rounded-2xl border-2 bg-white p-4
                     text-center
                     transition-all duration-200
-                    xl:flex-row xl:gap-3 xl:p-5 xl:text-left
+                    xl:flex-row xl:gap-3 xl:p-4 xl:text-left
                     ${
                       isSelected
                         ? "border-reckitt-pink bg-primary-fixed/15 shadow-card"
@@ -166,7 +166,7 @@ export default function ThroatSymptomStep({
                     <p className="text-sm font-bold text-deep-navy sm:text-base xl:text-sm">
                       {option.label}
                     </p>
-                    <p className="mt-0.5 text-xs text-secondary sm:text-sm">
+                    <p className="hidden text-xs text-secondary sm:block sm:text-sm">
                       {option.description}
                     </p>
                   </div>
@@ -215,7 +215,7 @@ export default function ThroatSymptomStep({
 
       {/* ── Mobile sticky bottom CTA ──────────────── */}
       <div
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] backdrop-blur sm:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur sm:hidden"
         role="group"
         aria-label="Step navigation"
       >
