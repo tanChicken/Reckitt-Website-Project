@@ -193,6 +193,29 @@ export default function NeedSelectionStep({
               );
             })}
 
+            {/* Chest dot — always visible, clicking it selects Throat & Chest */}
+            <button
+              onClick={() => setActivePartId("throat")}
+              aria-label="Select Throat & Chest"
+              aria-pressed={activePartId === "throat"}
+              className="absolute z-20 -translate-x-1/2 -translate-y-1/2 focus:outline-none"
+              style={{ top: dotPositions.chest.top, left: dotPositions.chest.left }}
+            >
+              <span className="relative flex h-6 w-6 items-center justify-center">
+                {activePartId === "throat" && (
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-reckitt-pink opacity-50" />
+                )}
+                <span
+                  className={cn(
+                    "relative inline-flex h-4 w-4 rounded-full border-2 transition-all duration-200",
+                    activePartId === "throat"
+                      ? "scale-125 border-white bg-reckitt-pink shadow-pink"
+                      : "border-white bg-deep-navy/40 hover:scale-110 hover:bg-reckitt-pink/70",
+                  )}
+                />
+              </span>
+            </button>
+
             {/* Active area badge */}
             {bodyPart && (
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-deep-navy px-4 py-2 text-white shadow-soft whitespace-nowrap">

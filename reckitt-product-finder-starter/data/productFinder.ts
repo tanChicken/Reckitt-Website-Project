@@ -55,8 +55,8 @@ export const bodyParts: ChoiceOption<BodyPartId>[] = [
   },
   {
     id: "throat",
-    label: "Throat",
-    description: "Throat-related symptoms.",
+    label: "Throat & Chest",
+    description: "Throat and chest-related symptoms.",
     icon: "/throat.png",
   },
   {
@@ -64,12 +64,6 @@ export const bodyParts: ChoiceOption<BodyPartId>[] = [
     label: "Heart",
     description: "Heart-related symptoms.",
     icon: "/heartQ.png",
-  },
-  {
-    id: "chest",
-    label: "Chest",
-    description: "Chest-related symptoms.",
-    icon: "/chest.png",
   },
   {
     id: "stomach",
