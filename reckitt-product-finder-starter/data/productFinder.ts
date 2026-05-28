@@ -384,7 +384,10 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["severe"],
     },
-    variants: [{ id: "16s", label: "16 lozenges", subLabel: "Standard pack" }],
+    variants: [
+      { id: "max-pro", label: "Max Pro",  imageId: "strepsils-max-pro" },
+      { id: "max-pro-spray", label: "Max Pro Spray", imageId: "strepsils-max-pro-spray" },
+    ],
     activeIngredient: ["Flurbiprofen 8.75 mg"],
     dosage: ["≥12 years: 1 spray every 3–6 hrs", "≥18 years: 3 sprays every 3–6 hrs"],
     keyBenefits: ["Pain relief from 1 min, lasts up to 6 hrs", "Alcohol-free & sugar-free"],
@@ -449,8 +452,8 @@ export const productItems: ProductItem[] = [
       severities: ["mild", "moderate"],
     },
     variants: [
-      { id: "8s", label: "8 lozenges", subLabel: "Trial pack" },
-      { id: "24s", label: "24 lozenges", subLabel: "Standard pack" },
+      { id: "8s", label: "8 lozenges", subLabel: "Trial pack", imageId: "strepsils-chesty-cough-8s" },
+      { id: "24s", label: "24 lozenges", subLabel: "Standard pack", imageId: "strepsils-chesty-cough-24s" },
     ],
     activeIngredient: ["Ambroxol HCL 15 mg"],
     dosage: ["≥12 years: Up to 2 lozenges per dose"],
@@ -480,6 +483,15 @@ export const productItems: ProductItem[] = [
         subLabel: "Peppermint liquid",
         description:
           "200 ml peppermint liquid bottle. 10 ml after meals, up to 4× daily.",
+        imageId: "gaviscon-original-bottle-200ml"
+      },
+      {
+        id: "sachet-5",
+        label: "Sachets × 5",
+        subLabel: "On-the-go single-serve",
+        description:
+          "5 single-serve sachets — 10 ml each. Convenient for travel and work.",
+        imageId: "gaviscon-original-sachet-5"
       },
       {
         id: "sachet-24",
@@ -487,6 +499,7 @@ export const productItems: ProductItem[] = [
         subLabel: "On-the-go single-serve",
         description:
           "24 single-serve sachets — 10 ml each. Convenient for travel and work.",
+        imageId: "gaviscon-original-sachet-24"
       },
       {
         id: "tablet-16",
@@ -494,6 +507,7 @@ export const productItems: ProductItem[] = [
         subLabel: "Chewable tablets",
         description:
           "16 chewable tablets — 2 tablets up to 4× daily, ideal when liquid is inconvenient.",
+        imageId: "gaviscon-original-tablet-16"
       },
     ],
     activeIngredient: ["Sodium Alginate ", "Potassium Bicarbonate ","Calcium Carbonate"],
@@ -522,12 +536,22 @@ export const productItems: ProductItem[] = [
         subLabel: "Family size",
         description:
           "300 ml liquid bottle for regular at-home use. 10 ml after meals, up to 4× daily.",
+        imageId: "gaviscon-double-action-bottle-300ml"
       },
       {
         id: "bottle-150ml",
         label: "Bottle 150 ml",
         subLabel: "Compact size",
         description: "150 ml liquid bottle — compact and travel-friendly.",
+        imageId: "gaviscon-double-action-bottle-150ml"
+      },
+      {
+        id: "sachet-5",
+        label: "Sachets × 5",
+        subLabel: "On-the-go single-serve",
+        description:
+          "5 single-serve 10 ml sachets — convenient and portion-controlled.",
+        imageId: "gaviscon-double-action-sachet-5"
       },
       {
         id: "sachet-24",
@@ -535,12 +559,14 @@ export const productItems: ProductItem[] = [
         subLabel: "On-the-go single-serve",
         description:
           "24 single-serve 10 ml sachets — convenient and portion-controlled.",
+        imageId: "gaviscon-double-action-sachet-24"
       },
       {
         id: "tablet-16",
         label: "Tablets × 16",
         subLabel: "Chewable tablets",
         description: "16 chewable tablets — 2 tablets up to 4× daily.",
+        imageId: "gaviscon-double-action-tablet-16"
       },
     ],
     activeIngredient: ["Sodium Alginate 500 mg", "Calcium Carbonate 325 mg"],
@@ -569,6 +595,7 @@ export const productItems: ProductItem[] = [
         subLabel: "Liquid — fastest soothing",
         description:
           "150 ml liquid bottle. Soothes within 3 minutes, lasts up to 4 hours. 10 ml after meals.",
+        imageId: "gaviscon-advance-bottle-150ml"
       },
       {
         id: "sachet-24",
@@ -576,6 +603,7 @@ export const productItems: ProductItem[] = [
         subLabel: "On-the-go single-serve",
         description:
           "24 single-serve 10 ml sachets — portion-controlled and travel-friendly.",
+        imageId: "gaviscon-advance-sachet-24"
       },
     ],
     activeIngredient: ["Potassium Alginate 500 mg", "Potassium Bicarbonate 200 mg"],

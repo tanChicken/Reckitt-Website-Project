@@ -72,7 +72,7 @@ export default function ProductFinder() {
     setAnswers(nextAnswers);
     let nextStep: number;
     if (bodyPartId === "throat") nextStep = 2;
-    else if (bodyPartId === "stomach") nextStep = 4;
+    else if (bodyPartId === "heart") nextStep = 4;
     else nextStep = 3;
     moveTo(nextStep, "need_selected", nextAnswers);
   }
@@ -80,7 +80,9 @@ export default function ProductFinder() {
   function handleThroatSymptom(symptomId: ThroatSymptomId) {
     setThroatSymptomId(symptomId);
     if (symptomId === "cough") {
-      moveTo(4, "throat_cough_selected");
+      const nextAnswers = { ...answers, needId: "chest" as BodyPartId };
+      setAnswers(nextAnswers);
+      moveTo(4, "throat_cough_selected", nextAnswers);
     } else {
       moveTo(3, "throat_sore_selected");
     }
@@ -159,7 +161,7 @@ export default function ProductFinder() {
                 onRestart={restart}
                 onBack={() => {
                   if (throatSymptomId === "cough") moveTo(2, "back_to_throat_symptom");
-                  else if (answers.needId === "stomach") moveTo(1, "back_to_need");
+                  else if (answers.needId === "heart") moveTo(1, "back_to_need");
                   else moveTo(3, "back_to_questions");
                 }}
               />
