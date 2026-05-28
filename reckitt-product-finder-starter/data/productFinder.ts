@@ -218,7 +218,7 @@ export const productItems: ProductItem[] = [
     priority: 5,
     suitableFor: {
       audiences: ["adult", "teen"],
-      severities: ["mild", "moderate"],
+      severities: ["mild"],
     },
     variants: [
       { id: "12s", label: "12 tablets", subLabel: "Ibuprofen 200 mg" },
@@ -268,7 +268,7 @@ export const productItems: ProductItem[] = [
     priority: 7,
     suitableFor: {
       audiences: ["adult"],
-      severities: ["moderate", "severe"],
+      severities: ["severe"],
     },
     activeIngredient: [
       "Ibuprofen 200 mg", 
@@ -473,7 +473,7 @@ export const productItems: ProductItem[] = [
     url: "https://www.gaviscon.com.au/products/",
     priority: 5,
     suitableFor: {
-      audiences: ["adult", "teen"],
+      audiences: ["adult", "teen", "child"],
       severities: ["mild"],
     },
     variants: [
@@ -526,7 +526,7 @@ export const productItems: ProductItem[] = [
     url: "https://www.gaviscon.com.au/products/gaviscon-double-action/",
     priority: 6,
     suitableFor: {
-      audiences: ["adult", "teen"],
+      audiences: ["adult", "teen", "child"],
       severities: ["moderate"],
     },
     variants: [
@@ -585,8 +585,8 @@ export const productItems: ProductItem[] = [
     url: "https://www.gaviscon.com.au/products/gaviscon-advance/",
     priority: 7,
     suitableFor: {
-      audiences: ["adult"],
-      severities: ["moderate", "severe"],
+      audiences: ["adult", "teen", "child"],
+      severities: ["severe"],
     },
     variants: [
       {
