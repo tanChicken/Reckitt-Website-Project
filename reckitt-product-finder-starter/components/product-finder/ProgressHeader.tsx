@@ -20,9 +20,9 @@ export default function ProgressHeader({
   currentStep,
   onHomeClick,
 }: ProgressHeaderProps) {
-  const showProgress = currentStep >= 1 && currentStep <= 4;
-  // Step 4 (Safety) shows progress bar fully complete
-  const effectiveStep = currentStep > 3 ? 4 : currentStep;
+  const showProgress = currentStep >= 1 && currentStep <= 5;
+  // Steps 1 & 2 both map to display step 1 (Symptoms); step 5 (Safety) shows fully complete
+  const effectiveStep = currentStep <= 2 ? 1 : Math.min(currentStep - 1, 4);
 
   function handleHomeClick(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!onHomeClick) return;

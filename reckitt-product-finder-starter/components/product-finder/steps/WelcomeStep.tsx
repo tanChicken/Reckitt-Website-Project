@@ -82,7 +82,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
 
       {/* ── Left: image carousel ────────────────────── */}
       {/* Replaced min-h-64 and sm:min-h-80 with responsive aspect ratios */}
-      <div className="relative w-full aspect-[1/1.4] md:aspect-[3/4] lg:aspect-auto lg:min-h-[540px] overflow-hidden rounded-2xl shadow-soft">
+      <div className="relative w-full aspect-[1/1.4] md:aspect-[3/4] lg:aspect-auto lg:min-h-[540px] overflow-hidden rounded-2xl">
         {slides.map((slide, i) => (
           <div
             key={slide.src}

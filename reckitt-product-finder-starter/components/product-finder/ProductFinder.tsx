@@ -6,6 +6,9 @@ import NeedSelectionStep from "@/components/product-finder/steps/NeedSelectionSt
 import QuestionsStep from "@/components/product-finder/steps/QuestionsStep";
 import RecommendationStep from "@/components/product-finder/steps/RecommendationStep";
 import SafetyStep from "@/components/product-finder/steps/SafetyStep";
+import ThroatSymptomStep, {
+  type ThroatSymptomId,
+} from "@/components/product-finder/steps/ThroatSymptomStep";
 import WelcomeStep from "@/components/product-finder/steps/WelcomeStep";
 import Card from "@/components/ui/Card";
 import { trackFunnelEvent } from "@/lib/analytics";
@@ -36,6 +39,9 @@ const footerLinks = [
 export default function ProductFinder() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<FinderAnswers>(initialAnswers);
+  const [throatSymptomId, setThroatSymptomId] = useState<
+    ThroatSymptomId | undefined
+  >(undefined);
   const isInitialMount = useRef(true);
 
   const recommendation = useMemo(() => getRecommendation(answers), [answers]);
@@ -64,7 +70,17 @@ export default function ProductFinder() {
   function setNeed(bodyPartId: BodyPartId) {
     const nextAnswers = { ...answers, needId: bodyPartId };
     setAnswers(nextAnswers);
-    moveTo(2, "need_selected", nextAnswers);
+    const nextStep = bodyPartId === "throat" ? 2 : 3;
+    moveTo(nextStep, "need_selected", nextAnswers);
+  }
+
+  function handleThroatSymptom(symptomId: ThroatSymptomId) {
+    setThroatSymptomId(symptomId);
+    if (symptomId === "cough") {
+      moveTo(4, "throat_cough_selected");
+    } else {
+      moveTo(3, "throat_sore_selected");
+    }
   }
 
   function setAudience(audienceId: AudienceId) {
@@ -87,6 +103,7 @@ export default function ProductFinder() {
 
   function restart() {
     setAnswers(initialAnswers);
+    setThroatSymptomId(undefined);
     moveTo(0, "finder_restarted", initialAnswers);
   }
 
@@ -109,31 +126,46 @@ export default function ProductFinder() {
                 selectedBodyPart={answers.needId}
                 onSelect={setNeed}
                 onBack={() => moveTo(0, "back_to_welcome")}
-                onContinue={() => moveTo(2, "need_selected")}
+                onContinue={() => {}}
               />
             )}
             {step === 2 && (
+              <ThroatSymptomStep
+                selectedSymptom={throatSymptomId}
+                onContinue={handleThroatSymptom}
+                onBack={() => moveTo(1, "back_to_need")}
+              />
+            )}
+            {step === 3 && (
               <QuestionsStep
                 answers={answers}
                 setAudience={setAudience}
                 setSeverity={setSeverity}
                 togglePreference={togglePreference}
-                onContinue={() => moveTo(3, "questions_completed")}
-                onBack={() => moveTo(1, "back_to_need")}
-              />
-            )}
-            {step === 3 && (
-              <RecommendationStep
-                recommendation={recommendation}
-                onRestart={restart}
-                onBack={() => moveTo(2, "back_to_questions")}
+                onContinue={() => moveTo(4, "questions_completed")}
+                onBack={() =>
+                  answers.needId === "throat"
+                    ? moveTo(2, "back_to_throat_symptom")
+                    : moveTo(1, "back_to_need")
+                }
               />
             )}
             {step === 4 && (
+              <RecommendationStep
+                recommendation={recommendation}
+                onRestart={restart}
+                onBack={() =>
+                  throatSymptomId === "cough"
+                    ? moveTo(2, "back_to_throat_symptom")
+                    : moveTo(3, "back_to_questions")
+                }
+              />
+            )}
+            {step === 5 && (
               <SafetyStep
                 recommendation={recommendation}
                 onRestart={restart}
-                onBack={() => moveTo(3, "back_to_recommendations")}
+                onBack={() => moveTo(4, "back_to_recommendations")}
               />
             )}
           </div>
