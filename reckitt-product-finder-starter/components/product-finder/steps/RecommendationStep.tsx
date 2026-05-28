@@ -197,7 +197,7 @@ export default function RecommendationStep({
                   {/* ── Flavour selector ─────────────────────── */}
                   {hasFlavors && (
                     <div className="mb-4 sm:mb-5">
-                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
+                      <p className="flex flex-wrap gap-2">
                         Flavour
                       </p>
                       <div
@@ -215,17 +215,17 @@ export default function RecommendationStep({
                               aria-checked={isSelected}
                               onClick={() => setSelectedFlavorId(flavor.id)}
                               className={[
-                                "group inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-3.5 py-2 text-sm font-semibold transition-all duration-150",
+                                "inline-flex min-h-[44px] items-center gap-1.5 rounded-full border-2 px-3 py-1.5 text-xs font-semibold transition-all duration-150 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm",                              
                                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2",
                                 isSelected
                                   ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
                                   : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
                               ].join(" ")}
                             >
-                              {isSelected && (
+                              {/* {isSelected && (
                                 <svg
-                                  width="12"
-                                  height="12"
+                                  width="10"
+                                  height="10"
                                   viewBox="0 0 12 12"
                                   fill="none"
                                   stroke="currentColor"
@@ -236,7 +236,7 @@ export default function RecommendationStep({
                                 >
                                   <polyline points="2,6 5,9 10,3" />
                                 </svg>
-                              )}
+                              )} */}
                               <span>{flavor.label}</span>
                             </button>
                           );
@@ -254,7 +254,7 @@ export default function RecommendationStep({
                       <div
                         role="radiogroup"
                         aria-label="Product variants"
-                        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:overflow-visible"
+                        className="flex flex-wrap gap-2"
                       >
                         {variants.map((variant) => {
                           const isSelected = variant.id === selectedVariant?.id;
@@ -266,17 +266,17 @@ export default function RecommendationStep({
                               aria-checked={isSelected}
                               onClick={() => setSelectedVariantId(variant.id)}
                               className={[
-                                "group inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-3.5 py-2 text-sm font-semibold transition-all duration-150",
+                                "inline-flex min-h-[44px] items-center gap-1.5 rounded-full border-2 px-3 py-1.5 text-xs font-semibold transition-all duration-150 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm",                              
                                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2",
                                 isSelected
                                   ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
                                   : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
                               ].join(" ")}
                             >
-                              {isSelected && (
+                              {/* {isSelected && (
                                 <svg
-                                  width="12"
-                                  height="12"
+                                  width="10"
+                                  height="10"
                                   viewBox="0 0 12 12"
                                   fill="none"
                                   stroke="currentColor"
@@ -287,7 +287,7 @@ export default function RecommendationStep({
                                 >
                                   <polyline points="2,6 5,9 10,3" />
                                 </svg>
-                              )}
+                              )} */}
                               <span>{variant.label}</span>
                               {variant.price && (
                                 <span
