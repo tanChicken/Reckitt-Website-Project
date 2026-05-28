@@ -218,7 +218,7 @@ export const productItems: ProductItem[] = [
       "Standard ibuprofen 200 mg tablets that relieve headaches, migraines, dental pain, fever and inflammation.",
     needId: "head",
     imageLabel: "NR",
-    tags: ["Ibuprofen 200mg", "Pain relief", "Fever"],
+    tags: ["Effective Pain Relief", "Relieves Fever", "Reduces Inflammation", "Contains Ibuprofen"],
     url: "https://www.nurofen.com.au/products/nurofen-tablets/",
     priority: 5,
     suitableFor: {
@@ -229,9 +229,12 @@ export const productItems: ProductItem[] = [
       { id: "12s", label: "12 tablets", subLabel: "Ibuprofen 200 mg" },
       { id: "24s", label: "24 tablets", subLabel: "Ibuprofen 200 mg" },
     ],
-    activeIngredient: "Ibuprofen 200 mg",
-    dosage: "1–2 tablets every 4–6 hours. Max 6 tablets/day.",
-    keyBenefits: ["Relieves headaches & migraines", "Reduces fever", "Anti-inflammatory"],
+    activeIngredient: [
+    "Ibuprofen 200mg"],
+    dosage: [
+      "Oral use only; short-term treatment.", 
+      "Adults & >12: 1–2 tabs every 4–6 hrs (max 6/day)", 
+      "Children 9–12: 1 tablet every 4–6 hrs as needed (max 3/day)",],
   },
   {
     id: "nurofen-express",
@@ -248,9 +251,14 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen"],
       severities: ["moderate", "severe"],
     },
-    activeIngredient: "Ibuprofen Lysine 342 mg",
-    dosage: "1–2 caplets every 4–6 hours. Max 6 caplets/day.",
-    keyBenefits: ["Targets pain in 10 minutes", "Relieves fever", "Fast-acting formula"],
+    activeIngredient: ["Ibuprofen Lysine 342 mg"],
+    dosage: [
+      "Adults, elderly & ≥12: 1–2 caplets with water up to 3× daily",
+      "Leave ≥4 hrs between doses; max 6 caplets/24 hrs.",
+      "Not for children <12",
+      "Consult a doctor if symptoms persist, worsen, or use exceeds 3 days",
+    ],
+    keyBenefits: ["Targets pain in 10 minutes", "Relieves fever", "Effective pain relief", "reduces inflammation", "Contains ibuprofen lysine"],
   },
   {
     id: "nurofen-nuromol",

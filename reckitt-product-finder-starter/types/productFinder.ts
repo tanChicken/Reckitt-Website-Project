@@ -55,8 +55,8 @@ export interface ProductItem {
     severities?: SeverityId[];
   };
   variants?: ProductVariant[];
-  activeIngredient?: string;
-  dosage?: string;
+  activeIngredient?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
+  dosage?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
   keyBenefits?: string[];
 }
 
