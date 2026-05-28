@@ -58,12 +58,14 @@ export default function RecommendationStep({
   const selectedFlavor: ProductFlavor | null =
     flavors.find((f) => f.id === selectedFlavorId) ?? flavors[0] ?? null;
 
-  // Derive display values — flavor > variant > product fallback chain.
+  // Derive display values — flavor+variant combo > flavor-only > variant-only > product fallback.
   const displayDescription =
     selectedVariant?.description ?? product.description;
   const displayUrl = selectedVariant?.url ?? product.url;
   const displayImageId =
-    selectedFlavor?.imageId ?? selectedVariant?.imageId ?? product.id;
+    selectedFlavor && selectedVariant
+      ? `${product.id}-${selectedFlavor.id}-${selectedVariant.id}`
+      : selectedFlavor?.imageId ?? selectedVariant?.imageId ?? product.id;
   const displayPrice = selectedVariant?.price;
 
   return (
@@ -194,57 +196,6 @@ export default function RecommendationStep({
                     {displayDescription}
                   </p>
 
-                  {/* ── Flavour selector ─────────────────────── */}
-                  {hasFlavors && (
-                    <div className="mb-4 sm:mb-5">
-                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
-                        Flavour
-                      </p>
-                      <div
-                        role="radiogroup"
-                        aria-label="Product flavours"
-                        className="flex flex-wrap gap-2"
-                      >
-                        {flavors.map((flavor) => {
-                          const isSelected = flavor.id === selectedFlavor?.id;
-                          return (
-                            <button
-                              key={flavor.id}
-                              type="button"
-                              role="radio"
-                              aria-checked={isSelected}
-                              onClick={() => setSelectedFlavorId(flavor.id)}
-                              className={[
-                                "inline-flex min-h-[44px] items-center gap-1.5 rounded-full border-2 px-3 py-1.5 text-xs font-semibold transition-all duration-150 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm",                              
-                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2",
-                                isSelected
-                                  ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
-                                  : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
-                              ].join(" ")}
-                            >
-                              {/* {isSelected && (
-                                <svg
-                                  width="10"
-                                  height="10"
-                                  viewBox="0 0 12 12"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  aria-hidden="true"
-                                >
-                                  <polyline points="2,6 5,9 10,3" />
-                                </svg>
-                              )} */}
-                              <span>{flavor.label}</span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-
                   {/* ── Variant selector ─────────────────────── */}
                   {hasMultipleVariants && (
                     <div className="mb-4 sm:mb-5">
@@ -301,6 +252,57 @@ export default function RecommendationStep({
                                   {variant.price}
                                 </span>
                               )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                                    {/* ── Flavour selector ─────────────────────── */}
+                  {hasFlavors && (
+                    <div className="mb-4 sm:mb-5">
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
+                        Flavour
+                      </p>
+                      <div
+                        role="radiogroup"
+                        aria-label="Product flavours"
+                        className="flex flex-wrap gap-2"
+                      >
+                        {flavors.map((flavor) => {
+                          const isSelected = flavor.id === selectedFlavor?.id;
+                          return (
+                            <button
+                              key={flavor.id}
+                              type="button"
+                              role="radio"
+                              aria-checked={isSelected}
+                              onClick={() => setSelectedFlavorId(flavor.id)}
+                              className={[
+                                "inline-flex min-h-[44px] items-center gap-1.5 rounded-full border-2 px-3 py-1.5 text-xs font-semibold transition-all duration-150 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm",                              
+                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2",
+                                isSelected
+                                  ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
+                                  : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
+                              ].join(" ")}
+                            >
+                              {/* {isSelected && (
+                                <svg
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <polyline points="2,6 5,9 10,3" />
+                                </svg>
+                              )} */}
+                              <span>{flavor.label}</span>
                             </button>
                           );
                         })}
