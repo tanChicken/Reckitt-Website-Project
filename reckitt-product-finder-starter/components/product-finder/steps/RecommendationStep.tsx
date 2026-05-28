@@ -26,7 +26,7 @@ export default function RecommendationStep({
   const product = recommendation.primary;
   const variants: ProductVariant[] = product.variants ?? [];
   const flavors: ProductFlavor[] = product.flavors ?? [];
-  const hasMultipleVariants = variants.length > 1;
+  const hasMultipleVariants = variants.length > 0;
   const hasFlavors = flavors.length > 0;
 
   // Track which variant and flavor the user is viewing. Reset when the primary product changes.
@@ -67,6 +67,9 @@ export default function RecommendationStep({
       ? `${product.id}-${selectedFlavor.id}-${selectedVariant.id}`
       : selectedFlavor?.imageId ?? selectedVariant?.imageId ?? product.id;
   const displayPrice = selectedVariant?.price;
+  const displayActiveIngredient = selectedVariant?.activeIngredient ?? product.activeIngredient;
+  const displayDosage = selectedVariant?.dosage ?? product.dosage;
+  const displayKeyBenefits = selectedVariant?.keyBenefits ?? product.keyBenefits;
 
   return (
     <section aria-labelledby="recommendation-heading">
@@ -357,25 +360,25 @@ export default function RecommendationStep({
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
                 <p className="text-xs font-bold tracking-wide text-deep-navy">Active Ingredient</p>
                 <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
-                  {Array.isArray(product.activeIngredient) 
-                    ? product.activeIngredient.join('\n') 
-                    : (product.activeIngredient ?? "See product label")}
+                  {Array.isArray(displayActiveIngredient)
+                    ? displayActiveIngredient.join('\n')
+                    : (displayActiveIngredient ?? "See product label")}
                 </p>
-            </div>
+              </div>
 
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
                 <p className="text-xs font-bold tracking-wide text-deep-navy">Dosage</p>
                 <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
-                  {Array.isArray(product.dosage)
-                    ? product.dosage.join('\n')
-                    : (product.dosage ?? "See product label")}
+                  {Array.isArray(displayDosage)
+                    ? displayDosage.join('\n')
+                    : (displayDosage ?? "Follow label instructions")}
                 </p>
               </div>
 
               <div>
                 <p className="text-xs font-bold tracking-wide text-deep-navy">Key Benefits</p>
                 <ul className="mt-1.5 flex flex-col gap-1">
-                  {(product.keyBenefits ?? product.tags).map((benefit) => (
+                  {(displayKeyBenefits ?? product.tags).map((benefit) => (
                     <li key={benefit} className="flex items-start gap-1.5 text-xs leading-5 text-secondary sm:leading-6">
                       <span className="mt-0.5 shrink-0 text-reckitt-pink">✓</span>
                       {benefit}
@@ -444,22 +447,20 @@ export default function RecommendationStep({
                 </p>
               </div>
 
-              <div className="flex flex-col gap-6 sm:gap-7">
-                {[
-                  { id: 1, title: "Product Labeling",             text: "Always read the label before use." },
-                  { id: 2, title: "Medical Supervision Required", text: `Your doctor will advise you on how long you should continue to take ${product.brand}. Make sure you see your doctor at regular intervals and discuss any questions that you may have with him or her. ${product.brand} should only be taken under medical supervision.` },
-                  { id: 3, title: "Contraindications",            text: `${product.brand} should not be taken by people who are allergic to salicylates or taking regular anticoagulant therapy. Precautions should be observed in patients with asthma or peptic ulcer.` },
-                  { id: 4, title: "Age Restriction",              text: "Not recommended for children and teenagers below 16 years old." },
-                  { id: 5, title: "Heartburn & Ulcer Warning",    text: `If you have a history of heartburn or ulcers, you may find that ${product.brand} affects your symptoms. If this occurs, consult your doctor.` },
-                ].map(({ id, title, text }) => (
-                  <div key={id} className="flex items-start gap-4">
+              <div className="flex flex-col gap-5 sm:gap-6">
+                <p className="text-sm font-bold tracking-wide text-deep-navy">Important</p>
+                
+                {(product.disclaimerPoints ?? []).map((text, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    {/* Number Badge */}
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-reckitt-pink/10 text-xs font-bold text-reckitt-pink ring-4 ring-white">
-                      {id}
+                      {i + 1}
                     </span>
-                    <div className="pt-0.5">
-                      <p className="text-sm font-bold tracking-wide text-deep-navy">{title}</p>
-                      <p className="mt-1.5 text-sm leading-relaxed text-secondary sm:leading-7">{text}</p>
-                    </div>
+                    
+                    {/* Disclaimer Text */}
+                    <p className="text-sm leading-relaxed text-secondary pt-0.5 sm:pt-0 sm:leading-7">
+                      {text}
+                    </p>
                   </div>
                 ))}
               </div>
