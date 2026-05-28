@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Button from "@/components/ui/Button";
 import type {
+  ProductFlavor,
   ProductVariant,
   RecommendationResult,
 } from "@/types/productFinder";
@@ -24,18 +25,24 @@ export default function RecommendationStep({
   const isStandard = recommendation.safetyLevel === "standard";
   const product = recommendation.primary;
   const variants: ProductVariant[] = product.variants ?? [];
+  const flavors: ProductFlavor[] = product.flavors ?? [];
   const hasMultipleVariants = variants.length > 1;
+  const hasFlavors = flavors.length > 0;
 
-  // Track which variant the user is viewing. Reset whenever the primary product changes.
+  // Track which variant and flavor the user is viewing. Reset when the primary product changes.
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     variants[0]?.id ?? null,
+  );
+  const [selectedFlavorId, setSelectedFlavorId] = useState<string | null>(
+    flavors[0]?.id ?? null,
   );
 
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
 
   useEffect(() => {
     setSelectedVariantId(product.variants?.[0]?.id ?? null);
-  }, [product.id, product.variants]);
+    setSelectedFlavorId(product.flavors?.[0]?.id ?? null);
+  }, [product.id, product.variants, product.flavors]);
 
   useEffect(() => {
     if (!disclaimerOpen) return;
@@ -48,12 +55,15 @@ export default function RecommendationStep({
 
   const selectedVariant: ProductVariant | null =
     variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null;
+  const selectedFlavor: ProductFlavor | null =
+    flavors.find((f) => f.id === selectedFlavorId) ?? flavors[0] ?? null;
 
-  // Derive display values — variant fields fall back to the product's own fields.
+  // Derive display values — flavor > variant > product fallback chain.
   const displayDescription =
     selectedVariant?.description ?? product.description;
   const displayUrl = selectedVariant?.url ?? product.url;
-  const displayImageId = selectedVariant?.imageId ?? product.id;
+  const displayImageId =
+    selectedFlavor?.imageId ?? selectedVariant?.imageId ?? product.id;
   const displayPrice = selectedVariant?.price;
 
   return (
@@ -138,10 +148,10 @@ export default function RecommendationStep({
                   ✓ Best Match
                 </span>
 
-                {/* Product image — swaps when a variant with its own imageId is selected */}
+                {/* Product image — re-animates on every variant change */}
                 <div className="flex flex-col items-center gap-3 text-center">
                   <img
-                    key={displayImageId}
+                    key={`${product.id}-${selectedFlavorId ?? "noflavor"}-${selectedVariantId ?? "novariant"}`}
                     src={`/products/${displayImageId}.png`}
                     alt={product.brand}
                     className="h-full w-full animate-fade-slide-up object-contain"
@@ -184,11 +194,62 @@ export default function RecommendationStep({
                     {displayDescription}
                   </p>
 
+                  {/* ── Flavour selector ─────────────────────── */}
+                  {hasFlavors && (
+                    <div className="mb-4 sm:mb-5">
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
+                        Flavour
+                      </p>
+                      <div
+                        role="radiogroup"
+                        aria-label="Product flavours"
+                        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:overflow-visible"
+                      >
+                        {flavors.map((flavor) => {
+                          const isSelected = flavor.id === selectedFlavor?.id;
+                          return (
+                            <button
+                              key={flavor.id}
+                              type="button"
+                              role="radio"
+                              aria-checked={isSelected}
+                              onClick={() => setSelectedFlavorId(flavor.id)}
+                              className={[
+                                "group inline-flex shrink-0 items-center gap-2 rounded-full border-2 px-3.5 py-2 text-sm font-semibold transition-all duration-150",
+                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2",
+                                isSelected
+                                  ? "border-reckitt-pink bg-reckitt-pink text-white shadow-pink"
+                                  : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
+                              ].join(" ")}
+                            >
+                              {isSelected && (
+                                <svg
+                                  width="12"
+                                  height="12"
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <polyline points="2,6 5,9 10,3" />
+                                </svg>
+                              )}
+                              <span>{flavor.label}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
                   {/* ── Variant selector ─────────────────────── */}
                   {hasMultipleVariants && (
                     <div className="mb-4 sm:mb-5">
                       <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
-                        Available options
+                        Pack Size
                       </p>
                       <div
                         role="radiogroup"

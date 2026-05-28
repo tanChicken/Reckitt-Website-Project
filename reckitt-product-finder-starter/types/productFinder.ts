@@ -30,6 +30,12 @@ export interface ChoiceOption<T extends string> {
   icon: string;
 }
 
+export interface ProductFlavor {
+  id: string;
+  label: string;
+  imageId?: string; // overrides product.id when locating /products/<id>.png
+}
+
 export interface ProductVariant {
   id: string;            // unique within this product's variants
   label: string;         // primary chip text e.g. "Honey", "200 ml bottle", "24-pack"
@@ -55,6 +61,7 @@ export interface ProductItem {
     severities?: SeverityId[];
   };
   variants?: ProductVariant[];
+  flavors?: ProductFlavor[];
   activeIngredient?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
   dosage?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
   keyBenefits?: string[];

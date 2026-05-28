@@ -6,6 +6,7 @@ import type {
   ProductItem,
   SeverityId,
   BodyPartId,
+  ProductFlavor,
 } from "@/types/productFinder";
 
 // export const needOptions: NeedOption[] = [
@@ -326,26 +327,22 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen", "child"],
       severities: ["mild"],
     },
+    flavors: [
+      { id: "honey",             label: "Honey" },
+      { id: "orange-vitamin-c",  label: "Orange with Vitamin C" },
+      { id: "original",          label: "Original" },
+      { id: "extra-strong",      label: "Extra Strong" },
+      { id: "cool",              label: "Cool" },
+      { id: "sugar-free-lemon",  label: "Sugar Free Lemon" },
+    ] satisfies ProductFlavor[],
     variants: [
-      {
-        id: "6-pack",
-        label: "6 Pack",
-        subLabel: "Soothing classic — 24 lozenges",
-        description:
-          "Honey-flavoured lozenges that soothe and moisturise a dry, scratchy throat with antibacterial action.",
-      },
-      {
-        id: "24-pack",
-        label: "24 Pack",
-        subLabel: "With added Vitamin C — 24 lozenges",
-        description:
-          "Orange-flavoured lozenges with added Vitamin C to soothe a dry, scratchy throat.",
-      },
+      { id: "6-pack",  label: "6 Pack",  subLabel: "6 lozenges" },
+      { id: "24-pack", label: "24 Pack", subLabel: "24 lozenges" },
     ],
     activeIngredient: [
       "2,4-Dichlorobenzyl alcohol 1.2 mg",
       "Amylmetacresol 0.6 mg",
-    ], 
+    ],
     dosage: ["≥6 years: 1 lozenge every 2–3 hrs."],
     keyBenefits: ["Soothes & Moisturises", "Antibacterial & antiviral action in 1–2 mins", "Relieves pain within 5 mins for up to 2 hrs"],
   },
@@ -365,8 +362,8 @@ export const productItems: ProductItem[] = [
       severities: ["moderate"],
     },
     variants: [
-      { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack" },
-      { id: "24s", label: "24 lozenges", subLabel: "Standard pack" },
+      { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack", imageId: "strepsils-max-triple-6s" },
+      { id: "24s", label: "24 lozenges", subLabel: "Standard pack", imageId: "strepsils-max-triple-24s" },
     ],
     activeIngredient: ["Hexylrescorcinol 24 mg"],
     dosage: ["≥6 years: 1 lozenge every 3 hrs"],
