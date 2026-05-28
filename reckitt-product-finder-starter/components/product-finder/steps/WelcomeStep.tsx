@@ -81,7 +81,8 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
       </div>
 
       {/* ── Left: image carousel ────────────────────── */}
-      <div className="relative min-h-64 overflow-hidden rounded-2xl shadow-soft sm:min-h-80 lg:min-h-[540px]">
+      {/* Replaced min-h-64 and sm:min-h-80 with responsive aspect ratios */}
+      <div className="relative w-full aspect-[1/1.12] sm:aspect-video lg:aspect-auto lg:min-h-[540px] overflow-hidden rounded-2xl shadow-soft">
         {slides.map((slide, i) => (
           <div
             key={slide.src}
@@ -93,7 +94,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
               src={slide.src}
               alt={slide.alt}
               fill
-              className="object-cover"
+              className="object-cover object-[center_65%] lg:object-contain"
               priority={i === 0}
               sizes="(max-width: 1024px) 100vw, 55vw"
             />
@@ -105,15 +106,6 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
 
         {/* Slide label */}
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-5 pb-5">
-          {/* <div>
-            <p className="text-sm font-bold text-white">
-              {slides[active].label}
-            </p>
-            <p className="text-xs text-white/70">
-              {slides[active].sublabel}
-            </p>
-          </div> */}
-
           {/* Dot indicators */}
           <div className="flex items-center gap-2">
             {slides.map((_, i) => (

@@ -293,15 +293,19 @@ export default function RecommendationStep({
             <div className="flex flex-col gap-4 sm:gap-5">
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
                 <p className="text-xs font-bold tracking-wide text-deep-navy">Active Ingredient</p>
-                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
-                  {product.activeIngredient ?? "See product label"}
+                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
+                  {Array.isArray(product.activeIngredient) 
+                    ? product.activeIngredient.join('\n') 
+                    : (product.activeIngredient ?? "See product label")}
                 </p>
-              </div>
+            </div>
 
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
                 <p className="text-xs font-bold tracking-wide text-deep-navy">Dosage</p>
-                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
-                  {product.dosage ?? "Follow label instructions"}
+                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
+                  {Array.isArray(product.dosage)
+                    ? product.dosage.join('\n')
+                    : (product.dosage ?? "See product label")}
                 </p>
               </div>
 
