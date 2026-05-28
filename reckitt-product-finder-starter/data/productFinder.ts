@@ -95,7 +95,7 @@ export const bodySymptoms: SymsptomType[] = [
     symptom: [
       "Heart Attack",
       "Chest Pain",
-      "Shortness of Breath",
+      "Tightness of Breath",
       "Palpitations",
       "Irregular Heartbeat",
     ],
@@ -105,7 +105,7 @@ export const bodySymptoms: SymsptomType[] = [
     id: "chest",
     symptom: [
       "Chest Pain",
-      "Shortness of Breath",
+      "Tightness of Breath",
       "Cough",
       "Chest Congestion",
       "Chest Tightness",
