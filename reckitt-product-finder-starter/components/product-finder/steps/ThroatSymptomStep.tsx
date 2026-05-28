@@ -108,8 +108,7 @@ export default function ThroatSymptomStep({
   return (
     <section
       aria-labelledby="throat-symptom-heading"
-      className="mx-auto max-w-3xl pb-24 sm:pb-0"
-    >
+      className="mx-auto flex w-full max-w-3xl flex-col justify-start px-4 pt-8 pb-32 sm:min-h-screen sm:justify-center sm:pt-0 sm:pb-40"    >
       {/* ── Heading ───────────────────────────────── */}
       <div className="mb-6 sm:mb-8">
         <h1
