@@ -443,7 +443,7 @@ export const productItems: ProductItem[] = [
       { id: "6-pack",  label: "6 lozenges",  subLabel: "6 lozenges" },
       { id: "24-pack", label: "24 lozenges", subLabel: "24 lozenges" },
     ],
-    activeIngredient: "-",
+    activeIngredient: ["Amylmetacresol 0.6 mg", "2,4-dichlorobenzyl alcohol 1.2 mg"],
     dosage: [">6 years: 1 lozenge every 2–3 hours", "Maximum 12 lozenges daily"],
     keyBenefits: [
       "Soothes and moisturises the throat",
@@ -452,11 +452,11 @@ export const productItems: ProductItem[] = [
       "Relief lasts up to 2 hours"
     ],
     disclaimerPoints: [
-      "Always read the label before use.",
-      "Use only as directed.",
-      "If sore throat is severe, persists for more than 3 days, or is accompanied by fever, headache, rash, nausea, or vomiting, consult your doctor promptly.",
-      "Not recommended for children under 6 years old.",
-      "Do not exceed 8 lozenges per day.",
+      "Strepsils are suitable for adults & children above 6 years old.",
+      "Remember young children can choke on lozenges.",
+      "Keep out of the reach of children.",
+      "Do not exceed the stated dose. ",
+      "Read the instructions carefully before use.",
     ],
   },
   {
@@ -478,7 +478,7 @@ export const productItems: ProductItem[] = [
       { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack", imageId: "strepsils-max-triple-6s" },
       { id: "16s", label: "16 lozenges", subLabel: "Standard pack", imageId: "strepsils-max-triple-16s" },
     ],
-    activeIngredient: "Hexylresorcinol 24 mg",
+    activeIngredient: "Hexylresorcinol 2.4 mg",
     dosage: [">6 years: 1 lozenge every 3 hours", "Maximum 12 lozenges daily"],
     keyBenefits: [
       "Relieves sore throat from 1 minute",
@@ -487,11 +487,11 @@ export const productItems: ProductItem[] = [
       "Helps ease pain and treat the cause"
     ],    
     disclaimerPoints: [
-      "Always read the label before use.",
-      "Use only as directed.",
-      "If sore throat is severe, persists for more than 3 days, or is accompanied by fever, consult your doctor.",
-      "Not recommended for children under 6 years old.",
-      "Do not exceed 8 lozenges per day.",
+      "Strepsils are suitable for adults & children above 6 years old.",
+      "Remember young children can choke on lozenges.",
+      "Keep out of the reach of children.",
+      "Do not exceed the stated dose. ",
+      "Read the instructions carefully before use.",
     ],
   },
   {
@@ -542,12 +542,12 @@ export const productItems: ProductItem[] = [
     dosage: ["≥12 years: 1 spray every 3–6 hrs", "≥18 years: 3 sprays every 3–6 hrs"],
     keyBenefits: ["Pain relief from 1 min, lasts up to 6 hrs", "Alcohol-free & sugar-free"],
     disclaimerPoints: [
-      "Always read the label before use.",
-      "Use only as directed.",
-      "If symptoms persist or worsen after 3 days, consult your doctor or pharmacist.",
-      "Not recommended for children and teenagers under 12 years old.",
-      "Do not exceed 5 lozenges per day.",
-      "Contains flurbiprofen, an NSAID. If you are pregnant or breastfeeding, consult your doctor before use.",
+      "Strepsils are suitable for adults & children above 12 years old.",
+      "Strepsils are suitable for those aged above 18 years old.",
+      "Remember young children can choke on lozenges. ",
+      "Keep out of the reach of children.",
+      "Do not exceed the stated dose.",
+      "Read the instructions carefully before use.",
     ],
   },
   {
@@ -601,7 +601,7 @@ export const productItems: ProductItem[] = [
       { id: "8s", label: "8 lozenges", subLabel: "Trial pack", imageId: "strepsils-chesty-cough-8s" },
       { id: "24s", label: "24 lozenges", subLabel: "Standard pack", imageId: "strepsils-chesty-cough-24s" },
     ],
-    activeIngredient: "Ambroxol HCl 15 mg",
+    activeIngredient: "Ambroxol Hydrochloride 15mg",
     dosage: [">12 years: Up to 2 lozenges per dose", "Maximum 6 lozenges daily"],
     keyBenefits: [
       "Suitable for cough with phlegm",
@@ -610,11 +610,11 @@ export const productItems: ProductItem[] = [
       "Eases coughing"
     ],    
     disclaimerPoints: [
-      "Always read the label before use.",
-      "Use only as directed.",
-      "If cough persists for more than 7 days, or is accompanied by fever, rash, or persistent headache, consult your doctor.",
-      "Not recommended for children under 12 years old.",
-      "Do not exceed 3 lozenges per day.",
+      "Strepsils are suitable for adults & children above 12 years old.",
+      "Strepsils are suitable for those aged above 18 years old. ",
+      "Remember young children can choke on lozenges. Keep out of the reach of children.",
+      "Do not exceed the stated dose.",
+      "Read the instructions carefully before use.",
     ],
   },
 
