@@ -421,7 +421,7 @@ export const productItems: ProductItem[] = [
     brand: "Strepsils",
     category: "Sore throat relief — mild",
     description:
-      "A basic sore throat lozenge range suitable for mild dry, itchy, or scratchy throat symptoms. It helps soothe and moisturise the throat while providing antibacterial and antiviral action for everyday throat discomfort.",
+      "A sore throat lozenge formulated for dry, itchy or scratchy throats. It soothes and moisturises the throat while providing antibacterial and antiviral action.",
     needId: "throat",
     imageLabel: "SO",
     tags: ["Lozenges", "Antibacterial", "Ages 6+"],
@@ -432,7 +432,7 @@ export const productItems: ProductItem[] = [
       severities: ["mild"],
     },
     flavors: [
-      { id: "honey",             label: "Honey" },
+      { id: "honey",             label: "Honey & Lemon" },
       { id: "orange-vitamin-c",  label: "Orange with Vitamin C" },
       { id: "original",          label: "Original" },
       { id: "extra-strong",      label: "Extra Strong" },
@@ -440,8 +440,8 @@ export const productItems: ProductItem[] = [
       { id: "sugar-free-lemon",  label: "Sugar Free Lemon" },
     ] satisfies ProductFlavor[],
     variants: [
-      { id: "6-pack",  label: "6 Pack",  subLabel: "6 lozenges" },
-      { id: "24-pack", label: "24 Pack", subLabel: "24 lozenges" },
+      { id: "6-pack",  label: "6 lozenges",  subLabel: "6 lozenges" },
+      { id: "24-pack", label: "24 lozenges", subLabel: "24 lozenges" },
     ],
     activeIngredient: "-",
     dosage: [">6 years: 1 lozenge every 2–3 hours", "Maximum 12 lozenges daily"],
@@ -464,7 +464,7 @@ export const productItems: ProductItem[] = [
     brand: "Strepsils Max Triple Action",
     category: "Sore throat relief — moderate",
     description:
-      "A stronger sore throat lozenge designed for painful throat symptoms. It is suitable when the throat feels more uncomfortable than a mild scratchy throat and provides fast relief while helping treat the cause.",
+      "A sore throat lozenge formulated for painful throat symptoms. It relieves pain, fights infection, and soothes the throat for  effective relief.",
     needId: "throat",
     imageLabel: "SM",
     tags: ["Hexylrescorcinol", "Triple action", "Painful throat"],
@@ -476,7 +476,7 @@ export const productItems: ProductItem[] = [
     },
     variants: [
       { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack", imageId: "strepsils-max-triple-6s" },
-      { id: "24s", label: "24 lozenges", subLabel: "Standard pack", imageId: "strepsils-max-triple-24s" },
+      { id: "16s", label: "16 lozenges", subLabel: "Standard pack", imageId: "strepsils-max-triple-16s" },
     ],
     activeIngredient: "Hexylresorcinol 24 mg",
     dosage: [">6 years: 1 lozenge every 3 hours", "Maximum 12 lozenges daily"],
