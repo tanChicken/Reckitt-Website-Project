@@ -733,7 +733,7 @@ export const productItems: ProductItem[] = [
       {
         id: "sachet-24",
         label: "Sachets × 24",
-        subLabel: "On-the-go single-serve",
+        subLabel: "On-the-go Single-serve",
         description:
           "24 single-serve 10 ml sachets — convenient and portion-controlled.",
         imageId: "gaviscon-double-action-sachet-24"
@@ -799,7 +799,7 @@ export const productItems: ProductItem[] = [
       {
         id: "sachet-24",
         label: "Sachets × 24",
-        subLabel: "On-the-go single-serve",
+        subLabel: "On-the-go Single-serve",
         imageId: "gaviscon-advance-sachet-24"
       },
     ],
