@@ -62,7 +62,7 @@ export default function QuestionsStep({
           Tell us a little more
         </h1>
         <p className="mt-2 text-sm leading-6 text-secondary sm:text-base">
-          Two quick questions to tailor your suggestion.
+          Answer two quick questions to personalize your recommendation.
         </p>
       </div>
 
