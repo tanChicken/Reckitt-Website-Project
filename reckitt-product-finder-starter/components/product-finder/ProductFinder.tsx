@@ -182,7 +182,7 @@ export default function ProductFinder() {
         <div className="mx-auto max-w-container-max px-4 py-12 sm:px-8 lg:px-16">
           <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
             {/* Brand column */}
-            <div>
+            <div className="flex justify-center sm:justify-start">
               <Image
                 src="/sosLogo.png"
                 alt="Reckitt"
@@ -214,7 +214,7 @@ export default function ProductFinder() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          {/* <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-surface-variant">
               © {new Date().getFullYear()} Reckitt Benckiser Group PLC. All
               rights reserved.
@@ -222,7 +222,7 @@ export default function ProductFinder() {
             <p className="text-xs text-surface-variant/60">
               This tool provides general guidance only — not medical advice.
             </p>
-          </div>
+          </div> */}
         </div>
       </footer>
     </>
