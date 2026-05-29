@@ -9,8 +9,9 @@ import Image from "next/image";
 const dotPositions: Record<BodyPartId, { top: string; left: string }> = {
   head: { top: "20%", left: "50%" },
   throat: { top: "39%", left: "50%" },
-  heart: { top: "50%", left: "50%" },
-  chest: { top: "56%", left: "56%" },
+  // heart: { top: "50%", left: "50%" },
+  chest: { top: "50%", left: "50%" }, 
+  heart: { top: "56%", left: "56%" },
   stomach: { top: "67%", left: "50%" },
 };
 
