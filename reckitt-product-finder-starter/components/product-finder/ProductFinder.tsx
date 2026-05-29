@@ -68,7 +68,8 @@ export default function ProductFinder() {
   }
 
   function setNeed(bodyPartId: BodyPartId) {
-    const nextAnswers = { ...answers, needId: bodyPartId };
+    // Reset audience & severity so a previously-saved invalid combo can't persist
+    const nextAnswers = { ...answers, needId: bodyPartId, audienceId: undefined, severityId: undefined };
     setAnswers(nextAnswers);
     let nextStep: number;
     if (bodyPartId === "throat") nextStep = 2;
@@ -89,7 +90,17 @@ export default function ProductFinder() {
   }
 
   function setAudience(audienceId: AudienceId) {
-    setAnswers((current) => ({ ...current, audienceId }));
+    setAnswers((current) => {
+      // Clear severity if the new audience makes "severe" unavailable
+      const severeBecamesUnavailable =
+        (current.needId === "throat" && audienceId === "child") ||
+        (current.needId === "head" && audienceId === "teen");
+      return {
+        ...current,
+        audienceId,
+        severityId: severeBecamesUnavailable && current.severityId === "severe" ? undefined : current.severityId,
+      };
+    });
   }
 
   function setSeverity(severityId: SeverityId) {

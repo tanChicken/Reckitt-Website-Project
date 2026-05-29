@@ -69,6 +69,7 @@ export interface ProductItem {
   dosage?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
   keyBenefits?: string[];
   disclaimerPoints?: string[];
+  variantLabel?: string;  // label shown above the variant selector, defaults to "Pack Size"
 }
 
 export interface FinderAnswers {
