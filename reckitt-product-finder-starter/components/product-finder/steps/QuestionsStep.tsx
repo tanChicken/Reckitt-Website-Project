@@ -71,7 +71,7 @@ export default function QuestionsStep({
           Tell us a little more
         </h1>
         <p className="mt-2 text-sm leading-6 text-secondary sm:text-base">
-          Answer two quick questions to personalize your recommendation.
+          Answer two quick questions to personalise your recommendation.
         </p>
       </div>
 
