@@ -134,7 +134,7 @@ export const audienceOptions: ChoiceOption<AudienceId>[] = [
   {
     id: "child",
     label: "Child",
-    description: "6 months – 12 years old.",
+    description: "Under 13 years old.",
     icon: "/child.png",
   },
 ];

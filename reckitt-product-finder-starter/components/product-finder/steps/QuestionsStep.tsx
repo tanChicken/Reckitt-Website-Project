@@ -139,7 +139,11 @@ export default function QuestionsStep({
                       {option.label}
                     </p>
                     <p className="hidden text-xs text-secondary xl:block">
-                      {option.description}
+                      {isDisabled
+                        ? option.description
+                        : option.id === "child" && answers.needId === "head"
+                          ? "6 months – 12 years old"
+                          : option.description}
                     </p>
                   </div>
 
