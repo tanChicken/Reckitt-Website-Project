@@ -501,6 +501,7 @@ export const productItems: ProductItem[] = [
     id: "strepsils-max-pro",
     brand: "Strepsils Max Pro",
     category: "Sore throat relief — severe",
+    variantLabel: "Format",
     description:
       "Flurbiprofen 8.75 mg lozenges for swollen, red and severely inflamed throats. Alcohol-free and sugar-free. Relieves pain from 1 minute, lasting up to 6 hours. For ages 12+.",
     needId: "throat",
@@ -842,6 +843,9 @@ export const productItems: ProductItem[] = [
       audiences: ["adult"],
       severities: ["mild", "moderate"],
     },
+    variants:[
+      { id: "standard", label: "90 Tablets",}
+    ],
     activeIngredient: ["Aspirin 100 mg", "Glycine 45mg"],
     dosage: ["Adults: 1 tablet daily", "Not for children/teenagers", "Take daily as prescribed (calendar pack helps adherence)", "Can dissolve on tongue or swallow whole with water", "Use only under medical supervision; duration per doctor’s advice & regular review"],
     keyBenefits: ["Reduces platelet3 stickiness, helping prevent blood clots and vessel blockages", "Contains 100 mg low-dose aspirin; helps lower risk of stroke & heart attack", "Designed to dissolve on tongue for rapid absorption and effectiveness"],

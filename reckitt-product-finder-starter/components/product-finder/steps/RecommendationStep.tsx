@@ -203,7 +203,7 @@ export default function RecommendationStep({
                   {hasMultipleVariants && (
                     <div className="mb-4 sm:mb-5">
                       <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
-                        Pack Size
+                        {product.variantLabel ?? "Pack Size"}
                       </p>
                       <div
                         role="radiogroup"
