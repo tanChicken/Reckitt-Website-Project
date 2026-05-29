@@ -443,7 +443,7 @@ export const productItems: ProductItem[] = [
       { id: "6-pack",  label: "6 lozenges",  subLabel: "6 lozenges" },
       { id: "24-pack", label: "24 lozenges", subLabel: "24 lozenges" },
     ],
-    activeIngredient: ["Amylmetacresol 0.6 mg", "2,4-dichlorobenzyl alcohol 1.2 mg"],
+    activeIngredient: ["Amylmetacresol 0.6 mg", "Dichlorobenzyl 1.2 mg"],
     dosage: [">6 years: 1 lozenge every 2–3 hours", "Maximum 12 lozenges daily"],
     keyBenefits: [
       "Soothes and moisturises the throat",
@@ -475,16 +475,19 @@ export const productItems: ProductItem[] = [
       severities: ["moderate"],
     },
     variants: [
-      { id: "6s", label: "6 lozenges", subLabel: "Travel / trial pack", imageId: "strepsils-max-triple-6s" },
-      { id: "16s", label: "16 lozenges", subLabel: "Standard pack", imageId: "strepsils-max-triple-16s" },
+      { id: "6s", label: "6 lozenges", subLabel: "6 lozenges", imageId: "strepsils-max-triple-6s", 
+        description: "A sore throat lozenge designed for painful  throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat." },
+      { id: "16s", label: "16 lozenges", subLabel: "16 lozenges", imageId: "strepsils-max-triple-16s",
+        description: "A sore throat lozenge designed for painful  throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat.",
+       },
     ],
     activeIngredient: "Hexylresorcinol 2.4 mg",
     dosage: [">6 years: 1 lozenge every 3 hours", "Maximum 12 lozenges daily"],
     keyBenefits: [
       "Relieves sore throat from 1 minute",
       "Relief lasts up to 2 hours",
-      "Strong and advanced sore throat relief",
-      "Helps ease pain and treat the cause"
+      "Numbs pain to ease sore throat discomfort",
+      "Fights infection cause germ"
     ],    
     disclaimerPoints: [
       "Strepsils are suitable for adults & children above 6 years old.",
@@ -510,27 +513,25 @@ export const productItems: ProductItem[] = [
       severities: ["severe"],
     },
     variants: [
-      { id: "max-pro", label: "Max Pro",  imageId: "strepsils-max-pro",
+      { id: "max-pro", label: "Max Pro",  imageId: "strepsils-max-pro", subLabel: "16 lozenges",
         description:
-          "A stronger lozenge for swollen, red, and inflamed sore throat symptoms. It is suitable for more severe throat discomfort and provides longer-lasting relief compared with regular sore throat lozenges.",
+          "A stronger lozenge for swollen, red, and inflamed sore throat symptoms. It is suitable for more severe throat discomfort and provides longer-lasting relief.",
         activeIngredient: "Flurbiprofen 8.75 mg",
         dosage: [">12 years: 1 lozenge every 3–6 hours", "Maximum 5 lozenges daily"],
         keyBenefits: [
           "Relieves pain from 1 minute",
-          "Relief lasts up to 6 hours",
+          "Relief lasts up to 3 hours",
           "Anti-inflammatory and analgesic effect",
           "Alcohol-free",
-          "Sugar-free"
         ],
       },
-      { id: "max-pro-spray", label: "Max Pro Spray", imageId: "strepsils-max-pro-spray",
+      { id: "max-pro-spray", label: "Max Pro Spray", imageId: "strepsils-max-pro-spray", subLabel: "15ml",
         description:
           "A targeted throat spray for adults with severe or inflamed sore throat symptoms. The fine mist helps deliver relief directly to the throat, making it convenient for use during the day or night.",
         activeIngredient: "Flurbiprofen 8.75 mg",
         dosage: [">18 years: 3 sprays every 3–6 hours", "Maximum 15 sprays daily"],
         keyBenefits: [
           "Fine mist targets the throat directly",
-          "Convenient for morning or night use",
           "Relieves pain from 1 minute",
           "Relief lasts up to 6 hours",
           "Alcohol-free",
