@@ -25,9 +25,18 @@ export default function QuestionsStep({
 }: QuestionsStepProps) {
   const canContinue = Boolean(answers.audienceId && answers.severityId);
 
-  const answeredCount = [answers.audienceId, answers  .severityId].filter(
-    Boolean,
-  ).length;
+  // Audiences that are unavailable for the selected body part
+  const disabledAudiences = new Set<AudienceId>(
+    answers.needId === "stomach" ? ["child"] : []
+  );
+
+  // Severities that are unavailable for the selected body part + audience combo
+  const disabledSeverities = new Set<SeverityId>(
+    (answers.needId === "throat" && answers.audienceId === "child") ||
+    (answers.needId === "head"   && answers.audienceId === "teen")
+      ? ["severe"]
+      : []
+  );
 
   return (
     <section
@@ -80,37 +89,41 @@ export default function QuestionsStep({
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {audienceOptions.map((option) => {
             const isSelected = answers.audienceId === option.id;
+            const isDisabled = disabledAudiences.has(option.id);
 
             return (
               <label
                 key={option.id}
-                className="group relative cursor-pointer"
+                className={`group relative ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
               >
                 <input
                   type="radio"
                   name="audience"
                   value={option.id}
                   checked={isSelected}
-                  onChange={() => setAudience(option.id)}
+                  disabled={isDisabled}
+                  onChange={isDisabled ? undefined : () => setAudience(option.id)}
                   className="sr-only"
                 />
 
                 <div
                   className={`
                     flex h-full flex-col items-center justify-center gap-2
-                    rounded-2xl border-2 bg-white p-3
+                    rounded-2xl border-2 p-3
                     text-center
                     transition-all duration-200
                     xl:flex-row xl:gap-3 xl:p-4 xl:text-left
                     ${
-                      isSelected
-                        ? "border-reckitt-pink bg-primary-fixed/15 shadow-card"
-                        : "border-border-subtle hover:border-secondary/40 hover:shadow-card"
+                      isDisabled
+                        ? "border-surface-container-high bg-surface-container-highest opacity-50"
+                        : isSelected
+                          ? "border-reckitt-pink bg-primary-fixed/15 shadow-card"
+                          : "bg-white border-border-subtle hover:border-secondary/40 hover:shadow-card"
                     }
                   `}
                 >
                   {/* Icon */}
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-container-low transition-transform duration-200 group-hover:scale-105 sm:h-11 sm:w-11">
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-container-low sm:h-11 sm:w-11 ${isDisabled ? "" : "transition-transform duration-200 group-hover:scale-105"}`}>
                     <Image
                       src={option.icon}
                       alt=""
@@ -122,7 +135,7 @@ export default function QuestionsStep({
 
                   {/* Content */}
                   <div>
-                    <p className="text-sm font-bold text-deep-navy sm:text-base xl:text-sm">
+                    <p className={`text-sm font-bold sm:text-base xl:text-sm ${isDisabled ? "text-secondary" : "text-deep-navy"}`}>
                       {option.label}
                     </p>
                     <p className="hidden text-xs text-secondary xl:block">
@@ -131,7 +144,7 @@ export default function QuestionsStep({
                   </div>
 
                   {/* Selected check (top-right on mobile) */}
-                  {isSelected && (
+                  {isSelected && !isDisabled && (
                     <span
                       className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-reckitt-pink text-white xl:right-3 xl:top-3"
                       aria-hidden="true"
@@ -171,37 +184,41 @@ export default function QuestionsStep({
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {severityOptions.map((option) => {
             const isSelected = answers.severityId === option.id;
+            const isDisabled = disabledSeverities.has(option.id);
 
             return (
               <label
                 key={option.id}
-                className="group relative cursor-pointer"
+                className={`group relative ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
               >
                 <input
                   type="radio"
                   name="severity"
                   value={option.id}
                   checked={isSelected}
-                  onChange={() => setSeverity(option.id)}
+                  disabled={isDisabled}
+                  onChange={isDisabled ? undefined : () => setSeverity(option.id)}
                   className="sr-only"
                 />
 
                 <div
                   className={`
                     flex h-full flex-col items-center justify-center gap-2
-                    rounded-2xl border-2 bg-white p-3
+                    rounded-2xl border-2 p-3
                     text-center
                     transition-all duration-200
                     xl:flex-row xl:gap-3 xl:p-4 xl:text-left
                     ${
-                      isSelected
-                        ? "border-reckitt-pink bg-primary-fixed/15 shadow-card"
-                        : "border-border-subtle hover:border-secondary/40 hover:shadow-card"
+                      isDisabled
+                        ? "border-surface-container-high bg-surface-container-highest opacity-50"
+                        : isSelected
+                          ? "border-reckitt-pink bg-primary-fixed/15 shadow-card"
+                          : "bg-white border-border-subtle hover:border-secondary/40 hover:shadow-card"
                     }
                   `}
                 >
                   {/* Icon */}
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-container-low transition-transform duration-200 group-hover:scale-105 sm:h-11 sm:w-11">
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-container-low sm:h-11 sm:w-11 ${isDisabled ? "" : "transition-transform duration-200 group-hover:scale-105"}`}>
                     <Image
                       src={option.icon}
                       alt=""
@@ -213,7 +230,7 @@ export default function QuestionsStep({
 
                   {/* Content */}
                   <div>
-                    <p className="text-sm font-bold text-deep-navy sm:text-base xl:text-sm">
+                    <p className={`text-sm font-bold sm:text-base xl:text-sm ${isDisabled ? "text-secondary" : "text-deep-navy"}`}>
                       {option.label}
                     </p>
                     <p className="hidden text-xs text-secondary xl:block">
@@ -222,7 +239,7 @@ export default function QuestionsStep({
                   </div>
 
                   {/* Selected check */}
-                  {isSelected && (
+                  {isSelected && !isDisabled && (
                     <span
                       className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-reckitt-pink text-white xl:right-3 xl:top-3"
                       aria-hidden="true"
