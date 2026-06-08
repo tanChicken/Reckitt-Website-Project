@@ -534,9 +534,18 @@ export const productItems: ProductItem[] = [
       { 
         id: "max-pro-spray", 
         label: "Max Pro Spray", 
+        imageId: "strepsils-max-pro-spray", // <--- THIS ENSURES THE SPRAY IMAGE LOADS
         allowedAudiences: ["adult"],
-        // ... existing props ...
-        // ADD THE SPRAY SPECIFIC DISCLAIMER:
+        description: "A targeted throat spray for adults with severe or inflamed sore throat symptoms. The fine mist helps deliver relief directly to the throat, making it convenient for use during the day or night.",
+        activeIngredient: "Flurbiprofen 8.75 mg",
+        dosage: [">18 years: 3 sprays every 3–6 hours", "Maximum 15 sprays daily"],
+        keyBenefits: [
+          "Fine mist targets the throat directly",
+          "Relieves pain from 1 minute",
+          "Relief lasts up to 6 hours",
+          "Alcohol-free",
+          "Sugar-free"
+        ],
         disclaimerPoints: [
           "Strepsils spray is suitable for those aged above 18 years old.",
           "Keep out of the reach of children.",
