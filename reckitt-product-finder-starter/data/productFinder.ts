@@ -250,7 +250,7 @@ export const productItems: ProductItem[] = [
       "Always read the label before use.",
       "Use only as directed.",
       "If symptoms persist or worsen, if new symptoms occur, or if the product is required for more than 3 days, consult your doctor.",
-      "Do not give to children under 18 years old.",
+      "Do not give to children under 12 years old.",
       "Do not exceed the stated dose. If you accidentally take more than the recommended dose, contact your doctor.",
       "Taking NSAIDs at about 20 weeks of pregnancy or later may harm your unborn baby.",
     ],
@@ -301,7 +301,7 @@ export const productItems: ProductItem[] = [
       "Always read the label before use.",
       "Use only as directed.",
       "If symptoms persist or worsen, if new symptoms occur, or if the product is required for more than 3 days, consult your doctor.",
-      "Do not give to children under 18 years old.",
+      "Do not give to children under 12 years old.",
       "Do not exceed the stated dose. If you accidentally take more than the recommended dose, contact your doctor.",
       "Taking NSAIDs at about 20 weeks of pregnancy or later may harm your unborn baby.",
     ],
@@ -849,5 +849,7 @@ export const productItems: ProductItem[] = [
       "Not recommended for children and teenagers below 16 years old.",
       "If you have a history of heartburn or ulcers, you may find that Cardiprin 100 affects your symptoms. If this occurs, consult your doctor.",
     ],
+    disclaimer:
+      "The product in our range is specifically recommended by healthcare professionals for the prevention of heart symptoms. It does not provide immediate relief to these symptoms in an emergency. Always consult a pharmacist or doctor before use.",
   },
 ];

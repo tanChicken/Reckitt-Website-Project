@@ -72,6 +72,7 @@ export interface ProductItem {
   keyBenefits?: string[];
   disclaimerPoints?: string[];
   variantLabel?: string;  // label shown above the variant selector, defaults to "Pack Size"
+  disclaimer?: string;    // always shown as the tier disclaimer banner when this product is recommended
 }
 
 export interface FinderAnswers {

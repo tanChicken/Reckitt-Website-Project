@@ -175,5 +175,8 @@ export function getRecommendation(answers: FinderAnswers): RecommendationResult 
   const filteredPrimary = filterVariantsForAudience(primary, answers.audienceId);
   const filteredAlternatives = alternatives.map(alt => filterVariantsForAudience(alt, answers.audienceId));
 
-  return buildResult(answers, filteredPrimary, filteredAlternatives, matchTier, tierDisclaimer);
+  // Product-level disclaimer overrides the tier disclaimer banner
+  const effectiveDisclaimer = filteredPrimary.disclaimer ?? tierDisclaimer;
+
+  return buildResult(answers, filteredPrimary, filteredAlternatives, matchTier, effectiveDisclaimer);
 }
