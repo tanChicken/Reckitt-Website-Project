@@ -70,6 +70,7 @@ export default function RecommendationStep({
   const displayActiveIngredient = selectedVariant?.activeIngredient ?? product.activeIngredient;
   const displayDosage = selectedVariant?.dosage ?? product.dosage;
   const displayKeyBenefits = selectedVariant?.keyBenefits ?? product.keyBenefits;
+  const displayDisclaimerPoints = selectedVariant?.disclaimerPoints ?? product.disclaimerPoints ?? [];
 
   return (
     <section aria-labelledby="recommendation-heading">
@@ -450,7 +451,7 @@ export default function RecommendationStep({
               <div className="flex flex-col gap-5 sm:gap-6">
                 <p className="text-sm font-bold tracking-wide text-deep-navy">Important</p>
                 
-                {(product.disclaimerPoints ?? []).map((text, i) => (
+                {displayDisclaimerPoints.map((text, i) => (
                   <div key={i} className="flex items-start gap-4">
                     {/* Number Badge */}
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-reckitt-pink/10 text-xs font-bold text-reckitt-pink ring-4 ring-white">

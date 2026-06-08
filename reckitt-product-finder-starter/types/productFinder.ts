@@ -46,7 +46,9 @@ export interface ProductVariant {
   price?: string;        // optional retail price string, e.g. "$8.99"
   activeIngredient?: string | string[];  // overrides product.activeIngredient when this variant is selected
   dosage?: string | string[];            // overrides product.dosage when this variant is selected
-  keyBenefits?: string[];                // overrides product.keyBenefits when this variant is selected
+  keyBenefits?: string[];   
+  allowedAudiences?: AudienceId[]; // overrides product.suitableFor.audiences when this variant is selected
+  disclaimerPoints?: string[]; // overrides product.disclaimerPoints when this variant is selected
 }
 
 export interface ProductItem {

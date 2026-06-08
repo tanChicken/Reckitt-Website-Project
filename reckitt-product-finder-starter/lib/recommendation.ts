@@ -1,5 +1,5 @@
 import { productItems } from "@/data/productFinder";
-import type { FinderAnswers, ProductItem, RecommendationResult } from "@/types/productFinder";
+import type { FinderAnswers, ProductItem, RecommendationResult, AudienceId,} from "@/types/productFinder";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -16,6 +16,23 @@ function severityMatches(product: ProductItem, answers: FinderAnswers): boolean 
 // Higher priority wins ties within a tier. Tier 3 uses ascending sort (most general first).
 const byPriorityDesc = (a: ProductItem, b: ProductItem) => (b.priority ?? 5) - (a.priority ?? 5);
 const byPriorityAsc  = (a: ProductItem, b: ProductItem) => (a.priority ?? 5) - (b.priority ?? 5);
+
+// Helper function to filter product variants based on audience suitability. This is applied after tier selection to ensure we don't exclude variants too early.
+function filterVariantsForAudience(product: ProductItem, audienceId?: AudienceId): ProductItem {
+  if (!product.variants || !audienceId) return product;
+
+  const filteredVariants = product.variants.filter(variant => {
+    // If no specific audience limit is set on the variant, anyone who sees the product can see the variant
+    if (!variant.allowedAudiences) return true; 
+    // Otherwise, check if the current user's audience is in the allowed list
+    return variant.allowedAudiences.includes(audienceId);
+  });
+
+  return {
+    ...product,
+    variants: filteredVariants,
+  };
+}
 
 // ── Tiered selection ───────────────────────────────────────────────────────
 
@@ -153,5 +170,10 @@ function buildResult(
 
 export function getRecommendation(answers: FinderAnswers): RecommendationResult {
   const { primary, alternatives, matchTier, tierDisclaimer } = pickProducts(answers);
-  return buildResult(answers, primary, alternatives, matchTier, tierDisclaimer);
+  
+  // Strip out any variants the current age group isn't allowed to see
+  const filteredPrimary = filterVariantsForAudience(primary, answers.audienceId);
+  const filteredAlternatives = alternatives.map(alt => filterVariantsForAudience(alt, answers.audienceId));
+
+  return buildResult(answers, filteredPrimary, filteredAlternatives, matchTier, tierDisclaimer);
 }

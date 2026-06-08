@@ -87,6 +87,7 @@ export const bodySymptoms: SymsptomType[] = [
       "Hoarseness",
       "Throat Irritation",
       "Difficulty Swallowing",
+      "Dissolves Phlegm",
     ],
     icon: "️",
   },
@@ -134,7 +135,7 @@ export const audienceOptions: ChoiceOption<AudienceId>[] = [
   {
     id: "child",
     label: "Child",
-    description: "Under 13 years old.",
+    description: "Under 13 years old, but above 6 years.",
     icon: "/child.png",
   },
 ];
@@ -447,9 +448,9 @@ export const productItems: ProductItem[] = [
     dosage: [">6 years: 1 lozenge every 2–3 hours", "Maximum 12 lozenges daily"],
     keyBenefits: [
       "Soothes and moisturises the throat",
-      "Antibacterial and antiviral action from 1–2 minutes",
       "Relieves pain from 5 minutes",
-      "Relief lasts up to 2 hours"
+      "Relief lasts up to 2 hours",
+      "Fights germs with antibacterial and antiviral effects",
     ],
     disclaimerPoints: [
       "Strepsils are suitable for adults & children above 6 years old.",
@@ -497,11 +498,13 @@ export const productItems: ProductItem[] = [
       "Read the instructions carefully before use.",
     ],
   },
+  // inside data/productFinder.ts
+
   {
     id: "strepsils-max-pro",
     brand: "Strepsils Max Pro",
     category: "Sore throat relief — severe",
-    variantLabel: "Format",
+    variantLabel: "Variant",
     description:
       "Flurbiprofen 8.75 mg lozenges for swollen, red and severely inflamed throats. Alcohol-free and sugar-free. Relieves pain from 1 minute, lasting up to 6 hours. For ages 12+.",
     needId: "throat",
@@ -510,48 +513,40 @@ export const productItems: ProductItem[] = [
     url: "https://www.strepsils.com.au/products/strepsils-max-pro/",
     priority: 7,
     suitableFor: {
-      audiences: ["adult", "teen"],
+      audiences: ["adult", "teen"], // Allows the product to show for both
       severities: ["severe"],
     },
+    // inside data/productFinder.ts, on the strepsils-max-pro product:
+
     variants: [
-      { id: "max-pro", label: "Max Pro",  imageId: "strepsils-max-pro", subLabel: "16 lozenges",
-        description:
-          "A stronger lozenge for swollen, red, and inflamed sore throat symptoms. It is suitable for more severe throat discomfort and provides longer-lasting relief.",
-        activeIngredient: "Flurbiprofen 8.75 mg",
-        dosage: [">12 years: 1 lozenge every 3–6 hours", "Maximum 5 lozenges daily"],
-        keyBenefits: [
-          "Relieves pain from 1 minute",
-          "Relief lasts up to 3 hours",
-          "Anti-inflammatory and analgesic effect",
-          "Alcohol-free",
-        ],
+      { 
+        id: "max-pro", 
+        label: "Max Pro",  
+        // ADD THE LOZENGE SPECIFIC DISCLAIMER:
+        disclaimerPoints: [
+          "Strepsils Lozenges are suitable for adults & children above 12 years old.",
+          "Remember young children can choke on lozenges.",
+          "Keep out of the reach of children.",
+          "Do not exceed the stated dose.",
+          "Read the instructions carefully before use.",
+        ]
       },
-      { id: "max-pro-spray", label: "Max Pro Spray", imageId: "strepsils-max-pro-spray", subLabel: "15ml",
-        description:
-          "A targeted throat spray for adults with severe or inflamed sore throat symptoms. The fine mist helps deliver relief directly to the throat, making it convenient for use during the day or night.",
-        activeIngredient: "Flurbiprofen 8.75 mg",
-        dosage: [">18 years: 3 sprays every 3–6 hours", "Maximum 15 sprays daily"],
-        keyBenefits: [
-          "Fine mist targets the throat directly",
-          "Relieves pain from 1 minute",
-          "Relief lasts up to 6 hours",
-          "Alcohol-free",
-          "Sugar-free"
-        ],
+      { 
+        id: "max-pro-spray", 
+        label: "Max Pro Spray", 
+        allowedAudiences: ["adult"],
+        // ... existing props ...
+        // ADD THE SPRAY SPECIFIC DISCLAIMER:
+        disclaimerPoints: [
+          "Strepsils spray is suitable for those aged above 18 years old.",
+          "Keep out of the reach of children.",
+          "Do not exceed the stated dose.",
+          "Read the instructions carefully before use.",
+        ]
        },
     ],
-    activeIngredient: ["Flurbiprofen 8.75 mg"],
-    dosage: ["≥12 years: 1 spray every 3–6 hrs", "≥18 years: 3 sprays every 3–6 hrs"],
-    keyBenefits: ["Pain relief from 1 min, lasts up to 6 hrs", "Alcohol-free & sugar-free"],
-    disclaimerPoints: [
-      "Strepsils are suitable for adults & children above 12 years old.",
-      "Strepsils are suitable for those aged above 18 years old.",
-      "Remember young children can choke on lozenges. ",
-      "Keep out of the reach of children.",
-      "Do not exceed the stated dose.",
-      "Read the instructions carefully before use.",
-    ],
   },
+
   {
     id: "strepsils-max-plus",
     brand: "Strepsils Max Plus",
@@ -600,8 +595,8 @@ export const productItems: ProductItem[] = [
       severities: ["mild", "moderate"],
     },
     variants: [
-      { id: "8s", label: "8 lozenges", subLabel: "Trial pack", imageId: "strepsils-chesty-cough-8s" },
-      { id: "24s", label: "24 lozenges", subLabel: "Standard pack", imageId: "strepsils-chesty-cough-24s" },
+      { id: "8s", label: "8 lozenges", subLabel: "8 Lozenges", imageId: "strepsils-chesty-cough-8s" },
+      { id: "24s", label: "24 lozenges", subLabel: "24 Lozenges", imageId: "strepsils-chesty-cough-24s" },
     ],
     activeIngredient: "Ambroxol Hydrochloride 15mg",
     dosage: [">12 years: Up to 2 lozenges per dose", "Maximum 6 lozenges daily"],
@@ -613,7 +608,6 @@ export const productItems: ProductItem[] = [
     ],    
     disclaimerPoints: [
       "Strepsils are suitable for adults & children above 12 years old.",
-      "Strepsils are suitable for those aged above 18 years old. ",
       "Remember young children can choke on lozenges. Keep out of the reach of children.",
       "Do not exceed the stated dose.",
       "Read the instructions carefully before use.",
@@ -756,14 +750,14 @@ export const productItems: ProductItem[] = [
       "Recommended: 3 times after meals and once before sleep"
     ],
     keyBenefits: [
+      "Soothes within 3 minutes",
+      "Relief lasts up to 4 hours",
       "Recommended for mild-to-moderate GERD",
       "Can be used as add-on rescue therapy",
       "High calcium carbonate content",
       "Effective relief for moderate to severe indigestion",
       "Sugar-free",
       "Gluten-free",
-      "Soothes within 3 minutes",
-      "Relief lasts up to 4 hours",
       "Made from natural seaweed"
     ],
     disclaimerPoints: [
@@ -847,7 +841,7 @@ export const productItems: ProductItem[] = [
     ],
     activeIngredient: ["Aspirin 100 mg", "Glycine 45mg"],
     dosage: ["Adults: 1 tablet daily", "Not for children/teenagers", "Take daily as prescribed (calendar pack helps adherence)", "Can dissolve on tongue or swallow whole with water", "Use only under medical supervision; duration per doctor’s advice & regular review"],
-    keyBenefits: ["Reduces platelet3 stickiness, helping prevent blood clots and vessel blockages", "Contains 100 mg low-dose aspirin; helps lower risk of stroke & heart attack", "Designed to dissolve on tongue for rapid absorption and effectiveness"],
+    keyBenefits: ["Reduces platelet stickiness, helping prevent blood clots and vessel blockages", "Contains 100 mg low-dose aspirin; helps lower risk of stroke & heart attack", "Designed to dissolve on tongue for rapid absorption and effectiveness"],
     disclaimerPoints: [
       "Always read the label before use.",
       "Your doctor will advise you on how long you should continue to take Cardiprin 100. Make sure you see your doctor at regular intervals and discuss any questions that you may have with him or her. Cardiprin 100 should only be taken under medical supervision.",
