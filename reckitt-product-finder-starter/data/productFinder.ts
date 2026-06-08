@@ -504,7 +504,7 @@ export const productItems: ProductItem[] = [
     id: "strepsils-max-pro",
     brand: "Strepsils Max Pro",
     category: "Sore throat relief — severe",
-    variantLabel: "Variant",
+    variantLabel: "Format",
     description:
       "Flurbiprofen 8.75 mg lozenges for swollen, red and severely inflamed throats. Alcohol-free and sugar-free. Relieves pain from 1 minute, lasting up to 6 hours. For ages 12+.",
     needId: "throat",
@@ -513,16 +513,24 @@ export const productItems: ProductItem[] = [
     url: "https://www.strepsils.com.au/products/strepsils-max-pro/",
     priority: 7,
     suitableFor: {
-      audiences: ["adult", "teen"], // Allows the product to show for both
+      audiences: ["adult", "teen"],
       severities: ["severe"],
     },
-    // inside data/productFinder.ts, on the strepsils-max-pro product:
-
     variants: [
       { 
         id: "max-pro", 
         label: "Max Pro",  
-        // ADD THE LOZENGE SPECIFIC DISCLAIMER:
+        imageId: "strepsils-max-pro", 
+        subLabel: "16 lozenges",
+        description: "A stronger lozenge for swollen, red, and inflamed sore throat symptoms. It is suitable for more severe throat discomfort and provides longer-lasting relief.",
+        activeIngredient: "Flurbiprofen 8.75 mg",
+        dosage: [">12 years: 1 lozenge every 3–6 hours", "Maximum 5 lozenges daily"],
+        keyBenefits: [
+          "Relieves pain from 1 minute",
+          "Relief lasts up to 3 hours",
+          "Anti-inflammatory and analgesic effect",
+          "Alcohol-free",
+        ],
         disclaimerPoints: [
           "Strepsils Lozenges are suitable for adults & children above 12 years old.",
           "Remember young children can choke on lozenges.",
@@ -534,7 +542,8 @@ export const productItems: ProductItem[] = [
       { 
         id: "max-pro-spray", 
         label: "Max Pro Spray", 
-        imageId: "strepsils-max-pro-spray", // <--- THIS ENSURES THE SPRAY IMAGE LOADS
+        imageId: "strepsils-max-pro-spray", 
+        subLabel: "15ml",
         allowedAudiences: ["adult"],
         description: "A targeted throat spray for adults with severe or inflamed sore throat symptoms. The fine mist helps deliver relief directly to the throat, making it convenient for use during the day or night.",
         activeIngredient: "Flurbiprofen 8.75 mg",
@@ -547,15 +556,18 @@ export const productItems: ProductItem[] = [
           "Sugar-free"
         ],
         disclaimerPoints: [
-          "Strepsils spray is suitable for those aged above 18 years old.",
+          "Strepsils Spray is suitable for those aged above 18 years old.",
           "Keep out of the reach of children.",
           "Do not exceed the stated dose.",
           "Read the instructions carefully before use.",
         ]
        },
     ],
+    activeIngredient: ["Flurbiprofen 8.75 mg"],
+    dosage: ["≥12 years: 1 spray every 3–6 hrs", "≥18 years: 3 sprays every 3–6 hrs"],
+    keyBenefits: ["Pain relief from 1 min, lasts up to 6 hrs", "Alcohol-free & sugar-free"],
   },
-
+  
   {
     id: "strepsils-max-plus",
     brand: "Strepsils Max Plus",
