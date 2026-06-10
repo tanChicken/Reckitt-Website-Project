@@ -222,7 +222,7 @@ export const productItems: ProductItem[] = [
       severities: ["mild"],
     },
     variants: [
-      { id: "standard", label: "12 Tablets", subLabel: "Ibuprofen 200 mg", 
+      { id: "standard", label: "12 Tablets", 
         description:
               "A standard pain and fever relief tablet for adults and children over 12 years old. It is suitable for general pain relief needs and also helps reduce inflammation when symptoms are mild.",
             activeIngredient: "Ibuprofen 200 mg",
@@ -271,7 +271,7 @@ export const productItems: ProductItem[] = [
       severities: ["moderate", "severe"],
     },
     variants: [
-      { id: "standard", label: "12 Caplets", subLabel: "Ibuprofen 342 mg", 
+      { id: "standard", label: "12 Caplets", 
         description:
           "A faster-acting pain relief caplet for adults, elderly users, and children aged 12 years and above. It is suitable when users want quicker relief from pain, fever, and inflammation.",
         activeIngredient: "Ibuprofen 342 mg",
@@ -322,7 +322,7 @@ export const productItems: ProductItem[] = [
       severities: ["severe"],
     },
     variants: [
-      { id: "standard", label: "12 Tablets", subLabel: "Ibuprofen 200 mg + Paracetamol 500mg", 
+      { id: "standard", label: "12 Tablets", 
         description:
           "A combination pain relief tablet for stronger adult pain symptoms. It combines ibuprofen and paracetamol to provide double-action relief and is positioned for users aged 18 and above.",
         activeIngredient: "Ibuprofen 200 mg + Paracetamol 500 mg",
@@ -378,7 +378,7 @@ export const productItems: ProductItem[] = [
       severities: ["mild", "moderate"],
     },
     variants: [
-      { id: "standard", label: "60ml", subLabel: "Ibuprofen 200 mg", 
+      { id: "standard", label: "60ml",
         description:
           "A children’s liquid ibuprofen product for fever, pain, and inflammation relief. It is designed for children from 6 months to 12 years, with dosage depending on the child’s age group.",
         activeIngredient: "Ibuprofen 100 mg",
@@ -441,8 +441,8 @@ export const productItems: ProductItem[] = [
       { id: "sugar-free-lemon",  label: "Sugar Free Lemon" },
     ] satisfies ProductFlavor[],
     variants: [
-      { id: "6-pack",  label: "6 lozenges",  subLabel: "6 lozenges" },
-      { id: "24-pack", label: "24 lozenges", subLabel: "24 lozenges" },
+      { id: "6-pack",  label: "6 lozenges" },
+      { id: "24-pack", label: "24 lozenges"},
     ],
     activeIngredient: ["Amylmetacresol 0.6 mg", "Dichlorobenzyl 1.2 mg"],
     dosage: [">6 years: 1 lozenge every 2–3 hours", "Maximum 12 lozenges daily"],
@@ -476,9 +476,9 @@ export const productItems: ProductItem[] = [
       severities: ["moderate"],
     },
     variants: [
-      { id: "6s", label: "6 lozenges", subLabel: "6 lozenges", imageId: "strepsils-max-triple-6s", 
+      { id: "6s", label: "6 lozenges", imageId: "strepsils-max-triple-6s", 
         description: "A sore throat lozenge designed for painful  throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat." },
-      { id: "16s", label: "16 lozenges", subLabel: "16 lozenges", imageId: "strepsils-max-triple-16s",
+      { id: "16s", label: "16 lozenges", imageId: "strepsils-max-triple-16s",
         description: "A sore throat lozenge designed for painful  throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat.",
        },
     ],
@@ -521,7 +521,6 @@ export const productItems: ProductItem[] = [
         id: "max-pro", 
         label: "Max Pro",  
         imageId: "strepsils-max-pro", 
-        subLabel: "Max Pro Lozenges",
         description: "A stronger lozenge for swollen, red, and inflamed sore throat symptoms. It is suitable for more severe throat discomfort and provides longer-lasting relief.",
         activeIngredient: "Flurbiprofen 8.75 mg",
         dosage: [">12 years: 1 lozenge every 3–6 hours", "Maximum 5 lozenges daily"],
@@ -543,7 +542,6 @@ export const productItems: ProductItem[] = [
         id: "max-pro-spray", 
         label: "Max Pro Spray", 
         imageId: "strepsils-max-pro-spray", 
-        subLabel: "Max Pro Spray",
         allowedAudiences: ["adult"],
         description: "A targeted throat spray for adults with severe or inflamed sore throat symptoms. The fine mist helps deliver relief directly to the throat, making it convenient for use during the day or night.",
         activeIngredient: "Flurbiprofen 8.75 mg",
@@ -584,8 +582,8 @@ export const productItems: ProductItem[] = [
       severities: ["moderate", "severe"],
     },
     variants: [
-      { id: "6s", label: "6 lozenges", subLabel: "Trial pack" },
-      { id: "16s", label: "16 lozenges", subLabel: "Standard pack" },
+      { id: "6s", label: "6 lozenges"},
+      { id: "16s", label: "16 lozenges"},
     ],
     activeIngredient: ["Lignocaine HCl 10 mg", "2 antiseptics"],
     dosage: ["≥12 years: 1 lozenge every 2 hrs."],
@@ -616,8 +614,8 @@ export const productItems: ProductItem[] = [
       severities: ["mild", "moderate"],
     },
     variants: [
-      { id: "8s", label: "8 lozenges", subLabel: "8 Lozenges", imageId: "strepsils-chesty-cough-8s" },
-      { id: "24s", label: "24 lozenges", subLabel: "24 Lozenges", imageId: "strepsils-chesty-cough-24s" },
+      { id: "8s", label: "8 lozenges", imageId: "strepsils-chesty-cough-8s" },
+      { id: "24s", label: "24 lozenges", imageId: "strepsils-chesty-cough-24s" },
     ],
     activeIngredient: "Ambroxol Hydrochloride 15mg",
     dosage: [">12 years: Up to 2 lozenges per dose", "Maximum 6 lozenges daily"],
@@ -654,7 +652,6 @@ export const productItems: ProductItem[] = [
       {
         id: "bottle-200ml",
         label: "Bottle 200 ml",
-        subLabel: "Family Pack",
         description:
           "A trusted relief option for occasional heartburn. Gaviscon Original works by forming a protective raft over the stomach contents, helping to prevent acid from rising into the esophagus while providing fast, soothing relief from discomfort. Ideal for occasional heartburn after meals.",
         imageId: "gaviscon-original-bottle-200ml"
@@ -662,7 +659,6 @@ export const productItems: ProductItem[] = [
       {
         id: "sachet-5",
         label: "Sachets × 5",
-        subLabel: "On-the-go Single-serve",
         description:
           "5 single-serve sachets — 10 ml each. Convenient for travel and work.",
         imageId: "gaviscon-original-sachet-5"
@@ -670,7 +666,6 @@ export const productItems: ProductItem[] = [
       {
         id: "sachet-24",
         label: "Sachets × 24",
-        subLabel: "On-the-go Single-serve",
         description:
           "24 single-serve sachets — 10 ml each. Convenient for travel and work.",
         imageId: "gaviscon-original-sachet-24"      
@@ -678,7 +673,6 @@ export const productItems: ProductItem[] = [
       {
         id: "tablet-16",
         label: "Tablets × 16",
-        subLabel: "Chewable tablets",
         description:
           "16 chewable tablets — 2 tablets up to 4× daily, ideal when liquid is inconvenient.",
         imageId: "gaviscon-original-tablet-16",
@@ -725,7 +719,6 @@ export const productItems: ProductItem[] = [
       {
         id: "bottle-300ml",
         label: "Bottle 300 ml",
-        subLabel: "Family Pack",
         description:
           "A dual-action relief option for heartburn and indigestion. Gaviscon Double Action not only forms a protective raft to help block acid reflux, but also helps neutralize excess stomach acid for fast and effective symptom relief. It is designed for consumers experiencing both heartburn and indigestion, providing comprehensive relief in one solution.",
         imageId: "gaviscon-double-action-bottle-300ml"
@@ -733,14 +726,12 @@ export const productItems: ProductItem[] = [
       {
         id: "bottle-150ml",
         label: "Bottle 150 ml",
-        subLabel: "Family Pack",
         description: "150 ml liquid bottle — compact and travel-friendly.",
         imageId: "gaviscon-double-action-bottle-150ml"
       },
       {
         id: "sachet-5",
         label: "Sachets × 5",
-        subLabel: "On-the-go Single-serve",
         description:
           "5 single-serve 10 ml sachets — convenient and portion-controlled.",
         imageId: "gaviscon-double-action-sachet-5"
@@ -748,7 +739,6 @@ export const productItems: ProductItem[] = [
       {
         id: "sachet-24",
         label: "Sachets × 24",
-        subLabel: "On-the-go Single-serve",
         description:
           "24 single-serve 10 ml sachets — convenient and portion-controlled.",
         imageId: "gaviscon-double-action-sachet-24"
@@ -756,7 +746,6 @@ export const productItems: ProductItem[] = [
       {
         id: "tablet-16",
         label: "Tablets × 16",
-        subLabel: "Chewable tablets",
         description: "16 chewable tablets — 2 tablets up to 4× daily.",
         imageId: "gaviscon-double-action-tablet-16",
         dosage: [
@@ -808,13 +797,11 @@ export const productItems: ProductItem[] = [
       {
         id: "bottle-150ml",
         label: "Bottle 150 ml",
-        subLabel: "Family Pack",
         imageId: "gaviscon-advance-bottle-150ml"
       },
       {
         id: "sachet-24",
         label: "Sachets × 24",
-        subLabel: "On-the-go Single-serve",
         imageId: "gaviscon-advance-sachet-24"
       },
     ],
