@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { productItems } from "@/data/productFinder";
+import { PRODUCT_PAGES_ENABLED } from "@/lib/featureFlags";
 import ProductDetail from "@/components/products/ProductDetail";
 
 interface ProductPageProps {
@@ -8,7 +9,9 @@ interface ProductPageProps {
 }
 
 // Pre-render a static page for every product at build time.
+// While the feature is disabled we generate no pages at all.
 export function generateStaticParams() {
+  if (!PRODUCT_PAGES_ENABLED) return [];
   return productItems.map((product) => ({ id: product.id }));
 }
 
@@ -22,6 +25,9 @@ export function generateMetadata({ params }: ProductPageProps): Metadata {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
+  // Feature disabled → block direct-link access with a 404. See lib/featureFlags.ts.
+  if (!PRODUCT_PAGES_ENABLED) notFound();
+
   const product = productItems.find((p) => p.id === params.id);
   if (!product) notFound();
   return <ProductDetail product={product} />;

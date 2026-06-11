@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { productItems } from "@/data/productFinder";
+import { PRODUCT_PAGES_ENABLED } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
   title: "Product Library — Reckitt",
@@ -32,6 +34,9 @@ const footerLinks = [
 ];
 
 export default function ProductsPage() {
+  // Feature disabled → block direct-link access with a 404. See lib/featureFlags.ts.
+  if (!PRODUCT_PAGES_ENABLED) notFound();
+
   return (
     <>
       {/* ── Navigation ──────────────────────────────── */}
