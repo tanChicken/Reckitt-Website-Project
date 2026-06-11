@@ -1,6 +1,7 @@
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { audienceOptions, severityOptions } from "@/data/productFinder";
+import { isAudienceAvailable, isSeverityAvailable } from "@/lib/finderRules";
 import type {
   AudienceId,
   FinderAnswers,
@@ -24,19 +25,6 @@ export default function QuestionsStep({
   onBack,
 }: QuestionsStepProps) {
   const canContinue = Boolean(answers.audienceId && answers.severityId);
-
-  // Audiences that are unavailable for the selected body part
-  const disabledAudiences = new Set<AudienceId>(
-    answers.needId === "stomach" ? ["child"] : []
-  );
-
-  // Severities that are unavailable for the selected body part + audience combo
-  const disabledSeverities = new Set<SeverityId>(
-    (answers.needId === "throat" && answers.audienceId === "child") ||
-    (answers.needId === "head"   && answers.audienceId === "teen")
-      ? ["severe"]
-      : []
-  );
 
   return (
     <section
@@ -89,7 +77,7 @@ export default function QuestionsStep({
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {audienceOptions.map((option) => {
             const isSelected = answers.audienceId === option.id;
-            const isDisabled = disabledAudiences.has(option.id);
+            const isDisabled = !isAudienceAvailable(answers.needId, option.id);
 
             return (
               <label
@@ -188,7 +176,11 @@ export default function QuestionsStep({
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {severityOptions.map((option) => {
             const isSelected = answers.severityId === option.id;
-            const isDisabled = disabledSeverities.has(option.id);
+            const isDisabled = !isSeverityAvailable(
+              answers.needId,
+              answers.audienceId,
+              option.id,
+            );
 
             return (
               <label

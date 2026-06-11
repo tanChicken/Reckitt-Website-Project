@@ -12,6 +12,7 @@ import ThroatSymptomStep, {
 import WelcomeStep from "@/components/product-finder/steps/WelcomeStep";
 import Card from "@/components/ui/Card";
 import { trackFunnelEvent } from "@/lib/analytics";
+import { isAudienceAvailable, isSeverityAvailable } from "@/lib/finderRules";
 import { getRecommendation } from "@/lib/recommendation";
 import type {
   AudienceId,
@@ -44,19 +45,37 @@ const STEP_INDEX: Record<WizardStep, number> = {
   result: 4,
 };
 
-function parseAnswers(sp: URLSearchParams): {
-  answers: FinderAnswers;
-  throatSymptomId?: ThroatSymptomId;
+// Read the raw params and strip any combination the UI would not allow, so a
+// hand-typed or shared URL (e.g. ?body=stomach&age=child) can't bypass the
+// availability rules. A disallowed answer is treated as "not chosen".
+function readParams(sp: URLSearchParams): {
+  body?: BodyPartId;
+  symptom?: ThroatSymptomId;
+  age?: AudienceId;
+  severity?: SeverityId;
+  needId?: BodyPartId;
 } {
-  const body = (sp.get("body") as BodyPartId | null) ?? undefined;
-  const symptom = (sp.get("symptom") as ThroatSymptomId | null) ?? undefined;
-  const age = (sp.get("age") as AudienceId | null) ?? undefined;
-  const severity = (sp.get("severity") as SeverityId | null) ?? undefined;
+  const body = (sp.get("body") as BodyPartId | null) || undefined;
+  const symptom = (sp.get("symptom") as ThroatSymptomId | null) || undefined;
+  let age = (sp.get("age") as AudienceId | null) || undefined;
+  let severity = (sp.get("severity") as SeverityId | null) || undefined;
 
   // A "cough" throat symptom maps to the chest product range.
   const needId: BodyPartId | undefined =
     body === "throat" && symptom === "cough" ? "chest" : body;
 
+  // Enforce the availability rules at the data layer (not just in the UI).
+  if (age && !isAudienceAvailable(needId, age)) age = undefined;
+  if (severity && !isSeverityAvailable(needId, age, severity)) severity = undefined;
+
+  return { body, symptom, age, severity, needId };
+}
+
+function parseAnswers(sp: URLSearchParams): {
+  answers: FinderAnswers;
+  throatSymptomId?: ThroatSymptomId;
+} {
+  const { needId, age, severity, symptom } = readParams(sp);
   return {
     answers: {
       needId,
@@ -69,24 +88,38 @@ function parseAnswers(sp: URLSearchParams): {
 }
 
 function deriveStep(sp: URLSearchParams): WizardStep {
+  const { body, symptom, age, severity, needId } = readParams(sp);
   const explicit = sp.get("step") as WizardStep | null;
-  if (explicit && explicit in STEP_INDEX) return explicit;
 
-  const body = sp.get("body");
-  const symptom = sp.get("symptom");
-  const age = sp.get("age");
-  const severity = sp.get("severity");
+  // Heart and chest (cough) skip the questions screen entirely.
+  const skipsQuestions = needId === "heart" || needId === "chest";
+  const complete = Boolean(body) && (skipsQuestions || Boolean(age && severity));
 
-  if (!body) return "welcome";
-  if (body === "throat" && !symptom) return "symptom";
+  // Natural (data-derived) position. Also the fallback when an explicit step is
+  // inconsistent with the answers — e.g. a hand-crafted URL.
+  let natural: WizardStep;
+  if (!body) natural = "welcome";
+  else if (body === "throat" && !symptom) natural = "symptom";
+  else if (!complete) natural = "questions";
+  else natural = "result";
 
-  const effectiveNeed =
-    body === "throat" && symptom === "cough" ? "chest" : body;
-  // Heart and chest skip the questions screen and go straight to the result.
-  if (effectiveNeed === "heart" || effectiveNeed === "chest") return "result";
-
-  if (age && severity) return "result";
-  return "questions";
+  // Trust an explicit step only when it is consistent with the current answers.
+  // This keeps Back/Forward exact while stopping a crafted URL from jumping
+  // forward past an incomplete (or now-stripped, invalid) answer.
+  switch (explicit) {
+    case "welcome":
+      return "welcome";
+    case "need":
+      return "need";
+    case "symptom":
+      return body === "throat" ? "symptom" : natural;
+    case "questions":
+      return body && !skipsQuestions ? "questions" : natural;
+    case "result":
+      return complete ? "result" : natural;
+    default:
+      return natural;
+  }
 }
 
 export default function ProductFinder() {
@@ -121,6 +154,22 @@ export default function ProductFinder() {
       behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   }, [step]);
+
+  // Keep the address bar honest: if it carries an answer the rules don't allow
+  // (typed or shared by hand), strip it so the visible URL matches what is shown
+  // and the bad link can't be re-shared.
+  useEffect(() => {
+    const sp = new URLSearchParams(searchParams.toString());
+    const rawAge = sp.get("age") || undefined;
+    const rawSeverity = sp.get("severity") || undefined;
+    const { age, severity } = readParams(sp);
+    if (rawAge === age && rawSeverity === severity) return;
+
+    if (!age) sp.delete("age");
+    if (!severity) sp.delete("severity");
+    sp.set("step", deriveStep(sp));
+    router.replace(`${pathname}?${sp.toString()}`, { scroll: false });
+  }, [searchParams, pathname, router]);
 
   // Write the given param updates to the URL. `undefined` removes a param.
   // `replace` avoids polluting history for in-place edits (e.g. picking an answer
@@ -170,15 +219,15 @@ export default function ProductFinder() {
   }
 
   function setAudience(audienceId: AudienceId) {
-    // Clear severity if the new audience makes "severe" unavailable.
-    const severeBecomesUnavailable =
-      (answers.needId === "throat" && audienceId === "child") ||
-      (answers.needId === "head" && audienceId === "teen");
     const updates: Record<string, string | undefined> = {
       age: audienceId,
       step: "questions",
     };
-    if (severeBecomesUnavailable && answers.severityId === "severe") {
+    // Clear a previously chosen severity if it isn't available for the new audience.
+    if (
+      answers.severityId &&
+      !isSeverityAvailable(answers.needId, audienceId, answers.severityId)
+    ) {
       updates.severity = undefined;
     }
     navigate(updates, "audience_selected", "replace");
