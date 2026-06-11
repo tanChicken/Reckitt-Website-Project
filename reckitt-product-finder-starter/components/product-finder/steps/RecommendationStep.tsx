@@ -329,6 +329,12 @@ export default function RecommendationStep({
 
                 {/* CTAs */}
                 <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:flex-row sm:gap-3">
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="inline-flex items-center justify-center rounded-lg bg-reckitt-pink px-6 py-3 text-sm font-bold text-white shadow-pink transition-all hover:brightness-110 active:scale-95"
+                  >
+                    View full details
+                  </Link>
                   <Button
                     onClick={onRestart}
                     variant ="primary"

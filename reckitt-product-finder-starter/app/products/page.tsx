@@ -248,7 +248,7 @@ export default function ProductsPage() {
 
                     <div className="mt-auto flex items-center justify-between pt-3 border-t border-border-subtle">
                       <Link
-                        href="#"
+                        href={`/products/${product.id}`}
                         className="flex items-center gap-1 text-sm font-semibold text-reckitt-pink hover:underline"
                       >
                         View Details
