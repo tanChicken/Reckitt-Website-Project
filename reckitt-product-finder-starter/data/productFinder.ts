@@ -726,27 +726,27 @@ export const productItems: ProductItem[] = [
       {
         id: "bottle-150ml",
         label: "Bottle 150 ml",
-        description: "150 ml liquid bottle — compact and travel-friendly.",
+        // description: "150 ml liquid bottle — compact and travel-friendly.",
         imageId: "gaviscon-double-action-bottle-150ml"
       },
       {
         id: "sachet-5",
         label: "Sachets × 5",
-        description:
-          "5 single-serve 10 ml sachets — convenient and portion-controlled.",
+        // description:
+        //   "5 single-serve 10 ml sachets — convenient and portion-controlled.",
         imageId: "gaviscon-double-action-sachet-5"
       },
       {
         id: "sachet-24",
         label: "Sachets × 24",
-        description:
-          "24 single-serve 10 ml sachets — convenient and portion-controlled.",
+        // description:
+        //   "24 single-serve 10 ml sachets — convenient and portion-controlled.",
         imageId: "gaviscon-double-action-sachet-24"
       },
       {
         id: "tablet-16",
         label: "Tablets × 16",
-        description: "16 chewable tablets — 2 tablets up to 4× daily.",
+        // description: "16 chewable tablets — 2 tablets up to 4× daily.",
         imageId: "gaviscon-double-action-tablet-16",
         dosage: [
           "Tablets: 2 tablets up to 4x daily",
