@@ -115,7 +115,7 @@ export const bodySymptoms: SymsptomType[] = [
   },
   {
     id: "stomach",
-    symptom: ["Stomachache", "Indigestion", "Nausea", "Bloating", "Gas"],
+    symptom: ["Stomachache", "Indigestion", "Nausea", "Bloating", "Gas", "Heartburn"],
     icon: "🔥",
   },
 ];
