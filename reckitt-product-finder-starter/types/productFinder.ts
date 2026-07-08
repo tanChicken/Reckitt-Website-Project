@@ -1,3 +1,5 @@
+import type { Localized, LocalizedList, LocalizedTextOrList } from "@/lib/i18n/localized";
+
 export type BodyPartId =
   | "head"
   | "throat"
@@ -19,46 +21,46 @@ export type SafetyLevel = "standard" | "caution" | "professional-advice";
 
 export interface SymsptomType {
   id: BodyPartId;
-  symptom: string[];
+  symptom: LocalizedList;
   icon: string;
 }
 
 export interface ChoiceOption<T extends string> {
   id: T;
-  label: string;
-  description: string;
+  label: Localized;
+  description: Localized;
   icon: string;
 }
 
 export interface ProductFlavor {
   id: string;
-  label: string;
+  label: Localized;
   imageId?: string; // overrides product.id when locating /products/<id>.png
 }
 
 export interface ProductVariant {
   id: string;            // unique within this product's variants
-  label: string;         // primary chip text e.g. "Honey", "200 ml bottle", "24-pack"
-  subLabel?: string;     // optional secondary line under selected variant title
+  label: Localized;      // primary chip text e.g. "Honey", "200 ml bottle", "24-pack"
+  subLabel?: Localized;  // optional secondary line under selected variant title
   imageId?: string;      // overrides product.id when locating /products/<id>.png
-  description?: string;  // overrides product.description when this variant is selected
+  description?: Localized;  // overrides product.description when this variant is selected
   url?: string;          // overrides product.url when this variant is selected
   price?: string;        // optional retail price string, e.g. "$8.99"
-  activeIngredient?: string | string[];  // overrides product.activeIngredient when this variant is selected
-  dosage?: string | string[];            // overrides product.dosage when this variant is selected
-  keyBenefits?: string[];   
+  activeIngredient?: LocalizedTextOrList;  // overrides product.activeIngredient when this variant is selected
+  dosage?: LocalizedTextOrList;            // overrides product.dosage when this variant is selected
+  keyBenefits?: LocalizedList;
   allowedAudiences?: AudienceId[]; // overrides product.suitableFor.audiences when this variant is selected
-  disclaimerPoints?: string[]; // overrides product.disclaimerPoints when this variant is selected
+  disclaimerPoints?: LocalizedList; // overrides product.disclaimerPoints when this variant is selected
 }
 
 export interface ProductItem {
   id: string;
-  brand: string;
-  category: string;
-  description: string;
+  brand: string;          // brand names are kept in their original (Latin) form
+  category: Localized;
+  description: Localized;
   needId: BodyPartId;
   imageLabel: string;
-  tags: string[];
+  tags: LocalizedList;
   url?: string;
   priority?: number; // 1–10, higher wins ties within the same tier. Default 5.
   suitableFor?: {
@@ -67,12 +69,12 @@ export interface ProductItem {
   };
   variants?: ProductVariant[];
   flavors?: ProductFlavor[];
-  activeIngredient?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
-  dosage?: string|string[]; // if array, each item is shown as a separate bullet point in the UI
-  keyBenefits?: string[];
-  disclaimerPoints?: string[];
-  variantLabel?: string;  // label shown above the variant selector, defaults to "Pack Size"
-  disclaimer?: string;    // always shown as the tier disclaimer banner when this product is recommended
+  activeIngredient?: LocalizedTextOrList; // if array, each item is shown as a separate bullet point in the UI
+  dosage?: LocalizedTextOrList; // if array, each item is shown as a separate bullet point in the UI
+  keyBenefits?: LocalizedList;
+  disclaimerPoints?: LocalizedList;
+  variantLabel?: Localized;  // label shown above the variant selector, defaults to "Pack Size"
+  disclaimer?: Localized;    // always shown as the tier disclaimer banner when this product is recommended
 }
 
 export interface FinderAnswers {
@@ -90,7 +92,7 @@ export interface RecommendationResult {
   alternatives: ProductItem[];
   nextSteps: string[];
   matchTier: 1 | 2 | 3; // 1=exact, 2=age matched/severity relaxed, 3=body part only
-  tierDisclaimer?: string; // shown as a banner for tier 2 and 3
+  tierDisclaimer?: Localized; // shown as a banner for tier 2 and 3
 }
 
 export interface FunnelEvent {

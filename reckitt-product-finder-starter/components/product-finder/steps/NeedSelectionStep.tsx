@@ -4,6 +4,8 @@ import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { bodyParts, bodySymptoms } from "@/data/productFinder";
 import { cn } from "@/lib/cn";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { tx, txList } from "@/lib/i18n/localized";
 import type { BodyPartId, FinderAnswers } from "@/types/productFinder";
 import Image from "next/image";
 const dotPositions: Record<BodyPartId, { top: string; left: string }> = {
@@ -28,11 +30,12 @@ export default function NeedSelectionStep({
   onBack,
   onContinue,
 }: NeedSelectionStepProps) {
+  const { t, locale } = useLanguage();
   const [activePartId, setActivePartId] = useState<BodyPartId>("head");
 
   const bodyPart = bodyParts.find((a) => a.id === activePartId);
   const symptoms = bodySymptoms.find((s) => s.id === activePartId);
-  const visibleSymptoms = symptoms?.symptom ?? [];
+  const visibleSymptoms = symptoms ? txList(symptoms.symptom, locale) : [];
   const canContinue = !!activePartId;
 
   return (
@@ -47,7 +50,7 @@ export default function NeedSelectionStep({
           id="need-heading"
           className="mt-2 font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-deep-navy sm:text-3xl lg:text-4xl"
         >
-          Please select the area you’re experiencing discomfort
+          {t("needHeading")}
         </h1>
         {/* <p className="mt-1.5 text-sm leading-6 text-secondary sm:text-base">
           Tap a body area to see relevant symptoms.
@@ -65,7 +68,7 @@ export default function NeedSelectionStep({
         <div className="flex flex-col gap-3">
           <div className="rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
             <p className="mb-3 text-xs font-bold uppercase tracking-widest text-secondary/60">
-              Body Area
+              {t("bodyArea")}
             </p>
             {/*
              * Mobile : horizontal scrollable pills (compact, finger-friendly)
@@ -94,14 +97,14 @@ export default function NeedSelectionStep({
                     <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white transition-transform duration-200 group-hover:scale-105 overflow-hidden">
                       <Image
                         src={area.icon}
-                        alt={`${area.label} icon`}
+                        alt={`${tx(area.label, locale)} icon`}
                         width={20}
                         height={20}
                         className="h-full w-full object-contain"
                       />
                     </div>
 
-                    <span>{area.label}</span>
+                    <span>{tx(area.label, locale)}</span>
                     {isActive && (
                       <svg
                         className="ml-auto hidden md:block shrink-0"
@@ -127,14 +130,14 @@ export default function NeedSelectionStep({
           {/* ── Desktop buttons: below the body area box ─────────────── */}
           <div className="hidden sm:flex sm:items-center sm:justify-start sm:gap-3 mt-6">
             <Button variant="secondary" onClick={onBack} className="text-sm">
-              Previous
+              {t("previous")}
             </Button>
             <Button
               onClick={() => onSelect(activePartId)}
               disabled={!canContinue}
               className="gap-2 px-10"
             >
-              Next
+              {t("next")}
             </Button>
           </div>
         </div>
@@ -154,13 +157,13 @@ export default function NeedSelectionStep({
 
             <img
               src="/body-diagram.png"
-              alt="Body diagram showing selectable areas"
+              alt={t("bodyDiagramAlt")}
               className="relative z-10 h-full w-full object-contain p-4 sm:p-6"
             />
             {/* ── Dynamic Instruction Hint ── */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 rounded-full bg-reckitt-pink/10 px-3 py-1 text-reckitt-pink border border-reckitt-pink/20 shadow-sm animate-pulse whitespace-nowrap">
               <span className="text-[11px] font-bold uppercase tracking-wider">
-                Tap a body area to get started
+                {t("tapToStart")}
               </span>
             </div>
 
@@ -172,7 +175,7 @@ export default function NeedSelectionStep({
                 <button
                   key={part.id}
                   onClick={() => setActivePartId(part.id)}
-                  aria-label={`Select ${part.label}`}
+                  aria-label={`${t("selectedSuffix")} ${tx(part.label, locale)}`}
                   aria-pressed={isActive}
                   className="absolute z-20 -translate-x-1/2 -translate-y-1/2 focus:outline-none"
                   style={{ top: pos.top, left: pos.left }}
@@ -197,7 +200,7 @@ export default function NeedSelectionStep({
             {/* Chest dot — always visible, clicking it selects Throat & Chest */}
             <button
               onClick={() => setActivePartId("throat")}
-              aria-label="Select Throat & Chest"
+              aria-label={tx(bodyParts.find((p) => p.id === "throat")!.label, locale)}
               aria-pressed={activePartId === "throat"}
               className="absolute z-20 -translate-x-1/2 -translate-y-1/2 focus:outline-none"
               style={{ top: dotPositions.chest.top, left: dotPositions.chest.left }}
@@ -224,7 +227,7 @@ export default function NeedSelectionStep({
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white transition-transform duration-200 group-hover:scale-105 overflow-hidden">
                   <Image
                     src={bodyPart.icon}
-                    alt={`${bodyPart.label} icon`}
+                    alt={`${tx(bodyPart.label, locale)} icon`}
                     width={16}
                     height={16}
                     className="h-full w-full object-contain"
@@ -232,7 +235,9 @@ export default function NeedSelectionStep({
                 </div>
 
                 <span className="text-xs font-bold uppercase tracking-wider">
-                  {bodyPart.label} Selected
+                  {locale === "zh"
+                    ? `${t("selectedSuffix")}${tx(bodyPart.label, locale)}`
+                    : `${tx(bodyPart.label, locale)} ${t("selectedSuffix")}`}
                 </span>
               </div>
             )}
@@ -245,7 +250,7 @@ export default function NeedSelectionStep({
           {/* Symptoms covered */}
           <div className="rounded-xl border border-border-subtle bg-white p-4 shadow-sm">
             <p className="mb-3 text-xs font-bold uppercase tracking-widest text-secondary/60">
-              Symptoms Covered
+              {t("symptomsCovered")}
             </p>
             {visibleSymptoms.length > 0 ? (
               <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
@@ -266,7 +271,7 @@ export default function NeedSelectionStep({
               </div>
             ) : (
               <p className="text-sm italic text-secondary">
-                No symptoms recorded for this zone.
+                {t("noSymptoms")}
               </p>
             )}
           </div>
@@ -298,12 +303,9 @@ export default function NeedSelectionStep({
               </svg>
               <p className="text-xs leading-5 text-secondary">
                 <span className="font-semibold text-deep-navy">
-                  Medical Disclaimer:{" "}
+                  {t("medicalDisclaimerLabel")}
                 </span>
-                This tool provides general product-category guidance only and
-                does not constitute medical advice. Always read product labels
-                and consult a healthcare professional if symptoms are severe or
-                persistent.
+                {t("medicalDisclaimerBody")}
               </p>
             </div>
           </div>
@@ -315,14 +317,14 @@ export default function NeedSelectionStep({
       <div
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] backdrop-blur sm:hidden"
         role="group"
-        aria-label="Step navigation"
+        aria-label={t("stepNavigation")}
       >
         <div className="flex items-center gap-2">
           <Button
             variant="secondary"
             onClick={onBack}
             className="min-h-[52px] shrink-0 px-4"
-            aria-label="Back"
+            aria-label={t("back")}
           >
             <svg
               width="16"
@@ -344,7 +346,7 @@ export default function NeedSelectionStep({
             disabled={!canContinue}
             className="min-h-[52px] flex-1 gap-2 text-base font-bold"
           >
-            Next
+            {t("next")}
             {canContinue && (
               <svg
                 width="16"

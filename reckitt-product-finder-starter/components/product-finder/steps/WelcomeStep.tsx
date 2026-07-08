@@ -2,26 +2,23 @@
 
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { DictKey } from "@/lib/i18n/dictionary";
 import Image from "next/image";
 
 interface WelcomeStepProps {
   onStart: () => void;
 }
 
-const slides = [
-  {
-    src: "/family-care.png",
-    alt: "A family using Reckitt products for everyday health and wellness",
-  },
-  {
-    src: "/kiosk.png",
-    alt: "Reckitt SOS Corner kiosk at a pharmacy",
-  },
+const slides: { src: string; altKey: DictKey }[] = [
+  { src: "/family-care.png", altKey: "welcomeSlideFamilyAlt" },
+  { src: "/kiosk.png", altKey: "welcomeSlideKioskAlt" },
 ];
 
 const INTERVAL_MS = 4500;
 
 export default function WelcomeStep({ onStart }: WelcomeStepProps) {
+  const { t } = useLanguage();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -46,7 +43,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-reckitt-pink" />
           </span>
           <span className="text-xs font-semibold text-deep-navy sm:text-sm">
-            Welcome to your SOS Corner
+            {t("welcomeBadge")}
           </span>
         </div>
 
@@ -56,16 +53,16 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             id="welcome-heading"
             className="font-display text-[2.2rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
           >
-            Find the right care{" "}
+            {t("welcomeHeadingLine1")}{" "}
           </h1>
           <h1
             id="welcome-heading"
             className="text-reckitt-pink font-display text-[2.2rem] font-bold leading-[1.1] tracking-tight text-deep-navy sm:text-5xl"
           >
-            in just a few steps
+            {t("welcomeHeadingLine2")}
           </h1>
           <p className="text-base leading-6 text-secondary sm:text-lg sm:leading-7">
-            Answer a few simple questions for a tailored product suggestion.
+            {t("welcomeSubtitle")}
           </p>
         </div>
 
@@ -75,7 +72,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
             onClick={onStart}
             className="min-h-[52px] w-full justify-center px-8 text-base font-bold sm:min-h-11 sm:w-auto"
           >
-            Start Now →
+            {t("startNow")}
           </Button>
         </div>
       </div>
@@ -92,7 +89,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
           >
             <Image
               src={slide.src}
-              alt={slide.alt}
+              alt={t(slide.altKey)}
               fill
               className="object-cover object-[center_55%] lg:object-contain"
               priority={i === 0}
@@ -112,7 +109,7 @@ export default function WelcomeStep({ onStart }: WelcomeStepProps) {
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={`${t("goToSlide")} ${i + 1}`}
                 className="h-1.5 rounded-full bg-white transition-all duration-300"
                 style={{ width: i === active ? "24px" : "6px", opacity: i === active ? 1 : 0.45 }}
               />

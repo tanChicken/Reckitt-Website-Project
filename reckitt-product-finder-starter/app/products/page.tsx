@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { productItems } from "@/data/productFinder";
 import { PRODUCT_PAGES_ENABLED } from "@/lib/featureFlags";
+import { tx, txList } from "@/lib/i18n/localized";
 
 export const metadata: Metadata = {
   title: "Product Library — Reckitt",
@@ -227,7 +228,7 @@ export default function ProductsPage() {
                   <div className="relative aspect-square bg-surface-gray p-8">
                     {/* Category chip */}
                     <span className="absolute left-4 top-4 rounded border border-border-subtle bg-white px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-secondary">
-                      {product.tags[0]}
+                      {txList(product.tags, "en")[0]}
                     </span>
 
                     {/* Image placeholder */}
@@ -247,7 +248,7 @@ export default function ProductsPage() {
                         {product.brand}
                       </h2>
                       <p className="mt-1 text-sm leading-5 text-secondary line-clamp-2">
-                        {product.description}
+                        {tx(product.description, "en")}
                       </p>
                     </div>
 

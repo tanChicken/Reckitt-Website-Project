@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { tx, txLines, txList } from "@/lib/i18n/localized";
 import type {
   ProductFlavor,
   ProductItem,
@@ -19,6 +21,7 @@ interface ProductDetailProps {
  * it is reached through the finder or via a direct /products/<id> link.
  */
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const { locale } = useLanguage();
   const variants: ProductVariant[] = product.variants ?? [];
   const flavors: ProductFlavor[] = product.flavors ?? [];
   const hasVariants = variants.length > 0;
@@ -42,20 +45,34 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     flavors.find((f) => f.id === selectedFlavorId) ?? flavors[0] ?? null;
 
   // Derive display values — flavor+variant combo > flavor-only > variant-only > product fallback.
-  const displayDescription = selectedVariant?.description ?? product.description;
+  // Bilingual fields are resolved to the active language here.
+  const displayDescription = tx(
+    selectedVariant?.description ?? product.description,
+    locale,
+  );
   const displayUrl = selectedVariant?.url ?? product.url;
   const displayImageId =
     selectedFlavor && selectedVariant
       ? `${product.id}-${selectedFlavor.id}-${selectedVariant.id}`
       : selectedFlavor?.imageId ?? selectedVariant?.imageId ?? product.id;
   const displayPrice = selectedVariant?.price;
-  const displayActiveIngredient =
-    selectedVariant?.activeIngredient ?? product.activeIngredient;
-  const displayDosage = selectedVariant?.dosage ?? product.dosage;
-  const displayKeyBenefits =
-    selectedVariant?.keyBenefits ?? product.keyBenefits ?? product.tags;
-  const displayDisclaimerPoints =
-    selectedVariant?.disclaimerPoints ?? product.disclaimerPoints ?? [];
+  const displayActiveIngredient = txLines(
+    selectedVariant?.activeIngredient ?? product.activeIngredient,
+    locale,
+  );
+  const displayDosage = txLines(
+    selectedVariant?.dosage ?? product.dosage,
+    locale,
+  );
+  const displayKeyBenefits = txList(
+    selectedVariant?.keyBenefits ?? product.keyBenefits ?? product.tags,
+    locale,
+  );
+  const displayDisclaimerPoints = txList(
+    selectedVariant?.disclaimerPoints ?? product.disclaimerPoints,
+    locale,
+  );
+  const displayTags = txList(product.tags, locale);
 
   return (
     <>
@@ -99,7 +116,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 {/* Image */}
                 <div className="relative flex items-center justify-center border-border-subtle bg-surface-gray p-6 md:w-2/5 md:border-r md:p-8">
                   <span className="absolute left-3 top-3 z-10 rounded border border-border-subtle bg-white px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-secondary">
-                    {product.tags[0]}
+                    {displayTags[0]}
                   </span>
                   <img
                     key={`${product.id}-${selectedFlavorId ?? "noflavor"}-${selectedVariantId ?? "novariant"}`}
@@ -116,11 +133,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       {product.brand}
                     </h1>
                     <p className="mt-1 text-xs font-semibold text-secondary sm:text-sm">
-                      {product.category}
+                      {tx(product.category, locale)}
                     </p>
                     {selectedVariant?.subLabel && (
                       <p className="mt-1 text-xs font-medium text-reckitt-pink sm:text-sm">
-                        {selectedVariant.subLabel}
+                        {tx(selectedVariant.subLabel, locale)}
                       </p>
                     )}
                     {displayPrice && (
@@ -137,7 +154,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     {hasVariants && (
                       <div className="mb-4 sm:mb-5">
                         <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
-                          {product.variantLabel ?? "Pack Size"}
+                          {product.variantLabel ? tx(product.variantLabel, locale) : "Pack Size"}
                         </p>
                         <div role="radiogroup" aria-label="Product variants" className="flex flex-wrap gap-2">
                           {variants.map((variant) => {
@@ -157,7 +174,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                                     : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
                                 ].join(" ")}
                               >
-                                <span>{variant.label}</span>
+                                <span>{tx(variant.label, locale)}</span>
                                 {variant.price && (
                                   <span className={["text-xs font-bold", isSelected ? "text-white/90" : "text-secondary"].join(" ")}>
                                     {variant.price}
@@ -194,7 +211,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                                     : "border-border-subtle bg-white text-deep-navy hover:border-reckitt-pink/40 hover:bg-surface-container-low",
                                 ].join(" ")}
                               >
-                                <span>{flavor.label}</span>
+                                <span>{tx(flavor.label, locale)}</span>
                               </button>
                             );
                           })}
@@ -204,7 +221,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1.5">
-                      {product.tags.map((tag) => (
+                      {displayTags.map((tag) => (
                         <span
                           key={tag}
                           className="rounded-full border border-border-subtle bg-surface-container-low px-2.5 py-0.5 text-xs font-semibold text-secondary"
@@ -250,18 +267,18 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <div className="border-b border-border-subtle pb-4 sm:pb-5">
                   <p className="text-xs font-bold tracking-wide text-deep-navy">Active Ingredient</p>
                   <p className="mt-1 whitespace-pre-line text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
-                    {Array.isArray(displayActiveIngredient)
+                    {displayActiveIngredient.length > 0
                       ? displayActiveIngredient.join("\n")
-                      : displayActiveIngredient ?? "See product label"}
+                      : "See product label"}
                   </p>
                 </div>
 
                 <div className="border-b border-border-subtle pb-4 sm:pb-5">
                   <p className="text-xs font-bold tracking-wide text-deep-navy">Dosage</p>
                   <p className="mt-1 whitespace-pre-line text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
-                    {Array.isArray(displayDosage)
+                    {displayDosage.length > 0
                       ? displayDosage.join("\n")
-                      : displayDosage ?? "Follow label instructions"}
+                      : "Follow label instructions"}
                   </p>
                 </div>
 

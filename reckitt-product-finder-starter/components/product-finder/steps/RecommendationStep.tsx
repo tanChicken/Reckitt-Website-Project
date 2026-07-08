@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Button from "@/components/ui/Button";
 import { PRODUCT_PAGES_ENABLED } from "@/lib/featureFlags";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { tx, txLines, txList } from "@/lib/i18n/localized";
 import type {
   ProductFlavor,
   ProductVariant,
@@ -23,6 +25,7 @@ export default function RecommendationStep({
   onRestart,
   onBack,
 }: RecommendationStepProps) {
+  const { t, locale } = useLanguage();
   const isStandard = recommendation.safetyLevel === "standard";
   const product = recommendation.primary;
   const variants: ProductVariant[] = product.variants ?? [];
@@ -60,18 +63,34 @@ export default function RecommendationStep({
     flavors.find((f) => f.id === selectedFlavorId) ?? flavors[0] ?? null;
 
   // Derive display values — flavor+variant combo > flavor-only > variant-only > product fallback.
-  const displayDescription =
-    selectedVariant?.description ?? product.description;
+  // Bilingual fields are resolved to the active language here so the JSX stays simple.
+  const displayDescription = tx(
+    selectedVariant?.description ?? product.description,
+    locale,
+  );
   const displayUrl = selectedVariant?.url ?? product.url;
   const displayImageId =
     selectedFlavor && selectedVariant
       ? `${product.id}-${selectedFlavor.id}-${selectedVariant.id}`
       : selectedFlavor?.imageId ?? selectedVariant?.imageId ?? product.id;
   const displayPrice = selectedVariant?.price;
-  const displayActiveIngredient = selectedVariant?.activeIngredient ?? product.activeIngredient;
-  const displayDosage = selectedVariant?.dosage ?? product.dosage;
-  const displayKeyBenefits = selectedVariant?.keyBenefits ?? product.keyBenefits;
-  const displayDisclaimerPoints = selectedVariant?.disclaimerPoints ?? product.disclaimerPoints ?? [];
+  const displayActiveIngredient = txLines(
+    selectedVariant?.activeIngredient ?? product.activeIngredient,
+    locale,
+  );
+  const displayDosage = txLines(
+    selectedVariant?.dosage ?? product.dosage,
+    locale,
+  );
+  const displayKeyBenefits = txList(
+    selectedVariant?.keyBenefits ?? product.keyBenefits ?? product.tags,
+    locale,
+  );
+  const displayDisclaimerPoints = txList(
+    selectedVariant?.disclaimerPoints ?? product.disclaimerPoints,
+    locale,
+  );
+  const displayTags = txList(product.tags, locale);
 
   return (
     <section aria-labelledby="recommendation-heading">
@@ -97,7 +116,7 @@ export default function RecommendationStep({
           <line x1="12" y1="8" x2="4" y2="8" />
           <polyline points="7,5 4,8 7,11" />
         </svg>
-        Back
+        {t("back")}
       </button>
 
       {/* ── Page header ─────────────────────────────── */}
@@ -110,10 +129,10 @@ export default function RecommendationStep({
             id="recommendation-heading"
             className="mt-2 font-display text-[1.6rem] font-bold leading-[1.2] text-deep-navy sm:text-3xl lg:text-4xl"
           >
-            Recommended Relief
+            {t("recommendedRelief")}
           </h1>
           <p className="mt-2 text-sm leading-6 text-secondary">
-            Based on your symptoms, here is your tailored suggestion.
+            {t("recommendationSubtitle")}
           </p>
         </div>
         <Button
@@ -121,7 +140,7 @@ export default function RecommendationStep({
           onClick={onBack}
           className="hidden shrink-0 self-start text-sm sm:inline-flex"
         >
-          ← Back
+          {t("backArrow")}
         </Button>
       </div>
 
@@ -132,8 +151,8 @@ export default function RecommendationStep({
             ⚠
           </span>
           <p className="text-xs leading-5 text-amber-800 sm:text-sm sm:leading-6">
-            <span className="font-semibold">Closest available match — </span>
-            {recommendation.tierDisclaimer}
+            <span className="font-semibold">{t("closestMatch")}</span>
+            {tx(recommendation.tierDisclaimer, locale)}
           </p>
         </div>
       )}
@@ -152,7 +171,7 @@ export default function RecommendationStep({
                     "bg-reckitt-pink/10 text-reckitt-pink",
                   ].join(" ")}
                 >
-                  ✓ Best Match
+                  {t("bestMatch")}
                 </span>
 
                 {/* Product image — re-animates on every variant change */}
@@ -175,21 +194,21 @@ export default function RecommendationStep({
                         {product.brand}
                       </h2>
                       <p className="mt-0.5 text-xs font-semibold text-secondary sm:text-sm">
-                        {product.category}
+                        {tx(product.category, locale)}
                       </p>
                       {selectedVariant?.subLabel && (
                         <p className="mt-1 text-xs font-medium text-reckitt-pink sm:text-sm">
-                          {selectedVariant.subLabel}
+                          {tx(selectedVariant.subLabel, locale)}
                         </p>
                       )}
                     </div>
                     <span
                       className="flex shrink-0 items-center justify-center text-reckitt-pink"
-                      aria-label="Verified recommendation"
+                      aria-label={t("verifiedRecommendation")}
                     >
                       <Image
                         src="/checkIndicator.png"
-                        alt="Verified"
+                        alt={t("verified")}
                         width={50}
                         height={50}
                         className="h-10 w-10 object-contain sm:h-[50px] sm:w-[50px]"
@@ -205,11 +224,11 @@ export default function RecommendationStep({
                   {hasMultipleVariants && (
                     <div className="mb-4 sm:mb-5">
                       <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
-                        {product.variantLabel ?? "Pack Size"}
+                        {product.variantLabel ? tx(product.variantLabel, locale) : t("packSize")}
                       </p>
                       <div
                         role="radiogroup"
-                        aria-label="Product variants"
+                        aria-label={t("productVariants")}
                         className="flex flex-wrap gap-2"
                       >
                         {variants.map((variant) => {
@@ -244,7 +263,7 @@ export default function RecommendationStep({
                                   <polyline points="2,6 5,9 10,3" />
                                 </svg>
                               )} */}
-                              <span>{variant.label}</span>
+                              <span>{tx(variant.label, locale)}</span>
                               {variant.price && (
                                 <span
                                   className={[
@@ -268,11 +287,11 @@ export default function RecommendationStep({
                   {hasFlavors && (
                     <div className="mb-4 sm:mb-5">
                       <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-secondary sm:text-xs">
-                        Flavour
+                        {t("flavour")}
                       </p>
                       <div
                         role="radiogroup"
-                        aria-label="Product flavours"
+                        aria-label={t("productFlavours")}
                         className="flex flex-wrap gap-2"
                       >
                         {flavors.map((flavor) => {
@@ -307,7 +326,7 @@ export default function RecommendationStep({
                                   <polyline points="2,6 5,9 10,3" />
                                 </svg>
                               )} */}
-                              <span>{flavor.label}</span>
+                              <span>{tx(flavor.label, locale)}</span>
                             </button>
                           );
                         })}
@@ -317,7 +336,7 @@ export default function RecommendationStep({
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-1.5">
-                    {product.tags.map((tag) => (
+                    {displayTags.map((tag) => (
                       <span
                         key={tag}
                         className="rounded-full border border-border-subtle bg-surface-container-low px-2.5 py-0.5 text-xs font-semibold text-secondary"
@@ -337,21 +356,21 @@ export default function RecommendationStep({
                       href={`/products/${product.id}`}
                       className="inline-flex items-center justify-center rounded-lg bg-reckitt-pink px-6 py-3 text-sm font-bold text-white shadow-pink transition-all hover:brightness-110 active:scale-95"
                     >
-                      View full details
+                      {t("viewFullDetails")}
                     </Link>
                   )}
                   <Button
                     onClick={onRestart}
                     variant ="primary"
                     className="text-sm font-bold">
-                    Start Over
+                    {t("startOver")}
                   </Button>
                   <Button
                       onClick={() => setDisclaimerOpen(true)}
                       variant="ghost"
                       className="text-sm font-bold bg-white text-surface border border-border-subtle hover:bg-surface-hover hover:text-surface-dark transition-colors"
                     >
-                      Medical Disclaimer
+                      {t("medicalDisclaimer")}
                     </Button>
                   </div>
               </div>
@@ -364,33 +383,33 @@ export default function RecommendationStep({
           <div className="flex h-full flex-col rounded-xl border border-border-subtle bg-white p-4 sm:p-6">
             <div className="mb-4 flex items-center gap-2 sm:mb-5">
               <h2 className="text-xs font-bold uppercase tracking-wider text-deep-navy">
-                Product Details
+                {t("productDetails")}
               </h2>
             </div>
 
             <div className="flex flex-col gap-4 sm:gap-5">
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
-                <p className="text-xs font-bold tracking-wide text-deep-navy">Active Ingredient</p>
+                <p className="text-xs font-bold tracking-wide text-deep-navy">{t("activeIngredient")}</p>
                 <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
-                  {Array.isArray(displayActiveIngredient)
+                  {displayActiveIngredient.length > 0
                     ? displayActiveIngredient.join('\n')
-                    : (displayActiveIngredient ?? "See product label")}
+                    : t("seeProductLabel")}
                 </p>
               </div>
 
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
-                <p className="text-xs font-bold tracking-wide text-deep-navy">Dosage</p>
+                <p className="text-xs font-bold tracking-wide text-deep-navy">{t("dosage")}</p>
                 <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
-                  {Array.isArray(displayDosage)
+                  {displayDosage.length > 0
                     ? displayDosage.join('\n')
-                    : (displayDosage ?? "Follow label instructions")}
+                    : t("followLabelInstructions")}
                 </p>
               </div>
 
               <div>
-                <p className="text-xs font-bold tracking-wide text-deep-navy">Key Benefits</p>
+                <p className="text-xs font-bold tracking-wide text-deep-navy">{t("keyBenefits")}</p>
                 <ul className="mt-1.5 flex flex-col gap-1">
-                  {(displayKeyBenefits ?? product.tags).map((benefit) => (
+                  {displayKeyBenefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-1.5 text-xs leading-5 text-secondary sm:leading-6">
                       <span className="mt-0.5 shrink-0 text-reckitt-pink">✓</span>
                       {benefit}
@@ -455,12 +474,12 @@ export default function RecommendationStep({
               <div className="mb-7 flex items-start gap-3 rounded-xl border border-amber-200/60 bg-amber-50/50 p-4 shadow-sm">
                 <span className="mt-0.5 text-lg" aria-hidden="true">💡</span>
                 <p className="text-sm font-medium leading-relaxed text-amber-900">
-                  This tool is for informational purposes only and does not constitute medical advice.
+                  {t("disclaimerModalIntro")}
                 </p>
               </div>
 
               <div className="flex flex-col gap-5 sm:gap-6">
-                <p className="text-sm font-bold tracking-wide text-deep-navy">Important</p>
+                <p className="text-sm font-bold tracking-wide text-deep-navy">{t("important")}</p>
                 
                 {displayDisclaimerPoints.map((text, i) => (
                   <div key={i} className="flex items-start gap-4">
@@ -484,7 +503,7 @@ export default function RecommendationStep({
                 onClick={() => setDisclaimerOpen(false)}
                 className="w-full justify-center py-3.5 text-sm font-bold shadow-md transition-transform hover:scale-[1.01] active:scale-95"
               >
-                I Understand
+                {t("iUnderstand")}
               </Button>
             </div>
           </div>

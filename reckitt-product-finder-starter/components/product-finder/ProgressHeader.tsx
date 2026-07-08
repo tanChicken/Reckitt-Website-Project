@@ -2,12 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import LanguageToggle from "@/components/ui/LanguageToggle";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { DictKey } from "@/lib/i18n/dictionary";
 
 // 3 visible steps — Safety is an epilogue, not a numbered step
-const steps = [
-  { id: 1, label: "Symptoms" },
-  { id: 2, label: "Assessment" },
-  { id: 3, label: "Results" },
+const steps: { id: number; labelKey: DictKey }[] = [
+  { id: 1, labelKey: "stepSymptoms" },
+  { id: 2, labelKey: "stepAssessment" },
+  { id: 3, labelKey: "stepResults" },
 ];
 
 interface ProgressHeaderProps {
@@ -20,6 +23,7 @@ export default function ProgressHeader({
   currentStep,
   onHomeClick,
 }: ProgressHeaderProps) {
+  const { t } = useLanguage();
   const showProgress = currentStep >= 1 && currentStep <= 5;
   // Steps 1 & 2 both map to display step 1 (Symptoms); step 5 (Safety) shows fully complete
   const effectiveStep = currentStep <= 2 ? 1 : Math.min(currentStep - 1, 4);
@@ -43,7 +47,7 @@ export default function ProgressHeader({
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-reckitt-pink focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white"
           >
-            Skip to main content
+            {t("skipToMain")}
           </a>
 
           {/* Logo — left column */}
@@ -52,7 +56,7 @@ export default function ProgressHeader({
               href="/"
               onClick={handleHomeClick}
               className="flex shrink-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reckitt-pink focus-visible:ring-offset-2"
-              aria-label="Reckitt — back to welcome page"
+              aria-label={t("logoAria")}
             >
               <Image
                 src="/sosLogo.png"
@@ -114,7 +118,7 @@ export default function ProgressHeader({
                                 : "text-secondary opacity-60",
                           ].join(" ")}
                         >
-                          {step.label}
+                          {t(step.labelKey)}
                         </span>
                       </div>
                       {i < steps.length - 1 && (
@@ -132,8 +136,10 @@ export default function ProgressHeader({
             )}
           </div>
 
-          {/* Right column — empty, balances the grid so the centre column stays truly centred */}
-          <div />
+          {/* Right column — language toggle, also balances the grid so the centre column stays centred */}
+          <div className="flex items-center justify-end">
+            <LanguageToggle />
+          </div>
         </div>
       </nav>
     </header>

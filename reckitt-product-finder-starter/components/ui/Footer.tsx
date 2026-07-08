@@ -1,18 +1,26 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { DictKey } from "@/lib/i18n/dictionary";
 
-const footerLinks = [
+const footerLinks: {
+  headingKey: DictKey;
+  links: { labelKey: DictKey; href: string }[];
+}[] = [
   {
-    heading: "Support",
+    headingKey: "supportHeading",
     links: [
-      { label: "Contact us", href: "/contact" },
-      { label: "Privacy policy", href: "/privacy" },
-      { label: "Terms of use", href: "/terms" },
+      { labelKey: "contactUs", href: "/contact" },
+      { labelKey: "privacyPolicy", href: "/privacy" },
+      { labelKey: "termsOfUse", href: "/terms" },
     ],
   },
 ];
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="mt-auto border-t border-white/10 bg-deep-navy">
       <div className="mx-auto max-w-container-max px-4 py-12 sm:px-8 lg:px-16">
@@ -27,19 +35,19 @@ export default function Footer() {
             />
           </div>
 
-          {footerLinks.map(({ heading, links }) => (
-            <div key={heading} className="text-center sm:text-right">
+          {footerLinks.map(({ headingKey, links }) => (
+            <div key={headingKey} className="text-center sm:text-right">
               <h3 className="text-sm font-bold uppercase tracking-widest text-surface-variant">
-                {heading}
+                {t(headingKey)}
               </h3>
               <ul className="mt-4 flex flex-wrap justify-center gap-6 sm:justify-end">
                 {links.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.href}>
                     <Link
                       href={link.href}
                       className="text-base text-secondary-fixed-dim transition-colors duration-150 hover:text-white"
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </li>
                 ))}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { productItems } from "@/data/productFinder";
 import { PRODUCT_PAGES_ENABLED } from "@/lib/featureFlags";
+import { tx } from "@/lib/i18n/localized";
 import ProductDetail from "@/components/products/ProductDetail";
 
 interface ProductPageProps {
@@ -20,7 +21,7 @@ export function generateMetadata({ params }: ProductPageProps): Metadata {
   if (!product) return { title: "Product not found — Reckitt" };
   return {
     title: `${product.brand} — Reckitt`,
-    description: product.description,
+    description: tx(product.description, "en"),
   };
 }
 

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { DictKey } from "@/lib/i18n/dictionary";
 import Image from "next/image";
 
 export type ThroatSymptomId = "sore-throat" | "cough";
@@ -12,37 +14,24 @@ interface ThroatSymptomStepProps {
 
 const throatOptions: {
   id: ThroatSymptomId;
-  label: string;
-  description: string;
-  icon: React.ReactNode;
+  labelKey: DictKey;
+  descriptionKey: DictKey;
+  iconSrc: string;
+  iconAltKey: DictKey;
 }[] = [
   {
     id: "sore-throat",
-    label: "Sore Throat",
-    description: "Pain, scratchiness or irritation in the throat",
-    icon: (
-      <Image
-        src="/sore-throat.png"
-        alt="Sore Throat icon"
-        width={32}
-        height={32}
-        className="object-contain"
-      />
-    ),
+    labelKey: "soreThroatLabel",
+    descriptionKey: "soreThroatDesc",
+    iconSrc: "/sore-throat.png",
+    iconAltKey: "soreThroatIconAlt",
   },
   {
     id: "cough",
-    label: "Cough",
-    description: "Persistent cough, tickle or irritation in the airway",
-    icon: (
-      <Image
-        src="/cough.png" 
-        alt="Cough icon"
-        width={32}
-        height={32}
-        className="object-contain"
-      />
-    ),
+    labelKey: "coughLabel",
+    descriptionKey: "coughDesc",
+    iconSrc: "/cough.png",
+    iconAltKey: "coughIconAlt",
   },
 ];
 
@@ -51,6 +40,7 @@ export default function ThroatSymptomStep({
   onContinue,
   onBack,
 }: ThroatSymptomStepProps) {
+  const { t } = useLanguage();
   const [selected, setSelected] = useState<ThroatSymptomId | undefined>(
     selectedSymptom,
   );
@@ -65,16 +55,16 @@ export default function ThroatSymptomStep({
           id="throat-symptom-heading"
           className="font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-deep-navy sm:text-4xl"
         >
-          What are your throat symptoms?
+          {t("throatHeading")}
         </h1>
         <p className="mt-2 text-sm leading-6 text-secondary sm:text-base">
-          Select the symptom that best describes how you&apos;re feeling.
+          {t("throatSubtitle")}
         </p>
       </div>
 
       {/* ── Options ───────────────────────────────── */}
       <fieldset className="mb-6 sm:mb-8">
-        <legend className="sr-only">Throat symptom type</legend>
+        <legend className="sr-only">{t("throatTypeLegend")}</legend>
 
         <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {throatOptions.map((option) => {
@@ -107,16 +97,22 @@ export default function ThroatSymptomStep({
                 >
                   {/* Icon */}
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-container-low transition-transform duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
-                    {option.icon}
+                    <Image
+                      src={option.iconSrc}
+                      alt={t(option.iconAltKey)}
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
                   </div>
 
                   {/* Content */}
                   <div>
                     <p className="text-sm font-bold text-deep-navy sm:text-base xl:text-sm">
-                      {option.label}
+                      {t(option.labelKey)}
                     </p>
                     <p className="hidden text-xs text-secondary sm:block sm:text-sm">
-                      {option.description}
+                      {t(option.descriptionKey)}
                     </p>
                   </div>
 
@@ -150,7 +146,7 @@ export default function ThroatSymptomStep({
       {/* ── Desktop action bar ────────────────────── */}
       <div className="hidden border-t border-border-subtle pt-6 sm:flex sm:items-center sm:justify-between sm:gap-3">
         <Button variant="secondary" onClick={onBack} className="gap-1.5">
-          Previous
+          {t("previous")}
         </Button>
 
         <Button
@@ -158,7 +154,7 @@ export default function ThroatSymptomStep({
           disabled={!selected}
           className="gap-2 px-10"
         >
-          Next
+          {t("next")}
         </Button>
       </div>
 
@@ -166,14 +162,14 @@ export default function ThroatSymptomStep({
       <div
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur sm:hidden"
         role="group"
-        aria-label="Step navigation"
+        aria-label={t("stepNavigation")}
       >
         <div className="flex items-center gap-2">
           <Button
             variant="secondary"
             onClick={onBack}
             className="min-h-[52px] shrink-0 px-4"
-            aria-label="Back"
+            aria-label={t("back")}
           >
             <svg
               width="16"
@@ -195,7 +191,7 @@ export default function ThroatSymptomStep({
             disabled={!selected}
             className="min-h-[52px] flex-1 gap-2 text-base font-bold"
           >
-            Next
+            {t("next")}
             <svg
               width="16"
               height="16"

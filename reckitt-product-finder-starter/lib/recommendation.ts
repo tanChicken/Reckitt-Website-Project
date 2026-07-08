@@ -1,4 +1,5 @@
 import { productItems } from "@/data/productFinder";
+import type { Localized } from "@/lib/i18n/localized";
 import type { FinderAnswers, ProductItem, RecommendationResult, AudienceId,} from "@/types/productFinder";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -40,7 +41,7 @@ function pickProducts(answers: FinderAnswers): {
   primary: ProductItem;
   alternatives: ProductItem[];
   matchTier: 1 | 2 | 3;
-  tierDisclaimer?: string;
+  tierDisclaimer?: Localized;
 } {
   const forBodyPart = productItems.filter((p) => p.needId === answers.needId);
 
@@ -51,8 +52,10 @@ function pickProducts(answers: FinderAnswers): {
       primary: fallback,
       alternatives: [],
       matchTier: 3,
-      tierDisclaimer:
-        "No products in our current range cover this area. Please consult a pharmacist or doctor for guidance.",
+      tierDisclaimer: {
+        en: "No products in our current range cover this area. Please consult a pharmacist or doctor for guidance.",
+        zh: "我们目前的产品系列尚未涵盖此部位。请咨询药剂师或医生以获取指导。",
+      },
     };
   }
 
@@ -75,8 +78,10 @@ function pickProducts(answers: FinderAnswers): {
       primary: tier2[0],
       alternatives: tier2.slice(1),
       matchTier: 2,
-      tierDisclaimer:
-        "No product in our range exactly matches your reported severity level. The suggestion below is the closest match for your age group — check the label carefully or speak to a pharmacist.",
+      tierDisclaimer: {
+        en: "No product in our range exactly matches your reported severity level. The suggestion below is the closest match for your age group — check the label carefully or speak to a pharmacist.",
+        zh: "我们的产品系列中没有与您所述严重程度完全匹配的产品。以下建议是最适合您年龄段的最接近选择——请仔细阅读标签或咨询药剂师。",
+      },
     };
   }
 
@@ -88,8 +93,10 @@ function pickProducts(answers: FinderAnswers): {
     primary: tier3[0],
     alternatives: tier3.slice(1),
     matchTier: 3,
-    tierDisclaimer:
-      "No product in our range is specifically recommended for your age group with this symptom. The suggestion below is the closest available — always consult a pharmacist or doctor before use.",
+    tierDisclaimer: {
+      en: "No product in our range is specifically recommended for your age group with this symptom. The suggestion below is the closest available — always consult a pharmacist or doctor before use.",
+      zh: "我们的产品系列中没有专门针对您所在年龄段此症状推荐的产品。以下是最接近的可用建议——使用前请务必咨询药剂师或医生。",
+    },
   };
 }
 
@@ -100,7 +107,7 @@ function buildResult(
   primary: ProductItem,
   alternatives: ProductItem[],
   matchTier: 1 | 2 | 3,
-  tierDisclaimer?: string
+  tierDisclaimer?: Localized
 ): RecommendationResult {
   // Severe or unsure → always redirect to professional advice
   const needsProfessionalAdvice =

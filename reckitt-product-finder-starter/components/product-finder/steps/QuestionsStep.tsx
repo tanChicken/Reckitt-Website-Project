@@ -2,6 +2,8 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { audienceOptions, severityOptions } from "@/data/productFinder";
 import { isAudienceAvailable, isSeverityAvailable } from "@/lib/finderRules";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { tx } from "@/lib/i18n/localized";
 import type {
   AudienceId,
   FinderAnswers,
@@ -24,6 +26,7 @@ export default function QuestionsStep({
   onContinue,
   onBack,
 }: QuestionsStepProps) {
+  const { t, locale } = useLanguage();
   const canContinue = Boolean(answers.audienceId && answers.severityId);
 
   return (
@@ -56,10 +59,10 @@ export default function QuestionsStep({
           id="questions-heading"
           className="font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-deep-navy sm:text-4xl"
         >
-          Tell us a little more
+          {t("tellUsMore")}
         </h1>
         <p className="mt-2 text-sm leading-6 text-secondary sm:text-base">
-          Answer two quick questions to personalise your recommendation.
+          {t("tellUsMoreSubtitle")}
         </p>
       </div>
 
@@ -67,7 +70,7 @@ export default function QuestionsStep({
       <fieldset className="mb-6 sm:mb-8">
         <legend className="mb-3 block">
           <span className="block text-lg font-bold text-deep-navy sm:text-base">
-            Who is this for?
+            {t("whoIsThisFor")}
           </span>
           {/* <span className="mt-0.5 block text-xs text-secondary sm:text-sm">
             Affects safety guidance.
@@ -124,14 +127,12 @@ export default function QuestionsStep({
                   {/* Content */}
                   <div>
                     <p className={`text-sm font-bold sm:text-base xl:text-sm ${isDisabled ? "text-secondary" : "text-deep-navy"}`}>
-                      {option.label}
+                      {tx(option.label, locale)}
                     </p>
                     <p className="hidden text-xs text-secondary xl:block">
-                      {isDisabled
-                        ? option.description
-                        : option.id === "child" && answers.needId === "head"
-                          ? "6 months – 12 years old"
-                          : option.description}
+                      {!isDisabled && option.id === "child" && answers.needId === "head"
+                        ? t("childHeadAge")
+                        : tx(option.description, locale)}
                     </p>
                   </div>
 
@@ -166,7 +167,7 @@ export default function QuestionsStep({
       <fieldset className="mb-6 sm:mb-8">
         <legend className="mb-3 block">
           <span className="block text-lg font-bold text-deep-navy sm:text-base">
-            How severe is it?
+            {t("howSevere")}
           </span>
           {/* <span className="mt-0.5 block text-xs text-secondary sm:text-sm">
             Not a diagnosis — helps tailor the suggestion.
@@ -227,10 +228,10 @@ export default function QuestionsStep({
                   {/* Content */}
                   <div>
                     <p className={`text-sm font-bold sm:text-base xl:text-sm ${isDisabled ? "text-secondary" : "text-deep-navy"}`}>
-                      {option.label}
+                      {tx(option.label, locale)}
                     </p>
                     <p className="hidden text-xs text-secondary xl:block">
-                      {option.description}
+                      {tx(option.description, locale)}
                     </p>
                   </div>
 
@@ -278,7 +279,7 @@ export default function QuestionsStep({
             <line x1="12" y1="8" x2="4" y2="8" />
             <polyline points="7,5 4,8 7,11" />
           </svg> */}
-          Previous
+          {t("previous")}
         </Button>
 
         <Button
@@ -286,7 +287,7 @@ export default function QuestionsStep({
           disabled={!canContinue}
           className="gap-2 px-10"
         >
-          Next
+          {t("next")}
           {/* {canContinue && (
             <svg
               width="14"
@@ -310,14 +311,14 @@ export default function QuestionsStep({
       <div
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border-subtle bg-white/95 px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur sm:hidden"
         role="group"
-        aria-label="Step navigation"
+        aria-label={t("stepNavigation")}
       >
         <div className="flex items-center gap-2">
           <Button
             variant="secondary"
             onClick={onBack}
             className="min-h-[52px] shrink-0 px-4"
-            aria-label="Back"
+            aria-label={t("back")}
           >
             <svg
               width="16"
@@ -339,7 +340,7 @@ export default function QuestionsStep({
             disabled={!canContinue}
             className="min-h-[52px] flex-1 gap-2 text-base font-bold"
           >
-            Next
+            {t("next")}
             <svg
               width="16"
               height="16"

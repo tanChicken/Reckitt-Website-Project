@@ -11,6 +11,8 @@ import ThroatSymptomStep, {
 } from "@/components/product-finder/steps/ThroatSymptomStep";
 import WelcomeStep from "@/components/product-finder/steps/WelcomeStep";
 import Card from "@/components/ui/Card";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { DictKey } from "@/lib/i18n/dictionary";
 import { trackFunnelEvent } from "@/lib/analytics";
 import { isAudienceAvailable, isSeverityAvailable } from "@/lib/finderRules";
 import { getRecommendation } from "@/lib/recommendation";
@@ -123,6 +125,7 @@ function deriveStep(sp: URLSearchParams): WizardStep {
 }
 
 export default function ProductFinder() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -325,20 +328,20 @@ export default function ProductFinder() {
               />
             </div>
 
-            {footerLinks.map(({ heading, links }) => (
-              <div key={heading} className="text-center sm:text-right">
+            {footerLinks.map(({ headingKey, links }) => (
+              <div key={headingKey} className="text-center sm:text-right">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-surface-variant">
-                  {heading}
+                  {t(headingKey)}
                 </h3>
 
                 <ul className="mt-4 flex flex-wrap justify-center gap-6 sm:justify-end">
                   {links.map((link) => (
-                    <li key={link.label}>
+                    <li key={link.href}>
                       <Link
                         href={link.href}
                         className="text-base text-secondary-fixed-dim transition-colors duration-150 hover:text-white"
                       >
-                        {link.label}
+                        {t(link.labelKey)}
                       </Link>
                     </li>
                   ))}
@@ -352,13 +355,16 @@ export default function ProductFinder() {
   );
 }
 
-const footerLinks = [
+const footerLinks: {
+  headingKey: DictKey;
+  links: { labelKey: DictKey; href: string }[];
+}[] = [
   {
-    heading: "Support",
+    headingKey: "supportHeading",
     links: [
-      { label: "Contact us", href: "/contact" },
-      { label: "Privacy policy", href: "/privacy" },
-      { label: "Terms of use", href: "/terms" },
+      { labelKey: "contactUs", href: "/contact" },
+      { labelKey: "privacyPolicy", href: "/privacy" },
+      { labelKey: "termsOfUse", href: "/terms" },
     ],
   },
 ];
