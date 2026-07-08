@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Reckitt Product Finder",
+  title: "SOS Care",
   description: "Find the right health, hygiene, or home care product in under a minute.",
 };
 
