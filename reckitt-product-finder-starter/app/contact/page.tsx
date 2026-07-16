@@ -14,26 +14,26 @@ const copy = {
     en: "Got a question or need support? We're here to help.",
     zh: "有疑问或需要帮助？我们随时为您提供支持。",
   },
-  getInTouch: { en: "Get in Touch", zh: "联系方式" },
+  getInTouch: { en: "Get in Touch", zh: "联系我们" },
   getInTouchBody: {
     en: "You can reach out to our Consumer Care team via phone or email.",
-    zh: "您可以通过电话或电子邮件联系我们的消费者关怀团队。",
+    zh: "您可以通过电话或电子邮件联系我们的消费者服务团队。",
   },
   phone: { en: "Phone", zh: "电话" },
   email: { en: "Email", zh: "邮箱" },
   hours: { en: "Hours", zh: "服务时间" },
   hoursValue: {
     en: "Monday – Friday, 9:00 AM – 6:00 PM, excluding public holidays.",
-    zh: "周一至周五，上午9:00 – 下午6:00（公共假期除外）。",
+    zh: "星期一至星期五，上午9:00 – 下午6:00（公共假期除外）",
   },
   safetyHeading: { en: "Product Safety & Guidance", zh: "产品安全与使用指导" },
   safetyBody1: {
     en: "Before using any product, please read the product label and follow the directions for use carefully. If you are unsure whether a product is suitable for you or have questions regarding usage, feel free to contact us for guidance.",
-    zh: "在使用任何产品之前，请仔细阅读产品标签并遵照使用说明操作。如您不确定某产品是否适合您使用，或对使用方法有任何疑问，欢迎随时联系我们寻求指导。",
+    zh: "在使用任何产品之前，请先仔细阅读产品标签并严格按照使用说明操作。如您不确定产品是否适合您，或对产品的使用方法有任何疑问，欢迎联系我们，我们将为您提供相关指导。",
   },
   safetyBody2: {
     en: "If you experience any discomfort or an unexpected reaction after using a product, please discontinue use immediately. If symptoms persist, kindly seek advice from a healthcare professional.",
-    zh: "如在使用产品后出现任何不适或意外反应，请立即停止使用。如症状持续，请及时咨询医疗专业人员。",
+    zh: "如在使用产品后出现任何不适或异常反应，请立即停止使用。如症状持续，请及时咨询医疗专业人士。",
   },
 } satisfies Record<string, Localized>;
 

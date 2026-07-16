@@ -119,21 +119,21 @@ export const audienceOptions: ChoiceOption<AudienceId>[] = [
   {
     id: "adult",
     label: { en: "Adult", zh: "成人" },
-    description: { en: "18 years old and above.", zh: "18岁及以上。" },
+    description: { en: "18 years old and above", zh: "18岁及以上" },
     icon: "/adult.png",
   },
   {
     id: "teen",
     label: { en: "Teen", zh: "青少年" },
-    description: { en: "13–17 years old.", zh: "13-17岁。" },
+    description: { en: "13–17 years old", zh: "13-17岁" },
     icon: "/teen.png",
   },
   {
     id: "child",
     label: { en: "Child", zh: "儿童" },
     description: {
-      en: "Under 13 years old, but above 6 years.",
-      zh: "13岁以下，6岁以上。",
+      en: "Under 13 years old, but above 6 years",
+      zh: "13岁以下，6岁以上",
     },
     icon: "/child.png",
   },
@@ -610,7 +610,7 @@ export const productItems: ProductItem[] = [
         "Strepsils are suitable for adults & children above 6 years old.",
         "Remember young children can choke on lozenges.",
         "Keep out of the reach of children.",
-        "Do not exceed the stated dose. ",
+        "Do not exceed the stated dose.",
         "Read the instructions carefully before use.",
       ],
       zh: [
@@ -627,7 +627,7 @@ export const productItems: ProductItem[] = [
     brand: "Strepsils Max Triple Action",
     category: { en: "Sore throat relief — moderate", zh: "缓解喉咙痛 - 中度" },
     description: {
-      en: "A sore throat lozenge formulated for painful throat symptoms. It relieves pain, fights infection, and soothes the throat for  effective relief.",
+      en: "A sore throat lozenge formulated for painful throat symptoms. It relieves pain, fights infection, and soothes the throat for effective relief.",
       zh: "专为缓解喉咙疼痛症状而设计的润喉糖。含有麻醉效果以舒缓喉咙疼痛和有效缓解剧烈的刺痛感，既能对抗感染。",
     },
     needId: "throat",
@@ -648,7 +648,7 @@ export const productItems: ProductItem[] = [
         label: { en: "6 lozenges", zh: "6粒含片" },
         imageId: "strepsils-max-triple-6s",
         description: {
-          en: "A sore throat lozenge designed for painful  throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat.",
+          en: "A sore throat lozenge designed for painful throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat.",
           zh: "专为缓解喉咙疼痛症状而设计的润喉糖。含有麻醉效果以舒缓喉咙疼痛和有效缓解剧烈的刺痛感，既能对抗感染。",
         },
       },
@@ -657,7 +657,7 @@ export const productItems: ProductItem[] = [
         label: { en: "16 lozenges", zh: "16粒含片" },
         imageId: "strepsils-max-triple-16s",
         description: {
-          en: "A sore throat lozenge designed for painful  throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat.",
+          en: "A sore throat lozenge designed for painful throat condition, helping relieve sharp, stabbing pain while fighting infection and providing a numbing effect to soothe sore throat.",
           zh: "专为缓解喉咙疼痛症状而设计的润喉糖。含有麻醉效果以舒缓喉咙疼痛和有效缓解剧烈的刺痛感，既能对抗感染。",
         },
       },
@@ -686,7 +686,7 @@ export const productItems: ProductItem[] = [
         "Strepsils are suitable for adults & children above 6 years old.",
         "Remember young children can choke on lozenges.",
         "Keep out of the reach of children.",
-        "Do not exceed the stated dose. ",
+        "Do not exceed the stated dose.",
         "Read the instructions carefully before use.",
       ],
       zh: [
@@ -846,8 +846,8 @@ export const productItems: ProductItem[] = [
       zh: ["盐酸利多卡因 10毫克", "2种抗菌成分"],
     },
     dosage: {
-      en: ["≥12 years: 1 lozenge every 2 hrs."],
-      zh: ["12岁以上：每2小时含服1粒。"],
+      en: ["≥12 years: 1 lozenge every 2 hrs"],
+      zh: ["12岁以上：每2小时含服1粒"],
     },
     keyBenefits: {
       en: [
@@ -899,7 +899,7 @@ export const productItems: ProductItem[] = [
       { id: "8s", label: { en: "8 lozenges", zh: "8粒含片" }, imageId: "strepsils-chesty-cough-8s" },
       { id: "24s", label: { en: "24 lozenges", zh: "24粒含片" }, imageId: "strepsils-chesty-cough-24s" },
     ],
-    activeIngredient: { en: "Ambroxol Hydrochloride 15mg", zh: "盐酸氨溴索 15毫克" },
+    activeIngredient: { en: "Ambroxol Hydrochloride 15 mg", zh: "盐酸氨溴索 15毫克" },
     dosage: {
       en: [">12 years: Up to 2 lozenges per dose", "Maximum 6 lozenges daily"],
       zh: ["12岁以上的人群：每次最多2粒", "每日最多6粒"],
@@ -1245,7 +1245,7 @@ export const productItems: ProductItem[] = [
     },
     variants: [{ id: "standard", label: { en: "90 Tablets", zh: "90片" } }],
     activeIngredient: {
-      en: ["Aspirin 100 mg", "Glycine 45mg"],
+      en: ["Aspirin 100 mg", "Glycine 45 mg"],
       zh: ["阿司匹林 100毫克", "甘氨酸 45毫克"],
     },
     dosage: {
