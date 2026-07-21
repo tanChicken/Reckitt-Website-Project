@@ -14,10 +14,12 @@ export const metadata: Metadata = {
 const categories = [
   { id: "all",     label: "All Products", count: productItems.length                                     },
   { id: "head",    label: "Head & Pain",  count: productItems.filter((p) => p.needId === "head").length  },
+  { id: "mouth",   label: "Mouth",        count: productItems.filter((p) => p.needId === "mouth").length },
   { id: "throat",  label: "Throat",       count: productItems.filter((p) => p.needId === "throat").length },
   { id: "chest",   label: "Chest & Cough",count: productItems.filter((p) => p.needId === "chest").length },
   { id: "heart",   label: "Heart",        count: productItems.filter((p) => p.needId === "heart").length  },
   { id: "stomach", label: "Digestive",    count: productItems.filter((p) => p.needId === "stomach").length},
+  { id: "bowel",   label: "Bowel",        count: productItems.filter((p) => p.needId === "bowel").length  },
 ];
 
 const navLinks = [
