@@ -55,6 +55,12 @@ export const bodyParts: ChoiceOption<BodyPartId>[] = [
     icon: "/head.png",
   },
   {
+    id: "mouth",
+    label: "Mouth",
+    description: "Mouth and gum-related symptoms.",
+    icon: "/mouth.svg",
+  },
+  {
     id: "throat",
     label: "Throat & Chest",
     description: "Throat and chest-related symptoms.",
@@ -72,12 +78,23 @@ export const bodyParts: ChoiceOption<BodyPartId>[] = [
     description: "Stomach-related symptoms.",
     icon: "/stomach.png",
   },
+  {
+    id: "bowel",
+    label: "Bowel",
+    description: "Bowel-related symptoms.",
+    icon: "/bowel.svg",
+  },
 ];
 export const bodySymptoms: SymsptomType[] = [
   {
     id: "head",
     symptom: ["Headache", "Migraine", "Fever", "Dental Pain"],
     icon: "🧠",
+  },
+  {
+    id: "mouth",
+    symptom: ["Mouth Ulcers", "Denture Sore Spots", "Cold Sores", "Teething"],
+    icon: "👄",
   },
   {
     id: "throat",
@@ -117,6 +134,11 @@ export const bodySymptoms: SymsptomType[] = [
     id: "stomach",
     symptom: ["Stomachache", "Indigestion", "Nausea", "Bloating", "Gas", "Heartburn"],
     icon: "🔥",
+  },
+  {
+    id: "bowel",
+    symptom: ["Constipation"],
+    icon: "🌿",
   },
 ];
 export const audienceOptions: ChoiceOption<AudienceId>[] = [
@@ -859,5 +881,103 @@ export const productItems: ProductItem[] = [
     ],
     disclaimer:
       "The product in our range is specifically recommended by healthcare professionals for the prevention of heart symptoms. It does not provide immediate relief to these symptoms in an emergency. Always consult a pharmacist or doctor before use.",
+  },
+
+  // ── MOUTH — Bonjela ───────────────────────────────────────────────────────
+  {
+    id: "bonjela-gel",
+    brand: "Bonjela Gel",
+    category: "Fast-acting mouth ulcer & teething pain relief",
+    description:
+      "Pain relieving gel which also reduces inflammation and helps fight infection in teething, mouth ulcers, denture sore spots and cold sores. Clinically shown to aid the healing and relieve the pain of mouth ulcers caused by braces and dentures. For topical oral use — not for children under 4 months old.",
+    needId: "mouth",
+    imageLabel: "BJ",
+    tags: ["Fast Acting", "Sugar-Free", "Mouth Ulcer"],
+    url: "https://www.bonjela.com.au/",
+    priority: 5,
+    suitableFor: {
+      audiences: ["adult", "teen", "child"],
+      severities: ["mild", "moderate"],
+    },
+    variants: [{ id: "standard", label: "15 g Tube" }],
+    activeIngredient: [
+      "Choline salicylate 8.714% w/w",
+      "Cetalkonium chloride 0.010% w/w",
+      "Also contains ethanol (33.45% w/w), glycerol, menthol, hypromellose 4500, star anise oil, sodium saccharin and water",
+    ],
+    dosage: [
+      "Adults: massage approximately 1 cm of gel onto the sore area",
+      "Children from 4 months: massage approximately 0.5 cm onto the sore area",
+      "May be repeated after 3 hours; maximum 6 doses in 24 hours",
+      "Denture sores: apply to the sore area and leave at least 30 minutes before reinserting dentures",
+      "Do not apply directly to the dentures",
+      "Not suitable for babies under 4 months",
+    ],
+    keyBenefits: [
+      "Fast-acting relief for mouth ulcers and teething pain",
+      "Soothes sore spots caused by braces and dentures",
+      "Sugar-free formula",
+      "Contains choline salicylate for pain relief",
+      "Contains cetalkonium chloride, an antiseptic agent",
+      "Easy topical application directly to affected areas",
+    ],
+    disclaimerPoints: [
+      "Always read the label before use. Do not exceed the stated dose — in case of overdose, seek medical advice.",
+      "Bonjela should not be used by children under 4 months, or by patients with a history of salicylate sensitivity, active peptic ulcer or haemophilia.",
+      "Preparations containing aspirin should not be given to young children during treatment with Bonjela, to avoid any risk of excessive salicylate levels.",
+      "Salicylates may precipitate bronchospasm and induce attacks of asthma in susceptible subjects.",
+      "Do not use this product if you are taking medicine for blood clots or gout, or if you have a stomach ulcer. If you are pregnant, consult your doctor before using this product.",
+      "Ethanol may be unsuitable for some patients, particularly those with epilepsy or brain damage, or who cannot tolerate alcohol.",
+      "Glycerol can be harmful in high doses and may cause headache, stomach upset and diarrhoea. If symptoms persist for more than 7 days or you have a stomach disorder, consult your pharmacist, doctor or dentist.",
+    ],
+    disclaimer:
+      "The product in our range is a fast acting gel for teething and mouth ulcers. It does not provide immediate relief to these symptoms in an emergency. Always consult a pharmacist or doctor before use.",
+  },
+
+  // ── BOWEL — Senokot ───────────────────────────────────────────────────────
+  {
+    id: "senokot-tablets",
+    brand: "Senokot Tablets",
+    category: "Relief of occasional constipation",
+    description:
+      "Stimulant laxative containing natural senna that provides relief from occasional constipation by stimulating bowel movement and helping restore regularity. Not recommended for children 18 years old and under.",
+    needId: "bowel",
+    imageLabel: "SK",
+    tags: ["Natural Senna", "Constipation Relief", "Adults only"],
+    url: "https://www.senokot.com.au/",
+    priority: 5,
+    suitableFor: {
+      audiences: ["adult"],
+      severities: ["mild", "moderate"],
+    },
+    variants: [{ id: "standard", label: "60 Tablets" }],
+    activeIngredient: [
+      "Standardised senna equivalent to 7.5 mg total sennosides per tablet",
+      "In a base containing lactose",
+    ],
+    dosage: [
+      "Adults, the elderly and children over 18 years: swallow one to two tablets at night",
+      "Children 18 years and under: not recommended",
+      "New users should start with the lowest dose and increase to the maximum dose if necessary",
+      "Once regularity has been regained the dose should be reduced and can usually be stopped",
+      "Senokot usually acts within 8–12 hours; if there is no bowel movement within three days of use, consult your doctor",
+      "Normally sufficient to take two to three times a week. Use for more than 1 week requires medical supervision",
+    ],
+    keyBenefits: [
+      "Effective relief of occasional constipation",
+      "Contains natural senna (plant-derived active ingredient)",
+      "Works in 8–12 hours",
+      "Gentle on the bowel",
+    ],
+    disclaimerPoints: [
+      "Always read the label before use.",
+      "Do not give to children 18 years old and under.",
+      "Tell a doctor or pharmacist if symptoms worsen or persist during use, if there is no bowel movement within 3 days of use, or if you need to take laxatives every day or abdominal pain persists.",
+      "If you miss a dose, take your next dose at the usual time. Do not take two doses at the same time to make up for a missed dose. Always consult your doctor if you need further advice.",
+      "Do not exceed the stated dose. If you accidentally take too many tablets, consult your doctor and take this leaflet with you.",
+      "Consult your doctor or pharmacist for advice if you are taking or have recently taken any other medicines, including medicines obtained without a prescription.",
+    ],
+    disclaimer:
+      "The product in our range is specifically for relief of occasional constipation. It does not provide immediate relief to these symptoms in an emergency. Always consult a pharmacist or doctor before use.",
   },
 ];

@@ -1,9 +1,11 @@
 export type BodyPartId =
   | "head"
+  | "mouth"
   | "throat"
   | "heart"
   | "chest"
-  | "stomach";
+  | "stomach"
+  | "bowel";
 
 export type AudienceId = "adult" | "teen" | "child" | "someone-else";
 export type SeverityId = "mild" | "moderate" | "severe" | "not-sure";

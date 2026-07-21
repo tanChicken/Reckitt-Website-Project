@@ -27,7 +27,7 @@ import Link from "next/link";
 // The whole funnel is driven by the query string so every screen is shareable
 // and the browser Back/Forward buttons work. Param contract:
 //   step      welcome | need | symptom | questions | result   (navigational stage)
-//   body      head | throat | heart | stomach                 (NeedSelectionStep)
+//   body      head | mouth | throat | heart | stomach | bowel (NeedSelectionStep)
 //   symptom   sore-throat | cough                             (throat sub-question)
 //   age       adult | teen | child | someone-else             (audience)
 //   severity  mild | moderate | severe | not-sure
@@ -44,6 +44,17 @@ const STEP_INDEX: Record<WizardStep, number> = {
   questions: 3,
   result: 4,
 };
+
+// Body areas served by a single product that isn't age/severity dependent
+// (Heart → Cardiprin, Mouth → Bonjela, Bowel → Senokot). These jump straight
+// from the body-area step to the result, skipping the questions screen.
+const SINGLE_PRODUCT_BODY_PARTS: readonly BodyPartId[] = ["heart", "mouth", "bowel"];
+
+function skipsQuestions(needId: BodyPartId | undefined): boolean {
+  // "chest" is only ever reached via the throat → cough sub-question, which
+  // already resolves to a single product range.
+  return needId === "chest" || SINGLE_PRODUCT_BODY_PARTS.includes(needId as BodyPartId);
+}
 
 // Read the raw params and strip any combination the UI would not allow, so a
 // hand-typed or shared URL (e.g. ?body=stomach&age=child) can't bypass the
@@ -91,9 +102,8 @@ function deriveStep(sp: URLSearchParams): WizardStep {
   const { body, symptom, age, severity, needId } = readParams(sp);
   const explicit = sp.get("step") as WizardStep | null;
 
-  // Heart and chest (cough) skip the questions screen entirely.
-  const skipsQuestions = needId === "heart" || needId === "chest";
-  const complete = Boolean(body) && (skipsQuestions || Boolean(age && severity));
+  const skipQuestions = skipsQuestions(needId);
+  const complete = Boolean(body) && (skipQuestions || Boolean(age && severity));
 
   // Natural (data-derived) position. Also the fallback when an explicit step is
   // inconsistent with the answers — e.g. a hand-crafted URL.
@@ -114,7 +124,7 @@ function deriveStep(sp: URLSearchParams): WizardStep {
     case "symptom":
       return body === "throat" ? "symptom" : natural;
     case "questions":
-      return body && !skipsQuestions ? "questions" : natural;
+      return body && !skipQuestions ? "questions" : natural;
     case "result":
       return complete ? "result" : natural;
     default:
@@ -205,7 +215,7 @@ export default function ProductFinder() {
       severity: undefined,
     };
     if (bodyPartId === "throat") updates.step = "symptom";
-    else if (bodyPartId === "heart") updates.step = "result";
+    else if (skipsQuestions(bodyPartId)) updates.step = "result";
     else updates.step = "questions";
     navigate(updates, "need_selected");
   }
@@ -300,7 +310,7 @@ export default function ProductFinder() {
                 onBack={() => {
                   if (throatSymptomId === "cough")
                     navigate({ step: "symptom" }, "back_to_throat_symptom");
-                  else if (answers.needId === "heart")
+                  else if (skipsQuestions(answers.needId))
                     navigate({ step: "need" }, "back_to_need");
                   else navigate({ step: "questions" }, "back_to_questions");
                 }}
