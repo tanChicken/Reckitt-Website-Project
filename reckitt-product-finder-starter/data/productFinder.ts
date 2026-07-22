@@ -1336,19 +1336,23 @@ export const productItems: ProductItem[] = [
       audiences: ["adult", "teen", "child"],
       severities: ["mild", "moderate"],
     },
-    variants: [{ id: "standard", label: "15 g Tube" }],
+    variants: [{ id: "standard", label: "15g" }],
     activeIngredient: [
       "Choline salicylate 8.714% w/w",
       "Cetalkonium chloride 0.010% w/w",
       "Also contains ethanol (33.45% w/w), glycerol, menthol, hypromellose 4500, star anise oil, sodium saccharin and water",
     ],
     dosage: [
-      "Adults: massage approximately 1 cm of gel onto the sore area",
-      "Children from 4 months: massage approximately 0.5 cm onto the sore area",
-      "May be repeated after 3 hours; maximum 6 doses in 24 hours",
-      "Denture sores: apply to the sore area and leave at least 30 minutes before reinserting dentures",
-      "Do not apply directly to the dentures",
-      "Not suitable for babies under 4 months",
+      "Children from 4 months:",
+      "1) Using a clean finger, massage approximately one half of a centimetre of bonjela onto the sore area.",
+      "2) This can be repeated after 3 hours.",
+      "3) No more than 6 doses in 24 hours",
+      "• Not suitable for babies under 4 months.",
+      "Adults:", 
+      "Massage approximately one centimetre of bonjela onto the sore area. This can be repeated after 3 hours.",
+      "Denture sores:",
+      "Massage approximately one centimetre of bonjela onto the sore area and leave at least 30 minutes before reinserting the dentures.",
+      "• Do not apply bonjela directly to the dentures.",
     ],
     keyBenefits: [
       "Fast-acting relief for mouth ulcers and teething pain",
@@ -1368,8 +1372,7 @@ export const productItems: ProductItem[] = [
       "Glycerol can be harmful in high doses and may cause headache, stomach upset and diarrhoea. If symptoms persist for more than 7 days or you have a stomach disorder, consult your pharmacist, doctor or dentist.",
     ],
     disclaimer:
-      "The product in our range is a fast acting gel for teething and mouth ulcers. It does not provide immediate relief to these symptoms in an emergency. Always consult a pharmacist or doctor before use.",
-  },
+"The product in our range is a fast acting gel for teething and mouth ulcers. It does not provide immediate relief to these symptoms in an emergency.",  },
 
   // ── BOWEL — Senokot ───────────────────────────────────────────────────────
   {
@@ -1377,10 +1380,10 @@ export const productItems: ProductItem[] = [
     brand: "Senokot Tablets",
     category: "Relief of occasional constipation",
     description:
-      "Stimulant laxative containing natural senna that provides relief from occasional constipation by stimulating bowel movement and helping restore regularity. Not recommended for children 18 years old and under.",
+      "Stimulant laxative containing natural senna that provides relief from occasional constipation by stimulating bowel movement and helping restore regularity.",
     needId: "bowel",
     imageLabel: "SK",
-    tags: ["Natural Senna", "Constipation Relief", "Adults only"],
+    tags: ["Natural Senna", "Constipation Relief"],
     url: "https://www.senokot.com.au/",
     priority: 5,
     suitableFor: {
@@ -1393,13 +1396,15 @@ export const productItems: ProductItem[] = [
       "In a base containing lactose",
     ],
     dosage: [
-      "Adults, the elderly and children over 18 years: swallow one to two tablets at night",
-      "Children 18 years and under: not recommended",
-      "New users should start with the lowest dose and increase to the maximum dose if necessary",
-      "Once regularity has been regained the dose should be reduced and can usually be stopped",
-      "Senokot usually acts within 8–12 hours; if there is no bowel movement within three days of use, consult your doctor",
-      "Normally sufficient to take two to three times a week. Use for more than 1 week requires medical supervision",
-    ],
+      "1) Adults, the elderly and children over 18 years",
+      "2) Children 18 years and under: Not recommended.",
+      "3) Swallow one to two tablets at night.",
+      "4) Do not exceed the stated dose. Senokot usually acts within 8-12 hours. Dose can be repeated on a daily basis until bowel action is restored, but if there is no bowel movement within three days of use, consult your doctor.",
+
+      "Duration of use:",
+      "Normally it is sufficient to take this medicinal product up to two to three times a week.",
+      "Use for more than 1 week requires medicinal supervision."
+   ],
     keyBenefits: [
       "Effective relief of occasional constipation",
       "Contains natural senna (plant-derived active ingredient)",
@@ -1412,7 +1417,7 @@ export const productItems: ProductItem[] = [
       "Tell a doctor or pharmacist if symptoms worsen or persist during use, if there is no bowel movement within 3 days of use, or if you need to take laxatives every day or abdominal pain persists.",
       "If you miss a dose, take your next dose at the usual time. Do not take two doses at the same time to make up for a missed dose. Always consult your doctor if you need further advice.",
       "Do not exceed the stated dose. If you accidentally take too many tablets, consult your doctor and take this leaflet with you.",
-      "Consult your doctor or pharmacist for advice if you are taking or have recently taken any other medicines, including medicines obtained without a prescription.",
+      "You should consult your doctor or pharmacist for advice if you are taking or have recently taken any other medicines, including medicines obtained without a prescription."
     ],
     disclaimer:
       "The product in our range is specifically for relief of occasional constipation. It does not provide immediate relief to these symptoms in an emergency. Always consult a pharmacist or doctor before use.",

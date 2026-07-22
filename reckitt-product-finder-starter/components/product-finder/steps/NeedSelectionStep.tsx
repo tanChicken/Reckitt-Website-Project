@@ -10,7 +10,7 @@ import type { BodyPartId, FinderAnswers } from "@/types/productFinder";
 import Image from "next/image";
 const dotPositions: Record<BodyPartId, { top: string; left: string }> = {
   head: { top: "20%", left: "50%" },
-  mouth: { top: "28%", left: "50%" },
+  mouth: { top: "33%", left: "50%" },
   throat: { top: "39%", left: "50%" },
   // heart: { top: "50%", left: "50%" },
   chest: { top: "50%", left: "50%" },
