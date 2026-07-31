@@ -29,7 +29,7 @@ import Link from "next/link";
 // The whole funnel is driven by the query string so every screen is shareable
 // and the browser Back/Forward buttons work. Param contract:
 //   step      welcome | need | symptom | questions | result   (navigational stage)
-//   body      head | mouth | throat | heart | stomach | bowel (NeedSelectionStep)
+//   body      head | throat | heart | stomach                 (NeedSelectionStep)
 //   symptom   sore-throat | cough                             (throat sub-question)
 //   age       adult | teen | child | someone-else             (audience)
 //   severity  mild | moderate | severe | not-sure
@@ -48,9 +48,9 @@ const STEP_INDEX: Record<WizardStep, number> = {
 };
 
 // Body areas served by a single product that isn't age/severity dependent
-// (Heart → Cardiprin, Mouth → Bonjela, Bowel → Senokot). These jump straight
-// from the body-area step to the result, skipping the questions screen.
-const SINGLE_PRODUCT_BODY_PARTS: readonly BodyPartId[] = ["heart", "mouth", "bowel"];
+// (Heart → Cardiprin). These jump straight from the body-area step to the
+// result, skipping the questions screen.
+const SINGLE_PRODUCT_BODY_PARTS: readonly BodyPartId[] = ["heart"];
 
 function skipsQuestions(needId: BodyPartId | undefined): boolean {
   // "chest" is only ever reached via the throat → cough sub-question, which

@@ -2,12 +2,10 @@ import type { Localized, LocalizedList, LocalizedTextOrList } from "@/lib/i18n/l
 
 export type BodyPartId =
   | "head"
-  | "mouth"
   | "throat"
   | "heart"
   | "chest"
-  | "stomach"
-  | "bowel";
+  | "stomach";
 
 export type AudienceId = "adult" | "teen" | "child" | "someone-else";
 export type SeverityId = "mild" | "moderate" | "severe" | "not-sure";
