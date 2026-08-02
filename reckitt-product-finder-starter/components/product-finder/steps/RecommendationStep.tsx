@@ -20,6 +20,39 @@ interface RecommendationStepProps {
   onBack: () => void;
 }
 
+// Renders a Product-Details field (Active Ingredient / Dosage) line by line.
+// Lines ending in ":" are treated as sub-headings and shown bold with a little
+// top spacing, so grouped instructions (e.g. Children / Adults / Denture sores)
+// read as distinct sections instead of one run-on block.
+function DetailLines({ lines, fallback }: { lines: string[]; fallback: string }) {
+  if (lines.length === 0) {
+    return (
+      <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6">
+        {fallback}
+      </p>
+    );
+  }
+  return (
+    <div className="mt-1 flex flex-col sm:mt-1.5">
+      {lines.map((line, i) => {
+        const isHeading = line.trim().endsWith(":");
+        return (
+          <p
+            key={i}
+            className={
+              isHeading
+                ? `text-xs font-bold leading-5 text-deep-navy sm:leading-6 ${i > 0 ? "mt-2" : ""}`
+                : "text-xs leading-5 text-secondary sm:leading-6"
+            }
+          >
+            {line}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function RecommendationStep({
   recommendation,
   onRestart,
@@ -390,20 +423,18 @@ export default function RecommendationStep({
             <div className="flex flex-col gap-4 sm:gap-5">
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
                 <p className="text-xs font-bold tracking-wide text-deep-navy">{t("activeIngredient")}</p>
-                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
-                  {displayActiveIngredient.length > 0
-                    ? displayActiveIngredient.join('\n')
-                    : t("seeProductLabel")}
-                </p>
+                <DetailLines
+                  lines={displayActiveIngredient}
+                  fallback={t("seeProductLabel")}
+                />
               </div>
 
               <div className="border-b border-border-subtle pb-4 sm:pb-5">
                 <p className="text-xs font-bold tracking-wide text-deep-navy">{t("dosage")}</p>
-                <p className="mt-1 text-xs leading-5 text-secondary sm:mt-1.5 sm:leading-6 whitespace-pre-line">
-                  {displayDosage.length > 0
-                    ? displayDosage.join('\n')
-                    : t("followLabelInstructions")}
-                </p>
+                <DetailLines
+                  lines={displayDosage}
+                  fallback={t("followLabelInstructions")}
+                />
               </div>
 
               <div>

@@ -27,7 +27,7 @@ export const bodyParts: ChoiceOption<BodyPartId>[] = [
     id: "mouth",
     label: "Mouth",
     description: "Mouth and gum-related symptoms.",
-    icon: "/mouth.svg",
+    icon: "/mouth.png",
   },
   {
     id: "throat",
@@ -54,7 +54,7 @@ export const bodyParts: ChoiceOption<BodyPartId>[] = [
     id: "bowel",
     label: "Bowel",
     description: "Bowel-related symptoms.",
-    icon: "/bowel.svg",
+    icon: "/bowel.png",
   },
 ];
 
@@ -1347,12 +1347,12 @@ export const productItems: ProductItem[] = [
       "1) Using a clean finger, massage approximately one half of a centimetre of bonjela onto the sore area.",
       "2) This can be repeated after 3 hours.",
       "3) No more than 6 doses in 24 hours",
-      "• Not suitable for babies under 4 months.",
+      "* Not suitable for children under 4 months.",
       "Adults:", 
       "Massage approximately one centimetre of bonjela onto the sore area. This can be repeated after 3 hours.",
       "Denture sores:",
       "Massage approximately one centimetre of bonjela onto the sore area and leave at least 30 minutes before reinserting the dentures.",
-      "• Do not apply bonjela directly to the dentures.",
+      "* Do not apply bonjela directly to the dentures.",
     ],
     keyBenefits: [
       "Fast-acting relief for mouth ulcers and teething pain",
@@ -1378,7 +1378,7 @@ export const productItems: ProductItem[] = [
   {
     id: "senokot-tablets",
     brand: "Senokot Tablets",
-    category: "Relief of occasional constipation",
+    category: "Relief of constipation",
     description:
       "Stimulant laxative containing natural senna that provides relief from occasional constipation by stimulating bowel movement and helping restore regularity.",
     needId: "bowel",
@@ -1391,10 +1391,8 @@ export const productItems: ProductItem[] = [
       severities: ["mild", "moderate"],
     },
     variants: [{ id: "standard", label: "60 Tablets" }],
-    activeIngredient: [
-      "Standardised senna equivalent to 7.5 mg total sennosides per tablet",
-      "In a base containing lactose",
-    ],
+    activeIngredient:
+      "Standardised senna equivalent to 7.5 mg total sennosides per tablet in a base containing lactose.",
     dosage: [
       "1) Adults, the elderly and children over 18 years",
       "2) Children 18 years and under: Not recommended.",
@@ -1414,7 +1412,7 @@ export const productItems: ProductItem[] = [
     disclaimerPoints: [
       "Always read the label before use.",
       "Do not give to children 18 years old and under.",
-      "Tell a doctor or pharmacist if symptoms worsen or persist during use, if there is no bowel movement within 3 days of use, or if you need to take laxatives every day or abdominal pain persists.",
+      "Tell your doctor or pharmacist if symptoms worsen or persist during use, if there is no bowel movement within 3 days of treatment, or if you need to take laxatives daily or continue to experience abdominal pain.",
       "If you miss a dose, take your next dose at the usual time. Do not take two doses at the same time to make up for a missed dose. Always consult your doctor if you need further advice.",
       "Do not exceed the stated dose. If you accidentally take too many tablets, consult your doctor and take this leaflet with you.",
       "You should consult your doctor or pharmacist for advice if you are taking or have recently taken any other medicines, including medicines obtained without a prescription."
